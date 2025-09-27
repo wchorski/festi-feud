@@ -1,3 +1,7 @@
+envs.js
+env.js
+.env*
+!.env.example
 # Logs
 logs
 *.log

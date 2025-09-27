@@ -1,0 +1,9 @@
+// made for couchdb endpoint
+export const ENVS = {
+  DB_PROTOCOL: "http",
+	DB_USER: "",
+	DB_PASSWORD: "",
+	DB_URL: "127.0.0.1:5984",
+	DB_COLLECTION_A: "questions",
+  DB_COLLECTION_B: "answers"
+}
