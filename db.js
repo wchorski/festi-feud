@@ -251,7 +251,11 @@ export async function createAnswer(point) {
 		throw new Error("create validation: data is not correct model shape")
 
 	try {
-		const res = await dbAnswers.post(point)
+		const res = await dbAnswers.post({
+      ...point,
+      questionId: point.questionId || "",
+      votes: 1,
+    })
 
 		if (!res.ok) throw new Error("form save res not OK")
 
@@ -277,7 +281,8 @@ export async function createQuestion(point) {
 	try {
 		const res = await dbQuestions.post({
 			...point,
-			groupId: point.groupId || "",
+			categoryId: point.categoryId || "",
+			tagIds: point.tagIds || [],
 		})
 
 		if (!res.ok) throw new Error("create form save res not OK")

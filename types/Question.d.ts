@@ -1,6 +1,7 @@
 type BaseQuestion = {
 	text: string
-  groupId: string
+  categoryId: string
+  tagIds: string[]
 	// Add more shared fields here as needed
 }
 

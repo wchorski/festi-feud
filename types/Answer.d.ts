@@ -1,6 +1,7 @@
 type BaseAnswer = {
 	text: string
-  questionId: string
+	questionId: string
+	votes: number
 	// Add more shared fields here as needed
 }
 

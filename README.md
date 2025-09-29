@@ -59,7 +59,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 ```json
 {
 	"_id": "1",
-	"groupId" "123",
+	"categoryId" "123",
 	"text": "What is your favorite color?",
 }
 ```
