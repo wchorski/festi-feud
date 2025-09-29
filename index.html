@@ -12,7 +12,24 @@
 	<body>
 		<h1>Festi Feud</h1>
 		<span data-sync-state="connecting" id="sync-state"> ␖ </span>
-		<form name="questionForm" data-state="idle">
+
+    <form name="answerForm" data-state="idle">
+			<label for="text">
+				<span>Answers:</span>
+				<textarea name="text"></textarea>
+			</label>
+      <p class="response-message"></p>
+			<button type="submit">submit</button>
+		</form>
+    <hr>
+    <h2>Answers:</h2>
+		<div id="answers-wrap" class="grid-tiles"></div>
+    
+    <hr>
+    <hr>
+    <hr>
+		
+    <form name="questionForm" data-state="idle">
 			<label for="text">
 				<span>Question:</span>
 				<textarea name="text"></textarea>

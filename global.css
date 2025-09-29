@@ -45,6 +45,7 @@ form {
 	background-color: whitesmoke;
 	border-radius: 3px;
 	box-shadow: rgba(0, 0, 0, 0.27) 3px 3px 3px;
+  margin: 0;
 	padding: 1rem;
 
 	& h3:first-child {

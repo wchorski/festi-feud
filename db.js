@@ -3,7 +3,7 @@
  * @typedef {import('./types/Answer').Answer} Answer
  * @typedef {import('./types/Response').Response} Response
  * @typedef {import('./types/RemoveObject').RemoveObject} RemoveObject
- * @typedef {import('./types/Answer').NewAnswer} NewAnswer
+ * @typedef {import('./types/Answer').AnswerCreate} AnswerCreate
  * @typedef {import('./types/Question').Question} Question
  * @typedef {import('./types/Question').QuestionCreate} QuestionCreate
  * @typedef {import('./types/PouchDBChange').PouchDBChange} PouchDBChange
@@ -166,7 +166,6 @@ function onSyncError(error) {
 export async function getAllQuestionDocs() {
 	try {
 		const res = await dbQuestions.allDocs({ include_docs: true })
-		console.log(res)
 
 		res.rows.forEach((row) => {
 			questionsMap.set(row.id, row.doc)
@@ -245,31 +244,27 @@ async function dbCreateManyQuestions(docs) {
 // }
 
 /**
- *  @param {string} message
+ *  @param {AnswerCreate} point
  */
-export async function createMessage(message) {
-	// POST to db
-	/** @type {QuestionCreate} */
-	const point = {
-		message,
-	}
-
-	if (!point.message) throw new Error("data is not correct model shape")
+export async function createAnswer(point) {
+	if (!point.text)
+		throw new Error("create validation: data is not correct model shape")
 
 	try {
 		const res = await dbAnswers.post(point)
 
-		if (!res.ok) throw new Error("createMessage form save res not OK")
+		if (!res.ok) throw new Error("form save res not OK")
 
-		// console.log("pouchdb ok: ", res.ok)
-		const newPoint = {
-			...point,
-			_id: res.id,
-			_rev: res.rev,
+		return {
+			...res,
+			point: {
+				...point,
+				_id: res.id,
+				_rev: res.rev,
+			},
 		}
-		return newPoint
 	} catch (error) {
-		console.log("createMessage error: ", error)
+		console.log("createAnswer error: ", error)
 	}
 }
 
@@ -287,16 +282,13 @@ export async function createQuestion(point) {
 
 		if (!res.ok) throw new Error("create form save res not OK")
 
-		// console.log("pouchdb ok: ", res.ok)
-		/** @type {Question} */
-		const newPoint = {
-			...point,
-			_id: res.id,
-			_rev: res.rev,
-		}
 		return {
 			...res,
-			point: newPoint,
+			point: {
+				...point,
+				_id: res.id,
+				_rev: res.rev,
+			},
 		}
 	} catch (error) {
 		console.log("create error: ", error)
@@ -349,70 +341,70 @@ export async function deleteEmoji(doc) {
 	}
 }
 
-export async function dbSeedDatabase() {
-	try {
-		/**
-		 * @param {string} url
-		 * @returns {Promise<Array<NewEmoji | QuestionCreate>>}
-		 */
-		const fetchAndProcess = async (url) => {
-			const response = await fetch(url)
-			/** @type {Array<Emoji | Question>} */
-			const docs = await response.json()
-			return docs.map(({ _rev, ...data }) => data)
-		}
+// export async function dbSeedDatabase() {
+// 	try {
+// 		/**
+// 		 * @param {string} url
+// 		 * @returns {Promise<Array<NewEmoji | QuestionCreate>>}
+// 		 */
+// 		const fetchAndProcess = async (url) => {
+// 			const response = await fetch(url)
+// 			/** @type {Array<Emoji | Question>} */
+// 			const docs = await response.json()
+// 			return docs.map(({ _rev, ...data }) => data)
+// 		}
 
-		/**
-		 * @param {any[]} results
-		 * @returns {number}
-		 */
-		const countErrors = (results) =>
-			results.reduce((count, obj) => count + (obj.error ? 1 : 0), 0)
-		/**
-		 * @param {any[]} results
-		 * @returns {boolean}
-		 */
-		const hasErrors = (results) => results.some((obj) => obj.error === true)
+// 		/**
+// 		 * @param {any[]} results
+// 		 * @returns {number}
+// 		 */
+// 		const countErrors = (results) =>
+// 			results.reduce((count, obj) => count + (obj.error ? 1 : 0), 0)
+// 		/**
+// 		 * @param {any[]} results
+// 		 * @returns {boolean}
+// 		 */
+// 		const hasErrors = (results) => results.some((obj) => obj.error === true)
 
-		const [emojiDocs, messageDocs] = await Promise.all([
-			fetchAndProcess("/public/ini/emojis-seed.json"),
-			fetchAndProcess("/public/ini/messages-seed.json"),
-		])
+// 		const [emojiDocs, messageDocs] = await Promise.all([
+// 			fetchAndProcess("/public/ini/emojis-seed.json"),
+// 			fetchAndProcess("/public/ini/messages-seed.json"),
+// 		])
 
-		const [emojiRes, messagesRes] = await Promise.all([
-			dbQuestions.bulkDocs(emojiDocs),
-			dbAnswers.bulkDocs(messageDocs),
-		])
+// 		const [emojiRes, messagesRes] = await Promise.all([
+// 			dbQuestions.bulkDocs(emojiDocs),
+// 			dbAnswers.bulkDocs(messageDocs),
+// 		])
 
-		if (hasErrors(emojiRes) || hasErrors(messagesRes)) {
-			const emojiErrors = countErrors(emojiRes)
-			const messageErrors = countErrors(messagesRes)
+// 		if (hasErrors(emojiRes) || hasErrors(messagesRes)) {
+// 			const emojiErrors = countErrors(emojiRes)
+// 			const messageErrors = countErrors(messagesRes)
 
-			throw new Error(
-				`🌱 Database already (or partially) seeded with data.\n` +
-					`Emoji errors: ${emojiErrors}/${emojiRes.length}, ` +
-					`Message errors: ${messageErrors}/${messagesRes.length}`
-			)
-		}
+// 			throw new Error(
+// 				`🌱 Database already (or partially) seeded with data.\n` +
+// 					`Emoji errors: ${emojiErrors}/${emojiRes.length}, ` +
+// 					`Message errors: ${messageErrors}/${messagesRes.length}`
+// 			)
+// 		}
 
-		return {
-			ok: true,
-			message: `Database seeded with ${messagesRes.length} messages and ${emojiRes.length} emojis`,
-		}
-	} catch (error) {
-		return {
-			error: true,
-			message: error instanceof Error ? error.message : String(error),
-		}
-	}
-}
+// 		return {
+// 			ok: true,
+// 			message: `Database seeded with ${messagesRes.length} messages and ${emojiRes.length} emojis`,
+// 		}
+// 	} catch (error) {
+// 		return {
+// 			error: true,
+// 			message: error instanceof Error ? error.message : String(error),
+// 		}
+// 	}
+// }
 
 /**
  * Seeds the database with emoji data
- * @param {Emoji[]} docs
+ * @param {Question[]} docs
  * @returns {Promise<Response>} The result of the seeding operation
  */
-export async function dbEmojiDeleteMany(docs) {
+export async function dbQuestionDeleteMany(docs) {
 	try {
 		const res = await dbQuestions.bulkDocs(
 			docs.map((doc) => ({ ...doc, _deleted: true }))
@@ -434,10 +426,10 @@ export async function dbEmojiDeleteMany(docs) {
 	}
 }
 /**
- * @param {Question[]} docs
+ * @param {Answer[]} docs
  * @returns {Promise<Response>}
  */
-export async function dbMessageDeleteMany(docs) {
+export async function dbAnswersDeleteMany(docs) {
 	console.log(docs)
 	try {
 		const res = await dbAnswers.bulkDocs(
@@ -459,13 +451,13 @@ export async function dbMessageDeleteMany(docs) {
 }
 /**
  *
- * @param {Emoji[]} emojiDocs
- * @param {Question[]} messageDocs
+ * @param {Question[]} qDocs
+ * @param {Answer[]} aDocs
  */
-export async function dbDeleteAllDocs(emojiDocs, messageDocs) {
+export async function dbDeleteAllDocs(qDocs, aDocs) {
 	try {
-		await dbEmojiDeleteMany(emojiDocs)
-		await dbMessageDeleteMany(messageDocs)
+		await dbQuestionDeleteMany(qDocs)
+		await dbAnswersDeleteMany(aDocs)
 		return {
 			ok: true,
 			message: "Database: All Docs have been marked as _deleted",

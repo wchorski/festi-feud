@@ -1,20 +1,21 @@
-export type Answer = {
-	_id: string
-	_rev: string
-	username: string
-	questionId: number
-  votes: number
-  text: string
-	date: string
+type BaseAnswer = {
+	text: string
+  questionId: string
+	// Add more shared fields here as needed
 }
 
-export type NewAnswer = {
+type DatabaseFields = {
+	_id: string
+	_rev: string
+}
+
+export type Answer = BaseAnswer & DatabaseFields
+
+export type AnswerCreate = BaseAnswer & {
 	_id?: string
-	username: string
-	questionId: number
-  votes: number
-  text: string
-	date: string
 }
 
 export type AnswerSet = CustomEvent<Answer>
+export type AnswerDelete = CustomEvent<string>
+
+export type AnswersChangeEvent = CustomEvent<Map<string, Answer>>
