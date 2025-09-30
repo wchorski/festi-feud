@@ -215,7 +215,7 @@ export async function getAllAnswerDocs() {
 /**
  *
  * @param {string} questionId
- * @returns {Promise<PouchDB.Find.FindResponse<{}>>}
+ * @returns {Promise<PouchDB.Find.FindResponse<Answer>>}
  */
 export async function dbFindAnswersByQuestionId(questionId) {
 	try {
@@ -225,7 +225,7 @@ export async function dbFindAnswersByQuestionId(questionId) {
 			// sort: ["_id"],
 		})
 
-		return res
+		return /** @type {PouchDB.Find.FindResponse<Answer>} */ (res)
 	} catch (err) {
 		console.log(err)
 		throw new Error("db find error")

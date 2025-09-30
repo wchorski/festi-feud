@@ -9,6 +9,7 @@
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
 
+import { createTextEl, renderAllTextEls } from "./ui.js"
 import {
 	answersMap,
 	dbCreateAnswer,
@@ -30,7 +31,7 @@ if (!questionForm || !answerForm) throw new Error("form(s) not found")
 /** @param {QuestionSet} e */
 function handleQuestionSet(e) {
 	if (!questionsWrap) throw new Error("wrap not found")
-	const p = createTextEl(e.detail)
+	const p = createTextEl(e.detail, dbDeleteQuestion)
 	questionsWrap.prepend(p)
 }
 /** @param {QuestionDelete} e */
@@ -43,8 +44,7 @@ function handleQuestionDelete(e) {
 /** @param {AnswerSet} e */
 function handleAnswerSet(e) {
 	if (!answersWrap) throw new Error("wrap not found")
-	createTextEl(e.detail)
-	const p = createTextEl(e.detail)
+	const p = createTextEl(e.detail, dbDeleteAnswer)
 	answersWrap.prepend(p)
 }
 /** @param {AnswerDelete} e */
@@ -158,60 +158,60 @@ async function ini() {
 
 ini()
 
-//* UI
-/**
- * Add a single new message to the top of the container
- * @param {Question|Answer} doc
- * @param {number} delay - animation start in ms
- */
-function createTextEl(doc, delay = 80) {
-	const p = Object.assign(document.createElement("p"), {
-		textContent: doc.text,
-		//? only getter, not setter
-		// dataset: { id: doc._id }
-		className: ["card", "anim-fade-in"].join(" "),
-	})
-	p.dataset.id = doc._id
-	p.style.animationDelay = `${delay}ms`
+// //* UI
+// /**
+//  * Add a single new message to the top of the container
+//  * @param {Question|Answer} doc
+//  * @param {number} delay - animation start in ms
+//  */
+// function createTextEl(doc, delay = 80) {
+// 	const p = Object.assign(document.createElement("p"), {
+// 		textContent: doc.text,
+// 		//? only getter, not setter
+// 		// dataset: { id: doc._id }
+// 		className: ["card", "anim-fade-in"].join(" "),
+// 	})
+// 	p.dataset.id = doc._id
+// 	p.style.animationDelay = `${delay}ms`
 
-	const deleteBtn = Object.assign(document.createElement("button"), {
-		className: "delete",
-		ariaLabel: `delete ${doc.typeof} item`,
-		title: `delete ${doc.typeof} item`,
-		textContent: "x",
-		onpointerup:
-			doc.typeof === "Question"
-				? () => dbDeleteQuestion(doc)
-				: doc.typeof === "Answer"
-				? () => dbDeleteAnswer(doc)
-				: console.error("typeof != Question || Answer"),
+// 	const deleteBtn = Object.assign(document.createElement("button"), {
+// 		className: "delete",
+// 		ariaLabel: `delete ${doc.typeof} item`,
+// 		title: `delete ${doc.typeof} item`,
+// 		textContent: "x",
+// 		onpointerup:
+// 			doc.typeof === "Question"
+// 				? () => dbDeleteQuestion(doc)
+// 				: doc.typeof === "Answer"
+// 				? () => dbDeleteAnswer(doc)
+// 				: console.error("typeof != Question || Answer"),
 
-		// TODO fix model and switch to error
-	})
+// 		// TODO fix model and switch to error
+// 	})
 
-	p.append(deleteBtn)
+// 	p.append(deleteBtn)
 
-	return p
-}
+// 	return p
+// }
 
-/**
- * @param {Map<string, Question|Answer>} map
- * @param {HTMLElement} wrap
- */
-export async function renderAllTextEls(map, wrap) {
-	const docs = [...map.values()].toReversed()
+// /**
+//  * @param {Map<string, Question|Answer>} map
+//  * @param {HTMLElement} wrap
+//  */
+// export async function renderAllTextEls(map, wrap) {
+// 	const docs = [...map.values()].toReversed()
 
-	if (!docs.length) {
-		wrap.append(
-			Object.assign(document.createElement("p"), {
-				textContent: "No found, create new one",
-			})
-		)
-		return
-	}
+// 	if (!docs.length) {
+// 		wrap.append(
+// 			Object.assign(document.createElement("p"), {
+// 				textContent: "No found, create new one",
+// 			})
+// 		)
+// 		return
+// 	}
 
-	const nodes = docs.map((doc, i) => createTextEl(doc, i * 80))
+// 	const nodes = docs.map((doc, i) => createTextEl(doc, i * 80))
 
-	// Append all at once
-	wrap.replaceChildren(...nodes)
-}
+// 	// Append all at once
+// 	wrap.replaceChildren(...nodes)
+// }
