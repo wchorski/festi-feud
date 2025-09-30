@@ -13,37 +13,64 @@
 		<h1>Festi Feud</h1>
 		<span data-sync-state="connecting" id="sync-state"> ␖ </span>
 
-    <form name="answerForm" data-state="idle">
+		<form name="answerForm" data-state="idle">
 			<label for="questionId">
-
 				<span>questionId: TODO make hidden</span>
 				<input name="questionId" type="text" />
 			</label>
 			<label for="text">
 				<span>Answers:</span>
-				<textarea name="text"></textarea>
+				<input name="text" type="text" min="2" max="30"/>
 			</label>
-      <p class="response-message"></p>
+			<p class="response-message"></p>
 			<button type="submit">submit</button>
 		</form>
-    <hr>
-    <h2>Answers:</h2>
-		<div id="answers-wrap" class="grid-tiles"></div>
-    
-    <hr>
-    <hr>
-    <hr>
 		
-    <form name="questionForm" data-state="idle">
-			<label for="text">
+		<h2>Answers:</h2>
+		<div id="answers-wrap" class="grid-tiles"></div>
+
+		<hr />
+		<hr />
+		<hr />
+
+		<form name="questionForm" data-state="idle">
+      <label for="text">
 				<span>Question:</span>
-				<textarea name="text"></textarea>
+				<textarea name="text" min="2" max="30"></textarea>
 			</label>
-      <p class="response-message"></p>
+
+			<fieldset for="categoryIds">
+				<legend>categories</legend>
+				<!-- <select multiple name="categoryIds">
+          <option value="1">one</option>
+          <option value="2">two</option>
+          <option value="3">three</option>
+        </select> -->
+				<div id="category-options" class="dropdown-content">
+					<label><input type="checkbox" value="cat-1" /> Cat 1</label>
+					<label><input type="checkbox" value="cat-2" /> Cat 2</label>
+					<label><input type="checkbox" value="cat-3" /> Cat 3</label>
+				</div>
+			</fieldset>
+			<fieldset for="tagIds">
+				<legend>tags</legend>
+				<!-- <select multiple name="categoryIds">
+          <option value="1">one</option>
+          <option value="2">two</option>
+          <option value="3">three</option>
+        </select> -->
+				<div id="tag-options" class="dropdown-content">
+					<label><input type="checkbox" value="tag-1" /> tag 1</label>
+					<label><input type="checkbox" value="tag-2" /> tag 2</label>
+					<label><input type="checkbox" value="tag-3" /> tag 3</label>
+				</div>
+			</fieldset>
+
+			<p class="response-message"></p>
 			<button type="submit">submit</button>
 		</form>
-    <hr>
-    <h2>Questions:</h2>
+		
+		<h2>Questions:</h2>
 		<div id="questions-wrap" class="grid-tiles"></div>
 	</body>
 </html>

@@ -1,6 +1,7 @@
 type BaseQuestion = {
+  typeof: "Question"
 	text: string
-  categoryId: string
+  categoryIds: string[]
   tagIds: string[]
 	// Add more shared fields here as needed
 }

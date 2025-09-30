@@ -1,3 +1,16 @@
+label:has(input[type="checkbox"]:checked) {
+	text-decoration: underline;
+}
+label:has(input[type="checkbox"]) {
+	&:hover,
+	& input {
+		cursor: pointer;
+	}
+}
+button:hover {
+  cursor: pointer;
+}
+
 form {
 	&[data-state="idle"] {
 		border-bottom: solid 5px skyblue;
@@ -18,10 +31,15 @@ form {
 
 form {
 	display: grid;
+	padding: 1rem;
 	gap: 1rem;
 	transition-duration: 500ms;
 	transition-property: border-color, color;
 	transition-timing-function: ease-out;
+	max-width: 30rem;
+	border: solid rgba(128, 128, 128, 0.253) 1px;
+	box-shadow: rgba(0, 0, 0, 0.081) 3px 3px 8px;
+	position: relative;
 
 	& > label {
 		display: grid;
@@ -41,11 +59,21 @@ form {
 	}
 }
 
+button.delete {
+	position: absolute;
+	top: 0;
+	right: 0;
+	&:hover {
+		background-color: red;
+		color: white;
+	}
+}
+
 .card {
 	background-color: whitesmoke;
 	border-radius: 3px;
 	box-shadow: rgba(0, 0, 0, 0.27) 3px 3px 3px;
-  margin: 0;
+	margin: 0;
 	padding: 1rem;
 
 	& h3:first-child {

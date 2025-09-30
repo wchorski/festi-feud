@@ -253,6 +253,7 @@ export async function createAnswer(point) {
 	try {
 		const res = await dbAnswers.post({
       ...point,
+      typeof: "Answer",
       questionId: point.questionId || "",
       votes: 1,
     })
@@ -281,7 +282,8 @@ export async function createQuestion(point) {
 	try {
 		const res = await dbQuestions.post({
 			...point,
-			categoryId: point.categoryId || "",
+      typeof: "Question",
+			categoryId: point.categoryIds || [],
 			tagIds: point.tagIds || [],
 		})
 
@@ -326,23 +328,23 @@ async function fetchCSS(url) {
 /**
  * @param {RemoveObject} doc
  */
-export async function deleteMessage(doc) {
+export async function dbDeleteAnswer(doc) {
 	try {
 		const res = await dbAnswers.remove(doc)
-		if (!res.ok) throw new Error("deleteMessage res is not OK")
+		if (!res.ok) throw new Error("delete res is not OK")
 	} catch (error) {
-		throw new Error("deleteMessage failed", { cause: error })
+		throw new Error("delete failed", { cause: error })
 	}
 }
 /**
  * @param {RemoveObject} doc
  */
-export async function deleteEmoji(doc) {
+export async function dbDeleteQuestion(doc) {
 	try {
 		const res = await dbQuestions.remove(doc)
-		if (!res.ok) throw new Error("dbEmoji res is not OK")
+		if (!res.ok) throw new Error("delete res is not OK")
 	} catch (error) {
-		throw new Error("dbEmoji failed", { cause: error })
+		throw new Error("delete failed", { cause: error })
 	}
 }
 

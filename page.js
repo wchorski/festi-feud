@@ -13,6 +13,8 @@ import {
 	answersMap,
 	createAnswer,
 	createQuestion,
+	dbDeleteAnswer,
+	dbDeleteQuestion,
 	getAllAnswerDocs,
 	getAllQuestionDocs,
 	questionsMap,
@@ -27,25 +29,30 @@ if (!questionForm || !answerForm) throw new Error("form(s) not found")
 
 /** @param {QuestionSet} e */
 function handleQuestionSet(e) {
-  if(!questionsWrap) throw new Error('wrap not found')
-	insertTextEl(e.detail, questionsWrap)
+	if (!questionsWrap) throw new Error("wrap not found")
+	const p = createTextEl(e.detail)
+	questionsWrap.prepend(p)
 }
 /** @param {QuestionDelete} e */
 function handleQuestionDelete(e) {
 	const id = e.detail
 	const el = questionsWrap?.querySelector(`[data-id="${id}"]`)
+	console.log(el)
 	if (el) el.remove()
 }
 
 /** @param {AnswerSet} e */
 function handleAnswerSet(e) {
-	if(!answersWrap) throw new Error('wrap not found')
-	insertTextEl(e.detail, answersWrap)
+	if (!answersWrap) throw new Error("wrap not found")
+	createTextEl(e.detail)
+	const p = createTextEl(e.detail)
+	answersWrap.prepend(p)
 }
 /** @param {AnswerDelete} e */
 function handleAnswerDelete(e) {
 	const id = e.detail
-	const el = questionsWrap?.querySelector(`[data-id="${id}"]`)
+	const el = answersWrap?.querySelector(`[data-id="${id}"]`)
+	console.log(el)
 	if (el) el.remove()
 }
 
@@ -144,11 +151,11 @@ document.addEventListener("DOMContentLoaded", function () {
 async function init() {
 	if (!questionsWrap) throw new Error("no wrap")
 	await getAllQuestionDocs()
-	renderParagraphEls(questionsMap, questionsWrap)
+	renderAllTextEls(questionsMap, questionsWrap)
 
 	if (!answersWrap) throw new Error("no wrap")
 	await getAllAnswerDocs()
-	renderParagraphEls(answersMap, answersWrap)
+	renderAllTextEls(answersMap, answersWrap)
 }
 
 init()
@@ -157,24 +164,43 @@ init()
 /**
  * Add a single new message to the top of the container
  * @param {Question|Answer} doc
- * @param {HTMLElement} wrap
+ * @param {number} delay - animation start in ms
  */
-function insertTextEl(doc, wrap) {
-	if (!questionsWrap) throw new Error("wrap not found")
-
+function createTextEl(doc, delay = 80) {
 	const p = Object.assign(document.createElement("p"), {
 		textContent: doc.text,
+		//? only getter, not setter
+		// dataset: { id: doc._id }
+		className: ["card", "anim-fade-in"].join(" "),
 	})
-	p.classList.add("card", "anim-fade-in")
-	p.style.animationDelay = `${80}ms`
-	wrap.prepend(p)
+	p.dataset.id = doc._id
+	p.style.animationDelay = `${delay}ms`
+
+	const deleteBtn = Object.assign(document.createElement("button"), {
+		className: "delete",
+		ariaLabel: `delete ${doc.typeof} item`,
+		title: `delete ${doc.typeof} item`,
+		textContent: "x",
+		onpointerup:
+			doc.typeof === "Question"
+				? () => dbDeleteQuestion(doc)
+				: doc.typeof === "Answer"
+				? () => dbDeleteAnswer(doc)
+				: console.error("typeof != Question || Answer"),
+
+		// TODO fix model and switch to error
+	})
+
+	p.append(deleteBtn)
+
+	return p
 }
 
 /**
  * @param {Map<string, Question|Answer>} map
  * @param {HTMLElement} wrap
  */
-export async function renderParagraphEls(map, wrap) {
+export async function renderAllTextEls(map, wrap) {
 	const docs = [...map.values()].toReversed()
 
 	if (!docs.length) {
@@ -186,16 +212,7 @@ export async function renderParagraphEls(map, wrap) {
 		return
 	}
 
-	const nodes = docs.map((doc, i) => {
-		// const p = document.createElement("p")
-		// p.textContent = `${i}: ${doc.message}`
-		const p = Object.assign(document.createElement("p"), {
-			textContent: doc.text,
-		})
-		p.classList.add("card", "anim-fade-in")
-		p.style.animationDelay = `${i * 80}ms`
-		return p
-	})
+	const nodes = docs.map((doc, i) => createTextEl(doc, i * 80))
 
 	// Append all at once
 	wrap.replaceChildren(...nodes)

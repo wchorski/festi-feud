@@ -1,4 +1,5 @@
 type BaseAnswer = {
+  typeof: "Answer"
 	text: string
 	questionId: string
 	votes: number
