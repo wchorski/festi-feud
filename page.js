@@ -1,8 +1,8 @@
 /**
- * @typedef {import('./types/Question').Question} Question
- * @typedef {import('./types/Question').QuestionSet} QuestionSet
- * @typedef {import('./types/Question').QuestionCreate} QuestionCreate
- * @typedef {import('./types/Question').QuestionDelete} QuestionDelete
+ * @typedef {import('types/Question').Question} Question
+ * @typedef {import('types/Question').QuestionSet} QuestionSet
+ * @typedef {import('types/Question').QuestionCreate} QuestionCreate
+ * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
  * @typedef {import("types/Answer.js").AnswerCreate} AnswerCreate
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	})
 })
 
-async function init() {
+async function ini() {
 	if (!questionsWrap) throw new Error("no wrap")
 	await getAllQuestionDocs()
 	renderAllTextEls(questionsMap, questionsWrap)
@@ -156,7 +156,7 @@ async function init() {
 	renderAllTextEls(answersMap, answersWrap)
 }
 
-init()
+ini()
 
 //* UI
 /**

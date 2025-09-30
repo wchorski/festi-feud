@@ -63,6 +63,15 @@ Surveyors can periodically sync by coming back in range of the server's network 
 	"text": "What is your favorite color?",
 }
 ```
+
+## Todos
+- [ ] `/questions` page where you can vote on existing and insert new answers
+  - [ ] either `/questions?id=123` or `/questions/123` to go to individual
+- [ ] `/play` page where you pull in questions with corrisponsing answers
+  - [ ] with category and tag filters
+- [ ] make a homepage `/` that explains how to play and participate
+
+
 ## Existing Repos
 - https://github.com/jasonfill/family-feud
 - https://github.com/tiwoc/clan-contest

@@ -3,38 +3,14 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Festi Feud</title>
-		<link rel="stylesheet" href="./global.css" />
+		<title>Vote | Festi Feud</title>
+		<link rel="stylesheet" href="/global.css" />
 		<script src="./page.js" type="module" defer></script>
 		<script src="/db.js" type="module" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
 	</head>
 	<body>
-		<h1>Festi Feud</h1>
-		<span data-sync-state="connecting" id="sync-state"> ␖ </span>
-
-		<form name="answerForm" data-state="idle">
-      <legend>Submit an Answer</legend>
-			<label for="questionId">
-				<span>questionId: TODO make hidden</span>
-				<input name="questionId" type="text" />
-			</label>
-			<label for="text">
-				<span>Answer:</span>
-				<input name="text" type="text" min="2" max="30"/>
-			</label>
-			<p class="response-message"></p>
-			<button type="submit">submit</button>
-		</form>
-		
-		<h2>Answers:</h2>
-		<div id="answers-wrap" class="grid-tiles"></div>
-
-		<hr />
-		<hr />
-		<hr />
-
-		<form name="questionForm" data-state="idle">
+    <form name="questionForm" data-state="idle">
       <legend>Create New Question</legend>
       <label for="text">
 				<span>Question:</span>
@@ -71,8 +47,7 @@
 			<p class="response-message"></p>
 			<button type="submit">submit</button>
 		</form>
-		
-		<h2>Questions:</h2>
-		<div id="questions-wrap" class="grid-tiles"></div>
+		<h1>Cast Your Vote</h1>
+    <div id="questions-wrap" class="grid-tiles"></div>
 	</body>
 </html>

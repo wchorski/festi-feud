@@ -164,7 +164,7 @@ function onSyncError(error) {
 
 /**
  * Retrieves all documents from the database
- * @returns {Promise<Answer[]|undefined>} Array of document objects
+ * @returns {Promise<Question[]|undefined>} Array of document objects
  */
 export async function getAllQuestionDocs() {
 	try {
@@ -180,8 +180,24 @@ export async function getAllQuestionDocs() {
 	}
 }
 /**
+ *
+ * @param {string} id
+ * @returns {Promise<Question>}
+ */
+export async function dbGetQuestion(id) {
+	try {
+		/** @type {Question} */
+		const doc = await dbQuestions.get(id)
+		return doc
+	} catch (err) {
+		console.log(err)
+		throw new Error("get doc error")
+	}
+}
+
+/**
  * Retrieves all documents from the database
- * @returns {Promise<Question[]|undefined>} Array of document objects
+ * @returns {Promise<Answer[]|undefined>} Array of document objects
  */
 export async function getAllAnswerDocs() {
 	try {
@@ -196,7 +212,25 @@ export async function getAllAnswerDocs() {
 		console.log("db.js getAllAnswerDocs: ", error)
 	}
 }
-// getAllDocs()
+/**
+ *
+ * @param {string} questionId
+ * @returns {Promise<PouchDB.Find.FindResponse<{}>>}
+ */
+export async function dbFindAnswersByQuestionId(questionId) {
+	try {
+		const res = await dbAnswers.find({
+			selector: { questionId },
+			// fields: ["_id", "text"],
+			// sort: ["_id"],
+		})
+
+		return res
+	} catch (err) {
+		console.log(err)
+		throw new Error("db find error")
+	}
+}
 
 /**
  *

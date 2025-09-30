@@ -21,6 +21,10 @@
       color: rgb(120, 120, 120);
     }
   }
+
+  a:link {
+    color: orange;
+  }
 }
 
 label:has(input[type="checkbox"]:checked) {
