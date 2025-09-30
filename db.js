@@ -284,15 +284,52 @@ async function dbCreateManyQuestions(docs) {
  *  @param {AnswerCreate} point
  */
 export async function dbCreateAnswer(point) {
-	if (!point.text)
+	const { text, questionId } = point
+	if (!text)
 		throw new Error("create validation: data is not correct model shape")
 
 	try {
 		const res = await dbAnswers.post({
 			...point,
 			typeof: "Answer",
-			questionId: point.questionId || "",
-			votes: 1,
+			questionId: questionId || "",
+			upvotes: 1,
+			downvotes: 0,
+		})
+
+		if (!res.ok) throw new Error("form save res not OK")
+
+		return {
+			...res,
+			point: {
+				...point,
+				_id: res.id,
+				_rev: res.rev,
+			},
+		}
+	} catch (error) {
+		console.log("createAnswer error: ", error)
+	}
+}
+
+/**
+ *  @param {Answer} point
+ *  @param {boolean} isUpvote
+ *  @param {boolean} isDownvote
+ */
+export async function dbVoteOnAnswer(point, isUpvote, isDownvote) {
+	const { text, questionId, upvotes, downvotes } = point
+	if (!text)
+		throw new Error("create validation: data is not correct model shape")
+
+	try {
+		// TODO handle if user removes vote
+		const res = await dbAnswers.post({
+			...point,
+			typeof: "Answer",
+			questionId: questionId || "",
+			upvotes: isUpvote ? upvotes + 1 : upvotes,
+			downvotes: isDownvote ? downvotes + 1 : downvotes,
 		})
 
 		if (!res.ok) throw new Error("form save res not OK")

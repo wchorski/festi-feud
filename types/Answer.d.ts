@@ -2,7 +2,8 @@ type BaseAnswer = {
   typeof: "Answer"
 	text: string
 	questionId: string
-	votes: number
+	upvotes: number
+	downvotes: number
 	// Add more shared fields here as needed
 }
 

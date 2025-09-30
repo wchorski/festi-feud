@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		handleQuestionDelete
 	)
 
+	// TODO refactor to use formHandler
 	questionForm?.addEventListener("submit", async (e) => {
 		e.preventDefault()
 
@@ -111,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		handleAnswerDelete
 	)
 
+	// TODO refactor to use formHandler
 	answerForm?.addEventListener("submit", async (e) => {
 		e.preventDefault()
 

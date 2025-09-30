@@ -1,5 +1,6 @@
 @media (prefers-color-scheme: dark) {
-	body, button {
+	body,
+	button {
 		background: #0c0c0c;
 		color: #bbddc4;
 	}
@@ -7,24 +8,25 @@
 		color: black;
 	}
 
-  .card, form {
-    background-color: rgb(24, 24, 25);
-  }
+	.card,
+	form {
+		background-color: rgb(24, 24, 25);
+	}
 
-  button {
-    border-style: solid;
-    border-color: rgb(53, 53, 53);
-    background-color: rgb(53, 53, 53);
+	button {
+		border-style: solid;
+		border-color: rgb(53, 53, 53);
+		background-color: rgb(53, 53, 53);
 
-    &:active {
-      background-color: black;
-      color: rgb(120, 120, 120);
-    }
-  }
+		&:active {
+			background-color: black;
+			color: rgb(120, 120, 120);
+		}
+	}
 
-  a:link {
-    color: orange;
-  }
+	a:link {
+		color: orange;
+	}
 }
 
 label:has(input[type="checkbox"]:checked) {
@@ -41,7 +43,6 @@ button:hover {
 }
 
 form {
-  
 	&[data-state="idle"] {
 		border-bottom: solid 5px skyblue;
 	}
@@ -74,6 +75,10 @@ form {
 	& > label {
 		display: grid;
 		gap: 0.2rem;
+
+		&:has(input[type="hidden"]) {
+			display: none;
+		}
 	}
 	& > .response-message {
 		border-left-width: 5px;
@@ -116,6 +121,22 @@ button.delete {
 			text-decoration: underline dotted;
 		}
 	}
+}
+.card.vote {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .inputs {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+
+    & button {
+      font-size: 1.5rem;
+      padding: 0.6rem;
+    }
+  }
 }
 
 .grid-tiles {

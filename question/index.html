@@ -15,5 +15,18 @@
 		<p id="question"></p>
 		<h2>Answers:</h2>
 		<div id="answers-wrap" class="grid-tiles"></div>
+		<hr />
+		<form name="answerForm" data-state="idle">
+			<legend>Submit a new Answer</legend>
+			<label for="questionId">
+				<input name="questionId" type="hidden" readonly />
+			</label>
+			<label for="text">
+				<span>Answer:</span>
+				<input name="text" type="text" min="2" max="30" />
+			</label>
+			<p class="response-message"></p>
+			<button type="submit">submit</button>
+		</form>
 	</body>
 </html>

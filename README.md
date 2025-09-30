@@ -70,6 +70,9 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] `/play` page where you pull in questions with corrisponsing answers
   - [ ] with category and tag filters
 - [ ] make a homepage `/` that explains how to play and participate
+- [ ] voting
+  - [ ] remove or hide items that get more than 3 negative votes
+  - [ ] only allow one vote or negative vote per user (or browser session)
 
 
 ## Existing Repos
