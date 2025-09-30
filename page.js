@@ -11,8 +11,8 @@
 
 import {
 	answersMap,
-	createAnswer,
-	createQuestion,
+	dbCreateAnswer,
+	dbCreateQuestion,
 	dbDeleteAnswer,
 	dbDeleteQuestion,
 	getAllAnswerDocs,
@@ -37,7 +37,6 @@ function handleQuestionSet(e) {
 function handleQuestionDelete(e) {
 	const id = e.detail
 	const el = questionsWrap?.querySelector(`[data-id="${id}"]`)
-	console.log(el)
 	if (el) el.remove()
 }
 
@@ -52,7 +51,6 @@ function handleAnswerSet(e) {
 function handleAnswerDelete(e) {
 	const id = e.detail
 	const el = answersWrap?.querySelector(`[data-id="${id}"]`)
-	console.log(el)
 	if (el) el.remove()
 }
 
@@ -84,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (!text || text === "")
 				throw new Error("Field validation. Text is required")
 
-			const res = await createQuestion(point)
+			const res = await dbCreateQuestion(point)
 			if (!res) throw new Error("no doc returned")
 
 			questionForm.reset()
@@ -129,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (!text || text === "")
 				throw new Error("Field validation. Text is required")
 
-			const res = await createAnswer(point)
+			const res = await dbCreateAnswer(point)
 			if (!res) throw new Error("no doc returned")
 
 			answerForm.reset()

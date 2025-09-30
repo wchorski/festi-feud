@@ -1,3 +1,28 @@
+@media (prefers-color-scheme: dark) {
+	body, button {
+		background: #0c0c0c;
+		color: #bbddc4;
+	}
+	#sync-state {
+		color: black;
+	}
+
+  .card, form {
+    background-color: rgb(24, 24, 25);
+  }
+
+  button {
+    border-style: solid;
+    border-color: rgb(53, 53, 53);
+    background-color: rgb(53, 53, 53);
+
+    &:active {
+      background-color: black;
+      color: rgb(120, 120, 120);
+    }
+  }
+}
+
 label:has(input[type="checkbox"]:checked) {
 	text-decoration: underline;
 }
@@ -8,10 +33,11 @@ label:has(input[type="checkbox"]) {
 	}
 }
 button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 form {
+  
 	&[data-state="idle"] {
 		border-bottom: solid 5px skyblue;
 	}
@@ -36,7 +62,7 @@ form {
 	transition-duration: 500ms;
 	transition-property: border-color, color;
 	transition-timing-function: ease-out;
-	max-width: 30rem;
+	max-width: 20rem;
 	border: solid rgba(128, 128, 128, 0.253) 1px;
 	box-shadow: rgba(0, 0, 0, 0.081) 3px 3px 8px;
 	position: relative;
@@ -46,7 +72,6 @@ form {
 		gap: 0.2rem;
 	}
 	& > .response-message {
-		background-color: whitesmoke;
 		border-left-width: 5px;
 		border-left-style: solid;
 		padding-inline: 1rem;
@@ -70,7 +95,6 @@ button.delete {
 }
 
 .card {
-	background-color: whitesmoke;
 	border-radius: 3px;
 	box-shadow: rgba(0, 0, 0, 0.27) 3px 3px 3px;
 	margin: 0;

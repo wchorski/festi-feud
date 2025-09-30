@@ -29,9 +29,12 @@ const dbQuestions = new PouchDB(DB_COLLECTION_Q, {
 	skip_setup: false,
 	auth: { username: DB_USER, password: DB_PASSWORD },
 })
-const remoteQuestionsDB = `${DB_PROTOCOL}://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_COLLECTION_Q}`
-const dbAnswers = new PouchDB(DB_COLLECTION_A)
-const remoteAnswersDbUrl = `${DB_PROTOCOL}://${DB_URL}/${DB_COLLECTION_A}`
+const remoteQuestionsDbUrl = `${DB_PROTOCOL}://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_COLLECTION_Q}`
+const dbAnswers = new PouchDB(DB_COLLECTION_A, {
+	skip_setup: false,
+	auth: { username: DB_USER, password: DB_PASSWORD },
+})
+const remoteAnswersDbUrl = `${DB_PROTOCOL}://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_COLLECTION_A}`
 const opts = { live: true, retry: true }
 
 /** @type {Map<string, Question>} */
@@ -54,13 +57,13 @@ export const answersMap = new Map()
 //? https://pouchdb.com/api.html#sync
 // do one way, one-off sync from the server until completion
 dbQuestions.replicate
-	.from(remoteAnswersDbUrl)
+	.from(remoteQuestionsDbUrl)
 	.on("complete", function (info) {
 		// then two-way, continuous, retriable sync
 		syncDom?.setAttribute("data-sync-state", "connected")
 		syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
 		dbQuestions
-			.sync(remoteAnswersDbUrl, opts)
+			.sync(remoteQuestionsDbUrl, opts)
 			//typescript no like
 			// .on("change", onSyncChange)
 			.on("paused", onSyncPaused)
@@ -96,13 +99,13 @@ dbQuestions
 	})
 
 dbAnswers.replicate
-	.from(remoteQuestionsDB)
+	.from(remoteAnswersDbUrl)
 	.on("complete", function (info) {
 		// then two-way, continuous, retriable sync
 		syncDom?.setAttribute("data-sync-state", "connected")
 		syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
 		dbAnswers
-			.sync(remoteQuestionsDB, opts)
+			.sync(remoteAnswersDbUrl, opts)
 			//typescript no like
 			// .on("change", onSyncChange)
 			.on("paused", onSyncPaused)
@@ -246,17 +249,17 @@ async function dbCreateManyQuestions(docs) {
 /**
  *  @param {AnswerCreate} point
  */
-export async function createAnswer(point) {
+export async function dbCreateAnswer(point) {
 	if (!point.text)
 		throw new Error("create validation: data is not correct model shape")
 
 	try {
 		const res = await dbAnswers.post({
-      ...point,
-      typeof: "Answer",
-      questionId: point.questionId || "",
-      votes: 1,
-    })
+			...point,
+			typeof: "Answer",
+			questionId: point.questionId || "",
+			votes: 1,
+		})
 
 		if (!res.ok) throw new Error("form save res not OK")
 
@@ -276,13 +279,13 @@ export async function createAnswer(point) {
 /**
  *  @param {QuestionCreate} point
  */
-export async function createQuestion(point) {
+export async function dbCreateQuestion(point) {
 	if (!point.text) throw new Error("data is not correct model shape")
 
 	try {
 		const res = await dbQuestions.post({
 			...point,
-      typeof: "Question",
+			typeof: "Question",
 			categoryId: point.categoryIds || [],
 			tagIds: point.tagIds || [],
 		})
@@ -302,28 +305,16 @@ export async function createQuestion(point) {
 	}
 }
 
-// /** @param {string} svg  */
-// function renderSVG(svg) {
-// 	const parser = new DOMParser()
-// 	const doc = parser.parseFromString(svg, "image/svg+xml")
-// 	const svgElement = doc.documentElement
-
-// 	if (svgElement.tagName === "svg") {
-// 		// Insert into DOM safely
-// 		document.getElementById("emojis-wrap")?.appendChild(svgElement)
-// 	}
+// /**
+//  *
+//  * @param {string} url
+//  * @returns {Promise<string>}
+//  */
+// async function fetchCSS(url) {
+// 	const response = await fetch(url)
+// 	if (!response.ok) throw new Error("Failed to fetch CSS")
+// 	return await response.text()
 // }
-
-/**
- *
- * @param {string} url
- * @returns {Promise<string>}
- */
-async function fetchCSS(url) {
-	const response = await fetch(url)
-	if (!response.ok) throw new Error("Failed to fetch CSS")
-	return await response.text()
-}
 
 /**
  * @param {RemoveObject} doc
@@ -479,22 +470,22 @@ export async function dbDeleteAllDocs(qDocs, aDocs) {
 	}
 }
 
-/**
- * @returns {Promise<Response>}
- */
-export async function dbEmojiDestroy() {
-	try {
-		const res = await dbQuestions.destroy()
-		return {
-			ok: true,
-			message: "Database has been destroyed",
-		}
-	} catch (error) {
-		console.log(error)
-		return {
-			error: true,
-			message:
-				error instanceof Error ? "Database not found" : "Database not found",
-		}
-	}
-}
+// /**
+//  * @returns {Promise<Response>}
+//  */
+// export async function dbEmojiDestroy() {
+// 	try {
+// 		const res = await dbQuestions.destroy()
+// 		return {
+// 			ok: true,
+// 			message: "Database has been destroyed",
+// 		}
+// 	} catch (error) {
+// 		console.log(error)
+// 		return {
+// 			error: true,
+// 			message:
+// 				error instanceof Error ? "Database not found" : "Database not found",
+// 		}
+// 	}
+// }
