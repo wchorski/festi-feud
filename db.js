@@ -10,6 +10,7 @@
  * @typedef {import('./types/PouchDBChange').PouchDBChange} PouchDBChange
  */
 
+import { getUserUUID } from "./uuid.js"
 import { ENVS } from "./envs.js"
 import { events } from "./events.js"
 
@@ -287,14 +288,15 @@ async function dbCreateManyQuestions(docs) {
 export async function dbCreateAnswer(point) {
 	const { text, questionId, voterId } = point
 	if (!text) throw new Error("create validation: no text")
-	if (!voterId) throw new Error("create validation: no voterId")
+	const uuid = await getUserUUID()
+	// if (!voterId) throw new Error("create validation: no voterId")
 
 	try {
 		const res = await dbAnswers.post({
 			...point,
 			typeof: "Answer",
 			questionId: questionId || "",
-			upvotes: [{ voterId }],
+			upvotes: [uuid],
 			downvotes: [],
 		})
 
@@ -313,64 +315,40 @@ export async function dbCreateAnswer(point) {
 	}
 }
 
-//? pivoting to bulk answers on one question form
-// /**
-//  *  @param {Answer} point
-//  *  @param {boolean} isUpvote
-//  *  @param {boolean} isDownvote
-//  */
-// export async function dbVoteOnAnswer(point, isUpvote, isDownvote) {
-// 	const { text, questionId, upvotes, downvotes } = point
-// 	if (!text)
-// 		throw new Error("create validation: data is not correct model shape")
-
-// 	try {
-// 		// TODO handle if user removes vote
-// 		const res = await dbAnswers.post({
-// 			...point,
-// 			typeof: "Answer",
-// 			questionId: questionId || "",
-// 			upvotes: isUpvote ? upvotes + 1 : upvotes,
-// 			downvotes: isDownvote ? downvotes + 1 : downvotes,
-// 		})
-
-// 		if (!res.ok) throw new Error("form save res not OK")
-
-// 		return {
-// 			...res,
-// 			point: {
-// 				...point,
-// 				_id: res.id,
-// 				_rev: res.rev,
-// 			},
-// 		}
-// 	} catch (error) {
-// 		console.log("createAnswer error: ", error)
-// 	}
-// }
-
 /**
- * @param {{question:Question, answers:AnswerFormData[], submittedAt:string}} data
+ * @param {{voterId:string, question:Question, answers:Answer[], votes:AnswerFormData[], submittedAt:string}} data
  */
 export async function dbVotePerQuestion(data) {
 	try {
-		console.log(data)
-		const voterId = await getUserUUID()
-		const { question, answers } = data
-		console.log("TODO dbVotePerQuestion when values are corrected")
-		const questionRes = await dbQuestions.put({ ...question, voterIds: [] })
+		//? used in transforms.getUUID()
+		// const voterId = await getUserUUID()
+		const { voterId, question, votes, answers } = data
+
+		// TODO may comment out for debuging later
+		if (question.voterIds.includes(voterId))
+			throw new Error("One submission per voter")
+
+		const questionRes = await dbQuestions.put({
+			...question,
+			voterIds: [...question.voterIds, voterId],
+		})
 		const answersRes = await dbAnswers.bulkDocs(
-			answers.map((a) => ({
-				_id: a._id,
-				...(a.upvote
-					? { upvote: 42069 }
-					: a.downvote
-					? { downvote: 42069 }
-					: {}),
-			}))
+			votes.flatMap((vote) => {
+				const foundAnswer = answers.find((a) => a._id === vote._id)
+				if (!foundAnswer) return []
+				return {
+          ...foundAnswer,
+					_id: vote._id,
+					...(vote.upvote
+						? { upvotes: [...foundAnswer.upvotes, voterId] }
+						: vote.downvote
+						? { downvotes: [...foundAnswer.downvotes, voterId] }
+						: {}),
+				}
+			})
 		)
 
-		// console.log({ questionRes, answersRes })
+		console.log({ questionRes, answersRes })
 
 		// return {
 		// 	questionRes,

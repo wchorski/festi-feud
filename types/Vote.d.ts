@@ -10,7 +10,7 @@ export type VoteFormData = {
 		_id: string
 		_rev: string
 	}
-	answers: {
+	Votes: {
 		_id: string
 		upvote: boolean
 		downvote: boolean
@@ -18,6 +18,10 @@ export type VoteFormData = {
 }
 
 export type VoteSubmission = {
+  _id: string,
+  value: "upvote"|"downvote"
+}
+export type VoteFlag = {
   _id: string,
   upvote: boolean
   downvote: boolean

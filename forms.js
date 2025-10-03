@@ -1,9 +1,11 @@
-import { compose, transforms } from "./transforms.js"
 /**
  * @typedef {import('types/Vote.js').VoteFormData} VoteFormData
  * @typedef {import('types/Vote.js').VoteSubmitData} VoteSubmitData
  * @typedef {import("./transforms.js").TransformFunction} TransformFunction
  */
+
+import { compose, transforms } from "./transforms.js"
+import { getUserUUID } from "./uuid.js"
 
 /**
  * Creates a reusable form submit handler
@@ -83,21 +85,23 @@ export function formHandler(form, options) {
 const transformVoteData = (metadata) =>
 	compose(
 		transforms.trimStrings,
-		transforms.extractAnswers(/^votes\['(.+)'\]$/),
+		transforms.extractVotes(/^votes\['(.+)'\]$/),
 		transforms.votesToFlags,
 		transforms.pick("votes"),
 		transforms.addTimestamp,
 		transforms.metadata(metadata)
+		// transforms.getUUID("voterId")
 	)
 
 /**
  * Validate vote form data
- * @param {VoteSubmitData} data - Transformed vote data
+ * @param {VoteFormData} data - Transformed vote data
  * @throws {Error} If validation fails
  */
 function validateVoteData(data) {
-	if (!data.voterId) throw new Error("Voter ID required")
-	if (!data.questionId) throw new Error("Question ID required")
+	//? only incoming data is the dynamic votes data so... just gonna not validate i guess
+	// if (!data.voterId) throw new Error("Voter ID required")
+	// if (!data.question._id) throw new Error("Question ID required")
 	//? can't validate dynamic raw data
 	// if (!data.answers || data.answers.length === 0) {
 	// 	throw new Error("At least one answer required")
@@ -115,12 +119,13 @@ function validateVoteData(data) {
  * @param {string} [options.messageSel] - Message element selector
  * @returns {void}
  */
-export function formVoterHandler(form, options) {
-  const { metadata, ...handlerOptions } = options
+export async function formVoterHandler(form, options) {
+	const { metadata, ...handlerOptions } = options
 	// TODO fingerprint. save to local storage.
 	// check if id is already in questions.voters
+	const uuid = await getUserUUID()
 	return formHandler(form, {
-		transform: transformVoteData(metadata),
+		transform: transformVoteData({ ...metadata, voterId: uuid }),
 		validate: validateVoteData,
 		onSuccess: "disable",
 		...handlerOptions, // Spread user options (onSubmit, successTimeout, etc.)
@@ -169,7 +174,7 @@ export const successHandlers = {
 			"fieldset, input, textarea, select, button"
 		)
 		// TODO add this back in after you prevent double submissions (with voterId local storage / finger print flag)
-		// inputs.forEach((input) => (input.disabled = true))
+		inputs.forEach((input) => (input.disabled = true))
 
 		resMsgEl.textContent = `Submitted successfully!`
 	},

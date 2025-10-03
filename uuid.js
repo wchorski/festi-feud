@@ -192,7 +192,7 @@ function getStoredUUID() {
   let uuid = localStorage.getItem('user_fingerprint');
   
   if (uuid) {
-    console.log('UUID retrieved from localStorage');
+    // console.log('UUID retrieved from localStorage');
     // Ensure cookie is also set (in case it was cleared)
     if (!document.cookie.includes('user_fingerprint=')) {
       document.cookie = `user_fingerprint=${uuid}; max-age=31536000; path=/; SameSite=Strict`;
@@ -215,7 +215,7 @@ function getStoredUUID() {
 }
 
 // Main function to get or generate UUID
-async function getUserUUID() {
+export async function getUserUUID() {
   // Check if we already have a stored UUID
   let uuid = getStoredUUID();
   
@@ -225,7 +225,7 @@ async function getUserUUID() {
     storeUserUUID(uuid);
     console.log('Generated new UUID:', uuid);
   } else {
-    console.log('Using stored UUID:', uuid);
+    // console.log('Using stored UUID:', uuid);
   }
   
   return uuid;

@@ -78,8 +78,9 @@ export const elAnswerVoteInput = (doc) => {
 	const p = Object.assign(document.createElement("p"), {
 		textContent: text,
 	})
+  // TODO update count when box is checked
 	const countEl = Object.assign(document.createElement("span"), {
-		textContent: `(↑${upvotes} ↓${downvotes})`,
+		textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
 	})
 
 	// TODO when vote is cast. highlight choice and disable the button
@@ -92,6 +93,7 @@ export const elAnswerVoteInput = (doc) => {
 	 * @param {string} text
 	 * */
 	function checkboxLabel(value, text) {
+    //TODO add to temp upvote/downvote field counter
 		const name = `votes['${_id}']`
 		return Object.assign(document.createElement("label"), {
 			textContent: text,

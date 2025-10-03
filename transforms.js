@@ -1,5 +1,6 @@
 /**
  * @typedef {import("./types/Vote").VoteSubmission} VoteSubmission
+ * @typedef {import("./types/Vote").VoteFlag} VoteFlags
  * @typedef {Object.<string, any>} FormData
  * Raw form data as key-value pairs
  */
@@ -9,16 +10,6 @@
  * A function that takes form data and returns transformed form data
  */
 
-/**
- * @typedef {Object} AnswerWithFlags
- * @property {string} id - The answer ID
- * @property {boolean} upvote - Whether this is an upvote
- * @property {boolean} downvote - Whether this is a downvote
- */
-
-/**
- * Collection of reusable form data transformation utilities
- */
 export const transforms = {
 	/**
 	 * Merge additional metadata or context data with form data
@@ -42,6 +33,19 @@ export const transforms = {
 		...metadata,
 	}),
 
+  //? i don't want to make all transforms async because only this func is
+  // /**
+  //  * @param {string} myKey 
+  //  * @returns {TransformFunction}
+  //  */
+	// getUUID: (myKey) => async (raw) => {
+	// 	const uuid = await getUserUUID()
+	// 	return {
+	// 		[myKey]: uuid,
+	// 		...raw,
+	// 	}
+	// },
+
 	/**
 	 * Extract answers from form data using pattern matching
 	 * @param {RegExp} pattern - Regular expression to match answer keys and extract IDs
@@ -51,29 +55,29 @@ export const transforms = {
 	 * const result = transform({ "answers['123']": "upvote" })
 	 * // { "answers['123']": "upvote", answers: [{ id: "123", value: "upvote" }] }
 	 */
-	extractAnswers: (pattern) => (raw) => {
-		const answers = []
+	extractVotes: (pattern) => (raw) => {
+		const votes = []
 		for (const [key, value] of Object.entries(raw)) {
 			const match = key.match(pattern)
 			if (match) {
-				answers.push({
-					id: match[1],
+				votes.push({
+					_id: match[1],
 					value: value,
 				})
 			}
 		}
-		return { ...raw, answers }
+		return { ...raw, votes }
 	},
 
 	/**
 	 * Convert answer values to boolean flags (upvote, downvote, novote)
 	 * @type {TransformFunction}
 	 * @param {FormData & { votes?: VoteSubmission[] }} raw - Form data with answers array
-	 * @returns {FormData & { votes?: AnswerWithFlags[] }} Form data with boolean flags
+	 * @returns {FormData & { votes?: VoteFlags[] }} Form data with boolean flags
 	 * @example
 	 * const input = { answers: [{ id: "123", value: "upvote" }] }
 	 * const result = transforms.answersToFlags(input)
-	 * // { answers: [{ id: "123", upvote: true, downvote: false, novote: false }] }
+	 * // { votes: [{ _id: "123", upvote: true, downvote: false }] }
 	 */
 	votesToFlags: (raw) => {
 		//@ts-ignore
@@ -81,7 +85,7 @@ export const transforms = {
 		return {
 			...raw,
 			votes: raw.votes.map((v) => ({
-				_id: v.id,
+				...v,
 				upvote: v.value === "upvote",
 				downvote: v.value === "downvote",
 			})),
