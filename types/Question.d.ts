@@ -3,6 +3,8 @@ type BaseQuestion = {
 	text: string
   categoryIds: string[]
   tagIds: string[]
+  voterIds: string[]
+  dateCreated: string,
 	// Add more shared fields here as needed
 }
 

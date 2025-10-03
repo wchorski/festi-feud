@@ -73,6 +73,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] voting
   - [ ] remove or hide items that get more than 3 negative votes
   - [ ] only allow one vote or negative vote per user (or browser session)
+  - [ ] allow only one new answer
 
 
 ## Existing Repos

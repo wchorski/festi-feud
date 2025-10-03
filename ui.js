@@ -49,14 +49,14 @@ export const voteButtons = (label) => {
 		textContent: label,
 	})
 
-	const upBtn = Object.assign(document.createElement("button"), {
-		type: "button",
+	const upBtn = Object.assign(document.createElement("input"), {
+		type: "checkbox",
 		textContent: "+",
 		onclick: () => console.log("upvote"),
 	})
 
-	const downBtn = Object.assign(document.createElement("button"), {
-		type: "button",
+	const downBtn = Object.assign(document.createElement("input"), {
+		type: "checkbox",
 		textContent: "-",
 		onclick: () => console.log("downvote"),
 	})
@@ -69,10 +69,10 @@ export const voteButtons = (label) => {
  * @param {Answer} doc
  * @returns {HTMLDivElement}
  */
-export const elAnswerVote = (doc) => {
-	const { text, upvotes, downvotes } = doc
+export const elAnswerVoteInput = (doc) => {
+	const { _id, text, upvotes, downvotes } = doc
 	const container = Object.assign(document.createElement("div"), {
-		className: "card vote",
+		className: "vote-field",
 	})
 
 	const p = Object.assign(document.createElement("p"), {
@@ -87,17 +87,22 @@ export const elAnswerVote = (doc) => {
 		className: "inputs",
 	})
 
-	const upBtn = Object.assign(document.createElement("button"), {
-		type: "button",
-		textContent: "+",
-		onclick: () => console.log("upvote"),
-	})
+	/**
+	 * @param {string} value
+	 * @param {string} text
+	 * */
+	function checkboxLabel(value, text) {
+		const name = `votes['${_id}']`
+		return Object.assign(document.createElement("label"), {
+			textContent: text,
+			for: name,
+			innerHTML: `<input type="radio" name="${name}" title="${value}" value="${value}"> ${text}`,
+			// onclick: () => console.log(`answer-${_id}: ${value}`),
+		})
+	}
 
-	const downBtn = Object.assign(document.createElement("button"), {
-		type: "button",
-		textContent: "-",
-		onclick: () => console.log("downvote"),
-	})
+	const upBtn = checkboxLabel("upvote", "↑")
+	const downBtn = checkboxLabel("downvote", "↓")
 
 	inputsWrap.append(countEl, upBtn, downBtn)
 	container.append(p, inputsWrap)

@@ -1,9 +1,10 @@
 type BaseAnswer = {
-  typeof: "Answer"
+	typeof: "Answer"
 	text: string
 	questionId: string
-	upvotes: number
-	downvotes: number
+	upvotes: { userId: string }[]
+	downvotes: { userId: string }[]
+  dateCreated: string,
 	// Add more shared fields here as needed
 }
 
@@ -12,10 +13,24 @@ type DatabaseFields = {
 	_rev: string
 }
 
+export type AnswerFormData = {
+	_id: string
+	upvote: boolean
+	downvote: boolean
+}
+
+export type AnswerFormValues = {
+	voterId: string
+	questionId: string
+	questionRev: string
+	[key]: "upvote" | "downvote"
+}
+
 export type Answer = BaseAnswer & DatabaseFields
 
 export type AnswerCreate = BaseAnswer & {
 	_id?: string
+  voterId: string
 }
 
 export type AnswerSet = CustomEvent<Answer>

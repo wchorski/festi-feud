@@ -10,7 +10,7 @@
  */
 import {
 	createTextEl,
-	elAnswerVote,
+	elAnswerVoteInput,
 	renderAllTextEls,
 	voteButtons,
 } from "../ui.js"
@@ -19,16 +19,18 @@ import {
 	dbDeleteAnswer,
 	dbFindAnswersByQuestionId,
 	dbGetQuestion,
+	dbVotePerQuestion,
 } from "../db.js"
-import { events } from "../events.js"
-import { formHandler } from "../forms.js"
+// import { events } from "../events.js"
+import { formHandler, formVoterHandler } from "../forms.js"
 
 const h1 = document.querySelector("h1")
 const questionEl = document.getElementById("question")
 const answersWrap = document.getElementById("answers-wrap")
 const answerForm = document.forms.namedItem("answerForm")
+const voteForm = document.forms.namedItem("voteForm")
 let questionId = ""
-if (!answerForm) throw new Error("form(s) not found")
+if (!answerForm || !voteForm) throw new Error("form(s) not found")
 
 /** @param {AnswerSet} e */
 function handleAnswerSet(e) {
@@ -47,16 +49,16 @@ function handleAnswerDelete(e) {
 
 document.addEventListener("DOMContentLoaded", function () {
 	// TODO maybe i shouldn't listen to events because it will react to ANY changes to answersDB
-	events.addEventListener(
-		"answers:set",
-		//@ts-ignore
-		handleAnswerSet
-	)
-	events.addEventListener(
-		"answers:delete",
-		//@ts-ignore
-		handleAnswerDelete
-	)
+	// events.addEventListener(
+	// 	"answers:set",
+	// 	//@ts-ignore
+	// 	handleAnswerSet
+	// )
+	// events.addEventListener(
+	// 	"answers:delete",
+	// 	//@ts-ignore
+	// 	handleAnswerDelete
+	// )
 
 	formHandler(answerForm, {
 		onSubmit: dbCreateAnswer,
@@ -65,6 +67,19 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (!values.text) throw new Error("need input text")
 			//TODO validate min max of text
 		},
+	})
+
+	formVoterHandler(voteForm, {
+		onSubmit: dbVotePerQuestion,
+		//? moved to forms.js
+		// validate: (values) => {
+		// 	console.log(values)
+		// 	if (!values.voterId) throw new Error("Voter ID required")
+		// 	if (!values.questionId) throw new Error("Question ID required")
+		// 	if (!values.answers || values.answers.length === 0) {
+		// 		throw new Error("At least one answer required")
+		// 	}
+		// },
 	})
 })
 
@@ -84,20 +99,31 @@ async function ini() {
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
 		// console.log(answerDocsRes)
 		// renderAllTextEls(answerDocsRes.docs, answersWrap)
-		const answerEls = answerDocsRes.docs.map((doc) => elAnswerVote(doc))
+		const answerEls = answerDocsRes.docs.map((doc) => elAnswerVoteInput(doc))
 		answersWrap.replaceChildren(...answerEls)
 
 		// const voteBtns = voteButtons("vote 4 me")
 		// answersWrap.append(voteBtns)
 
-		if (!answerForm) throw new Error("form(s) not found")
+		if (!answerForm || !voteForm) throw new Error("form(s) not found")
 		// const questionIdField = document.querySelector('[name="questionId"]')
 
-		const questionIdField = /** @type {HTMLInputElement}*/ (
+		const answerFormQuestionIdField = /** @type {HTMLInputElement}*/ (
 			answerForm.elements.namedItem("questionId")
 		)
-		questionIdField.value = id
+		answerFormQuestionIdField.value = id
+
+		const voteFormQuestionIdField = /** @type {HTMLInputElement}*/ (
+			voteForm.elements.namedItem("questionId")
+		)
+		voteFormQuestionIdField.value = id
+
+		const voteFormQuestionRevField = /** @type {HTMLInputElement}*/ (
+			voteForm.elements.namedItem("questionRev")
+		)
+		voteFormQuestionRevField.value = doc._rev
 	}
 }
 
 ini()
+

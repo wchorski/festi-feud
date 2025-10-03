@@ -4,6 +4,7 @@
  * @typedef {import('./types/Response').Response} Response
  * @typedef {import('./types/RemoveObject').RemoveObject} RemoveObject
  * @typedef {import('./types/Answer').AnswerCreate} AnswerCreate
+ * @typedef {import("./types/Answer").AnswerFormData} AnswerFormData
  * @typedef {import('./types/Question').Question} Question
  * @typedef {import('./types/Question').QuestionCreate} QuestionCreate
  * @typedef {import('./types/PouchDBChange').PouchDBChange} PouchDBChange
@@ -284,17 +285,17 @@ async function dbCreateManyQuestions(docs) {
  *  @param {AnswerCreate} point
  */
 export async function dbCreateAnswer(point) {
-	const { text, questionId } = point
-	if (!text)
-		throw new Error("create validation: data is not correct model shape")
+	const { text, questionId, voterId } = point
+	if (!text) throw new Error("create validation: no text")
+	if (!voterId) throw new Error("create validation: no voterId")
 
 	try {
 		const res = await dbAnswers.post({
 			...point,
 			typeof: "Answer",
 			questionId: questionId || "",
-			upvotes: 1,
-			downvotes: 0,
+			upvotes: [{ voterId }],
+			downvotes: [],
 		})
 
 		if (!res.ok) throw new Error("form save res not OK")
@@ -312,38 +313,76 @@ export async function dbCreateAnswer(point) {
 	}
 }
 
+//? pivoting to bulk answers on one question form
+// /**
+//  *  @param {Answer} point
+//  *  @param {boolean} isUpvote
+//  *  @param {boolean} isDownvote
+//  */
+// export async function dbVoteOnAnswer(point, isUpvote, isDownvote) {
+// 	const { text, questionId, upvotes, downvotes } = point
+// 	if (!text)
+// 		throw new Error("create validation: data is not correct model shape")
+
+// 	try {
+// 		// TODO handle if user removes vote
+// 		const res = await dbAnswers.post({
+// 			...point,
+// 			typeof: "Answer",
+// 			questionId: questionId || "",
+// 			upvotes: isUpvote ? upvotes + 1 : upvotes,
+// 			downvotes: isDownvote ? downvotes + 1 : downvotes,
+// 		})
+
+// 		if (!res.ok) throw new Error("form save res not OK")
+
+// 		return {
+// 			...res,
+// 			point: {
+// 				...point,
+// 				_id: res.id,
+// 				_rev: res.rev,
+// 			},
+// 		}
+// 	} catch (error) {
+// 		console.log("createAnswer error: ", error)
+// 	}
+// }
+
 /**
- *  @param {Answer} point
- *  @param {boolean} isUpvote
- *  @param {boolean} isDownvote
+ * @param {{question:Question, answers:AnswerFormData[], submittedAt:string}} data
  */
-export async function dbVoteOnAnswer(point, isUpvote, isDownvote) {
-	const { text, questionId, upvotes, downvotes } = point
-	if (!text)
-		throw new Error("create validation: data is not correct model shape")
-
+export async function dbVotePerQuestion(data) {
 	try {
-		// TODO handle if user removes vote
-		const res = await dbAnswers.post({
-			...point,
-			typeof: "Answer",
-			questionId: questionId || "",
-			upvotes: isUpvote ? upvotes + 1 : upvotes,
-			downvotes: isDownvote ? downvotes + 1 : downvotes,
-		})
+		console.log(data)
+		const voterId = await getUserUUID()
+		const { question, answers } = data
+		console.log("TODO dbVotePerQuestion when values are corrected")
+		const questionRes = await dbQuestions.put({ ...question, voterIds: [] })
+		const answersRes = await dbAnswers.bulkDocs(
+			answers.map((a) => ({
+				_id: a._id,
+				...(a.upvote
+					? { upvote: 42069 }
+					: a.downvote
+					? { downvote: 42069 }
+					: {}),
+			}))
+		)
 
-		if (!res.ok) throw new Error("form save res not OK")
+		// console.log({ questionRes, answersRes })
 
+		// return {
+		// 	questionRes,
+		// 	answersRes,
+		// }
 		return {
-			...res,
-			point: {
-				...point,
-				_id: res.id,
-				_rev: res.rev,
-			},
+			ok: true,
+			code: 420,
 		}
-	} catch (error) {
-		console.log("createAnswer error: ", error)
+	} catch (err) {
+		console.log(err)
+		throw new Error(`!!! dbVotePerQuestion: ${err}`)
 	}
 }
 
@@ -359,6 +398,7 @@ export async function dbCreateQuestion(point) {
 			typeof: "Question",
 			categoryId: point.categoryIds || [],
 			tagIds: point.tagIds || [],
+			voterIds: [],
 		})
 
 		if (!res.ok) throw new Error("create form save res not OK")

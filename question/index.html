@@ -14,10 +14,27 @@
 		<h1>Question: [ID]</h1>
 		<p id="question"></p>
 		<h2>Answers:</h2>
-		<div id="answers-wrap" class="grid-tiles"></div>
+		<!-- <div id="answers-wrap" class="grid-list"></div> -->
+		<form name="voteForm" data-state="idle">
+			<legend>Vote</legend>
+			<!-- <input type="text" name="voterId" value="123.123.0.123" readonly /> -->
+			<!-- <input type="text" name="questionId" readonly /> -->
+			<!-- <input type="text" name="questionRev" readonly /> -->
+			<fieldset id="answers-wrap">
+				<!-- from db -->
+			</fieldset>
+			<p class="response-message"></p>
+			<button type="submit">submit</button>
+		</form>
+
 		<hr />
+
 		<form name="answerForm" data-state="idle">
-			<legend>Submit a new Answer</legend>
+			<legend>
+				Submit a new Answer
+				<p class="sub-text">only one per person</p>
+			</legend>
+
 			<label for="questionId">
 				<input name="questionId" type="hidden" readonly />
 			</label>
