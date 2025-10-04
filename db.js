@@ -3,10 +3,10 @@
  * @typedef {import('./types/Answer').Answer} Answer
  * @typedef {import('./types/Response').Response} Response
  * @typedef {import('./types/RemoveObject').RemoveObject} RemoveObject
- * @typedef {import('./types/Answer').AnswerCreate} AnswerCreate
+ * @typedef {import('./types/Answer').AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("./types/Answer").AnswerFormData} AnswerFormData
  * @typedef {import('./types/Question').Question} Question
- * @typedef {import('./types/Question').QuestionCreate} QuestionCreate
+ * @typedef {import('./types/Question').QuestionCreateTrans} QuestionCreateTrans
  * @typedef {import('./types/PouchDBChange').PouchDBChange} PouchDBChange
  */
 
@@ -44,7 +44,6 @@ export const questionsMap = new Map()
 /** @type {Map<string, Answer>} */
 export const answersMap = new Map()
 
-// TODO have client login to play game
 // // Client logs in with username/password
 // async function login(username, password) {
 //   const response = await fetch('https://couchdb.mydomain.site/_session', {
@@ -283,24 +282,20 @@ async function dbCreateManyQuestions(docs) {
 // }
 
 /**
- *  @param {AnswerCreate} point
+ *  @param {AnswerCreateTrans} point
  */
 export async function dbCreateAnswer(point) {
-	const { text, questionId, userId } = point
-	console.log({ userId })
-	if (!text) throw new Error("create validation: no text")
-	// TODO remove this if getting uuid from frontend
-	const uuid = await getUserUUID()
-	// if (!voterId) throw new Error("create validation: no voterId")
+	const { userId, upvotes, downvotes } = point
+
+	// TODO do i really need to validate again here?
+	// if (!text) throw new Error("create validation: no text")
 
 	try {
 		const res = await dbAnswers.post({
 			...point,
 			typeof: "Answer",
-			questionId: questionId || "",
-			upvotes: [uuid],
-			downvotes: [],
-			userId: userId || uuid,
+			upvotes: [...upvotes, userId],
+			downvotes: [...downvotes],
 		})
 
 		if (!res.ok) throw new Error("form save res not OK")
@@ -328,6 +323,7 @@ export async function dbVotePerQuestion(data) {
 		const { voterId, question, votes, answers } = data
 
 		// TODO may comment out for debuging later
+		// TODO do i need to validate here even tho i did in the form?
 		if (question.voterIds.includes(voterId))
 			throw new Error("One submission per voter")
 
@@ -352,6 +348,8 @@ export async function dbVotePerQuestion(data) {
 		)
 
 		console.log({ questionRes, answersRes })
+    // TODO figure out good res for form
+    // if(!questionRes.ok || answersRes.map)
 
 		// return {
 		// 	questionRes,
@@ -360,6 +358,8 @@ export async function dbVotePerQuestion(data) {
 		return {
 			ok: true,
 			code: 420,
+      questionRes,
+      answersRes
 		}
 	} catch (err) {
 		console.log(err)
@@ -368,7 +368,7 @@ export async function dbVotePerQuestion(data) {
 }
 
 /**
- *  @param {QuestionCreate} point
+ *  @param {QuestionCreateTrans} point
  */
 export async function dbCreateQuestion(point) {
 	if (!point.text) throw new Error("data is not correct model shape")

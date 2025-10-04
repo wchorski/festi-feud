@@ -2,11 +2,11 @@
  * @typedef {Object} ElementProps
  * @typedef {import('types/Question').Question} Question
  * @typedef {import('types/Question').QuestionSet} QuestionSet
- * @typedef {import('types/Question').QuestionCreate} QuestionCreate
+ * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreate} AnswerCreate
+ * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  * @typedef {import("types/RemoveObject").RemoveObject} RemoveObject
  * @typedef {function(string, Record<string, any>|null, ...(HTMLElement|string)[]): HTMLElement} CreateElement
@@ -78,12 +78,12 @@ export const elAnswerVoteInput = (doc) => {
 	const p = Object.assign(document.createElement("p"), {
 		textContent: text,
 	})
-  // TODO update count when box is checked
+	// TODO update count when box is checked
+	// TODO remove showing votes as to not influence bias
 	const countEl = Object.assign(document.createElement("span"), {
 		textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
 	})
 
-	// TODO when vote is cast. highlight choice and disable the button
 	const inputsWrap = Object.assign(document.createElement("div"), {
 		className: "inputs",
 	})
@@ -93,7 +93,6 @@ export const elAnswerVoteInput = (doc) => {
 	 * @param {string} text
 	 * */
 	function checkboxLabel(value, text) {
-    //TODO add to temp upvote/downvote field counter
 		const name = `votes['${_id}']`
 		return Object.assign(document.createElement("label"), {
 			textContent: text,
@@ -136,8 +135,6 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 			doc.typeof === "Question" || doc.typeof === "Answer"
 				? () => deleteFunc(doc)
 				: console.error("typeof != Question || Answer"),
-
-		// TODO fix model and switch to error
 	})
 
 	const linkEl = Object.assign(document.createElement("a"), {
@@ -146,8 +143,6 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 		// title: `go to poll`,
 		textContent: "-->",
 		href: `/${doc.typeof.toLowerCase()}/index.html?id=${doc._id}`,
-
-		// TODO fix model and switch to error
 	})
 
 	p.append(linkEl, deleteBtn)

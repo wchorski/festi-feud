@@ -13,35 +13,15 @@
 		<h1>Festi Feud</h1>
 		<span data-sync-state="connecting" id="sync-state"> ␖ </span>
 
-		<form name="answerForm" data-state="idle">
-      <legend>Submit an Answer</legend>
-			<label for="questionId">
-				<span>questionId: TODO make hidden</span>
-				<input name="questionId" type="text" />
-			</label>
-			<label for="text">
-				<span>Answer:</span>
-				<input name="text" type="text" min="2" max="30"/>
-			</label>
-			<p class="response-message"></p>
-			<button type="submit">submit</button>
-		</form>
-		
-		<h2>Answers:</h2>
-		<div id="answers-wrap" class="grid-tiles"></div>
-
-		<hr />
-		<hr />
-		<hr />
-
 		<form name="questionForm" data-state="idle">
-      <legend>Create New Question</legend>
-      <label for="text">
+			<legend>Create New Question</legend>
+			<label for="text">
 				<span>Question:</span>
 				<textarea name="text" min="2" max="30"></textarea>
 			</label>
 
 			<fieldset for="categoryIds">
+				<p>TODO add these features</p>
 				<legend>categories</legend>
 				<!-- <select multiple name="categoryIds">
           <option value="1">one</option>
@@ -55,6 +35,7 @@
 				</div>
 			</fieldset>
 			<fieldset for="tagIds">
+        <p>TODO add these features</p>
 				<legend>tags</legend>
 				<!-- <select multiple name="categoryIds">
           <option value="1">one</option>
@@ -71,8 +52,15 @@
 			<p class="response-message"></p>
 			<button type="submit">submit</button>
 		</form>
-		
+
 		<h2>Questions:</h2>
 		<div id="questions-wrap" class="grid-tiles"></div>
+
+		<hr />
+		<hr />
+		<hr />
+    <h2>Answers:</h2>
+		<div id="answers-wrap" class="grid-tiles"></div>
+
 	</body>
 </html>

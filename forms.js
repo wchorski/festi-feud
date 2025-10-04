@@ -1,12 +1,18 @@
 /**
  * @typedef {import('types/Vote.js').VoteFormData} VoteFormData
+ * @typedef {import('types/Elements.js').InputEls} InputEls
  * @typedef {import('types/Vote.js').VoteSubmitData} VoteSubmitData
  * @typedef {import("./transforms.js").TransformFunction} TransformFunction
+ * @typedef {Object} FormSubmitResponse
+ * @property {boolean} ok - Whether the submission was successful
+ * @property {string} [id] - Optional ID of the submitted record
  */
 
 import { compose, transforms } from "./transforms.js"
 import { getUserUUID } from "./uuid.js"
 
+// TODO figure out this typing for options.onSubmit for better stuff
+//  * @param {(data: any) => Promise<FormSubmitResponse>} options.onSubmit - Async function to handle form data
 /**
  * Creates a reusable form submit handler
  * @param {HTMLFormElement} form - The form element
@@ -41,7 +47,7 @@ export function formHandler(form, options) {
 		)
 
 		try {
-      //? if tranform doesn't contain async func then it will run as synchronous
+			//? if tranform doesn't contain async func then it will run as synchronous
 			const transData = transform ? await transform(submitData) : submitData
 
 			// Run validation if provided
@@ -116,12 +122,10 @@ function validateVoteData(data) {
  * @param {Function} [options.validate] - Optional validation function
  * @param {number} [options.successTimeout] - Time to show success state
  * @param {string} [options.messageSel] - Message element selector
- * @returns {void}
+ * @returns {Promise<void>}
  */
 export async function formVoterHandler(form, options) {
 	const { metadata, ...handlerOptions } = options
-	// TODO fingerprint. save to local storage.
-	// check if id is already in questions.voters
 	const uuid = await getUserUUID()
 	return formHandler(form, {
 		transform: transformVoteData({ ...metadata, voterId: uuid }),
@@ -145,7 +149,7 @@ export const successHandlers = {
 	/**
 	 * Reset form and show temporary success message
 	 * @param {HTMLFormElement} form - The form element
-	 * @param {Object} res - Response from onSubmit
+	 * @param {FormSubmitResponse} res - Response from onSubmit
 	 * @param {SuccessContext} context - Additional context
 	 */
 	reset: (form, res, { resMsgEl, successTimeout }) => {
@@ -169,6 +173,7 @@ export const successHandlers = {
 		form.setAttribute("disabled", "true")
 
 		// Disable all form inputs
+		/** @type {InputEls} */
 		const inputs = form.querySelectorAll(
 			"fieldset, input, textarea, select, button"
 		)
@@ -189,6 +194,7 @@ export const successHandlers = {
 		form.setAttribute("data-state", "success")
 		form.setAttribute("disabled", "true")
 
+		/** @type {InputEls} */
 		const inputs = form.querySelectorAll("input, textarea, select, button")
 		inputs.forEach((input) => (input.disabled = true))
 
@@ -198,7 +204,7 @@ export const successHandlers = {
 	/**
 	 * Just show success state without resetting
 	 * @param {HTMLFormElement} form - The form element
-	 * @param {Object} res - Response from onSubmit
+	 * @param {FormSubmitResponse} res - Response from onSubmit
 	 * @param {SuccessContext} context - Additional context
 	 */
 	keepData: (form, res, { resMsgEl, successTimeout }) => {
@@ -217,6 +223,12 @@ export const successHandlers = {
 	 */
 	redirect:
 		(url) =>
+		/**
+		 * @param {HTMLFormElement} form - The form element
+		 * @param {Object} res - Response from onSubmit
+		 * @param {SuccessContext} context - Additional context
+		 * @returns {void}
+		 */
 		(form, res, { resMsgEl }) => {
 			form.setAttribute("data-state", "success")
 			resMsgEl.textContent = `Success! Redirecting...`
@@ -246,6 +258,12 @@ export const successHandlers = {
 	 */
 	customMessage:
 		(messageFormatter) =>
+		/**
+		 * @param {HTMLFormElement} form - The form element
+		 * @param {Object} res - Response from onSubmit
+		 * @param {SuccessContext} context - Additional context
+		 * @returns {void}
+		 */
 		(form, res, { resMsgEl, successTimeout }) => {
 			form.reset()
 			form.setAttribute("data-state", "success")

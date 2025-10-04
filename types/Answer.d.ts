@@ -1,5 +1,4 @@
 type BaseAnswer = {
-	typeof: "Answer"
 	text: string
 	questionId: string
 	// TODO will it be better future proof to do nested ids?
@@ -13,6 +12,7 @@ type BaseAnswer = {
 }
 
 type DatabaseFields = {
+	typeof: "Answer"
 	_id: string
 	_rev: string
 }

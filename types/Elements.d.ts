@@ -1,0 +1,1 @@
+export type InputEls = NodeListOf<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement | HTMLFieldSetElement>

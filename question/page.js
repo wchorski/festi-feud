@@ -1,7 +1,7 @@
 /**
  * @typedef {import('types/Question').Question} Question
  * @typedef {import('types/Question').QuestionSet} QuestionSet
- * @typedef {import('types/Question').QuestionCreate} QuestionCreate
+ * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
@@ -93,17 +93,6 @@ async function ini() {
 		)
 		answerFormQuestionIdField.value = id
 
-		// const voteFormQuestionIdField = /** @type {HTMLInputElement}*/ (
-		// 	voteForm.elements.namedItem("questionId")
-		// )
-		// voteFormQuestionIdField.value = id
-
-		// const voteFormQuestionRevField = /** @type {HTMLInputElement}*/ (
-		// 	voteForm.elements.namedItem("questionRev")
-		// )
-		// voteFormQuestionRevField.value = question._rev
-
-		// TODO add to vote form when new answer is added
 		formHandler(answerForm, {
 			onSubmit: dbCreateAnswer,
 			onSuccess: "disable",

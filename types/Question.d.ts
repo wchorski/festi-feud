@@ -1,21 +1,25 @@
 type BaseQuestion = {
-  typeof: "Question"
 	text: string
-  categoryIds: string[]
-  tagIds: string[]
-  voterIds: string[]
-  dateCreated: string,
+	userId: string
+	categoryIds: string[]
+	tagIds: string[]
+	voterIds: string[]
+	dateCreated: string
 	// Add more shared fields here as needed
 }
 
 type DatabaseFields = {
+  typeof: "Question"
 	_id: string
 	_rev: string
 }
 
 export type Question = BaseQuestion & DatabaseFields
 
-export type QuestionCreate = BaseQuestion & {
+export type QuestionCreateTrans = BaseQuestion & {
+	_id?: string
+}
+export type QuestionCreateRaw = BaseQuestion & {
 	_id?: string
 }
 

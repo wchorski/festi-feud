@@ -1,11 +1,13 @@
 /**
  * @typedef {import('types/Question').Question} Question
  * @typedef {import('types/Question').QuestionSet} QuestionSet
- * @typedef {import('types/Question').QuestionCreate} QuestionCreate
+ * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
+ * @typedef {import('types/Question').QuestionCreateRaw} QuestionCreateRaw
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreate} AnswerCreate
+ * @typedef {import("types/Answer.js").AnswerCreateRaw} AnswerCreateRaw
+ * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
 
@@ -21,12 +23,14 @@ import {
 	questionsMap,
 } from "./db.js"
 import { events } from "./events.js"
+import { formHandler } from "./forms.js"
+import { getUserUUID } from "./uuid.js"
+import { compose, transforms } from "./transforms.js"
 
 const questionsWrap = document.getElementById("questions-wrap")
 const questionForm = document.forms.namedItem("questionForm")
 const answersWrap = document.getElementById("answers-wrap")
-const answerForm = document.forms.namedItem("answerForm")
-if (!questionForm || !answerForm) throw new Error("form(s) not found")
+if (!questionForm) throw new Error("form(s) not found")
 
 /** @param {QuestionSet} e */
 function handleQuestionSet(e) {
@@ -66,39 +70,24 @@ document.addEventListener("DOMContentLoaded", function () {
 		handleQuestionDelete
 	)
 
-	// TODO refactor to use formHandler
-	questionForm?.addEventListener("submit", async (e) => {
-		e.preventDefault()
-
-		const resMsgEl = questionForm.querySelector(".response-message")
-		if (!resMsgEl) throw new Error("no resMsgEl on form")
-
-		const point = /** @type {QuestionCreate} */ (
-			//@ts-ignore
-			Object.fromEntries(new FormData(e.target))
-		)
-		const { text } = point
-
-		try {
-			if (!text || text === "")
-				throw new Error("Field validation. Text is required")
-
-			const res = await dbCreateQuestion(point)
-			if (!res) throw new Error("no doc returned")
-
-			questionForm.reset()
-
-			questionForm.setAttribute("data-state", "success")
-			resMsgEl.textContent = `ok: ${res.ok} | id: ${res.id}`
-
-			setTimeout(() => {
-				questionForm.setAttribute("data-state", "idle")
-			}, 3000)
-		} catch (error) {
-			questionForm.setAttribute("data-state", "error")
-			console.log("form submit error: ", error)
-			resMsgEl.textContent = String(error)
-		}
+	formHandler(questionForm, {
+		onSubmit: dbCreateQuestion,
+		onSuccess: "disable",
+		/** @param {QuestionCreateTrans} values */
+		validate: (values) => {
+			//TODO validate min max of text
+			if (!values.text) throw new Error("need input text")
+		},
+		//? able to make transform async when needed
+		/** @param {QuestionCreateRaw} raw */
+		transform: async (raw) => {
+			const uuid = await getUserUUID()
+			return compose(
+				transforms.trimStrings,
+				transforms.addTimestamp,
+				transforms.metadata({ userId: uuid })
+			)(raw)
+		},
 	})
 
 	events.addEventListener(
@@ -111,41 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		//@ts-ignore
 		handleAnswerDelete
 	)
-
-	// TODO refactor to use formHandler
-	answerForm?.addEventListener("submit", async (e) => {
-		e.preventDefault()
-
-		const resMsgEl = answerForm.querySelector(".response-message")
-		if (!resMsgEl) throw new Error("no resMsgEl on form")
-
-		const point = /** @type {AnswerCreate} */ (
-			//@ts-ignore
-			Object.fromEntries(new FormData(e.target))
-		)
-		const { text } = point
-
-		try {
-			if (!text || text === "")
-				throw new Error("Field validation. Text is required")
-
-			const res = await dbCreateAnswer(point)
-			if (!res) throw new Error("no doc returned")
-
-			answerForm.reset()
-
-			answerForm.setAttribute("data-state", "success")
-			resMsgEl.textContent = `ok: ${res.ok} | id: ${res.id}`
-
-			setTimeout(() => {
-				answerForm.setAttribute("data-state", "idle")
-			}, 3000)
-		} catch (error) {
-			answerForm.setAttribute("data-state", "error")
-			console.log("form submit error: ", error)
-			resMsgEl.textContent = String(error)
-		}
-	})
 })
 
 async function ini() {

@@ -74,6 +74,8 @@ Surveyors can periodically sync by coming back in range of the server's network 
   - [ ] remove or hide items that get more than 3 negative votes
   - [ ] only allow one vote or negative vote per user (or browser session)
   - [ ] allow only one new answer
+  - [ ] save question poll submission or answer to localstorage to recal if user wants to update / re-do their form.
+- [ ] results. bar/pie chart for admin users 
 
 
 ## Existing Repos
