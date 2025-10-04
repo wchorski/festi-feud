@@ -41,12 +41,11 @@ export function formHandler(form, options) {
 		)
 
 		try {
-			// Run validation if provided
-			if (validate) {
-				validate(submitData)
-			}
+      //? if tranform doesn't contain async func then it will run as synchronous
+			const transData = transform ? await transform(submitData) : submitData
 
-			const transData = transform ? transform(submitData) : submitData
+			// Run validation if provided
+			if (validate) validate(transData)
 
 			// Execute submit handler
 			const res = await onSubmit(transData)

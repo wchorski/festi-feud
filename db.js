@@ -286,8 +286,10 @@ async function dbCreateManyQuestions(docs) {
  *  @param {AnswerCreate} point
  */
 export async function dbCreateAnswer(point) {
-	const { text, questionId, voterId } = point
+	const { text, questionId, userId } = point
+	console.log({ userId })
 	if (!text) throw new Error("create validation: no text")
+	// TODO remove this if getting uuid from frontend
 	const uuid = await getUserUUID()
 	// if (!voterId) throw new Error("create validation: no voterId")
 
@@ -298,6 +300,7 @@ export async function dbCreateAnswer(point) {
 			questionId: questionId || "",
 			upvotes: [uuid],
 			downvotes: [],
+			userId: userId || uuid,
 		})
 
 		if (!res.ok) throw new Error("form save res not OK")
@@ -337,7 +340,7 @@ export async function dbVotePerQuestion(data) {
 				const foundAnswer = answers.find((a) => a._id === vote._id)
 				if (!foundAnswer) return []
 				return {
-          ...foundAnswer,
+					...foundAnswer,
 					_id: vote._id,
 					...(vote.upvote
 						? { upvotes: [...foundAnswer.upvotes, voterId] }

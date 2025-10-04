@@ -5,7 +5,8 @@
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreate} AnswerCreate
+ * @typedef {import("types/Answer.js").AnswerCreateRaw} AnswerCreateRaw
+ * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
 import {
@@ -23,6 +24,8 @@ import {
 } from "../db.js"
 // import { events } from "../events.js"
 import { formHandler, formVoterHandler } from "../forms.js"
+import { compose, transforms } from "../transforms.js"
+import { getUserUUID } from "../uuid.js"
 
 const h1 = document.querySelector("h1")
 const questionEl = document.getElementById("question")
@@ -103,11 +106,24 @@ async function ini() {
 		// TODO add to vote form when new answer is added
 		formHandler(answerForm, {
 			onSubmit: dbCreateAnswer,
-			onSuccess: "reset",
-			/** @param {AnswerCreate} values */
+			onSuccess: "disable",
+			/** @param {AnswerCreateTrans} values */
 			validate: (values) => {
-				if (!values.text) throw new Error("need input text")
 				//TODO validate min max of text
+				if (!values.text) throw new Error("need input text")
+				if (!values.questionId) throw new Error("need input questionId")
+				if (values.answers.flatMap((a) => a.userId).includes(values.userId))
+					throw new Error("Can only submit one new answer")
+			},
+			//? able to make transform async when needed
+			/** @param {AnswerCreateRaw} raw */
+			transform: async (raw) => {
+				const uuid = await getUserUUID()
+				return compose(
+					transforms.trimStrings,
+					transforms.addTimestamp,
+					transforms.metadata({ answers: answerDocsRes.docs, userId: uuid })
+				)(raw)
 			},
 		})
 

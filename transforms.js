@@ -33,11 +33,11 @@ export const transforms = {
 		...metadata,
 	}),
 
-  //? i don't want to make all transforms async because only this func is
-  // /**
-  //  * @param {string} myKey 
-  //  * @returns {TransformFunction}
-  //  */
+	//? i don't want to make all transforms async because only this func is
+	// /**
+	//  * @param {string} myKey
+	//  * @returns {TransformFunction}
+	//  */
 	// getUUID: (myKey) => async (raw) => {
 	// 	const uuid = await getUserUUID()
 	// 	return {
@@ -157,14 +157,14 @@ export const transforms = {
 	 * Add ISO timestamp to form data
 	 * @type {TransformFunction}
 	 * @param {FormData} raw - Form data to add timestamp to
-	 * @returns {FormData & { submittedAt: string }} Form data with submittedAt timestamp
+	 * @returns {FormData & { dateCreated: string }} Form data with submittedAt timestamp
 	 * @example
 	 * const result = transforms.addTimestamp({ voterId: "123" })
 	 * // { voterId: "123", submittedAt: "2025-10-02T12:34:56.789Z" }
 	 */
 	addTimestamp: (raw) => ({
 		...raw,
-		submittedAt: new Date().toISOString(),
+		dateCreated: new Date().toISOString(),
 	}),
 
 	/**

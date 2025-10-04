@@ -2,12 +2,13 @@ type BaseAnswer = {
 	typeof: "Answer"
 	text: string
 	questionId: string
-  // TODO will it be better future proof to do nested ids?
+	// TODO will it be better future proof to do nested ids?
 	// upvotes: { userId: string }[]
 	// downvotes: { userId: string }[]
 	upvotes: string[]
 	downvotes: string[]
-  dateCreated: string,
+	dateCreated: string
+	userId: string
 	// Add more shared fields here as needed
 }
 
@@ -31,9 +32,13 @@ export type AnswerFormValues = {
 
 export type Answer = BaseAnswer & DatabaseFields
 
-export type AnswerCreate = BaseAnswer & {
-	_id?: string
-  voterId: string
+export type AnswerCreateRaw = {
+	questionId: string
+	text: string
+}
+export type AnswerCreateTrans = BaseAnswer & {
+	// check if question.answers have same userId
+	answers: Answer[]
 }
 
 export type AnswerSet = CustomEvent<Answer>
