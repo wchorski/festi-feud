@@ -10,6 +10,27 @@
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
 	</head>
 	<body>
+    <section class="settings-wrap">
+      <button popovertarget="settings">
+        <img
+          class="icon"
+          alt="icon up"
+          src="/icons/gear.svg"
+          height="30"
+          width="30"
+        />
+      </button>
+
+      <div id="settings" class="popover" popover>
+        <button title="close popover" popovertarget="settings">x</button>
+        <p id="db-message"></p>
+        <h2>Settings</h2>
+        <div class="flex">
+          <button id="seed-db-btn">seed database</button>
+          <button id="destroy-db-btn">delete all docs</button>
+        </div>
+      </section>
+
 		<h1>Festi Feud</h1>
 		<span data-sync-state="connecting" id="sync-state"> ␖ </span>
 

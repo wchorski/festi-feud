@@ -1,0 +1,2528 @@
+[
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-ca80af4d-273f-4082-a64e-7ad84d1733f2",
+    "text": "Bandana",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-0817eeb7-04fb-4da9-b1cd-80d22e934cb5",
+      "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d",
+      "user-c62df6da-0ba7-4268-b44b-28d796757888",
+      "user-948ff637-8175-422f-ab31-492e724582e0",
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21"
+    ],
+    "createdAt": "2025-10-03T13:16:32Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-a25661b8-41d1-449a-819f-e79f9cdb0e24",
+    "text": "Glow sticks",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-04b4d9cc-f0f6-451c-bb62-e939c6a521f0",
+      "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
+      "user-2653b110-65f8-4cd4-852c-6e9499aeb280"
+    ],
+    "createdAt": "2025-09-22T07:41:20Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+    "text": "Hoodie",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-ba600110-fc84-439d-bf34-3df881979bed",
+      "user-170851a2-1ce6-4415-b85d-c429c8b2d43c",
+      "user-8d3b18c8-9cab-4407-a291-0cf3b2c12f62"
+    ],
+    "createdAt": "2025-10-02T15:00:16Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-ba600110-fc84-439d-bf34-3df881979bed",
+    "text": "Hat pin",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-7649af22-91d1-4da5-b00e-e0bf3d52e394"
+    ],
+    "createdAt": "2025-09-26T00:37:02Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
+    "text": "Festival flag",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-dca92915-12b0-4d37-92c4-f729623bed7f",
+      "user-2653b110-65f8-4cd4-852c-6e9499aeb280"
+    ],
+    "createdAt": "2025-09-14T12:32:44Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-8d3b18c8-9cab-4407-a291-0cf3b2c12f62",
+    "text": "Sunglasses",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
+      "user-948ff637-8175-422f-ab31-492e724582e0",
+      "user-082f1c55-6f2b-4c95-a4ed-2e3c3f6c9b3a",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd"
+    ],
+    "createdAt": "2025-09-30T18:20:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+    "text": "Wristband",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-ca80af4d-273f-4082-a64e-7ad84d1733f2"
+    ],
+    "createdAt": "2025-10-01T09:15:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-7649af22-91d1-4da5-b00e-e0bf3d52e394",
+    "text": "Phone charger",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-ba600110-fc84-439d-bf34-3df881979bed",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+      "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
+      "user-948ff637-8175-422f-ab31-492e724582e0"
+    ],
+    "createdAt": "2025-09-25T22:48:55Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-0efcb470-707c-46c9-b20a-ba59d176e973",
+    "text": "Cash wallet",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
+      "user-04b4d9cc-f0f6-451c-bb62-e939c6a521f0",
+      "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d"
+    ],
+    "createdAt": "2025-10-04T11:09:44Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-dca92915-12b0-4d37-92c4-f729623bed7f",
+    "text": "Tickets",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-7649af22-91d1-4da5-b00e-e0bf3d52e394"
+    ],
+    "createdAt": "2025-09-20T10:45:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
+    "text": "Tent stakes",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
+      "user-ca80af4d-273f-4082-a64e-7ad84d1733f2"
+    ],
+    "createdAt": "2025-09-28T14:18:59Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-948ff637-8175-422f-ab31-492e724582e0",
+    "text": "Earplugs",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
+      "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
+      "user-0efcb470-707c-46c9-b20a-ba59d176e973"
+    ],
+    "createdAt": "2025-09-27T16:22:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-0817eeb7-04fb-4da9-b1cd-80d22e934cb5",
+    "text": "Water bottle",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-ca80af4d-273f-4082-a64e-7ad84d1733f2"
+    ],
+    "createdAt": "2025-09-29T08:40:20Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d",
+    "text": "Sunscreen",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
+      "user-7649af22-91d1-4da5-b00e-e0bf3d52e394",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd"
+    ],
+    "createdAt": "2025-09-30T13:05:07Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-c62df6da-0ba7-4268-b44b-28d796757888",
+    "text": "Portable fan",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016"
+    ],
+    "createdAt": "2025-09-23T17:50:45Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-7fe4fcfd-cd52-4fda-a8e5-0c4b68cd75b1",
+    "text": "Socks",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-01T12:33:20Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-da2a1f56-ac0a-44c6-85f4-2354f8ed77ee",
+    "text": "Flip flops",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-0817eeb7-04fb-4da9-b1cd-80d22e934cb5",
+      "user-948ff637-8175-422f-ab31-492e724582e0",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd"
+    ],
+    "createdAt": "2025-09-21T10:12:50Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-8d5e1406-f258-4b35-b295-8ebee0688925",
+    "text": "Jacket",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-7649af22-91d1-4da5-b00e-e0bf3d52e394",
+      "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d"
+    ],
+    "createdAt": "2025-09-24T14:42:31Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-b966dd2d-3a82-41e1-8af3-64795b8ed2ea",
+    "text": "Camera",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-ca80af4d-273f-4082-a64e-7ad84d1733f2",
+      "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016"
+    ],
+    "createdAt": "2025-09-19T11:35:00Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-0a017e89-1830-4523-8bcb-2a6a87366c5e",
+    "text": "Portable speaker",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+      "user-4085ac2d-2c26-4d51-855b-662dc47adf70"
+    ],
+    "createdAt": "2025-09-18T09:08:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "user-5969e262-acfd-49a0-871f-1df1d50ae00d",
+    "text": "Backpack",
+    "downvotes": [],
+    "downvotes": [],
+    "upvotes": [
+      "user-ca80af4d-273f-4082-a64e-7ad84d1733f2",
+      "user-948ff637-8175-422f-ab31-492e724582e0"
+    ],
+    "createdAt": "2025-09-17T16:40:05Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-8d5e1406-f258-4b35-b295-8ebee0688925",
+    "text": "Tent",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284"
+    ],
+    "createdAt": "2025-10-06T16:00:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "text": "Sleeping bag",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df"
+    ],
+    "createdAt": "2025-10-06T16:02:15Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "text": "Sunscreen",
+    "downvotes": [],
+    "upvotes": [
+      "user-8d5e1406-f258-4b35-b295-8ebee0688925"
+    ],
+    "createdAt": "2025-10-06T16:05:03Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "text": "Food and snacks",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4"
+    ],
+    "createdAt": "2025-10-06T16:07:44Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "text": "Water bottle",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T16:10:22Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "text": "Hat or cap",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
+    ],
+    "createdAt": "2025-10-06T16:12:51Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "text": "Cash",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1"
+    ],
+    "createdAt": "2025-10-06T16:15:05Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "text": "Portable charger",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df"
+    ],
+    "createdAt": "2025-10-06T16:17:30Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "text": "Tickets or wristbands",
+    "downvotes": [],
+    "upvotes": [
+      "user-8d5e1406-f258-4b35-b295-8ebee0688925"
+    ],
+    "createdAt": "2025-10-06T16:20:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "text": "Jacket",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284"
+    ],
+    "createdAt": "2025-10-06T16:22:13Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b82",
+    "text": "Bandana or scarf",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df"
+    ],
+    "createdAt": "2025-10-06T16:25:00Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b285",
+    "text": "Shoes",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4"
+    ],
+    "createdAt": "2025-10-06T16:27:30Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f2",
+    "text": "Earplugs",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T16:30:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-662b718a-23e0-5d57-b787-6ac94809a56b",
+    "text": "Camera",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284"
+    ],
+    "createdAt": "2025-10-06T16:32:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfa6",
+    "text": "Glow sticks",
+    "downvotes": [],
+    "upvotes": [
+      "user-8d5e1406-f258-4b35-b295-8ebee0688925"
+    ],
+    "createdAt": "2025-10-06T16:35:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e0",
+    "text": "Backpack",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1"
+    ],
+    "createdAt": "2025-10-06T16:37:25Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a43",
+    "text": "Snacks",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4"
+    ],
+    "createdAt": "2025-10-06T16:40:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ea",
+    "text": "Map",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T16:42:18Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-e2a78712-9f6a-4a8b-b05c-0e6b69f84c83",
+    "text": "Poncho",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
+    ],
+    "createdAt": "2025-10-06T16:45:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b83",
+    "text": "Flashlight",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1"
+    ],
+    "createdAt": "2025-10-06T16:47:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b286",
+    "text": "Raincoat",
+    "downvotes": [],
+    "upvotes": [
+      "user-8d5e1406-f258-4b35-b295-8ebee0688925"
+    ],
+    "createdAt": "2025-10-06T16:50:02Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f3",
+    "text": "Insect repellent",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T16:52:11Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e1",
+    "text": "First aid kit",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4"
+    ],
+    "createdAt": "2025-10-06T16:55:30Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a44",
+    "text": "Hand sanitizer",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
+    ],
+    "createdAt": "2025-10-06T16:57:50Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a45",
+    "text": "Crowd cheering",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
+    ],
+    "createdAt": "2025-10-06T17:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f4",
+    "text": "Someone yelling into a walkie-talkie",
+    "downvotes": [],
+    "upvotes": [
+      "user-8d5e1406-f258-4b35-b295-8ebee0688925"
+    ],
+    "createdAt": "2025-10-06T17:03:07Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a5",
+    "text": "Car alarms from the parking lot",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:05:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e2",
+    "text": "Dogs barking nearby",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
+    ],
+    "createdAt": "2025-10-06T17:08:19Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfa7",
+    "text": "Snoring neighbors",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1"
+    ],
+    "createdAt": "2025-10-06T17:10:55Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7eb",
+    "text": "Someone snoring",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:13:22Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b84",
+    "text": "Generators humming",
+    "downvotes": [],
+    "upvotes": [
+      "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a45"
+    ],
+    "createdAt": "2025-10-06T17:15:41Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b287",
+    "text": "Fireworks in the distance",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a5"
+    ],
+    "createdAt": "2025-10-06T17:18:09Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f5",
+    "text": "Late-night party music",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e2"
+    ],
+    "createdAt": "2025-10-06T17:20:32Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e3",
+    "text": "Car engines starting",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:23:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
+    "text": "Police sirens",
+    "downvotes": [],
+    "upvotes": [
+      "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a45"
+    ],
+    "createdAt": "2025-10-06T17:25:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfa8",
+    "text": "Birds chirping",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f4"
+    ],
+    "createdAt": "2025-10-06T17:28:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ec",
+    "text": "Airplanes overhead",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b84"
+    ],
+    "createdAt": "2025-10-06T17:30:51Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
+    "text": "Someone setting up a generator",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:33:22Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b288",
+    "text": "People talking loudly",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6"
+    ],
+    "createdAt": "2025-10-06T17:35:41Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+    "text": "Someone playing a guitar",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e3"
+    ],
+    "createdAt": "2025-10-06T17:38:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e4",
+    "text": "Traffic noises from nearby road",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:40:50Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+    "text": "Helicopter overhead",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b287"
+    ],
+    "createdAt": "2025-10-06T17:43:23Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfa9",
+    "text": "Someone practicing drums",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85"
+    ],
+    "createdAt": "2025-10-06T17:45:59Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ed",
+    "text": "Someone setting up lights",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:48:34Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b86",
+    "text": "Construction noises nearby",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6"
+    ],
+    "createdAt": "2025-10-06T17:51:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b289",
+    "text": "People laughing",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e4"
+    ],
+    "createdAt": "2025-10-06T17:53:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f7",
+    "text": "Someone talking loudly on the phone",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T17:56:15Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e5",
+    "text": "Crowd singing",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7"
+    ],
+    "createdAt": "2025-10-06T17:58:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a8",
+    "text": "Someone tuning instruments",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:01:18Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfaa",
+    "text": "Fire pit crackling",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b86"
+    ],
+    "createdAt": "2025-10-06T18:03:45Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a46",
+    "text": "$20 water bottles",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b287",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b84"
+    ],
+    "createdAt": "2025-10-06T18:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f8",
+    "text": "Glow sticks",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7"
+    ],
+    "createdAt": "2025-10-06T18:07:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a9",
+    "text": "Cheap snacks",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b288"
+    ],
+    "createdAt": "2025-10-06T18:10:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e6",
+    "text": "$20 hats",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f8"
+    ],
+    "createdAt": "2025-10-06T18:12:20Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfa9",
+    "text": "Festival T-shirts",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:14:55Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ee",
+    "text": "Face paint",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a9"
+    ],
+    "createdAt": "2025-10-06T18:17:18Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b87",
+    "text": "Socks",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:19:45Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b290",
+    "text": "Phone charging",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85"
+    ],
+    "createdAt": "2025-10-06T18:22:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+    "text": "Waterproof bags",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b288"
+    ],
+    "createdAt": "2025-10-06T18:24:32Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a47",
+    "text": "Festival bracelets",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:27:11Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e7",
+    "text": "LED accessories",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9"
+    ],
+    "createdAt": "2025-10-06T18:29:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+    "text": "Hand fans",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:32:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b88",
+    "text": "Custom pins",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b290"
+    ],
+    "createdAt": "2025-10-06T18:34:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfab",
+    "text": "Temporary tattoos",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa"
+    ],
+    "createdAt": "2025-10-06T18:37:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef",
+    "text": "$20 glow necklaces",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:39:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b291",
+    "text": "Mini flashlights",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b88"
+    ],
+    "createdAt": "2025-10-06T18:42:00Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fa",
+    "text": "$20 festival hats",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:44:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e8",
+    "text": "Fake flower crowns",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b291"
+    ],
+    "createdAt": "2025-10-06T18:47:05Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ab",
+    "text": "Glow bracelets",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:49:32Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b89",
+    "text": "Mini speakers",
+    "downvotes": [],
+    "upvotes": [
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef"
+    ],
+    "createdAt": "2025-10-06T18:52:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfac",
+    "text": "Bandanas",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T18:54:32Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f0",
+    "text": "Face masks",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b291"
+    ],
+    "createdAt": "2025-10-06T18:57:05Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b292",
+    "text": "Sunglasses",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:00:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fb",
+    "text": "LED glasses",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b89"
+    ],
+    "createdAt": "2025-10-06T19:02:45Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4e9",
+    "text": "Festival pins",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a48",
+    "text": "Oops, wrong stage!",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b292",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b89"
+    ],
+    "createdAt": "2025-10-06T19:10:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fc",
+    "text": "I’ve been wandering too long!",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ac"
+    ],
+    "createdAt": "2025-10-06T19:12:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ad",
+    "text": "Where am I?",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:15:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ea",
+    "text": "I missed my favorite DJ!",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fc"
+    ],
+    "createdAt": "2025-10-06T19:17:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfad",
+    "text": "Stuck at the wrong tent!",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:20:15Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f1",
+    "text": "I’ve been dancing in the wrong spot!",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b292"
+    ],
+    "createdAt": "2025-10-06T19:22:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8a",
+    "text": "Oops, wrong genre!",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:25:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b293",
+    "text": "I thought this was the main stage",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ad"
+    ],
+    "createdAt": "2025-10-06T19:27:41Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fd",
+    "text": "Did I miss the headliner?",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8a"
+    ],
+    "createdAt": "2025-10-06T19:30:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4eb",
+    "text": "I came too early",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:32:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ae",
+    "text": "This isn’t the stage I wanted",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b293"
+    ],
+    "createdAt": "2025-10-06T19:35:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfae",
+    "text": "I got lost!",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fd"
+    ],
+    "createdAt": "2025-10-06T19:37:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f2",
+    "text": "Why is it so crowded here?",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:40:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8b",
+    "text": "I was looking for the DJ tent",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4eb"
+    ],
+    "createdAt": "2025-10-06T19:42:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b294",
+    "text": "Missed the start of the set",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:45:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fe",
+    "text": "Went to the wrong stage",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ae"
+    ],
+    "createdAt": "2025-10-06T19:47:41Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ec",
+    "text": "I think I missed something important",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:50:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7af",
+    "text": "Totally lost track of time",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b294"
+    ],
+    "createdAt": "2025-10-06T19:52:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfaf",
+    "text": "How did I end up here?",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T19:55:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f3",
+    "text": "I thought this was another stage",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8b"
+    ],
+    "createdAt": "2025-10-06T19:57:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8c",
+    "text": "Missed the schedule",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b295",
+    "text": "I need a map",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ec"
+    ],
+    "createdAt": "2025-10-06T20:02:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85ff",
+    "text": "Where’s everyone going?",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ed",
+    "text": "I’m at the wrong set!",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7af"
+    ],
+    "createdAt": "2025-10-06T20:07:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b0",
+    "text": "Totally at the wrong stage!",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:10:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb0",
+    "text": "This isn’t my stage",
+    "downvotes": [],
+    "upvotes": [
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f3"
+    ],
+    "createdAt": "2025-10-06T20:12:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a49",
+    "text": "Check your watch before the meeting starts",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8c"
+    ],
+    "createdAt": "2025-10-06T20:15:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c860",
+    "text": "Upgrade to Pro to avoid the 40-minute limit",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b295",
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ed"
+    ],
+    "createdAt": "2025-10-06T20:17:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b1",
+    "text": "The meeting should continue with the new account settings",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:20:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ee",
+    "text": "It depends if Zoom applied the upgrade instantly",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b1"
+    ],
+    "createdAt": "2025-10-06T20:22:33Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb1",
+    "text": "Meeting may still stop at 40 mins if not refreshed",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:25:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f4",
+    "text": "Best to start a new meeting with Pro account",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c860"
+    ],
+    "createdAt": "2025-10-06T20:27:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8d",
+    "text": "Meeting may auto-extend with the new Pro features",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:30:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b296",
+    "text": "Check Zoom settings after upgrade",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ee"
+    ],
+    "createdAt": "2025-10-06T20:32:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c861",
+    "text": "Zoom might not retroactively extend the old meeting",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b1"
+    ],
+    "createdAt": "2025-10-06T20:35:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ef",
+    "text": "Upgrading in the middle might not affect the current meeting",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:37:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b2",
+    "text": "Start a new Pro meeting to be safe",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b296"
+    ],
+    "createdAt": "2025-10-06T20:40:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb2",
+    "text": "Zoom may recognize the Pro license after refresh",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:42:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f5",
+    "text": "Old meeting might cut off at 40 min regardless",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c861"
+    ],
+    "createdAt": "2025-10-06T20:45:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8e",
+    "text": "Meeting might need to restart to apply Pro limits",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:47:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b297",
+    "text": "Zoom sometimes requires logout/login for upgrade to apply",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ef"
+    ],
+    "createdAt": "2025-10-06T20:50:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c862",
+    "text": "You might need to check your account plan in settings",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:52:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f0",
+    "text": "Meeting may continue if the license is recognized",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b2"
+    ],
+    "createdAt": "2025-10-06T20:55:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b3",
+    "text": "It may not stop at 40 minutes after upgrade",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T20:57:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb3",
+    "text": "Test by starting a new meeting after upgrading",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b297"
+    ],
+    "createdAt": "2025-10-06T21:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f6",
+    "text": "Zoom upgrades sometimes require a restart to apply",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:02:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8f",
+    "text": "Old meeting may still cut off at 40 mins",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c862"
+    ],
+    "createdAt": "2025-10-06T21:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b298",
+    "text": "It’s safer to start a new Pro meeting",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:07:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c863",
+    "text": "Zoom’s upgrade may not affect ongoing meetings",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f0"
+    ],
+    "createdAt": "2025-10-06T21:10:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f1",
+    "text": "Confirm the upgrade in your Zoom account dashboard",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:12:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a50",
+    "text": "Try using the default EWS URL from Microsoft documentation",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b90"
+    ],
+    "createdAt": "2025-10-06T21:15:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c864",
+    "text": "The default URL is usually https://outlook.office365.com/EWS/Exchange.asmx",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b299",
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f1"
+    ],
+    "createdAt": "2025-10-06T21:17:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b4",
+    "text": "Check ECP settings in your Microsoft Exchange admin center",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:20:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f2",
+    "text": "You can often copy the EWS URL directly from the Zoom integration page",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b4"
+    ],
+    "createdAt": "2025-10-06T21:22:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb4",
+    "text": "The default URL includes https:// and ends with /EWS/Exchange.asmx",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:25:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f7",
+    "text": "EWS URL can usually be found under Service Settings",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c864"
+    ],
+    "createdAt": "2025-10-06T21:27:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b91",
+    "text": "Most Exchange Online accounts use outlook.office365.com",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:30:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b300",
+    "text": "Ensure you include https:// at the start",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f2"
+    ],
+    "createdAt": "2025-10-06T21:32:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c865",
+    "text": "If using Zoom Room, check the integration guide for the correct URL",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b4"
+    ],
+    "createdAt": "2025-10-06T21:35:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f3",
+    "text": "Double-check your Exchange version to use the correct EWS URL",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:37:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b5",
+    "text": "Some older Exchange servers have a slightly different URL",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b300"
+    ],
+    "createdAt": "2025-10-06T21:40:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb5",
+    "text": "Test the URL in a browser to make sure it responds",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:42:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f8",
+    "text": "You can get the EWS URL from the Outlook Web App settings",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c865"
+    ],
+    "createdAt": "2025-10-06T21:45:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b92",
+    "text": "Sometimes admins restrict the URL; check permissions",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:47:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b301",
+    "text": "Make sure the account used has EWS access",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f3"
+    ],
+    "createdAt": "2025-10-06T21:50:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c866",
+    "text": "If unsure, contact IT support for the correct URL",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:52:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f4",
+    "text": "URL must include /EWS/Exchange.asmx at the end",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b5"
+    ],
+    "createdAt": "2025-10-06T21:55:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b6",
+    "text": "You can verify the URL by using the Test EWS tool in Exchange",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T21:57:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb6",
+    "text": "Use the account email to check the correct URL path",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b301"
+    ],
+    "createdAt": "2025-10-06T22:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f9",
+    "text": "Confirm that the Zoom Room is allowed to access Exchange Online",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:02:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b93",
+    "text": "The URL format is the same for all Office365 tenants",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c866"
+    ],
+    "createdAt": "2025-10-06T22:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b302",
+    "text": "For on-prem Exchange, URL might differ",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:07:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c867",
+    "text": "Always include https:// in the EWS URL",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f4"
+    ],
+    "createdAt": "2025-10-06T22:10:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f5",
+    "text": "Check admin guides for the exact path if default doesn’t work",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:12:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a51",
+    "text": "Tent",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b302"
+    ],
+    "createdAt": "2025-10-06T22:15:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c868",
+    "text": "Cooler with food and drinks",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f5",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b6"
+    ],
+    "createdAt": "2025-10-06T22:17:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b7",
+    "text": "Wallet or purse",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:20:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f6",
+    "text": "Phone or charger",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b93"
+    ],
+    "createdAt": "2025-10-06T22:22:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb7",
+    "text": "Sunglasses",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:25:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7fa",
+    "text": "Tent stakes",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c868"
+    ],
+    "createdAt": "2025-10-06T22:27:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b94",
+    "text": "Sleeping bag",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:30:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b303",
+    "text": "Headphones or earbuds",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f6"
+    ],
+    "createdAt": "2025-10-06T22:32:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c869",
+    "text": "Water bottle",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b7"
+    ],
+    "createdAt": "2025-10-06T22:35:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f7",
+    "text": "Portable charger",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:37:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b8",
+    "text": "Camping stove",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b303"
+    ],
+    "createdAt": "2025-10-06T22:40:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb8",
+    "text": "Flashlight",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:42:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7fb",
+    "text": "Earplugs for loud music",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c869"
+    ],
+    "createdAt": "2025-10-06T22:45:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b95",
+    "text": "Sunscreen",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:47:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b304",
+    "text": "Camping chair",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f7"
+    ],
+    "createdAt": "2025-10-06T22:50:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c870",
+    "text": "Extra clothes",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:52:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f8",
+    "text": "Rain jacket",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b8"
+    ],
+    "createdAt": "2025-10-06T22:55:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b9",
+    "text": "Portable speaker",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T22:57:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb9",
+    "text": "First aid kit",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b304"
+    ],
+    "createdAt": "2025-10-06T23:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7fc",
+    "text": "Trash bags",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:02:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b96",
+    "text": "Hat or cap",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c870"
+    ],
+    "createdAt": "2025-10-06T23:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a52",
+    "text": "Overslept",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b96"
+    ],
+    "createdAt": "2025-10-06T23:15:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c872",
+    "text": "Lost track of time while at another stage",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b305"
+    ],
+    "createdAt": "2025-10-06T23:17:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ba",
+    "text": "Tripped on the way to the tent",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:20:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fa",
+    "text": "Ran out of battery on my phone",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b9"
+    ],
+    "createdAt": "2025-10-06T23:22:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfba",
+    "text": "Got stuck in the food line",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:25:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7fd",
+    "text": "Lost friends and had to regroup",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c872"
+    ],
+    "createdAt": "2025-10-06T23:27:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b97",
+    "text": "Misread the schedule",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:30:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b306",
+    "text": "Had to go to the bathroom",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fa"
+    ],
+    "createdAt": "2025-10-06T23:32:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c873",
+    "text": "Lost their ticket",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ba"
+    ],
+    "createdAt": "2025-10-06T23:35:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fb",
+    "text": "Confused by the map",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:37:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bb",
+    "text": "Stopped to get food and lost time",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b306"
+    ],
+    "createdAt": "2025-10-06T23:40:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbb",
+    "text": "Found a new band and stayed",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:42:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7fe",
+    "text": "Was chatting with friends",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c873"
+    ],
+    "createdAt": "2025-10-06T23:45:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b98",
+    "text": "Got lost on the way",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:47:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b307",
+    "text": "Stopped for merch shopping",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fb"
+    ],
+    "createdAt": "2025-10-06T23:50:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c874",
+    "text": "The line for drinks was too long",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:52:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fc",
+    "text": "Went to the wrong stage",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bb"
+    ],
+    "createdAt": "2025-10-06T23:55:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bc",
+    "text": "Stopped for a photo op",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-06T23:57:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbc",
+    "text": "Ran into an old friend",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b307"
+    ],
+    "createdAt": "2025-10-07T00:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ff",
+    "text": "Stopped to buy snacks",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:02:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b99",
+    "text": "Waiting for a friend to arrive",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fc"
+    ],
+    "createdAt": "2025-10-07T00:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b308",
+    "text": "Decided to rest and missed the start",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:07:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c875",
+    "text": "Had to help someone else find their spot",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bc"
+    ],
+    "createdAt": "2025-10-07T00:10:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fd",
+    "text": "Got distracted by the festival art installations",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:12:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a53",
+    "text": "Perfume that's way too strong",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b308"
+    ],
+    "createdAt": "2025-10-07T00:15:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c876",
+    "text": "Body spray that makes the whole area smell",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fd"
+    ],
+    "createdAt": "2025-10-07T00:17:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bd",
+    "text": "Skunk smell from nearby campers",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:20:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fe",
+    "text": "Leftover food rotting in a trash bag",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b99"
+    ],
+    "createdAt": "2025-10-07T00:22:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbd",
+    "text": "Strong weed smell",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:25:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d800",
+    "text": "Farting in close quarters",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c874"
+    ],
+    "createdAt": "2025-10-07T00:27:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b9a",
+    "text": "Wet muddy shoes",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:30:01Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b309",
+    "text": "Burnt popcorn from the food stall",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bd"
+    ],
+    "createdAt": "2025-10-07T00:32:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c877",
+    "text": "Sweaty bodies in a packed crowd",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fe"
+    ],
+    "createdAt": "2025-10-07T00:35:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ff",
+    "text": "Alcohol spilling around",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:37:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7be",
+    "text": "Trash bins overflowing",
+    "downvotes": [],
+    "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b9a"
+    ],
+    "createdAt": "2025-10-07T00:40:10Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbe",
+    "text": "Stinky socks",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:42:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d801",
+    "text": "Dirty portable toilets",
+    "downvotes": [],
+    "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c877"
+    ],
+    "createdAt": "2025-10-07T00:45:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b9b",
+    "text": "Strong deodorant mixed with sweat",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:47:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b310",
+    "text": "Trash left on the grass",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4ff"
+    ],
+    "createdAt": "2025-10-07T00:50:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c878",
+    "text": "Wet blankets from rain",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:52:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c500",
+    "text": "Body odor from dancing all night",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7be"
+    ],
+    "createdAt": "2025-10-07T00:55:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bf",
+    "text": "Cigarette smoke",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T00:57:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbf",
+    "text": "Strong sunscreen smell",
+    "downvotes": [],
+    "upvotes": [
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b310"
+    ],
+    "createdAt": "2025-10-07T01:00:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d802",
+    "text": "Wet mud on shoes",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T01:02:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b9c",
+    "text": "Overpowering incense",
+    "downvotes": [],
+    "upvotes": [
+      "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c500"
+    ],
+    "createdAt": "2025-10-07T01:05:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b311",
+    "text": "Rotten fruit from trash cans",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T01:07:42Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c879",
+    "text": "Food stands cooking too strong smells",
+    "downvotes": [],
+    "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bf"
+    ],
+    "createdAt": "2025-10-07T01:10:12Z"
+  },
+  {
+    "typeof": "Answer",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c501",
+    "text": "Dirty laundry piled up",
+    "downvotes": [],
+    "upvotes": [],
+    "createdAt": "2025-10-07T01:12:42Z"
+  }
+]

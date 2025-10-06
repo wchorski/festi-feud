@@ -101,8 +101,12 @@ async function ini() {
 				//TODO validate min max of text
 				if (!values.text) throw new Error("need input text")
 				if (!values.questionId) throw new Error("need input questionId")
-				if (values.answers.flatMap((a) => a.userId).includes(values.userId))
+				if (values.answers?.flatMap((a) => a.authorId).includes(values.authorId))
 					throw new Error("Can only submit one new answer")
+				if (!values.downvotes || !values.upvotes)
+					throw new Error(
+						"must include upvotes and downvotes arrays even if empty"
+					)
 			},
 			//? able to make transform async when needed
 			/** @param {AnswerCreateRaw} raw */
@@ -111,7 +115,12 @@ async function ini() {
 				return compose(
 					transforms.trimStrings,
 					transforms.addTimestamp,
-					transforms.metadata({ answers: answerDocsRes.docs, userId: uuid })
+					transforms.metadata({
+						answers: answerDocsRes.docs,
+						authorId: uuid,
+						upvotes: [],
+						downvotes: [],
+					})
 				)(raw)
 			},
 		})

@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "Name something you might lose at a music festival before the first headliner even starts."
+  },
+  {
+    "_id": "question-4aab55de-6c7d-4c9d-8cb9-302af7a7d3a8",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "What's the worst thing to forget to pack for a camping music festival?"
+  },
+  {
+    "_id": "question-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7e9",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "Name a sound you hear at 4 AM in the campground that's definitely not music."
+  },
+  {
+    "_id": "question-b3d5e34c-00b1-4df6-9515-43f758d1cfa5",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "What's something a festival vendor could charge $20 for that people would still buy?"
+  },
+  {
+    "_id": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "Name something a raver might say when they realize they've been at the wrong stage for 30 minutes."
+  },
+  {
+    "_id": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "What's a telltale sign someone's been to too many festivals this summer?"
+  },
+  {
+    "_id": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "What's something you'll definitely step on in the festival crowd?"
+  },
+  {
+    "_id": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "Name something that mysteriously disappears from your campsite overnight."
+  },
+  {
+    "_id": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "What's the most creative excuse someone might give for missing a DJ set?"
+  },
+  {
+    "_id": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "authorId": "662b718a-23e0-5d57-b787-6ac94809a56b",
+    "typeof": "Question",
+    "voterIds": [],
+    "categoryId": [],
+    "tagIds": [],
+    "text": "Name something that smells *way too strong* at a festival — and not in a good way."
+  }
+]

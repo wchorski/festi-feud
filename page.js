@@ -14,10 +14,11 @@
 import { createTextEl, renderAllTextEls } from "./ui.js"
 import {
 	answersMap,
-	dbCreateAnswer,
 	dbCreateQuestion,
+	dbDeleteAllDocs,
 	dbDeleteAnswer,
 	dbDeleteQuestion,
+	dbSeedDatabase,
 	getAllAnswerDocs,
 	getAllQuestionDocs,
 	questionsMap,
@@ -27,6 +28,9 @@ import { formHandler } from "./forms.js"
 import { getUserUUID } from "./uuid.js"
 import { compose, transforms } from "./transforms.js"
 
+const destroyDdBtn = document.getElementById("destroy-db-btn")
+const dbMessage = document.getElementById("db-message")
+const seedDbBtn = document.getElementById("seed-db-btn")
 const questionsWrap = document.getElementById("questions-wrap")
 const questionForm = document.forms.namedItem("questionForm")
 const answersWrap = document.getElementById("answers-wrap")
@@ -85,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			return compose(
 				transforms.trimStrings,
 				transforms.addTimestamp,
-				transforms.metadata({ userId: uuid })
+				transforms.metadata({ authorId: uuid })
 			)(raw)
 		},
 	})
@@ -110,9 +114,34 @@ async function ini() {
 	if (!answersWrap) throw new Error("no wrap")
 	await getAllAnswerDocs()
 	renderAllTextEls(answersMap, answersWrap)
+
+  if (!dbMessage) throw new Error("dbMessage not found in dom")
+  if (!seedDbBtn) throw new Error("seedDbBtn not found in dom")
+  if (!destroyDdBtn) throw new Error("destroyDdBtn not found in dom")
+
+  seedDbBtn.addEventListener("pointerup", async (e) => {
+		const res = await dbSeedDatabase()
+		const { error, ok, message } = res
+		if (error) dbMessage.style.setProperty("--c-status", "red")
+		if (ok) dbMessage.style.setProperty("--c-status", "green")
+		dbMessage.textContent = message
+	})
+
+  destroyDdBtn.addEventListener("pointerup", async (e) => {
+		// const res = await dbEmojiDeleteMany([...emojisMap.values()])
+		const res = await dbDeleteAllDocs(
+			[...questionsMap.values()],
+			[...answersMap.values()]
+		)
+		if (res.error) dbMessage.style.setProperty("--c-status", "red")
+		if (res.ok) dbMessage.style.setProperty("--c-status", "green")
+		dbMessage.textContent = res.message
+	})
 }
 
-ini()
+document.addEventListener("DOMContentLoaded", function () {
+  ini()
+})
 
 // //* UI
 // /**

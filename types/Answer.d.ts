@@ -7,7 +7,7 @@ type BaseAnswer = {
 	upvotes: string[]
 	downvotes: string[]
 	dateCreated: string
-	userId: string
+	authorId: string
 	// Add more shared fields here as needed
 }
 
@@ -38,7 +38,7 @@ export type AnswerCreateRaw = {
 }
 export type AnswerCreateTrans = BaseAnswer & {
 	// check if question.answers have same userId
-	answers: Answer[]
+	answers?: Answer[]
 }
 
 export type AnswerSet = CustomEvent<Answer>

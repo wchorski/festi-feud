@@ -1,6 +1,6 @@
 type BaseQuestion = {
 	text: string
-	userId: string
+	authorId: string
 	categoryIds: string[]
 	tagIds: string[]
 	voterIds: string[]

@@ -285,16 +285,19 @@ async function dbCreateManyQuestions(docs) {
  *  @param {AnswerCreateTrans} point
  */
 export async function dbCreateAnswer(point) {
-	const { userId, upvotes, downvotes } = point
+	const { authorId, upvotes, downvotes } = point
 
 	// TODO do i really need to validate again here?
 	// if (!text) throw new Error("create validation: no text")
+
+	// only used for validation (prevent double submissions)
+	delete point.answers
 
 	try {
 		const res = await dbAnswers.post({
 			...point,
 			typeof: "Answer",
-			upvotes: [...upvotes, userId],
+			upvotes: [...upvotes, authorId],
 			downvotes: [...downvotes],
 		})
 
@@ -317,6 +320,7 @@ export async function dbCreateAnswer(point) {
  * @param {{voterId:string, question:Question, answers:Answer[], votes:AnswerFormData[], submittedAt:string}} data
  */
 export async function dbVotePerQuestion(data) {
+
 	try {
 		//? used in transforms.getUUID()
 		// const voterId = await getUserUUID()
@@ -348,8 +352,8 @@ export async function dbVotePerQuestion(data) {
 		)
 
 		console.log({ questionRes, answersRes })
-    // TODO figure out good res for form
-    // if(!questionRes.ok || answersRes.map)
+		// TODO figure out good res for form
+		// if(!questionRes.ok || answersRes.map)
 
 		// return {
 		// 	questionRes,
@@ -358,8 +362,8 @@ export async function dbVotePerQuestion(data) {
 		return {
 			ok: true,
 			code: 420,
-      questionRes,
-      answersRes
+			questionRes,
+			answersRes,
 		}
 	} catch (err) {
 		console.log(err)
@@ -431,68 +435,72 @@ export async function dbDeleteQuestion(doc) {
 	}
 }
 
-// export async function dbSeedDatabase() {
-// 	try {
-// 		/**
-// 		 * @param {string} url
-// 		 * @returns {Promise<Array<NewEmoji | QuestionCreate>>}
-// 		 */
-// 		const fetchAndProcess = async (url) => {
-// 			const response = await fetch(url)
-// 			/** @type {Array<Emoji | Question>} */
-// 			const docs = await response.json()
-// 			return docs.map(({ _rev, ...data }) => data)
-// 		}
+export function testMe() {
+	console.log("test ME BUDDY")
+}
 
-// 		/**
-// 		 * @param {any[]} results
-// 		 * @returns {number}
-// 		 */
-// 		const countErrors = (results) =>
-// 			results.reduce((count, obj) => count + (obj.error ? 1 : 0), 0)
-// 		/**
-// 		 * @param {any[]} results
-// 		 * @returns {boolean}
-// 		 */
-// 		const hasErrors = (results) => results.some((obj) => obj.error === true)
+export async function dbSeedDatabase() {
+	try {
+		/**
+		 * @param {string} url
+		 * @returns {Promise<Array<Question | Answer>>}
+		 */
+		const fetchAndProcess = async (url) => {
+			const response = await fetch(url)
+			/** @type {Array<Answer | Question>} */
+			const docs = await response.json()
+      //@ts-ignore - remove _rev if i forgot to take it out manually
+			return docs.map(({ _rev, ...data }) => data)
+		}
 
-// 		const [emojiDocs, messageDocs] = await Promise.all([
-// 			fetchAndProcess("/public/ini/emojis-seed.json"),
-// 			fetchAndProcess("/public/ini/messages-seed.json"),
-// 		])
+		/**
+		 * @param {any[]} results
+		 * @returns {number}
+		 */
+		const countErrors = (results) =>
+			results.reduce((count, obj) => count + (obj.error ? 1 : 0), 0)
+		/**
+		 * @param {any[]} results
+		 * @returns {boolean}
+		 */
+		const hasErrors = (results) => results.some((obj) => obj.error === true)
 
-// 		const [emojiRes, messagesRes] = await Promise.all([
-// 			dbQuestions.bulkDocs(emojiDocs),
-// 			dbAnswers.bulkDocs(messageDocs),
-// 		])
+		const [questionDocs, answerDocs] = await Promise.all([
+			fetchAndProcess("/ini/questions-seed.json"),
+			fetchAndProcess("/ini/answers-seed.json"),
+		])
 
-// 		if (hasErrors(emojiRes) || hasErrors(messagesRes)) {
-// 			const emojiErrors = countErrors(emojiRes)
-// 			const messageErrors = countErrors(messagesRes)
+		const [questionRes, answerRes] = await Promise.all([
+			dbQuestions.bulkDocs(questionDocs),
+			dbAnswers.bulkDocs(answerDocs),
+		])
 
-// 			throw new Error(
-// 				`🌱 Database already (or partially) seeded with data.\n` +
-// 					`Emoji errors: ${emojiErrors}/${emojiRes.length}, ` +
-// 					`Message errors: ${messageErrors}/${messagesRes.length}`
-// 			)
-// 		}
+		if (hasErrors(questionRes) || hasErrors(answerRes)) {
+			const questionErrors = countErrors(questionRes)
+			const answerErrors = countErrors(answerRes)
 
-// 		return {
-// 			ok: true,
-// 			message: `Database seeded with ${messagesRes.length} messages and ${emojiRes.length} emojis`,
-// 		}
-// 	} catch (error) {
-// 		return {
-// 			error: true,
-// 			message: error instanceof Error ? error.message : String(error),
-// 		}
-// 	}
-// }
+			throw new Error(
+				`🌱 Database already (or partially) seeded with data.\n` +
+					`Question errors: ${questionErrors}/${questionRes.length}, ` +
+					`Answer errors: ${answerErrors}/${answerRes.length}`
+			)
+		}
+
+		return {
+			ok: true,
+			message: `Database seeded with ${answerRes.length} answers and ${questionRes.length} questions`,
+		}
+	} catch (error) {
+		return {
+			error: true,
+			message: error instanceof Error ? error.message : String(error),
+		}
+	}
+}
 
 /**
- * Seeds the database with emoji data
  * @param {Question[]} docs
- * @returns {Promise<Response>} The result of the seeding operation
+ * @returns {Promise<Response>}
  */
 export async function dbQuestionDeleteMany(docs) {
 	try {
@@ -506,8 +514,6 @@ export async function dbQuestionDeleteMany(docs) {
 		}
 	} catch (error) {
 		console.log(error)
-		// const seedError = new Error("seedDatabase failed", { cause: error })
-		// console.error(seedError)
 		return {
 			error: true,
 			message:
