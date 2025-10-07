@@ -78,11 +78,11 @@ export const elAnswerVoteInput = (doc) => {
 	const p = Object.assign(document.createElement("p"), {
 		textContent: text,
 	})
-	// TODO update count when box is checked
-	// TODO remove showing votes as to not influence bias
-	const countEl = Object.assign(document.createElement("span"), {
-		textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
-	})
+
+	// TODO may leave off to prevent voter bias
+	// const countEl = Object.assign(document.createElement("span"), {
+	// 	textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
+	// })
 
 	const inputsWrap = Object.assign(document.createElement("div"), {
 		className: "inputs",
@@ -105,7 +105,7 @@ export const elAnswerVoteInput = (doc) => {
 	const upBtn = checkboxLabel("upvote", "↑")
 	const downBtn = checkboxLabel("downvote", "↓")
 
-	inputsWrap.append(countEl, upBtn, downBtn)
+	inputsWrap.append(upBtn, downBtn)
 	container.append(p, inputsWrap)
 	return container
 }

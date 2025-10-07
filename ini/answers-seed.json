@@ -5,10 +5,12 @@
     "authorId": "user-ca80af4d-273f-4082-a64e-7ad84d1733f2",
     "text": "Bandana",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-0817eeb7-04fb-4da9-b1cd-80d22e934cb5",
       "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d",
+      "user-c62df6da-0ba7-4268-b44b-28d796757888",
+      "user-c62df6da-0ba7-4268-b44b-28d796757888",
+      "user-c62df6da-0ba7-4268-b44b-28d796757888",
       "user-c62df6da-0ba7-4268-b44b-28d796757888",
       "user-948ff637-8175-422f-ab31-492e724582e0",
       "user-5d2c6d40-47d2-4125-b063-3b6905d09e21"
@@ -20,7 +22,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-a25661b8-41d1-449a-819f-e79f9cdb0e24",
     "text": "Glow sticks",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-04b4d9cc-f0f6-451c-bb62-e939c6a521f0",
@@ -35,7 +36,6 @@
     "authorId": "user-82d86325-e002-4754-abef-d3931b9f9fcd",
     "text": "Hoodie",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-ba600110-fc84-439d-bf34-3df881979bed",
       "user-170851a2-1ce6-4415-b85d-c429c8b2d43c",
@@ -49,7 +49,6 @@
     "authorId": "user-ba600110-fc84-439d-bf34-3df881979bed",
     "text": "Hat pin",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-7649af22-91d1-4da5-b00e-e0bf3d52e394"
     ],
@@ -60,7 +59,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
     "text": "Festival flag",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-dca92915-12b0-4d37-92c4-f729623bed7f",
@@ -73,7 +71,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-8d3b18c8-9cab-4407-a291-0cf3b2c12f62",
     "text": "Sunglasses",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
@@ -89,7 +86,6 @@
     "authorId": "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
     "text": "Wristband",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-ca80af4d-273f-4082-a64e-7ad84d1733f2"
     ],
@@ -100,7 +96,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-7649af22-91d1-4da5-b00e-e0bf3d52e394",
     "text": "Phone charger",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-ba600110-fc84-439d-bf34-3df881979bed",
@@ -116,7 +111,6 @@
     "authorId": "user-0efcb470-707c-46c9-b20a-ba59d176e973",
     "text": "Cash wallet",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
       "user-04b4d9cc-f0f6-451c-bb62-e939c6a521f0",
@@ -129,7 +123,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-dca92915-12b0-4d37-92c4-f729623bed7f",
     "text": "Tickets",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-82d86325-e002-4754-abef-d3931b9f9fcd",
@@ -144,7 +137,6 @@
     "authorId": "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
     "text": "Tent stakes",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
       "user-ca80af4d-273f-4082-a64e-7ad84d1733f2"
@@ -157,9 +149,11 @@
     "authorId": "user-948ff637-8175-422f-ab31-492e724582e0",
     "text": "Earplugs",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
       "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
       "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
       "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016",
@@ -173,7 +167,6 @@
     "authorId": "user-0817eeb7-04fb-4da9-b1cd-80d22e934cb5",
     "text": "Water bottle",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
       "user-ca80af4d-273f-4082-a64e-7ad84d1733f2"
@@ -185,7 +178,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d",
     "text": "Sunscreen",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-4085ac2d-2c26-4d51-855b-662dc47adf70",
@@ -200,7 +192,6 @@
     "authorId": "user-c62df6da-0ba7-4268-b44b-28d796757888",
     "text": "Portable fan",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-3e56e47e-bda0-4a4b-bb11-79f9cedaa016"
     ],
@@ -212,7 +203,6 @@
     "authorId": "user-7fe4fcfd-cd52-4fda-a8e5-0c4b68cd75b1",
     "text": "Socks",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [],
     "createdAt": "2025-10-01T12:33:20Z"
   },
@@ -221,7 +211,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-da2a1f56-ac0a-44c6-85f4-2354f8ed77ee",
     "text": "Flip flops",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-0817eeb7-04fb-4da9-b1cd-80d22e934cb5",
@@ -236,7 +225,6 @@
     "authorId": "user-8d5e1406-f258-4b35-b295-8ebee0688925",
     "text": "Jacket",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-7649af22-91d1-4da5-b00e-e0bf3d52e394",
       "user-39abc87c-fdc1-4c1e-93b6-7a1a799b967d"
@@ -248,7 +236,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-b966dd2d-3a82-41e1-8af3-64795b8ed2ea",
     "text": "Camera",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-ca80af4d-273f-4082-a64e-7ad84d1733f2",
@@ -262,9 +249,10 @@
     "authorId": "user-0a017e89-1830-4523-8bcb-2a6a87366c5e",
     "text": "Portable speaker",
     "downvotes": [],
-    "downvotes": [],
     "upvotes": [
       "user-5d2c6d40-47d2-4125-b063-3b6905d09e21",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd",
+      "user-82d86325-e002-4754-abef-d3931b9f9fcd",
       "user-82d86325-e002-4754-abef-d3931b9f9fcd",
       "user-4085ac2d-2c26-4d51-855b-662dc47adf70"
     ],
@@ -275,7 +263,6 @@
     "questionId": "question-1f2a8b40-47b7-4f4d-97ad-51e2ce8c1a42",
     "authorId": "user-5969e262-acfd-49a0-871f-1df1d50ae00d",
     "text": "Backpack",
-    "downvotes": [],
     "downvotes": [],
     "upvotes": [
       "user-ca80af4d-273f-4082-a64e-7ad84d1733f2",
@@ -413,6 +400,9 @@
     "text": "Shoes",
     "downvotes": [],
     "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
       "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4"
     ],
@@ -555,6 +545,9 @@
     "downvotes": [],
     "upvotes": [
       "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+      "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
     ],
     "createdAt": "2025-10-06T17:00:12Z"
@@ -586,6 +579,11 @@
     "text": "Dogs barking nearby",
     "downvotes": [],
     "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81"
     ],
     "createdAt": "2025-10-06T17:08:19Z"
@@ -702,6 +700,12 @@
     "text": "People talking loudly",
     "downvotes": [],
     "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a6"
     ],
     "createdAt": "2025-10-06T17:35:41Z"
@@ -764,6 +768,16 @@
     "text": "Construction noises nearby",
     "downvotes": [],
     "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6",
       "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f6"
     ],
     "createdAt": "2025-10-06T17:51:10Z"
@@ -795,6 +809,14 @@
     "text": "Crowd singing",
     "downvotes": [],
     "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a7"
     ],
     "createdAt": "2025-10-06T17:58:42Z"
@@ -849,6 +871,11 @@
     "text": "Cheap snacks",
     "downvotes": [],
     "upvotes": [
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
+      "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b85",
       "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b288"
     ],
@@ -932,6 +959,17 @@
     "text": "LED accessories",
     "downvotes": [],
     "upvotes": [
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9",
       "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85f9"
     ],
     "createdAt": "2025-10-06T18:29:42Z"
@@ -963,6 +1001,17 @@
     "text": "Temporary tattoos",
     "downvotes": [],
     "upvotes": [
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7aa"
     ],
     "createdAt": "2025-10-06T18:37:01Z"
@@ -1023,6 +1072,11 @@
     "text": "Mini speakers",
     "downvotes": [],
     "upvotes": [
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef",
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef",
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef",
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef",
+      "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef",
       "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7ef"
     ],
     "createdAt": "2025-10-06T18:52:01Z"
@@ -1095,7 +1149,14 @@
     "text": "I’ve been wandering too long!",
     "downvotes": [],
     "upvotes": [
-      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ac"
+      "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ac",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
     ],
     "createdAt": "2025-10-06T19:12:33Z"
   },
@@ -1115,7 +1176,13 @@
     "text": "I missed my favorite DJ!",
     "downvotes": [],
     "upvotes": [
-      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fc"
+      "user-9f59f6a4-9c93-45c4-b18b-3271dc3c85fc",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
     ],
     "createdAt": "2025-10-06T19:17:42Z"
   },
@@ -1207,7 +1274,15 @@
     "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7f2",
     "text": "Why is it so crowded here?",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T19:40:10Z"
   },
   {
@@ -1277,6 +1352,13 @@
     "text": "I thought this was another stage",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8b"
     ],
     "createdAt": "2025-10-06T19:57:42Z"
@@ -1390,7 +1472,27 @@
     "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb1",
     "text": "Meeting may still stop at 40 mins if not refreshed",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T20:25:10Z"
   },
   {
@@ -1481,7 +1583,22 @@
     "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b8e",
     "text": "Meeting might need to restart to apply Pro limits",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T20:47:42Z"
   },
   {
@@ -1511,6 +1628,27 @@
     "text": "Meeting may continue if the license is recognized",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b2"
     ],
     "createdAt": "2025-10-06T20:55:12Z"
@@ -1531,6 +1669,17 @@
     "text": "Test by starting a new meeting after upgrading",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b297"
     ],
     "createdAt": "2025-10-06T21:00:12Z"
@@ -1571,6 +1720,12 @@
     "text": "Zoom’s upgrade may not affect ongoing meetings",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f0"
     ],
     "createdAt": "2025-10-06T21:10:12Z"
@@ -1591,6 +1746,26 @@
     "text": "Try using the default EWS URL from Microsoft documentation",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b90"
     ],
     "createdAt": "2025-10-06T21:15:12Z"
@@ -1613,7 +1788,12 @@
     "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b4",
     "text": "Check ECP settings in your Microsoft Exchange admin center",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T21:20:01Z"
   },
   {
@@ -1623,6 +1803,17 @@
     "text": "You can often copy the EWS URL directly from the Zoom integration page",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b4"
     ],
     "createdAt": "2025-10-06T21:22:42Z"
@@ -1674,6 +1865,13 @@
     "text": "If using Zoom Room, check the integration guide for the correct URL",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b4"
     ],
     "createdAt": "2025-10-06T21:35:12Z"
@@ -1744,7 +1942,14 @@
     "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c866",
     "text": "If unsure, contact IT support for the correct URL",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T21:52:42Z"
   },
   {
@@ -1804,7 +2009,29 @@
     "authorId": "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b302",
     "text": "For on-prem Exchange, URL might differ",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T22:07:42Z"
   },
   {
@@ -1824,7 +2051,26 @@
     "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f5",
     "text": "Check admin guides for the exact path if default doesn’t work",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T22:12:42Z"
   },
   {
@@ -1856,7 +2102,36 @@
     "authorId": "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b7",
     "text": "Wallet or purse",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T22:20:01Z"
   },
   {
@@ -1886,6 +2161,18 @@
     "text": "Tent stakes",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-9f59f6a4-9c93-45c4-b18b-3271dc3c868"
     ],
     "createdAt": "2025-10-06T22:27:42Z"
@@ -1915,7 +2202,12 @@
     "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
     "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c869",
     "text": "Water bottle",
-    "downvotes": [],
+    "downvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "upvotes": [
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7b7"
     ],
@@ -1977,6 +2269,26 @@
     "text": "Camping chair",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4f7"
     ],
     "createdAt": "2025-10-06T22:50:12Z"
@@ -2015,7 +2327,11 @@
     "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
     "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfb9",
     "text": "First aid kit",
-    "downvotes": [],
+    "downvotes": [
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "upvotes": [
       "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b304"
     ],
@@ -2027,7 +2343,35 @@
     "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d7fc",
     "text": "Trash bags",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T23:02:42Z"
   },
   {
@@ -2048,6 +2392,14 @@
     "text": "Overslept",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b96"
     ],
     "createdAt": "2025-10-06T23:15:12Z"
@@ -2059,6 +2411,12 @@
     "text": "Lost track of time while at another stage",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b305"
     ],
     "createdAt": "2025-10-06T23:17:42Z"
@@ -2089,7 +2447,26 @@
     "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfba",
     "text": "Got stuck in the food line",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T23:25:10Z"
   },
   {
@@ -2099,6 +2476,9 @@
     "text": "Lost friends and had to regroup",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
       "user-9f59f6a4-9c93-45c4-b18b-3271dc3c872"
     ],
     "createdAt": "2025-10-06T23:27:42Z"
@@ -2109,7 +2489,30 @@
     "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b97",
     "text": "Misread the schedule",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T23:30:01Z"
   },
   {
@@ -2128,7 +2531,11 @@
     "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
     "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c873",
     "text": "Lost their ticket",
-    "downvotes": [],
+    "downvotes": [
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "upvotes": [
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7ba"
     ],
@@ -2160,7 +2567,27 @@
     "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbb",
     "text": "Found a new band and stayed",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T23:42:42Z"
   },
   {
@@ -2180,7 +2607,26 @@
     "authorId": "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b98",
     "text": "Got lost on the way",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-06T23:47:42Z"
   },
   {
@@ -2250,6 +2696,18 @@
     "text": "Waiting for a friend to arrive",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4fc"
     ],
     "createdAt": "2025-10-07T00:05:12Z"
@@ -2270,6 +2728,13 @@
     "text": "Had to help someone else find their spot",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bc"
     ],
     "createdAt": "2025-10-07T00:10:12Z"
@@ -2321,6 +2786,23 @@
     "text": "Leftover food rotting in a trash bag",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b99"
     ],
     "createdAt": "2025-10-07T00:22:42Z"
@@ -2330,7 +2812,11 @@
     "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
     "authorId": "user-b3d5e34c-00b1-4df6-9515-43f758d1cfbd",
     "text": "Strong weed smell",
-    "downvotes": [],
+    "downvotes": [
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "upvotes": [],
     "createdAt": "2025-10-07T00:25:10Z"
   },
@@ -2412,6 +2898,24 @@
     "text": "Dirty portable toilets",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-9f59f6a4-9c93-45c4-b18b-3271dc3c877"
     ],
     "createdAt": "2025-10-07T00:45:12Z"
@@ -2442,7 +2946,25 @@
     "authorId": "user-9f59f6a4-9c93-45c4-b18b-3271dc3c878",
     "text": "Wet blankets from rain",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-07T00:52:42Z"
   },
   {
@@ -2472,6 +2994,19 @@
     "text": "Strong sunscreen smell",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b310"
     ],
     "createdAt": "2025-10-07T01:00:12Z"
@@ -2482,7 +3017,16 @@
     "authorId": "user-86c5c4b9-b2a5-44e9-b3b7-2e4633a8d802",
     "text": "Wet mud on shoes",
     "downvotes": [],
-    "upvotes": [],
+    "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "createdAt": "2025-10-07T01:02:42Z"
   },
   {
@@ -2512,6 +3056,25 @@
     "text": "Food stands cooking too strong smells",
     "downvotes": [],
     "upvotes": [
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
+      "user-test",
       "user-2b74a78f-62f2-4ad9-bd4e-196f3a0df7bf"
     ],
     "createdAt": "2025-10-07T01:10:12Z"
@@ -2521,7 +3084,11 @@
     "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
     "authorId": "user-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c501",
     "text": "Dirty laundry piled up",
-    "downvotes": [],
+    "downvotes": [
+      "user-test",
+      "user-test",
+      "user-test"
+    ],
     "upvotes": [],
     "createdAt": "2025-10-07T01:12:42Z"
   }

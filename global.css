@@ -31,7 +31,9 @@
 	.sub-text {
 		color: rgb(139, 139, 139);
 	}
+
 }
+
 
 label:has(input[type="checkbox"]:checked, input[type="radio"]:checked) {
 	text-decoration: underline;
@@ -79,7 +81,7 @@ form {
 	transition-duration: 500ms;
 	transition-property: border-color, color;
 	transition-timing-function: ease-out;
-	max-width: 20rem;
+	max-width: 30rem;
 	border: solid rgba(128, 128, 128, 0.253) 1px;
 	box-shadow: rgba(0, 0, 0, 0.081) 3px 3px 8px;
 	position: relative;
@@ -92,6 +94,9 @@ form {
 			display: none;
 		}
 	}
+  & label:has(input[type="radio"]){
+    display: flex;
+  }
 	& > .response-message {
 		border-left-width: 5px;
 		border-left-style: solid;
