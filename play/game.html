@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<!--
+Copyright 2011 Daniel Seither (post@tiwoc.de), Cornelius Flöter (cornelius@nxon.de)
+
+This file is part of Clan Contest.
+
+Clan Contest is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Clan Contest is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Clan Contest.  If not, see http://www.gnu.org/licenses/.
+-->
+	<head>
+		<title>Clan Contest</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="/styles/popup.css" />
+		<script src="/questions-demo.js" defer></script>
+		<script src="./poppup.js" defer></script>
+	</head>
+
+	<body>
+		<div id="container">
+			<!-- splash -->
+			<div class="screen" id="view_splash">
+				<img src="/favicon.ico" />
+			</div>
+
+			<!-- round 1 to 4 -->
+			<div class="screen" id="view_rounds">
+				<h1>
+					Round <span id="round_display"></span>
+					<span id="multiplicator_display"></span>
+				</h1>
+				<table class="answerstable" id="tbl_rounds_answers">
+					<!-- placeholder for answers, filled using JS -->
+				</table>
+
+				<table class="pointstable">
+					<tr>
+						<td id="name_t0" class="points_left"></td>
+						<td class="points_center"></td>
+						<td id="name_t1" class="points_right"></td>
+					</tr>
+					<tr class="points_row">
+						<td id="team0_points" class="points_left"></td>
+						<td id="round_points" class="points_center"></td>
+						<td id="team1_points" class="points_right"></td>
+					</tr>
+					<tr>
+						<td class="points_left">
+							<span id="x_t0_0">&nbsp;</span>
+							<span id="x_t0_1">&nbsp;</span>
+							<span id="x_t0_2">&nbsp;</span>
+						</td>
+						<td></td>
+						<td class="points_right">
+							<span id="x_t1_2">&nbsp;</span>
+							<span id="x_t1_1">&nbsp;</span>
+							<span id="x_t1_0">&nbsp;</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- finals -->
+			<div class="screen" id="view_finals">
+				<h1>Finals</h1>
+				<table class="answerstable" id="tbl_finals_answers">
+					<!-- placeholder for answers, filled using JS -->
+				</table>
+
+				<table class="pointstable">
+					<tr>
+						<td class="points_left">
+							Time left: <span id="timeleft"></span> s
+						</td>
+						<td class="points_right">
+							&Sigma; <span id="finals_points"></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- end -->
+			<div class="screen" id="view_end">
+				<img src="/favicon.ico" />
+			</div>
+		</div>
+	</body>
+</html>

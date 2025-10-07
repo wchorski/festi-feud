@@ -7,10 +7,68 @@
 		<link rel="stylesheet" href="/global.css" />
 		<script src="./page.js" type="module" defer></script>
 		<script src="/db.js" type="module" defer></script>
+		<script src="/game.js" type="module" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script>
 	</head>
 	<body>
+    <button type="button" id="btn_open_win" >Open game window</button><br />
+<input type="button" id="btn_undo" value="< undo" onclick="state.undo();"></input>
+<input type="button" id="btn_redo" value="redo >" onclick="state.redo();"></input>
+
+<!-- splash -->
+<div class="screen" id="view_splash">
+	<h2>Settings</h2>
+	<label for="txt_name_0">Left team: </label><input type="text" id="txt_name_0" id="txt_name_0"></input><br />
+	<label for="txt_name_1">Right team: </label><input type="text" id="txt_name_1" id="txt_name_1"></input><br />
+	<button type="button" id="btn_goto_rounds">start first round</input>
+</div>
+
+<!-- round 1 to 4 -->
+<div class="screen" id="view_rounds">
+	<h2>Round <span id="round"></span></h2>
+	<h3>Answers</h3>
+	<div id="answers"><!-- placeholder for answers, filled using JS --></div>
+	<div id="misses">
+	<input type="button" id="btn_miss0" value="Mistake (left team)" onclick="wrong_answer_given(0);"></input>
+	<input type="button" id="btn_miss1" value="Mistake (right team)" onclick="wrong_answer_given(1);"></input>
+	</div>
+
+	<h3>End of round</h3>
+	<input type="button" id="btn_left_wins" value="left team wins" onclick="team_won_round(0);"></input>
+	<input type="button" id="btn_right_wins" value="right team wins" onclick="team_won_round(1);"></input><br />
+	<input type="button" id="btn_next_round" value="go to next round" onclick="goto_next_round();"></input>
+	<input type="button" id="btn_goto_finals" value="go to finals" onclick="goto_screen('finals');"></input>
+</div>
+
+<!-- finals -->
+<div class="screen" id="view_finals">
+	<h2>Finals</h2>
+	<h3>Questions</h3>
+	<div>
+	<div style="float: left; padding-right: 4em;"><ul id="questions_p0" style="margin: 0;"><!-- placeholder for questions, filled using JS --></ul></div>
+	<div style="clear: right;"><ul id="questions_p1" style="margin: 0;"><!-- placeholder for questions, filled using JS --></ul></div>
+	</div>
+	
+	<h3>Timer</h3>
+	<input type="button" id="btn_timer_p1" value="Set timer for first player" onclick="timer.init(0);"></input>
+	<input type="button" id="btn_timer_p2" value="Set timer for second player" onclick="timer.init(1);"></input>
+	<input type="button" id="btn_timer_start" value="Start timer" onclick="timer.start();"></input>
+	
+	<h3>End of game</h3>
+	<input type="button" id="btn_goto_end" value="Show end of game screen" onclick="goto_screen('end');"></input>
+</div>
+
+<!-- end -->
+<div class="screen" id="view_end">
+	<h2>End of game</h2>
+	Done :)
+</div>
+
+<h2>Sounds</h2>
+<input type="checkbox" id="chk_mute" onchange="mute_changed();">Mute sounds</input><br />
+<div id="audio"><!-- placeholder for play buttons, filled using JS --></div>
+<div id="audiodummy"><!-- placeholder for audio objects, filled using JS --></div>
 		<h1>Play | Question: [ID]</h1>
 		<p id="question"></p>
 		<hr />
@@ -22,12 +80,12 @@
 		</ul>
 
 		<div>
-			<h2>strikes</h2>
-      <ul>
-        <li>x</li>
-        <li>x</li>
-        <li>x</li>
-      </ul>
+			<h2>Left Team strikes</h2>
+			<ul>
+				<li>x</li>
+				<li>x</li>
+				<li>x</li>
+			</ul>
 		</div>
 	</body>
 </html>
