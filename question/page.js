@@ -9,12 +9,7 @@
  * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
-import {
-	createTextEl,
-	elAnswerVoteInput,
-	renderAllTextEls,
-	voteButtons,
-} from "../ui.js"
+import { elAnswerVoteInput } from "../ui.js"
 import {
 	dbCreateAnswer,
 	dbDeleteAnswer,
@@ -101,7 +96,9 @@ async function ini() {
 				//TODO validate min max of text
 				if (!values.text) throw new Error("need input text")
 				if (!values.questionId) throw new Error("need input questionId")
-				if (values.answers?.flatMap((a) => a.authorId).includes(values.authorId))
+				if (
+					values.answers?.flatMap((a) => a.authorId).includes(values.authorId)
+				)
 					throw new Error("Can only submit one new answer")
 				if (!values.downvotes || !values.upvotes)
 					throw new Error(

@@ -1,11 +1,11 @@
 /**
  * @typedef {import('types/Question').QuestionSet} QuestionSet
  * @typedef {import('types/Question').Question} Question
- * @typedef {import('types/Question').QuestionCreate} QuestionCreate
+ * @typedef {import('types/Question').QuestionCreateRaw} QuestionCreateRaw
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreate} AnswerCreate
+ * @typedef {import("types/Answer.js").AnswerCreateRaw} AnswerCreateRaw
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
 
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		const resMsgEl = questionForm.querySelector(".response-message")
 		if (!resMsgEl) throw new Error("no resMsgEl on form")
 
-		const point = /** @type {QuestionCreate} */ (
+		const point = /** @type {QuestionCreateRaw} */ (
 			//@ts-ignore
 			Object.fromEntries(new FormData(e.target))
 		)
@@ -82,10 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	})
 })
 
-async function init() {
+async function ini() {
 	if (!questionsWrap) throw new Error("no wrap")
-	const qs = await getAllQuestionDocs()
-	renderAllTextEls(questionsMap, questionsWrap)
+	await getAllQuestionDocs()
+	renderAllTextEls(questionsMap, questionsWrap, dbDeleteQuestion)
 }
 
-init()
+document.addEventListener("DOMContentLoaded", function () {
+	ini()
+})

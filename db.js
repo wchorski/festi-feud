@@ -57,89 +57,91 @@ export const answersMap = new Map()
 
 //? https://pouchdb.com/api.html#sync
 // do one way, one-off sync from the server until completion
-dbQuestions.replicate
-	.from(remoteQuestionsDbUrl)
-	.on("complete", function (info) {
-		// then two-way, continuous, retriable sync
-		syncDom?.setAttribute("data-sync-state", "connected")
-		syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
-		dbQuestions
-			.sync(remoteQuestionsDbUrl, opts)
-			//typescript no like
-			// .on("change", onSyncChange)
-			.on("paused", onSyncPaused)
-			.on("error", onSyncError)
-	})
-	.on("error", onSyncError)
+function ini() {
+	dbQuestions.replicate
+		.from(remoteQuestionsDbUrl)
+		.on("complete", function (info) {
+			// then two-way, continuous, retriable sync
+			syncDom?.setAttribute("data-sync-state", "connected")
+			syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
+			dbQuestions
+				.sync(remoteQuestionsDbUrl, opts)
+				//typescript no like
+				// .on("change", onSyncChange)
+				.on("paused", onSyncPaused)
+				.on("error", onSyncError)
+		})
+		.on("error", onSyncError)
 
-dbQuestions
-	.changes({
-		since: "now",
-		live: true,
-		include_docs: true,
-	})
-	.on("change", (change) => {
-		const { id, deleted, doc } = change
+	dbQuestions
+		.changes({
+			since: "now",
+			live: true,
+			include_docs: true,
+		})
+		.on("change", (change) => {
+			const { id, deleted, doc } = change
 
-		if (deleted) {
-			questionsMap.delete(id)
+			if (deleted) {
+				questionsMap.delete(id)
+				events.dispatchEvent(
+					new CustomEvent("questions:delete", { detail: change.id })
+				)
+			} else {
+				questionsMap.set(id, doc)
+				events.dispatchEvent(
+					new CustomEvent("questions:set", { detail: change.doc })
+				)
+			}
+
+			// react to both delete and update
 			events.dispatchEvent(
-				new CustomEvent("questions:delete", { detail: change.id })
+				new CustomEvent("questions:change", { detail: questionsMap })
 			)
-		} else {
-			questionsMap.set(id, doc)
+		})
+
+	dbAnswers.replicate
+		.from(remoteAnswersDbUrl)
+		.on("complete", function (info) {
+			// then two-way, continuous, retriable sync
+			syncDom?.setAttribute("data-sync-state", "connected")
+			syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
+			dbAnswers
+				.sync(remoteAnswersDbUrl, opts)
+				//typescript no like
+				// .on("change", onSyncChange)
+				.on("paused", onSyncPaused)
+				.on("error", onSyncError)
+		})
+		.on("error", onSyncError)
+
+	dbAnswers
+		.changes({
+			since: "now",
+			live: true,
+			include_docs: true,
+		})
+		.on("change", (change) => {
+			const { id, deleted, doc } = change
+
+			if (deleted) {
+				answersMap.delete(id)
+				events.dispatchEvent(
+					new CustomEvent("answers:delete", { detail: change.id })
+				)
+			} else {
+				answersMap.set(id, doc)
+				events.dispatchEvent(
+					new CustomEvent("answers:set", { detail: change.doc })
+				)
+			}
+
+			// react to both delete and update
 			events.dispatchEvent(
-				new CustomEvent("questions:set", { detail: change.doc })
+				new CustomEvent("answers:change", { detail: answersMap })
 			)
-		}
-
-		// react to both delete and update
-		events.dispatchEvent(
-			new CustomEvent("questions:change", { detail: questionsMap })
-		)
-	})
-
-dbAnswers.replicate
-	.from(remoteAnswersDbUrl)
-	.on("complete", function (info) {
-		// then two-way, continuous, retriable sync
-		syncDom?.setAttribute("data-sync-state", "connected")
-		syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
-		dbAnswers
-			.sync(remoteAnswersDbUrl, opts)
-			//typescript no like
-			// .on("change", onSyncChange)
-			.on("paused", onSyncPaused)
-			.on("error", onSyncError)
-	})
-	.on("error", onSyncError)
-
-dbAnswers
-	.changes({
-		since: "now",
-		live: true,
-		include_docs: true,
-	})
-	.on("change", (change) => {
-		const { id, deleted, doc } = change
-
-		if (deleted) {
-			answersMap.delete(id)
-			events.dispatchEvent(
-				new CustomEvent("answers:delete", { detail: change.id })
-			)
-		} else {
-			answersMap.set(id, doc)
-			events.dispatchEvent(
-				new CustomEvent("answers:set", { detail: change.doc })
-			)
-		}
-
-		// react to both delete and update
-		events.dispatchEvent(
-			new CustomEvent("answers:change", { detail: answersMap })
-		)
-	})
+		})
+}
 
 // /**@param {PouchDBChange} data */
 // function onSyncChange(data) {
@@ -320,7 +322,6 @@ export async function dbCreateAnswer(point) {
  * @param {{voterId:string, question:Question, answers:Answer[], votes:AnswerFormData[], submittedAt:string}} data
  */
 export async function dbVotePerQuestion(data) {
-
 	try {
 		//? used in transforms.getUUID()
 		// const voterId = await getUserUUID()
@@ -449,7 +450,7 @@ export async function dbSeedDatabase() {
 			const response = await fetch(url)
 			/** @type {Array<Answer | Question>} */
 			const docs = await response.json()
-      //@ts-ignore - remove _rev if i forgot to take it out manually
+			//@ts-ignore - remove _rev if i forgot to take it out manually
 			return docs.map(({ _rev, ...data }) => data)
 		}
 
@@ -587,3 +588,7 @@ export async function dbDeleteAllDocs(qDocs, aDocs) {
 // 		}
 // 	}
 // }
+
+document.addEventListener("DOMContentLoaded", () => {
+	ini()
+})

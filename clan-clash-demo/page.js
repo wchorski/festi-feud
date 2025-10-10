@@ -18,19 +18,19 @@ async function ini() {
 		questionEl.innerText = question.text
 
 		// TODO add answers to hidden object until score reveal
-		const answerDocsRes = await dbFindAnswersByQuestionId(id)
+		// const answerDocsRes = await dbFindAnswersByQuestionId(id)
 
-		if (!answersWrap) throw new Error("no answersWrap")
-		const answerEls = answerDocsRes.docs.map((doc, i) => {
-			return Object.assign(document.createElement("li"), {
-				textContent: `#${i}) ` + doc.text + "  ",
-				//? only getter, not setter
-				// dataset: { id: doc._id }
-				className: ["card", "anim-fade-in"].join(" "),
-			})
-		})
+		// if (!answersWrap) throw new Error("no answersWrap")
+		// const answerEls = answerDocsRes.docs.map((doc, i) => {
+		// 	return Object.assign(document.createElement("li"), {
+		// 		textContent: `#${i}) ` + doc.text + "  ",
+		// 		//? only getter, not setter
+		// 		// dataset: { id: doc._id }
+		// 		className: ["card", "anim-fade-in"].join(" "),
+		// 	})
+		// })
 
-		answersWrap.replaceChildren(...answerEls)
+		// answersWrap.replaceChildren(...answerEls)
 		// console.log(answerDocsRes)
 	}
 }

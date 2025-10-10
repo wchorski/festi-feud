@@ -109,11 +109,11 @@ document.addEventListener("DOMContentLoaded", function () {
 async function ini() {
 	if (!questionsWrap) throw new Error("no wrap")
 	await getAllQuestionDocs()
-	renderAllTextEls(questionsMap, questionsWrap)
+	renderAllTextEls(questionsMap, questionsWrap, dbDeleteQuestion)
 
 	if (!answersWrap) throw new Error("no wrap")
 	await getAllAnswerDocs()
-	renderAllTextEls(answersMap, answersWrap)
+	renderAllTextEls(answersMap, answersWrap, dbDeleteAnswer)
 
   if (!dbMessage) throw new Error("dbMessage not found in dom")
   if (!seedDbBtn) throw new Error("seedDbBtn not found in dom")

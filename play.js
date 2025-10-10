@@ -6,7 +6,7 @@ import {
 	questions_finals,
 	timers,
 } from "./questions-demo.js"
-import { apply_changes } from "./play/poppup.js"
+import { apply_changes } from "./play/game.js"
 
 /**
  * Audio files to be loaded

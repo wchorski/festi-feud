@@ -11,8 +11,20 @@
  * @typedef {import("types/RemoveObject").RemoveObject} RemoveObject
  * @typedef {function(string, Record<string, any>|null, ...(HTMLElement|string)[]): HTMLElement} CreateElement
  */
-// import htm from "./node_modules/htm/dist/htm.module.js"
-import { dbDeleteAnswer, dbDeleteQuestion } from "./db.js"
+//! don't import anything relating to db in here
+// import { dbDeleteAnswer, dbDeleteQuestion } from "./db.js"
+
+/**
+ * @template {HTMLElement} T
+ * @param {string} id
+ * @param {new () => T} type
+ * @returns {T}
+ */
+export function getElementById(id, type) {
+	const el = document.getElementById(id)
+	if (!el) throw new Error(`Element with id "${id}" not found`)
+	return /** @type {T} */ (el)
+}
 
 // TODO look into using template strings. seemed like a lot of type gymnastics tho and should probably stick to js
 // //@ts-ignore
@@ -137,15 +149,23 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 				: console.error("typeof != Question || Answer"),
 	})
 
-	const linkEl = Object.assign(document.createElement("a"), {
+	const docLinkEl = Object.assign(document.createElement("a"), {
 		// className: "delete",
 		// ariaLabel: `delete ${doc.typeof} item`,
 		// title: `go to poll`,
-		textContent: "-->",
+		textContent: "question -->",
 		href: `/${doc.typeof.toLowerCase()}/index.html?id=${doc._id}`,
 	})
 
-	p.append(linkEl, deleteBtn)
+	const playLinkEl = Object.assign(document.createElement("a"), {
+		// className: "delete",
+		// ariaLabel: `delete ${doc.typeof} item`,
+		// title: `go to poll`,
+		textContent: "play -->",
+		href: `/play/index.html?id=${doc._id}`,
+	})
+
+	p.append(docLinkEl, playLinkEl, deleteBtn)
 
 	return p
 }
@@ -153,8 +173,9 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 /**
  * @param {Map<string, Question|Answer> | Array<Question|Answer>} mapOrArray
  * @param {HTMLElement} wrap
+ * @param {(doc: RemoveObject) => Promise<void>} deleteFunc
  */
-export async function renderAllTextEls(mapOrArray, wrap) {
+export async function renderAllTextEls(mapOrArray, wrap, deleteFunc) {
 	const docs = (
 		mapOrArray instanceof Map ? [...mapOrArray.values()] : mapOrArray
 	).toReversed()
@@ -168,20 +189,8 @@ export async function renderAllTextEls(mapOrArray, wrap) {
 		return
 	}
 
-	function deleteFunc(/** @type {Question|Answer} */ doc) {
-		switch (doc.typeof) {
-			case "Question":
-				return dbDeleteQuestion
-			case "Answer":
-				return dbDeleteAnswer
-			default:
-				console.error("typeof != Question || Answer")
-				throw new Error(`Invalid doc.typeof`)
-		}
-	}
-
 	const nodes = docs.map((doc, i) => {
-		return createTextEl(doc, deleteFunc(doc), i * 80)
+		return createTextEl(doc, deleteFunc, i * 80)
 	})
 
 	// Append all at once
