@@ -6,39 +6,19 @@ import { getElementById } from "../ui.js"
 ;(function () {
 	"use strict"
 
-	// Cache DOM elements at the top - throw errors if missing
-	// const openBtn = getElementById("openPopup", HTMLButtonElement)
-	const openBtn = document.getElementById('openPopup');
-	if (!openBtn) throw new Error('Element with id "openPopup" not found');
+	const openBtn = getElementById("openPopup", HTMLButtonElement)
+	const closeBtn = getElementById("closePopup", HTMLButtonElement)
+	const textInput = getElementById("textInput", HTMLInputElement)
+	const updateBtn = getElementById("updateText", HTMLButtonElement)
+	const colorBtn = getElementById("changeColor", HTMLButtonElement)
+	const addBtn = getElementById("addElement", HTMLButtonElement)
 
-	const closeBtn = document.getElementById("closePopup")
-	if (!closeBtn) throw new Error('Element with id "closePopup" not found')
-
-	const textInput = /** @type {HTMLInputElement} */ (
-		document.getElementById("textInput")
-	)
-	if (!textInput) throw new Error('Element with id "textInput" not found')
-
-	const updateBtn = document.getElementById("updateText")
-	if (!updateBtn) throw new Error('Element with id "updateText" not found')
-
-	const colorBtn = document.getElementById("changeColor")
-	if (!colorBtn) throw new Error('Element with id "changeColor" not found')
-
-	const addBtn = document.getElementById("addElement")
-	if (!addBtn) throw new Error('Element with id "addElement" not found')
-
-	/**
-	 * @type {Window | null}
-	 */
+	/** @type {Window | null} */
 	let popupWindow = null
 
-	/**
-	 * Opens a borderless popup window
-	 * @returns {void}
-	 */
+	/** @returns {void} */
 	function openPopup() {
-		console.log("openPopup")
+
 		const features =
 			"width=600,height=400,left=100,top=100,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes"
 
@@ -59,10 +39,7 @@ import { getElementById } from "../ui.js"
 		}
 	}
 
-	/**
-	 * Closes the popup window
-	 * @returns {void}
-	 */
+	/** @returns {void} */
 	function closePopup() {
 		if (popupWindow && !popupWindow.closed) {
 			popupWindow.close()
@@ -70,20 +47,14 @@ import { getElementById } from "../ui.js"
 		handlePopupClosed()
 	}
 
-	/**
-	 * Handles popup closed state
-	 * @returns {void}
-	 */
+	/** @returns {void} */
 	function handlePopupClosed() {
 		popupWindow = null
 		openBtn.disabled = false
 		closeBtn.disabled = true
 	}
 
-	/**
-	 * Updates text content in the popup
-	 * @returns {void}
-	 */
+	/** @returns {void} */
 	function updatePopupText() {
 		if (!popupWindow || popupWindow.closed) {
 			alert("Popup is not open!")
@@ -100,10 +71,7 @@ import { getElementById } from "../ui.js"
 		contentDiv.textContent = text || "No text entered"
 	}
 
-	/**
-	 * Changes background color of popup
-	 * @returns {void}
-	 */
+	/** @returns {void} */
 	function changePopupColor() {
 		if (!popupWindow || popupWindow.closed) {
 			alert("Popup is not open!")
@@ -115,10 +83,7 @@ import { getElementById } from "../ui.js"
 		popupWindow.document.body.style.backgroundColor = randomColor
 	}
 
-	/**
-	 * Adds a new element to the popup
-	 * @returns {void}
-	 */
+	/** @returns {void} */
 	function addElementToPopup() {
 		if (!popupWindow || popupWindow.closed) {
 			alert("Popup is not open!")
@@ -139,9 +104,9 @@ import { getElementById } from "../ui.js"
 	}
 
 	// Event listeners
-	openBtn.addEventListener("click", openPopup)
-	closeBtn.addEventListener("click", closePopup)
-	updateBtn.addEventListener("click", updatePopupText)
-	colorBtn.addEventListener("click", changePopupColor)
-	addBtn.addEventListener("click", addElementToPopup)
+	openBtn.addEventListener("pointerup", openPopup)
+	closeBtn.addEventListener("pointerup", closePopup)
+	updateBtn.addEventListener("pointerup", updatePopupText)
+	colorBtn.addEventListener("pointerup", changePopupColor)
+	addBtn.addEventListener("pointerup", addElementToPopup)
 })()
