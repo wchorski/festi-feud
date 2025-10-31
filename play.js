@@ -45,10 +45,10 @@ function get_initial_changeset() {
 	const init = {
 		"teams.0.name": "Team left",
 		"teams.0.points": 0,
-		"teams.0.misses": 0,
+		"teams.0.strikes": 0,
 		"teams.1.name": "Team right",
 		"teams.1.points": 0,
-		"teams.1.misses": 0,
+		"teams.1.strikes": 0,
 		screen: "splash",
 		"round.id": 0,
 		"round.points": 0,
@@ -74,6 +74,7 @@ function get_initial_changeset() {
  * @listens DOMContentLoaded
  */
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("play.js");
 	const openGameWindowBtn = document.getElementById("btn_open_win")
 	if (!openGameWindowBtn) throw new Error("no btn_open_win el")
 	openGameWindowBtn.addEventListener("pointerup", () => {
@@ -371,8 +372,8 @@ const state_changer = {
 				document.getElementById("txt_name_" + team).value = value
 				break
 
-			case "misses":
-				// set team misses
+			case "strikes":
+				// set team strikes
 				document.getElementById("btn_miss" + team).disabled = value >= 3
 				break
 		}
@@ -599,7 +600,7 @@ function right_answer_given(idx_a) {
  */
 function wrong_answer_given(team) {
 	const changes = {}
-	const setting = "teams." + team + ".misses"
+	const setting = "teams." + team + ".strikes"
 	changes[setting] = state.get_consolidated()[setting] + 1
 	state.commit_changes(changes)
 
@@ -642,8 +643,8 @@ function goto_next_round() {
 		changes["round.answers_shown." + a] = -1
 	}
 
-	changes["teams.0.misses"] = 0
-	changes["teams.1.misses"] = 0
+	changes["teams.0.strikes"] = 0
+	changes["teams.1.strikes"] = 0
 	state.commit_changes(changes)
 }
 

@@ -9,7 +9,6 @@
     "noEmit": true, // Prevents compilation (only type-checking)
     "module": "ESNext", // Supports modern ES modules
     "target": "ES6", // Target modern JavaScript
-    "baseUrl": ".", // Base directory for resolving imports
     "paths": { // Aliases (optional)
       "/*": [
         "."

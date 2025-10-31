@@ -4,13 +4,15 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Popup Display</title>
-    <link rel="stylesheet" href="/global.css" />
-    <link rel="stylesheet" href="./style.css" />
+		<link rel="stylesheet" href="/global.css" />
+		<link rel="stylesheet" href="./style.css" />
+		<link rel="stylesheet" href="/styles/popup.css" />
 	</head>
 	<body>
 		<section id="playfield" class="polka-dots">
 			<span class="score">30</span>
-			<ul class="answers">
+      <h2 id="question">QUESTION</h2>
+			<ul id="answers">
 				<li>1</li>
 				<li>2</li>
 				<li>3</li>
@@ -20,6 +22,18 @@
 				<li>7</li>
 				<li>8</li>
 			</ul>
+			<div class="teams grid col-2">
+				<div id="team-a" class="team a">
+					<h2>Team A</h2>
+					<p class="points a">points</p>
+					<p class="strikes a">x x x</p>
+				</div>
+				<div id="team-b" class="team b">
+					<h2>Team B</h2>
+					<p class="points b">points</p>
+					<p class="strikes b">x x x</p>
+				</div>
+			</div>
 		</section>
 		<h1 id="mainTitle">Popup Window</h1>
 		<div id="content">This is the popup window content.</div>

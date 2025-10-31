@@ -112,7 +112,7 @@ form {
 		transition-timing-function: ease-out;
 	}
 	& > .response-message:empty {
-		display: none;
+		visibility: hidden;
 	}
 }
 
@@ -176,6 +176,13 @@ button.delete {
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 20rem));
 }
 
+.grid {
+  display: grid;
+}
+.col-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
 #sync-state {
 	background-color: rgb(177, 177, 177);
 	border-radius: 30%;
@@ -235,3 +242,5 @@ button.delete {
 		scale: 1;
 	}
 }
+
+

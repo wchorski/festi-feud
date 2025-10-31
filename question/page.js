@@ -21,6 +21,7 @@ import {
 import { formHandler, formVoterHandler } from "../forms.js"
 import { compose, transforms } from "../transforms.js"
 import { getUserUUID } from "../uuid.js"
+import { filterAndSortVotes } from "../utils/filterVotes.js"
 
 const h1 = document.querySelector("h1")
 const questionEl = document.getElementById("question")
@@ -72,9 +73,12 @@ async function ini() {
 
 		if (!answersWrap) throw new Error("no answersWrap")
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
+		const votes = filterAndSortVotes(answerDocsRes.docs)
+		// TODO should i sort by popularity? could cause bias 
+    // console.log(votes);
 		// console.log(answerDocsRes)
 		// renderAllTextEls(answerDocsRes.docs, answersWrap)
-		const answerEls = answerDocsRes.docs.map((doc) => elAnswerVoteInput(doc))
+		const answerEls = votes.map((doc) => elAnswerVoteInput(doc))
 		answersWrap.replaceChildren(...answerEls)
 
 		// const voteBtns = voteButtons("vote 4 me")

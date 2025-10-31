@@ -5,14 +5,70 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Main Window - Popup Controller</title>
 		<link rel="stylesheet" href="/global.css" />
+		<link rel="stylesheet" href="./style.css" />
 		<script src="./game.js" type="module" defer></script>
+		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script>
+		<!-- <script src="/play.js" type="module" defer></script> -->
 	</head>
 	<body>
 		<h1>Main Window</h1>
-		<button id="openPopup">Open Popup Window</button>
-		<button id="closePopup" disabled>Close Popup</button>
+		<button id="btn_open_win">Open Popup Window</button>
+		<button id="btn_close_win" disabled>Close Popup</button>
+		<input type="button" id="btn_undo" value="undo" />
+		<input type="button" id="btn_redo" value="redo" />
 
-		<h2>Control Popup Content:</h2>
+		<h2>Teams</h2>
+		<div class="teams grid col-2">
+			<div id="team-a" class="team a">
+				<h2>Team A</h2>
+				<input type="text" name="team-a-name" value="Team A" />
+				<p class="points a">points</p>
+				<p class="strikes a">x x x</p>
+			</div>
+			<div id="team-b" class="team b">
+				<h2>Team B</h2>
+				<input type="text" name="team-b-name" value="Team B" />
+				<p class="points b">points</p>
+				<p class="strikes b">x x x</p>
+			</div>
+		</div>
+
+		<h2>Question:</h2>
+		<p id="question">...</p>
+
+		<h2>Answers</h2>
+		<ul id="answers">
+			<li>
+				<button>1</button>
+			</li>
+			<li>
+				<button>2</button>
+			</li>
+			<li>
+				<button>3</button>
+			</li>
+			<li>
+				<button>4</button>
+			</li>
+			<li>
+				<button>5</button>
+			</li>
+			<li>
+				<button>6</button>
+			</li>
+			<li>
+				<button>7</button>
+			</li>
+			<li>
+				<button>8</button>
+			</li>
+		</ul>
+
+		<h2>Game Controls</h2>
+		<button id="next-round">Next Round</button>
+
+		<h2>Test Control Popup Content:</h2>
 		<input type="text" id="textInput" placeholder="Enter text to display" />
 		<button id="updateText">Update Popup Text</button>
 

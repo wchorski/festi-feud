@@ -79,11 +79,35 @@ export const voteButtons = (label) => {
 
 /**
  * @param {Answer} doc
+ * @param {boolean} isPlayWindow
+ * @returns {HTMLElement}
+ */
+export const elGameAnswer = (doc, isPlayWindow = true) => {
+	const wrap = Object.assign(document.createElement("li"), {
+		className: "answer",
+	})
+
+	if (isPlayWindow) {
+		const p = Object.assign(document.createElement("p"), {
+			textContent: doc.text,
+		})
+		wrap.append(p)
+	} else {
+		const btn = Object.assign(document.createElement("button"), {
+			textContent: doc.text,
+		})
+		wrap.append(btn)
+	}
+	return wrap
+}
+
+/**
+ * @param {Answer} doc
  * @returns {HTMLDivElement}
  */
 export const elAnswerVoteInput = (doc) => {
 	const { _id, text, upvotes, downvotes } = doc
-	const container = Object.assign(document.createElement("div"), {
+	const wrap = Object.assign(document.createElement("div"), {
 		className: "vote-field",
 	})
 
@@ -92,9 +116,9 @@ export const elAnswerVoteInput = (doc) => {
 	})
 
 	// TODO may leave off to prevent voter bias
-	// const countEl = Object.assign(document.createElement("span"), {
-	// 	textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
-	// })
+	const countEl = Object.assign(document.createElement("span"), {
+		textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
+	})
 
 	const inputsWrap = Object.assign(document.createElement("div"), {
 		className: "inputs",
@@ -117,9 +141,9 @@ export const elAnswerVoteInput = (doc) => {
 	const upBtn = checkboxLabel("upvote", "↑")
 	const downBtn = checkboxLabel("downvote", "↓")
 
-	inputsWrap.append(upBtn, downBtn)
-	container.append(p, inputsWrap)
-	return container
+	inputsWrap.append(countEl, upBtn, downBtn)
+	wrap.append(p, inputsWrap)
+	return wrap
 }
 
 /**
