@@ -78,6 +78,20 @@ export const voteButtons = (label) => {
 }
 
 /**
+ * @param {number} prevIndex
+ * @param {number} nextIndex
+ * @param {Window} window
+ * */
+export function uiActiveTeam(prevIndex, nextIndex, window) {
+	const prevTeamEl = window.document.getElementById(`team-${prevIndex}`)
+	const nextTeamEl = window.document.getElementById(`team-${nextIndex}`)
+	if (!prevTeamEl || !nextTeamEl) throw new Error("no prevTeamEl or prevTeamEl")
+
+	prevTeamEl.classList.remove("active")
+	nextTeamEl.classList.add("active")
+}
+
+/**
  * @param {Answer} doc
  * @param {boolean} isPlayWindow
  * @returns {HTMLElement}

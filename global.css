@@ -179,6 +179,9 @@ button.delete {
 .grid {
   display: grid;
 }
+.gap-m {
+  gap: 1rem;
+}
 .col-2 {
   grid-template-columns: 1fr 1fr;
 }

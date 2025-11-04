@@ -59,3 +59,18 @@ ul#answers {
     background-color: rgb(28, 28, 28);
   }
 }
+
+.team.active {
+  border: solid yellow 1px;
+  box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+}
+
+.strikes {
+  text-align: center;
+  font-size: 3rem;
+
+  & > label > input {
+    width: 2rem;
+    height: 2rem;
+  }
+}

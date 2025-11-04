@@ -4,19 +4,22 @@
  */
 // IIFE to avoid global scope pollution and prevent "Cannot redeclare" errors
 import { dbFindAnswersByQuestionId, dbGetQuestion } from "../db.js"
+import { events } from "../events.js"
 import { elGameAnswer, getElementById } from "../ui.js"
+import { EVENT_TYPES } from "../utils/events.js"
 import { filterAndSortVotes } from "../utils/filterVotes.js"
+import { gameStateManager } from "../utils/gameState.js"
 
 //? may remove this wrap cuz i prob don't need it.
 document.addEventListener("DOMContentLoaded", function () {
-	const openBtn = getElementById("btn_open_win", HTMLButtonElement)
+	// const openBtn = getElementById("btn_open_win", HTMLButtonElement)
+	// const closeBtn = getElementById("btn_close_win", HTMLButtonElement)
 	const answersList = getElementById("answers", HTMLDListElement)
 	const nextRoundBtn = getElementById("next-round", HTMLButtonElement)
-	const closeBtn = getElementById("btn_close_win", HTMLButtonElement)
-	const textInput = getElementById("textInput", HTMLInputElement)
+	// const textInput = getElementById("textInput", HTMLInputElement)
 	const updateBtn = getElementById("updateText", HTMLButtonElement)
-	const colorBtn = getElementById("changeColor", HTMLButtonElement)
-	const addBtn = getElementById("addElement", HTMLButtonElement)
+	// const colorBtn = getElementById("changeColor", HTMLButtonElement)
+	// const addBtn = getElementById("addElement", HTMLButtonElement)
 
 	/** @type {Question|null} */
 	let theQuestion = null
@@ -28,59 +31,21 @@ document.addEventListener("DOMContentLoaded", function () {
 	// const teamBControls = getElementById("team-b", HTMLDivElement)
 	setupControls()
 
-	/** @type {Window | null} */
-	let popupWindow = null
+	// function updatePopupText() {
+	// 	if (!popupWindow || popupWindow.closed) {
+	// 		alert("Popup is not open!")
+	// 		return
+	// 	}
 
-	/** @returns {void} */
-	function openPopup() {
-		const features =
-			"width=600,height=400,left=100,top=100,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes"
+	// 	const text = textInput.value
+	// 	const contentDiv = popupWindow.document.getElementById("content")
 
-		// Open the popup with the external HTML file
-		popupWindow = window.open("popup.html", "PopupWindow", features)
+	// 	if (!contentDiv) {
+	// 		throw new Error('Element with id "content" not found in popup window')
+	// 	}
 
-		if (popupWindow) {
-			openBtn.disabled = true
-			closeBtn.disabled = false
-
-			// Check if popup is closed
-			const checkClosed = setInterval(() => {
-				if (popupWindow && popupWindow.closed) {
-					clearInterval(checkClosed)
-					handlePopupClosed()
-				}
-			}, 500)
-		}
-	}
-
-	function closePopup() {
-		if (popupWindow && !popupWindow.closed) {
-			popupWindow.close()
-		}
-		handlePopupClosed()
-	}
-
-	function handlePopupClosed() {
-		popupWindow = null
-		openBtn.disabled = false
-		closeBtn.disabled = true
-	}
-
-	function updatePopupText() {
-		if (!popupWindow || popupWindow.closed) {
-			alert("Popup is not open!")
-			return
-		}
-
-		const text = textInput.value
-		const contentDiv = popupWindow.document.getElementById("content")
-
-		if (!contentDiv) {
-			throw new Error('Element with id "content" not found in popup window')
-		}
-
-		contentDiv.textContent = text || "No text entered"
-	}
+	// 	contentDiv.textContent = text || "No text entered"
+	// }
 
 	// function changePopupColor() {
 	// 	if (!popupWindow || popupWindow.closed) {
@@ -126,78 +91,99 @@ document.addEventListener("DOMContentLoaded", function () {
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
 		theAnswers = answerDocsRes.docs
 
-		const theAnswersFilteredSorted = filterAndSortVotes(theAnswers, ).slice(0, 8)
-		const answerEls = theAnswersFilteredSorted.map((a) => elGameAnswer(a, false))
+		const theAnswersFilteredSorted = filterAndSortVotes(theAnswers).slice(0, 8)
+		const answerEls = theAnswersFilteredSorted.map((a) =>
+			elGameAnswer(a, false)
+		)
 		theAnswers = theAnswersFilteredSorted
 
 		answersList.replaceChildren(...answerEls)
 	}
 	getQuestionAndAnswers()
 
-	function setNextRound() {
-		if (!theQuestion) throw new Error("no theQuestion")
+	// function setNextRound() {
+	// 	if (!theQuestion) throw new Error("no theQuestion")
 
-		const popupQuestionEl = popupWindow?.document.getElementById("question")
-		if (!popupQuestionEl) throw new Error("no popupQuestionEl")
-		popupQuestionEl.innerText = theQuestion.text
+	// 	const popupQuestionEl = popupWindow?.document.getElementById("question")
+	// 	if (!popupQuestionEl) throw new Error("no popupQuestionEl")
+	// 	popupQuestionEl.innerText = theQuestion.text
 
-		const popupAnswerEl = popupWindow?.document.getElementById("answers")
-		if (!popupAnswerEl) throw new Error("no popupAnswerEl")
-		if (!theAnswers) throw new Error("no theAnswers")
-		const answerEls = theAnswers.map((a) => elGameAnswer(a))
-		popupAnswerEl.replaceChildren(...answerEls)
-	}
+	// 	const popupAnswerEl = popupWindow?.document.getElementById("answers")
+	// 	if (!popupAnswerEl) throw new Error("no popupAnswerEl")
+	// 	if (!theAnswers) throw new Error("no theAnswers")
+	// 	const answerEls = theAnswers.map((a) => elGameAnswer(a))
+	// 	popupAnswerEl.replaceChildren(...answerEls)
+	// }
 
 	// Event listeners
-	openBtn.addEventListener("pointerup", openPopup)
-	nextRoundBtn.addEventListener("pointerup", setNextRound)
-	closeBtn.addEventListener("pointerup", closePopup)
-	updateBtn.addEventListener("pointerup", updatePopupText)
+	// openBtn.addEventListener("pointerup", openPopup)
+	// closeBtn.addEventListener("pointerup", closePopup)
+	// nextRoundBtn.addEventListener("pointerup", setNextRound)
+	// updateBtn.addEventListener("pointerup", updatePopupText)
 	// colorBtn.addEventListener("pointerup", changePopupColor)
 	// addBtn.addEventListener("pointerup", addElementToPopup)
 
-	/**
-	 * @param {"a"|"b"} team
-	 * @param {string} string
-	 */
-	function setTeamName(team, string) {
-		if (!popupWindow || popupWindow.closed) {
-			alert("Popup is not open!")
-			return
-		}
-
-		let h2 = undefined
-
-		switch (team) {
-			case "a":
-				h2 = popupWindow.document.getElementById("team-a")?.querySelector("h2")
-				break
-			case "b":
-				h2 = popupWindow.document.getElementById("team-b")?.querySelector("h2")
-				break
-		}
-		if (!h2) throw new Error("h2 not found")
-		h2.textContent = string || `Team ${team}`
-	}
+	// TODO remove this
 
 	function setupControls() {
 		/** @type {HTMLInputElement|null} */
-		const teamANameInput = document.querySelector('input[name="team-a-name"]')
+		const teamANameInput = document.querySelector('input[name="team-0-name"]')
 		/** @type {HTMLInputElement|null} */
-		const teamBNameInput = document.querySelector('input[name="team-b-name"]')
+		const teamBNameInput = document.querySelector('input[name="team-1-name"]')
 		if (!teamANameInput || !teamBNameInput)
 			throw new Error("no teamBNameInput or teamBNameInput")
 
 		teamANameInput.oninput = (e) => {
-			//@ts-ignore
-			setTeamName("a", e.target?.value)
+			if (!(e.target instanceof HTMLInputElement))
+				throw new Error("not an input el")
+			gameStateManager.setTeamName(0, e.target.value)
 		}
+
 		teamBNameInput.oninput = (e) => {
-			//@ts-ignore
-			setTeamName("b", e.target?.value)
+			if (!(e.target instanceof HTMLInputElement))
+				throw new Error("not an input el")
+			gameStateManager.setTeamName(1, e.target.value)
 		}
-		// teamBNameInput
-		// teamANameInput?.addEventListener("change", (e) => console.log(e.))
-		// teamBNameInput?.addEventListener("change", (e) => console.log(e.value))
+
+		const strikesContainer = document.querySelector(".strikes")
+		if (!strikesContainer) throw new Error("no strikesContainer")
+
+		strikesContainer.addEventListener("change", () => {
+			// Count checked checkboxes
+			/** @type {NodeListOf<HTMLInputElement>} */
+			const checkboxes = strikesContainer.querySelectorAll(
+				'input[type="checkbox"]'
+			)
+			const checkedCount = Array.from(checkboxes).filter(
+				(cb) => cb.checked
+			).length
+
+			gameStateManager.setStrikes(checkedCount)
+
+			// TODO could change this over to dispatch listener for ui only script
+			if (checkedCount === 3) {
+				checkboxes.forEach((box) => {
+					box.disabled = true
+				})
+				setTimeout(() => {
+					checkboxes.forEach((box) => {
+						box.checked = false
+						box.disabled = false
+					})
+				}, 3000)
+			}
+
+			// You can call your controller function here
+			// updateStrikes(checkedCount);
+		})
+
+		// const checkboxes = document.querySelectorAll(".strike-checkbox")
+
+		// checkboxes.forEach((checkbox) => {
+		// 	checkbox.addEventListener("change", handleStrikeChange)
+		// })
+
+		// // Listen for state changes to sync checkboxes
+		// events.addEventListener(EVENT_TYPES.STATE_CHANGED, syncStrikesWithState)
 	}
 })
