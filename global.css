@@ -125,6 +125,9 @@ button.delete {
 		color: white;
 	}
 }
+.block {
+  display: block;
+}
 
 .card {
 	border-radius: 3px;

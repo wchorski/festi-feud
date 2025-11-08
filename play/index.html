@@ -22,10 +22,27 @@
 		</section>
 
 		<section id="playfield" class="polka-dots">
-			<span class="score">30</span>
+			<div class="grid col-2 card">
+				<div>
+					<h2>score</h2>
+					<span class="score block">30</span>
+				</div>
+				<div>
+					<h3>round</h3>
+					<input
+						class="round block"
+						name="round"
+						type="number"
+						value="1"
+						pattern="[0-9]+"
+					/>
+				</div>
+			</div>
 
-			<h2>Question:</h2>
-			<p id="question">...</p>
+      <div class="card">
+        <h2>Question:</h2>
+        <p id="question">...</p>
+      </div>
 
 			<h2>Answers</h2>
 			<ul id="answers">
@@ -59,12 +76,34 @@
 				<div id="team-0" class="team a active">
 					<h2>Team A</h2>
 					<input type="text" name="team-0-name" value="Team A" />
-					<p class="points a">points</p>
+					<p class="points a">
+						<label for="team-a-points">
+							<span>points</span>
+							<input
+								class="round"
+								name="team-a-points"
+								type="number"
+								value="0"
+								pattern="[0-9]+"
+							/>
+						</label>
+					</p>
 				</div>
 				<div id="team-1" class="team b">
 					<h2>Team B</h2>
 					<input type="text" name="team-1-name" value="Team B" />
-					<p class="points b">points</p>
+					<p class="points b">
+						<label for="team-b-points">
+							<span>points</span>
+							<input
+								class="round"
+								name="team-b-points"
+								type="number"
+								value="0"
+								pattern="[0-9]+"
+							/>
+						</label>
+					</p>
 				</div>
 			</div>
 			<div class="strikes">

@@ -14,10 +14,10 @@
         "."
       ],
       "@components/*": [
-        "components/*"
+        "./components/*"
       ],
       "@types/*": [
-        "types/*"
+        "./types/*"
       ]
     },
     "typeRoots": [

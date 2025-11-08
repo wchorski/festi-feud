@@ -1,34 +1,10 @@
-// gameState.js
+/**
+ * @typedef {import('../types/GameState.js').GameState} GameState
+ * @typedef {import('../types/GameState.js').Team} Team
+ * @typedef {import('../types/GameState.js').Answer} Answer
+ * @typedef {import('../types/EventDetails.js').TeamRenamedDetail} TeamRenamedDetail
+ */
 import { events, EVENT_TYPES } from "./events.js"
-
-/**
- * @typedef {Object} GameState
- * @property {number} round
- * @property {Team[]} teams
- * @property {number} activeTeamIndex
- * @property {number} strikes
- * @property {Answer[]} answers
- * @property {Set<number>} revealedAnswers
- */
-
-/**
- * @typedef {Object} Team
- * @property {string} name
- * @property {number} score
- */
-
-/**
- * @typedef {Object} Answer
- * @property {string} text
- * @property {number} points
- */
-
-/**
- * @typedef {Object} TeamRenamedDetail
- * @property {number} teamIndex
- * @property {string} oldName
- * @property {string} newName
- */
 
 /**
  * Singleton Game State Manager
@@ -51,6 +27,7 @@ class GameStateManager {
 		/** @type {GameState} */
 		this.state = {
 			round: initialState.round ?? 1,
+      points: 0,
 			teams: initialState.teams ?? [
 				{ name: "Team A", score: 0 },
 				{ name: "Team B", score: 0 },
@@ -73,15 +50,19 @@ class GameStateManager {
 	 * @returns {GameState}
 	 */
 	get() {
-		return {
-			round: this.state.round,
-			teams: this.state.teams.map((team) => ({ ...team })),
-			activeTeamIndex: this.state.activeTeamIndex,
-			strikes: this.state.strikes,
-			answers: [...this.state.answers],
-			revealedAnswers: new Set(this.state.revealedAnswers),
-		}
-	}
+  const { round, points, teams, activeTeamIndex, strikes, answers, revealedAnswers } = this.state;
+
+  return {
+    round,
+    points,
+    // TODO do i need to map or spread? Is copying important?
+    teams: teams.map((team) => ({ ...team })),
+    activeTeamIndex,
+    strikes,
+    answers: [...answers],
+    revealedAnswers: new Set(revealedAnswers),
+  };
+}
 
 	/**
 	 * Update state and dispatch event
@@ -92,20 +73,20 @@ class GameStateManager {
 		const previousState = this.get()
 
 		// Handle Set and Array updates specially
-		if (updates.revealedAnswers !== undefined) {
-			this.state.revealedAnswers = new Set(updates.revealedAnswers)
-		}
+		// if (updates.revealedAnswers !== undefined) {
+		// 	this.state.revealedAnswers = new Set(updates.revealedAnswers)
+		// }
 		// if (updates.teams !== undefined) {
 		// 	this.state.teams = updates.teams.map((team) => ({ ...team }))
 		// }
-		if (updates.answers !== undefined) {
-			this.state.answers = [...updates.answers]
-		}
+		// if (updates.answers !== undefined) {
+		// 	this.state.answers = [...updates.answers]
+		// }
 
 		// Update primitive values
-		if (updates.round !== undefined) {
-			this.state.round = updates.round
-		}
+		// if (updates.round !== undefined) {
+		// 	this.state.round = updates.round
+		// }
 		// if (updates.activeTeamIndex !== undefined) {
 		// 	this.state.activeTeamIndex = updates.activeTeamIndex
 		// }
@@ -113,6 +94,18 @@ class GameStateManager {
 		// 	console.log(updates.strikes)
 		// 	this.state.strikes = updates.strikes
 		// }
+
+    // TODO a catch all. Don't have to explicited state each object key
+    //! this falls apart
+		for (const [updateKey, updateValue] of Object.entries(updates)) {
+			if (updateValue !== undefined) {
+				//@ts-ignore
+				this.state[updateKey] = updateValue 
+        console.log('GameState this.state: ', JSON.stringify(this.state, null, 2));
+			} else {
+        console.error(`[${updateKey}] does not exist on GameState`)
+      }
+		}
 
 		// if it's a generic this.set() trigger
 		if ((eventType = EVENT_TYPES.STATE_CHANGED)) {

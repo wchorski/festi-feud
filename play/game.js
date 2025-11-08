@@ -123,8 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	// colorBtn.addEventListener("pointerup", changePopupColor)
 	// addBtn.addEventListener("pointerup", addElementToPopup)
 
-	// TODO remove this
-
 	function setupControls() {
 		/** @type {HTMLInputElement|null} */
 		const teamANameInput = document.querySelector('input[name="team-0-name"]')
@@ -172,9 +170,16 @@ document.addEventListener("DOMContentLoaded", function () {
 					})
 				}, 3000)
 			}
+		})
 
-			// You can call your controller function here
-			// updateStrikes(checkedCount);
+		/** @type {HTMLInputElement|null} */
+		const gameRoundNumInput = document.querySelector('input[name="round"]')
+		if (!gameRoundNumInput) throw new Error("no gameRoundNumInput")
+    
+		gameRoundNumInput.addEventListener("change", (e) => {
+      if (!(e.target instanceof HTMLInputElement))
+				throw new Error("not an input el")
+			gameStateManager.set({ round: Number(e.target.value )})
 		})
 
 		// const checkboxes = document.querySelectorAll(".strike-checkbox")
