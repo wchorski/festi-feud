@@ -18,3 +18,7 @@ export type ActiveTeamDetail = {
 	nextTeamIndex: number
 	prevTeamIndex: number
 }
+export type SetPointsDetail = {
+	prevPoints: number
+	currentPoints: number
+}

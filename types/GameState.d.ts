@@ -4,7 +4,7 @@ export type GameState = {
 	teams: Team[]
 	activeTeamIndex: number
 	strikes: number
-	answers: Answer[]
+	answers: GameAnswer[]
 	revealedAnswers: Set<number>
 }
 
@@ -12,9 +12,11 @@ export type Team = {
 	name: string
 	score: number
 }
-export type Answer = {
+export type GameAnswer = {
+  id: string
 	text: string
 	points: number
+  isGuessed: boolean
 }
 
 /**
@@ -36,6 +38,6 @@ export type Answer = {
  * @property {Team[]} teams
  * @property {number} activeTeamIndex
  * @property {number} strikes
- * @property {Answer[]} answers
+ * @property {GameAnswer[]} answers
  * @property {Set<number>} revealedAnswers
  */

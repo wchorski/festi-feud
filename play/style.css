@@ -49,6 +49,10 @@ ul#answers {
 	}
 }
 
+.answer:has(input[type="checkbox"].points:checked) {
+  outline: dashed yellow 2px;
+}
+
 .teams {
   gap: 1rem;
   & > div {

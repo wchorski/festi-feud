@@ -1,7 +1,7 @@
 /**
  * @typedef {import('../types/GameState.js').GameState} GameState
  * @typedef {import('../types/GameState.js').Team} Team
- * @typedef {import('../types/GameState.js').Answer} Answer
+ * @typedef {import('../types/GameState.js').GameAnswer} Answer
  * @typedef {import('../types/EventDetails.js').TeamRenamedDetail} TeamRenamedDetail
  */
 import { events, EVENT_TYPES } from "./events.js"
@@ -27,7 +27,7 @@ class GameStateManager {
 		/** @type {GameState} */
 		this.state = {
 			round: initialState.round ?? 1,
-      points: 0,
+			points: 0,
 			teams: initialState.teams ?? [
 				{ name: "Team A", score: 0 },
 				{ name: "Team B", score: 0 },
@@ -50,19 +50,27 @@ class GameStateManager {
 	 * @returns {GameState}
 	 */
 	get() {
-  const { round, points, teams, activeTeamIndex, strikes, answers, revealedAnswers } = this.state;
+		const {
+			round,
+			points,
+			teams,
+			activeTeamIndex,
+			strikes,
+			answers,
+			revealedAnswers,
+		} = this.state
 
-  return {
-    round,
-    points,
-    // TODO do i need to map or spread? Is copying important?
-    teams: teams.map((team) => ({ ...team })),
-    activeTeamIndex,
-    strikes,
-    answers: [...answers],
-    revealedAnswers: new Set(revealedAnswers),
-  };
-}
+		return {
+			round,
+			points,
+			// TODO do i need to map or spread? Is copying important?
+			teams: teams.map((team) => ({ ...team })),
+			activeTeamIndex,
+			strikes,
+			answers: [...answers],
+			revealedAnswers: new Set(revealedAnswers),
+		}
+	}
 
 	/**
 	 * Update state and dispatch event
@@ -95,16 +103,19 @@ class GameStateManager {
 		// 	this.state.strikes = updates.strikes
 		// }
 
-    // TODO a catch all. Don't have to explicited state each object key
-    //! this falls apart
+		// TODO a catch all. Don't have to explicited state each object key
+		//! this falls apart
 		for (const [updateKey, updateValue] of Object.entries(updates)) {
 			if (updateValue !== undefined) {
 				//@ts-ignore
-				this.state[updateKey] = updateValue 
-        console.log('GameState this.state: ', JSON.stringify(this.state, null, 2));
+				this.state[updateKey] = updateValue
+				// console.log(
+				// 	"GameState this.state: ",
+				// 	JSON.stringify(this.state, null, 2)
+				// )
 			} else {
-        console.error(`[${updateKey}] does not exist on GameState`)
-      }
+				console.error(`[${updateKey}] does not exist on GameState`)
+			}
 		}
 
 		// if it's a generic this.set() trigger
@@ -141,6 +152,44 @@ class GameStateManager {
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.TEAM_RENAME, {
 				detail: { teamIndex, oldName, newName },
+			})
+		)
+	}
+
+	/**
+	 *  @param {string} id
+	 *  @param {boolean} isGuessed
+	 */
+	setIsGuessed(id, isGuessed) {
+    // TODO i did use to return this.state.points and increment, but this is fool proof for all answers
+		const prevPoints = this.state.points
+		// const newPoints = this.state.answers.find((a) => a.id === id)?.points
+		// if (!newPoints) throw new Error("no newPoints")
+		const updatedAnswer = this.state.answers.find((a) => a.id === id)
+		if (!updatedAnswer) throw new Error("no updatedAnswer")
+		// updatedAnswer.isGuessed = isGuessed
+		const updatedAnswers = this.state.answers.map((answer) => {
+			return answer.id === id ? { ...answer, isGuessed } : answer
+		})
+		this.state.answers = updatedAnswers
+
+		const totalPoints = this.state.answers.reduce((accumulator, answer) => {
+			if (answer.isGuessed === true) {
+				return accumulator + answer.points
+			}
+			return accumulator
+		}, 0)
+
+		// TODO. prob should just loop through all this.state.answers and add all points
+		// const currentPoints = isGuessed
+		// 	? prevPoints + newPoints
+		// 	: prevPoints + newPoints * -1
+
+		this.state.points = totalPoints
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.UPDATE_POINTS, {
+				detail: { prevPoints, currentPoints: totalPoints },
 			})
 		)
 	}

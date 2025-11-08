@@ -5,6 +5,7 @@
  * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
+ * @typedef {import("types/GameState").GameAnswer} GameAnswer
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
  * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
@@ -13,6 +14,11 @@
  */
 //! don't import anything relating to db in here
 // import { dbDeleteAnswer, dbDeleteQuestion } from "./db.js"
+
+import { events } from "./events.js"
+import { EVENT_TYPES } from "./utils/events.js"
+import { calcAnswerPoints } from "./utils/filterVotes.js"
+import { gameStateManager } from "./utils/gameState.js"
 
 /**
  * @template {HTMLElement} T
@@ -92,25 +98,40 @@ export function uiActiveTeam(prevIndex, nextIndex, window) {
 }
 
 /**
- * @param {Answer} doc
- * @param {boolean} isPlayWindow
+ * @param {GameAnswer} gAnswer
+ * @param {boolean} isModeratorWindow
  * @returns {HTMLElement}
  */
-export const elGameAnswer = (doc, isPlayWindow = true) => {
+export const elGameAnswer = (gAnswer, isModeratorWindow = false) => {
 	const wrap = Object.assign(document.createElement("li"), {
 		className: "answer",
 	})
 
-	if (isPlayWindow) {
-		const p = Object.assign(document.createElement("p"), {
-			textContent: doc.text,
+	const p = Object.assign(document.createElement("p"), {
+		textContent: gAnswer.text,
+	})
+	wrap.append(p)
+
+	if (isModeratorWindow) {
+		const pointsLabel = Object.assign(document.createElement("label"), {
+			textContent: `${gAnswer.points} points`,
 		})
-		wrap.append(p)
-	} else {
-		const btn = Object.assign(document.createElement("button"), {
-			textContent: doc.text,
+		const pointsCheckbox = Object.assign(document.createElement("input"), {
+			type: "checkbox",
+			value: gAnswer.points,
 		})
-		wrap.append(btn)
+		pointsCheckbox.className = "points"
+
+    pointsCheckbox.addEventListener('change', 
+      // TODO this works but type is wrong
+      /** @param {InputEvent} e  */
+      (e) => {
+      // console.log(e.target.checked);
+      gameStateManager.setIsGuessed(gAnswer.id, e.target.checked)
+    })
+		
+		pointsLabel.append(pointsCheckbox)
+		wrap.append(pointsLabel)
 	}
 	return wrap
 }

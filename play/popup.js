@@ -2,6 +2,7 @@
  * @typedef {import("../types/EventDetails").TeamRenamedDetail} TeamRenamedDetail
  * @typedef {import("../types/EventDetails").StrikesSetDetail} StrikesSetDetail
  * @typedef {import("../types/EventDetails").ActiveTeamDetail} ActiveTeamDetail
+ * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
  */
 
 import { getElementById, uiActiveTeam } from "../ui.js"
@@ -69,23 +70,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		h2.textContent = newName || `Team ${teamIndex}`
 	}
 
-	// /**
-	//  * @param {number} prevIndex
-	//  * @param {number} nextIndex
-	//  * */
-	// function uiActiveTeam(prevIndex, nextIndex) {
-	// 	if (!popupWindow || popupWindow.closed) {
-	// 		alert("Popup is not open!")
-	// 		return
-	// 	}
-	// 	const prevTeamEl = popupWindow.document.getElementById(`team-${prevIndex}`)
-	// 	const nextTeamEl = popupWindow.document.getElementById(`team-${nextIndex}`)
-	// 	if (!prevTeamEl || !nextTeamEl)
-	// 		throw new Error("no prevTeamEl or prevTeamEl")
-
-	// 	prevTeamEl.classList.remove("active")
-	// 	nextTeamEl.classList.add("active")
-	// }
+	/** @param {number} points  */
+	function uiPointsDisplay(points) {
+    // TODO move this definition to top
+		const elRoundScore = getElementById("round-score", HTMLElement)
+    elRoundScore.textContent = points.toString()
+	}
 
 	const onActiveTeamSwitch = /** @type {EventListener} */ (
 		/** @param {CustomEvent<ActiveTeamDetail>} e */
@@ -98,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			uiActiveTeam(prevTeamIndex, nextTeamIndex, popupWindow)
-      // TODO isn't popup related but... lazy
+			// TODO isn't popup related but... lazy
 			uiActiveTeam(prevTeamIndex, nextTeamIndex, window)
 		}
 	)
@@ -110,6 +100,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			uiTeamName(teamIndex, newName)
 		}
 	)
+
+	const onIsGuessed = /** @type {EventListener} */ (
+		/** @param {CustomEvent<SetPointsDetail>} e */
+		(e) => {
+			const { prevPoints, currentPoints } = e.detail
+			uiPointsDisplay(currentPoints)
+		}
+	)
+	events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
 
 	// listeners
 	openBtn.addEventListener("pointerup", openPopup)
