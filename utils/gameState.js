@@ -32,7 +32,7 @@ class GameStateManager {
 				{ name: "Team A", score: 0 },
 				{ name: "Team B", score: 0 },
 			],
-			activeTeamIndex: initialState.activeTeamIndex ?? 0,
+			activeTeamIndex: initialState.activeTeamIndex,
 			strikes: initialState.strikes ?? 0,
 			answers: initialState.answers ?? [],
 			revealedAnswers: initialState.revealedAnswers ?? new Set(),
@@ -111,7 +111,8 @@ class GameStateManager {
 				this.state[updateKey] = updateValue
 				// console.log(
 				// 	"GameState this.state: ",
-				// 	JSON.stringify(this.state, null, 2)
+				// 	this.state
+				// 	// JSON.stringify(this.state, null, 2)
 				// )
 			} else {
 				console.error(`[${updateKey}] does not exist on GameState`)
@@ -161,7 +162,7 @@ class GameStateManager {
 	 *  @param {boolean} isGuessed
 	 */
 	setIsGuessed(id, isGuessed) {
-    // TODO i did use to return this.state.points and increment, but this is fool proof for all answers
+		// TODO i did use to return this.state.points and increment, but this is fool proof for all answers
 		const prevPoints = this.state.points
 		// const newPoints = this.state.answers.find((a) => a.id === id)?.points
 		// if (!newPoints) throw new Error("no newPoints")
@@ -196,6 +197,8 @@ class GameStateManager {
 
 	/** @param {number} num */
 	setStrikes(num) {
+		if (!this.state.activeTeamIndex) throw new Error("set active team")
+
 		const strikes = Math.min(num, 3)
 
 		// this.set({ strikes }, EVENT_TYPES.STRIKES_SET)
@@ -212,19 +215,27 @@ class GameStateManager {
 		)
 	}
 
+	/**. @param {number} teamIndex  */
+	setActiveTeam(teamIndex) {
+		const { activeTeamIndex: prevIndex } = this.state
+
+		this.state.activeTeamIndex = teamIndex
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
+				detail: { nextTeamIndex: teamIndex, prevTeamIndex: prevIndex },
+			})
+		)
+	}
+
 	nextActiveTeam() {
 		const { activeTeamIndex: prevIndex, teams } = this.state
+		if (!prevIndex)
+			throw new Error("active team not set. Manually choose active team")
 
 		const nextIndex = (prevIndex + 1) % teams.length
 
 		this.state.activeTeamIndex = nextIndex
-		// this.set(
-		// 	{
-		// 		activeTeamIndex: nextIndex,
-		// 		strikes: 0,
-		// 	},
-		// 	EVENT_TYPES.TEAM_ACTIVE
-		// )
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
@@ -239,12 +250,12 @@ class GameStateManager {
 	reset() {
 		this.set(
 			{
-				round: 1,
+				round: 0,
 				teams: [
 					{ name: "Team A", score: 0 },
 					{ name: "Team B", score: 0 },
 				],
-				activeTeamIndex: 0,
+				activeTeamIndex: undefined,
 				strikes: 0,
 				answers: [],
 				revealedAnswers: new Set(),

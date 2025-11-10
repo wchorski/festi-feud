@@ -91,10 +91,10 @@ export const voteButtons = (label) => {
 export function uiActiveTeam(prevIndex, nextIndex, window) {
 	const prevTeamEl = window.document.getElementById(`team-${prevIndex}`)
 	const nextTeamEl = window.document.getElementById(`team-${nextIndex}`)
-	if (!prevTeamEl || !nextTeamEl) throw new Error("no prevTeamEl or prevTeamEl")
-
-	prevTeamEl.classList.remove("active")
-	nextTeamEl.classList.add("active")
+	// TODO no like cuz index can be `undefined`
+	// if (!prevTeamEl || !nextTeamEl) throw new Error("no prevTeamEl or prevTeamEl")
+	if (prevTeamEl) prevTeamEl.classList.remove("active")
+	if (nextTeamEl) nextTeamEl.classList.add("active")
 }
 
 /**
@@ -122,14 +122,18 @@ export const elGameAnswer = (gAnswer, isModeratorWindow = false) => {
 		})
 		pointsCheckbox.className = "points"
 
-    pointsCheckbox.addEventListener('change', 
-      // TODO this works but type is wrong
-      /** @param {InputEvent} e  */
-      (e) => {
-      // console.log(e.target.checked);
-      gameStateManager.setIsGuessed(gAnswer.id, e.target.checked)
-    })
-		
+		pointsCheckbox.addEventListener(
+			"change",
+			// TODO this works but type is wrong
+			/** @param {Event} e */
+			(e) => {
+				if (!(e.target instanceof HTMLInputElement))
+					throw new Error("not input el")
+
+				gameStateManager.setIsGuessed(gAnswer.id, e.target.checked)
+			}
+		)
+
 		pointsLabel.append(pointsCheckbox)
 		wrap.append(pointsLabel)
 	}

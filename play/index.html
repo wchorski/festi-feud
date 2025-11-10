@@ -6,8 +6,8 @@
 		<title>Main Window - Popup Controller</title>
 		<link rel="stylesheet" href="/global.css" />
 		<link rel="stylesheet" href="./style.css" />
-		<script src="./game.js" type="module" defer></script>
-		<script src="./popup.js" type="module" defer></script>
+		<script src="./page.js" type="module" defer></script>
+		<script src="./ui.js" type="module" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script>
 		<!-- <script src="/play.js" type="module" defer></script> -->
@@ -25,7 +25,7 @@
 			<div class="grid col-2 card">
 				<div>
 					<h2>score</h2>
-					<span class="score block" id="round-score">UNDEFINED</span>
+					<span class="score block" id="round-score">0</span>
 				</div>
 				<div>
 					<h3>round</h3>
@@ -33,7 +33,7 @@
 						class="round block"
 						name="round"
 						type="number"
-						value="1"
+						value="0"
 						pattern="[0-9]+"
 					/>
 				</div>
@@ -46,46 +46,76 @@
 				</p>
 			</div>
 
-			<h2>Answers</h2>
-			<ul id="answers">
-				<!-- gathered from question -->
-			</ul>
+			<div>
+				<h2>Answers</h2>
+				<ul id="answers">
+					<!-- gathered from question -->
+				</ul>
+			</div>
 
 			<div class="teams grid col-2">
-				<div id="team-0" class="team a active">
+				<div id="team-0" class="team a">
 					<h2>Team A</h2>
-					<input type="text" name="team-0-name" value="Team A" />
-					<p class="points a">
-						<label for="team-a-points">
-							<span>points</span>
-							<input
-								class="round"
-								name="team-a-points"
-								type="number"
-								value="0"
-								pattern="[0-9]+"
-							/>
-						</label>
-					</p>
+					<input
+						type="text"
+						id="team-0-name"
+						name="team-0-name"
+						value="Team A"
+					/>
+					<br />
+					<label for="team-0-points">
+						<span>points</span>
+						<input
+							class="round"
+							name="team-0-points"
+							type="number"
+							value="0"
+							pattern="[0-9]+"
+						/>
+					</label>
+					<label for="team-0-active">
+						<input
+							id="team-0-active"
+							name="team-0-active"
+							type="checkbox"
+							title="Active Team"
+						/>
+						<span>Active Team</span>
+					</label>
 				</div>
 				<div id="team-1" class="team b">
 					<h2>Team B</h2>
-					<input type="text" name="team-1-name" value="Team B" />
-					<p class="points b">
-						<label for="team-b-points">
-							<span>points</span>
-							<input
-								class="round"
-								name="team-b-points"
-								type="number"
-								value="0"
-								pattern="[0-9]+"
-							/>
-						</label>
-					</p>
+					<input
+						id="team-1-name"
+						name="team-1-name"
+						type="text"
+						value="Team B"
+					/>
+					<br />
+					<label for="team-1-points">
+						<span>points</span>
+						<input
+							class="round"
+							name="team-1-points"
+							type="number"
+							value="0"
+							pattern="[0-9]+"
+						/>
+					</label>
+					<br />
+					<label for="team-1-active">
+						<input
+							id="team-1-active"
+							name="team-1-active"
+							type="checkbox"
+							title="Active Team"
+						/>
+						<span>Active Team</span>
+					</label>
 				</div>
 			</div>
 			<div class="strikes">
+				<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
 				<label for="strike-1">
 					<input type="checkbox" name="team-0-strike-1" />
 					<span>X</span>
