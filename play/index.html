@@ -73,6 +73,7 @@
 							pattern="[0-9]+"
 						/>
 					</label>
+					<br />
 					<label for="team-0-active">
 						<input
 							id="team-0-active"
@@ -114,18 +115,18 @@
 					</label>
 				</div>
 			</div>
-			<div class="strikes">
+			<div id="game-strikes" class="strikes">
 				<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
-				<label for="strike-1">
-					<input type="checkbox" name="team-0-strike-1" />
+				<label for="strike-1" class="strike">
+					<input type="checkbox" name="strike-1" disabled />
 					<span>X</span>
 				</label>
-				<label for="strike-2">
-					<input type="checkbox" name="team-0-strike-2" />
+				<label for="strike-2" class="strike">
+					<input type="checkbox" name="strike-2" disabled />
 					<span>X</span>
 				</label>
-				<label for="strike-3">
-					<input type="checkbox" name="team-0-strike-3" />
+				<label for="strike-3" class="strike">
+					<input type="checkbox" name="strike-3" disabled />
 					<span>X</span>
 				</label>
 			</div>

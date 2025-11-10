@@ -6,7 +6,7 @@
 export const EVENT_TYPES = {
   STATE_CHANGED: 'game:stateChanged',
   ANSWER_REVEALED: 'game:answerRevealed',
-  STRIKES_SET: 'game:setStrikes',
+  SET_STRIKES: 'game:setStrikes',
   TEAM_ACTIVE: 'game:teamActive',
   TEAM_RENAME: 'game:teamRename',
   ROUND_ENDED: 'game:roundEnded',

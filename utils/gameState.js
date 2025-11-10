@@ -6,6 +6,7 @@
  */
 import { events, EVENT_TYPES } from "./events.js"
 
+// TODO save gamestate to local storage as to persist if browser is refreshed
 /**
  * Singleton Game State Manager
  * Ensures only one instance of the game state exists
@@ -197,7 +198,8 @@ class GameStateManager {
 
 	/** @param {number} num */
 	setStrikes(num) {
-		if (!this.state.activeTeamIndex) throw new Error("set active team")
+		if (this.state.activeTeamIndex === undefined)
+			throw new Error("set active team")
 
 		const strikes = Math.min(num, 3)
 
@@ -209,13 +211,13 @@ class GameStateManager {
 		}
 
 		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.STRIKES_SET, {
+			new CustomEvent(EVENT_TYPES.SET_STRIKES, {
 				detail: { strikes },
 			})
 		)
 	}
 
-	/**. @param {number} teamIndex  */
+	/**. @param {number|undefined} teamIndex  */
 	setActiveTeam(teamIndex) {
 		const { activeTeamIndex: prevIndex } = this.state
 
@@ -230,7 +232,7 @@ class GameStateManager {
 
 	nextActiveTeam() {
 		const { activeTeamIndex: prevIndex, teams } = this.state
-		if (!prevIndex)
+		if (prevIndex === undefined)
 			throw new Error("active team not set. Manually choose active team")
 
 		const nextIndex = (prevIndex + 1) % teams.length
