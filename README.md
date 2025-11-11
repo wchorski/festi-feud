@@ -89,6 +89,8 @@ Surveyors can periodically sync by coming back in range of the server's network 
   - [ ] save question poll submission or answer to localstorage to recal if user wants to update / re-do their form.
 - [ ] results. bar/pie chart for admin users
 - [ ] answers. allow user submitted answers to be reviewed first. approved ones will be added to the voting forms
+- [ ] set an `active` boolean on questions to allow moderator filtering 
+- [ ] disable answers points checkboxes after `endRound` 
 
 ## Existing Repos
 

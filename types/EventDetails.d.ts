@@ -1,3 +1,5 @@
+import { GameState } from "./GameState"
+
 export type TeamRenamedDetail = {
 	teamIndex: number
 	oldName: string
@@ -9,6 +11,7 @@ export interface TeamRenameEvent extends CustomEvent<TeamRenameDetail> {
 
 export type StrikesSetDetail = {
 	strikes: number
+	roundSteal: boolean
 }
 export interface StrikesSetEvent extends CustomEvent<StrikesSetDetail> {
 	type: "game:setStrikes"
@@ -21,4 +24,7 @@ export type ActiveTeamDetail = {
 export type SetPointsDetail = {
 	prevPoints: number
 	currentPoints: number
+}
+export type RoundEndedDetail = {
+	state: GameState
 }

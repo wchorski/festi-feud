@@ -1,10 +1,28 @@
 /**
- * @typedef {import('../types/GameState.js').GameState} GameState
- * @typedef {import('../types/GameState.js').Team} Team
- * @typedef {import('../types/GameState.js').GameAnswer} Answer
- * @typedef {import('../types/EventDetails.js').TeamRenamedDetail} TeamRenamedDetail
+ * @typedef {import('types/GameState.js').GameState} GameState
+ * @typedef {import('types/GameState.js').Team} Team
+ * @typedef {import('types/GameState.js').GameAnswer} GameAnswer
+ * @typedef {import("types/Question.js").Question} Question
+ * @typedef {import('types/EventDetails.js').TeamRenamedDetail} TeamRenamedDetail
  */
 import { events, EVENT_TYPES } from "./events.js"
+
+/** @type {GameState} */
+const initGameState = {
+	round: 1,
+	points: 0,
+	pointMultiplier: 1,
+	roundType: "feud",
+	roundSteal: false,
+	teams: [
+		{ name: "Team A", score: 0 },
+		{ name: "Team B", score: 0 },
+	],
+	activeTeamIndex: undefined,
+	strikes: 0,
+	question: undefined,
+	answers: [],
+}
 
 // TODO save gamestate to local storage as to persist if browser is refreshed
 /**
@@ -14,36 +32,89 @@ import { events, EVENT_TYPES } from "./events.js"
 class GameStateManager {
 	/** @type {GameStateManager|null} */
 	static instance = null
+	/** @type {string} */
+	storageKey = "gameState"
 
 	/**
 	 * @param {Partial<GameState>} [initialState] - Optional initial state
+	 * @param {string} [storageKey]
 	 */
-	constructor(initialState = {}) {
-		// If instance already exists, return it
-		if (GameStateManager.instance) {
-			return GameStateManager.instance
-		}
-
+	constructor(initialState = initGameState, storageKey = "gameState") {
+		// If instance already exists, return it (Singleton Pattern)
+		if (GameStateManager.instance) return GameStateManager.instance
+		this.storageKey = storageKey
+		const savedState = this.load()
+		const stateToUse = savedState || initialState
 		// Initialize state with defaults
 		/** @type {GameState} */
 		this.state = {
-			round: initialState.round ?? 1,
+			round: stateToUse.round ?? 1,
 			points: 0,
-			teams: initialState.teams ?? [
+			pointMultiplier: 1,
+			roundType: "feud",
+			roundSteal: false,
+			teams: stateToUse.teams ?? [
 				{ name: "Team A", score: 0 },
 				{ name: "Team B", score: 0 },
 			],
-			activeTeamIndex: initialState.activeTeamIndex,
-			strikes: initialState.strikes ?? 0,
-			answers: initialState.answers ?? [],
-			revealedAnswers: initialState.revealedAnswers ?? new Set(),
+			activeTeamIndex: stateToUse.activeTeamIndex,
+			strikes: stateToUse.strikes ?? 0,
+			question: undefined,
+			answers: stateToUse.answers ?? [],
 		}
 
 		// Store the instance
 		GameStateManager.instance = this
-
+		this.save()
 		// Optionally seal the instance to prevent modifications
 		Object.seal(this)
+	}
+
+	/**
+	 * Load state from sessionStorage
+	 * @param {Question} [question]
+	 * @param {GameAnswer[]} [answers]
+	 * @returns {Partial<GameState>|null}
+	 */
+	load(question, answers) {
+		try {
+			const saved = sessionStorage.getItem(this.storageKey)
+			//? return initGameState
+			if (!saved) return null
+
+			/** @type {GameState} */
+			const parsed = JSON.parse(saved)
+
+			// TODO make a shallow `newRoundReset` keeping teams but reseting round values
+			if (question && answers) {
+				parsed.points = 0
+				parsed.activeTeamIndex = undefined
+				parsed.strikes = 0
+				parsed.roundSteal = false
+				parsed.question = question
+				parsed.answers = answers
+			}
+
+			return parsed
+		} catch (error) {
+			console.error("Error loading game state:", error)
+			return null
+		}
+	}
+
+	// TODO i'll need to this.save() on any function that manipulates this.state. or should i funnel all funcs to this.set()?
+	/**
+	 * Save state to sessionStorage
+	 */
+	save() {
+		try {
+			// Convert Set to Array for JSON serialization
+			const stateToSave = this.state
+
+			sessionStorage.setItem(this.storageKey, JSON.stringify(stateToSave))
+		} catch (error) {
+			console.error("Error saving game state:", error)
+		}
 	}
 
 	/**
@@ -54,22 +125,28 @@ class GameStateManager {
 		const {
 			round,
 			points,
+			pointMultiplier,
+			roundType,
+			roundSteal,
 			teams,
 			activeTeamIndex,
 			strikes,
 			answers,
-			revealedAnswers,
+			question,
 		} = this.state
 
 		return {
 			round,
 			points,
+			pointMultiplier,
+			roundType,
+			roundSteal,
 			// TODO do i need to map or spread? Is copying important?
 			teams: teams.map((team) => ({ ...team })),
 			activeTeamIndex,
 			strikes,
+			question,
 			answers: [...answers],
-			revealedAnswers: new Set(revealedAnswers),
 		}
 	}
 
@@ -80,29 +157,6 @@ class GameStateManager {
 	 */
 	set(updates, eventType = EVENT_TYPES.STATE_CHANGED) {
 		const previousState = this.get()
-
-		// Handle Set and Array updates specially
-		// if (updates.revealedAnswers !== undefined) {
-		// 	this.state.revealedAnswers = new Set(updates.revealedAnswers)
-		// }
-		// if (updates.teams !== undefined) {
-		// 	this.state.teams = updates.teams.map((team) => ({ ...team }))
-		// }
-		// if (updates.answers !== undefined) {
-		// 	this.state.answers = [...updates.answers]
-		// }
-
-		// Update primitive values
-		// if (updates.round !== undefined) {
-		// 	this.state.round = updates.round
-		// }
-		// if (updates.activeTeamIndex !== undefined) {
-		// 	this.state.activeTeamIndex = updates.activeTeamIndex
-		// }
-		// if (updates.strikes !== undefined) {
-		// 	console.log(updates.strikes)
-		// 	this.state.strikes = updates.strikes
-		// }
 
 		// TODO a catch all. Don't have to explicited state each object key
 		//! this falls apart
@@ -119,6 +173,8 @@ class GameStateManager {
 				console.error(`[${updateKey}] does not exist on GameState`)
 			}
 		}
+
+		this.save()
 
 		// if it's a generic this.set() trigger
 		if ((eventType = EVENT_TYPES.STATE_CHANGED)) {
@@ -149,6 +205,8 @@ class GameStateManager {
 		teams[teamIndex] = { ...teams[teamIndex], name: newName }
 
 		this.set({ teams }, EVENT_TYPES.TEAM_RENAME)
+
+		this.save()
 
 		// Dispatch additional event with details
 		events.dispatchEvent(
@@ -189,6 +247,8 @@ class GameStateManager {
 
 		this.state.points = totalPoints
 
+		this.save()
+
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.UPDATE_POINTS, {
 				detail: { prevPoints, currentPoints: totalPoints },
@@ -207,12 +267,29 @@ class GameStateManager {
 		this.state.strikes = strikes
 
 		if (strikes === 3) {
-			this.nextActiveTeam()
+			// TODO instead of setting active team use `roundSteal = true`
+			// this.nextActiveTeam()
+			this.state.roundSteal = true
 		}
+
+		this.save()
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.SET_STRIKES, {
-				detail: { strikes },
+				detail: { strikes, roundSteal: this.state.roundSteal },
+			})
+		)
+	}
+
+	/** @param {boolean} roundSteal  */
+	setRoundSteal(roundSteal) {
+		this.state.roundSteal = roundSteal
+
+		this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.ROUNDSTEAL_SET, {
+				detail: { roundSteal: this.state.roundSteal },
 			})
 		)
 	}
@@ -223,6 +300,8 @@ class GameStateManager {
 
 		this.state.activeTeamIndex = teamIndex
 
+		this.save()
+
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
 				detail: { nextTeamIndex: teamIndex, prevTeamIndex: prevIndex },
@@ -231,6 +310,7 @@ class GameStateManager {
 	}
 
 	nextActiveTeam() {
+		// TODO instead of setting active team use `roundSteal`
 		const { activeTeamIndex: prevIndex, teams } = this.state
 		if (prevIndex === undefined)
 			throw new Error("active team not set. Manually choose active team")
@@ -239,9 +319,62 @@ class GameStateManager {
 
 		this.state.activeTeamIndex = nextIndex
 
+		this.save()
+
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
 				detail: { nextTeamIndex: nextIndex, prevTeamIndex: prevIndex },
+			})
+		)
+	}
+
+	awardPoints() {
+		const { roundSteal, activeTeamIndex, points, pointMultiplier, teams } =
+			this.state
+		if (activeTeamIndex === undefined)
+			throw new Error("activeTeamIndex is undefined")
+
+		const totalPoints = points * pointMultiplier
+
+		const teamStealIndex = (activeTeamIndex + 1) % teams.length
+
+		const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+
+		this.state.teams = this.state.teams.map((team, index) =>
+			index === winningTeamIndex
+				? { ...team, score: team.score + totalPoints }
+				: team
+		)
+
+		this.state.points = 0
+
+		this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.AWARD_POINTS, {
+				detail: { state: this.get() },
+			})
+		)
+	}
+
+	/** @param {GameAnswer[]} answers  */
+	nextRound(answers) {
+		console.log("gameState.nextRound()")
+		const currState = this.get()
+
+		this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.NEXT_ROUND, {
+				detail: {
+					state: {
+						...currState,
+						round: currState.round + 1,
+						points: 0,
+						strikes: 0,
+						answers,
+					},
+				},
 			})
 		)
 	}
@@ -250,20 +383,8 @@ class GameStateManager {
 	 * Reset state to initial values
 	 */
 	reset() {
-		this.set(
-			{
-				round: 0,
-				teams: [
-					{ name: "Team A", score: 0 },
-					{ name: "Team B", score: 0 },
-				],
-				activeTeamIndex: undefined,
-				strikes: 0,
-				answers: [],
-				revealedAnswers: new Set(),
-			},
-			EVENT_TYPES.STATE_CHANGED
-		)
+		this.set(initGameState, EVENT_TYPES.STATE_CHANGED)
+		sessionStorage.removeItem(this.storageKey)
 	}
 
 	/**

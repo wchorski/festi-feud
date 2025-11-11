@@ -32,6 +32,18 @@ export function getElementById(id, type) {
 	return /** @type {T} */ (el)
 }
 
+/**
+ * @template {HTMLElement} T
+ * @param {string} selector
+ * @param {new () => T} type
+ * @returns {T}
+ */
+export function querySelector(selector, type) {
+	const el = document.querySelector(selector)
+	if (!el) throw new Error(`Element with selector "${selector}" not found`)
+	return /** @type {T} */ (el)
+}
+
 // TODO look into using template strings. seemed like a lot of type gymnastics tho and should probably stick to js
 // //@ts-ignore
 // const html = htm.bind((type, props, ...children) => {
@@ -84,8 +96,8 @@ export const voteButtons = (label) => {
 }
 
 /**
- * @param {number} prevIndex
- * @param {number} nextIndex
+ * @param {number|undefined} prevIndex
+ * @param {number|undefined} nextIndex
  * @param {Window|null} window
  * */
 export function uiActiveTeam(prevIndex, nextIndex, window) {

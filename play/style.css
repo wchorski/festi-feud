@@ -50,31 +50,51 @@ ul#answers {
 }
 
 .answer:has(input[type="checkbox"].points:checked) {
-  outline: dashed yellow 2px;
+	outline: dashed yellow 2px;
 }
 
 .teams {
-  gap: 1rem;
-  & > div {
-    & > h2 {
-      margin-top: 0;
-    }
-    padding: 1rem;
-    background-color: rgb(28, 28, 28);
-  }
+	gap: 1rem;
+	& > div {
+		& > h2 {
+			margin-top: 0;
+		}
+		padding: 1rem;
+		background-color: rgb(28, 28, 28);
+	}
+}
+
+.team {
+	position: relative;
 }
 
 .team.active {
-  border: solid yellow 1px;
-  box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+	border: solid yellow 1px;
+	box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+}
+
+.steal-badge {
+	opacity: 0.1;
+	/* TODO don't use absolute, make a 2 column layout */
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: red;
+	color: white;
+	padding: 0.5rem;
+	text-align: center;
+}
+
+.round-steal .team:not(.active) .steal-badge {
+	opacity: 1;
 }
 
 .strikes {
-  text-align: center;
-  font-size: 3rem;
+	text-align: center;
+	font-size: 3rem;
 
-  & > label > input {
-    width: 2rem;
-    height: 2rem;
-  }
+	& > label > input {
+		width: 2rem;
+		height: 2rem;
+	}
 }

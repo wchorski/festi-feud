@@ -9,7 +9,9 @@ export const EVENT_TYPES = {
   SET_STRIKES: 'game:setStrikes',
   TEAM_ACTIVE: 'game:teamActive',
   TEAM_RENAME: 'game:teamRename',
-  ROUND_ENDED: 'game:roundEnded',
+  AWARD_POINTS: 'game:awardPoints',
+  ROUNDSTEAL_SET: 'game:roundSteal',
+  NEXT_ROUND: 'game:nextRound',
   UPDATE_POINTS: 'game:updatePoints'
 };
 

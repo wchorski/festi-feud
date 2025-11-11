@@ -14,47 +14,40 @@
 	</head>
 	<body class="grid gap-m">
 		<section>
-			<h1>Main Window</h1>
+			<h1>Moderator Controls</h1>
 			<button id="btn_open_win">Open Popup Window</button>
 			<button id="btn_close_win" disabled>Close Popup</button>
 			<input type="button" id="btn_undo" value="undo" />
 			<input type="button" id="btn_redo" value="redo" />
+			<br />
+			<br />
+			<button id="end-round">End Round</button>
+			<button id="next-round">Next Round</button>
 		</section>
 
 		<section id="playfield" class="polka-dots">
-			<div class="grid col-2 card">
-				<div>
+			<div class="grid col-2 gap-m card">
+				<div class="grid col-2">
 					<h2>score</h2>
 					<span class="score block" id="round-score">0</span>
 				</div>
-				<div>
-					<h3>round</h3>
+				<div class="grid col-2">
+					<h2>round</h2>
 					<input
 						class="round block"
 						name="round"
 						type="number"
 						value="0"
 						pattern="[0-9]+"
+						min="0"
+						max="999"
 					/>
 				</div>
 			</div>
 
-			<div class="card">
-				<h2>Question:</h2>
-				<p id="question">
-					<!-- gotten from database -->
-				</p>
-			</div>
-
-			<div>
-				<h2>Answers</h2>
-				<ul id="answers">
-					<!-- gathered from question -->
-				</ul>
-			</div>
-
-			<div class="teams grid col-2">
+			<div id="teams-wrapper" class="teams grid col-2">
 				<div id="team-0" class="team a">
+					<!-- TODO hide h2 and styel input -->
 					<h2>Team A</h2>
 					<input
 						type="text"
@@ -83,6 +76,7 @@
 						/>
 						<span>Active Team</span>
 					</label>
+					<p class="steal-badge">STEAL</p>
 				</div>
 				<div id="team-1" class="team b">
 					<h2>Team B</h2>
@@ -112,36 +106,61 @@
 							title="Active Team"
 						/>
 						<span>Active Team</span>
+						<p class="steal-badge">STEAL</p>
 					</label>
 				</div>
 			</div>
-			<div id="game-strikes" class="strikes">
-				<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
-				<label for="strike-1" class="strike">
-					<input type="checkbox" name="strike-1" disabled />
-					<span>X</span>
+			<section class="grid col-2">
+				<div id="game-strikes" class="strikes">
+					<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
+					<label for="strike-1" class="strike">
+						<input type="checkbox" name="strike-1" disabled />
+						<span>X</span>
+					</label>
+					<label for="strike-2" class="strike">
+						<input type="checkbox" name="strike-2" disabled />
+						<span>X</span>
+					</label>
+					<label for="strike-3" class="strike">
+						<input type="checkbox" name="strike-3" disabled />
+						<span>X</span>
+					</label>
+				</div>
+				<label for="round-steal">
+					<input id="round-steal" type="checkbox" name="round-steal" disabled />
+					<span>Round Steal</span>
 				</label>
-				<label for="strike-2" class="strike">
-					<input type="checkbox" name="strike-2" disabled />
-					<span>X</span>
-				</label>
-				<label for="strike-3" class="strike">
-					<input type="checkbox" name="strike-3" disabled />
-					<span>X</span>
-				</label>
+			</section>
+
+			<div class="card">
+				<h2>Question:</h2>
+				<p id="question">
+					<!-- gotten from database -->
+				</p>
+			</div>
+
+			<div>
+				<h2>Answers</h2>
+				<ul id="answers">
+					<!-- gathered from question -->
+				</ul>
 			</div>
 		</section>
 
-		<section>
-			<h2>Game Controls</h2>
-			<button id="next-round">Next Round</button>
+		<details class="card" open>
+			<summary>Next Round Question</summary>
+			<ul id="next-round-questions">
+				<!-- fetched from db -->
+			</ul>
+		</details>
 
-			<h2>Test Control Popup Content:</h2>
-			<input type="text" id="textInput" placeholder="Enter text to display" />
-			<button id="updateText">Update Popup Text</button>
+		<!-- <section>
+      <h2>Test Control Popup Content:</h2>
+      <input type="text" id="textInput" placeholder="Enter text to display" />
+      <button id="updateText">Update Popup Text</button>
 
-			<button id="changeColor">Change Background Color</button>
-			<button id="addElement">Add New Element</button>
-		</section>
+      <button id="changeColor">Change Background Color</button>
+      <button id="addElement">Add New Element</button>
+    </section> -->
 	</body>
 </html>
