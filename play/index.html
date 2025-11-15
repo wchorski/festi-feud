@@ -12,19 +12,21 @@
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script>
 		<!-- <script src="/play.js" type="module" defer></script> -->
 	</head>
-	<body class="grid gap-m" data-round-type="face-off">
+	<body class="grid gap-m" data-round-type="face-off" data-round-phase="end">
 		<section>
 			<h1>Moderator Controls</h1>
 			<button id="btn_open_win">Open Popup Window</button>
 			<button id="btn_close_win" disabled>Close Popup</button>
 			<input type="button" id="btn_undo" value="undo" />
 			<input type="button" id="btn_redo" value="redo" />
+			<button id="rest-game">Reset Game</button>
 			<br />
 			<br />
 			<button id="end-round">End Round</button>
 
 			<details id="next-round-options" class="card">
 				<summary>Next Round Question</summary>
+				<p>Choose the next round's prompt</p>
 				<ul id="next-round-questions">
 					<!-- fetched from db -->
 				</ul>
@@ -38,12 +40,27 @@
 					<span id="score-multiplier">x1</span>
 				</h2>
 
-				<!-- TODO make this drop down selector input -->
-				<h2>Round Type: <span id="round-type">NO_TYPE</span></h2>
+				<div>
+					<!-- TODO make this drop down selector input -->
+					<h2>Round Type: <span id="round-type">NO_TYPE</span></h2>
+					<h3>
+						Round Phase:
+						<span id="round-phase">NO_PHASE</span>
+					</h3>
+					<!-- <label for="round-phase">
+						<span>Round Phase</span>
+						<select name="round-phase">
+							<option value="ingame">ingame</option>
+							<option value="end">end</option>
+						</select>
+					</label> -->
+				</div>
 
 				<h2>
 					round:
-					<input
+					<span id="game-round">NO_ROUND</span>
+          <!-- TODO game logic too complicated rn, will add control back later -->
+					<!-- <input
 						class="round"
 						name="round"
 						type="number"
@@ -51,7 +68,7 @@
 						pattern="[0-9]+"
 						min="0"
 						max="999"
-					/>
+					/> -->
 				</h2>
 			</div>
 
@@ -70,6 +87,7 @@
 						<span>points</span>
 						<input
 							class="round"
+							id="team-0-points"
 							name="team-0-points"
 							type="number"
 							value="0"
@@ -101,6 +119,7 @@
 					<label for="team-1-points">
 						<span>points</span>
 						<input
+							id="team-1-points"
 							class="round"
 							name="team-1-points"
 							type="number"
@@ -141,7 +160,7 @@
 				</div>
 				<label for="round-steal">
 					<input id="round-steal" type="checkbox" name="round-steal" disabled />
-					<span>Round Steal</span>
+					<span>Round Steal </span>
 				</label>
 			</section>
 

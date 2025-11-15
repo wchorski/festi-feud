@@ -24,9 +24,6 @@ const { TEAM_ACTIVE, SET_STRIKES: STRIKES_SET, TEAM_RENAME } = EVENT_TYPES
 
 /** @type {Window | null} */
 let popupWindow = null
-// const strikesWrap = getElementById("game-strikes", HTMLDivElement)
-// /** @type {NodeListOf<HTMLInputElement>|null} */
-// let strikeCheckboxes = null
 
 document.addEventListener("DOMContentLoaded", function () {
 	// setupControls()

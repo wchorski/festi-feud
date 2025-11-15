@@ -1,6 +1,6 @@
 body {
-  max-width: 60em;
-  margin-inline: auto;
+	max-width: 60em;
+	margin-inline: auto;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,9 +51,16 @@ label:has(input[type="checkbox"]:checked, input[type="radio"]:checked) {
 	color: var(--c-accent, yellow);
 }
 label:has(input[type="checkbox"]) {
-	&:hover,
+	cursor: pointer;
 	& input {
 		cursor: pointer;
+	}
+}
+label:has(input:disabled) {
+	cursor: not-allowed;
+	& > input:disabled {
+		pointer-events: none;
+		cursor: not-allowed;
 	}
 }
 button:hover {

@@ -1,15 +1,16 @@
-import { Question } from "./Question";
+import { Question } from "./Question"
 
 export type GameState = {
 	round: number
 	points: number
 	pointMultiplier: number
-	roundType: "face-off" | "feud" | "fast-money"
+	roundType: "face-off" | "feud" | "fast-money" | "conclusion"
+	roundPhase: "ingame" | "end"
 	roundSteal: boolean
 	teams: Team[]
 	activeTeamIndex: number | undefined
 	strikes: number
-  question: Question | undefined
+	question: Question | undefined
 	// TODO consider converting Array to Set instead
 	answers: GameAnswer[]
 }

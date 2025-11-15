@@ -3,7 +3,6 @@
  * @typedef {import('types/GameState.js').Team} Team
  * @typedef {import('types/GameState.js').GameAnswer} GameAnswer
  * @typedef {import("types/Question.js").Question} Question
- * @typedef {import('types/EventDetails.js').TeamRenamedDetail} TeamRenamedDetail
  */
 import { events, EVENT_TYPES } from "./events.js"
 
@@ -13,6 +12,7 @@ const initGameState = {
 	points: 0,
 	pointMultiplier: 1,
 	roundType: "face-off",
+	roundPhase: "ingame",
 	roundSteal: false,
 	teams: [
 		{ name: "Team A", score: 0 },
@@ -52,6 +52,7 @@ class GameStateManager {
 			points: 0,
 			pointMultiplier: 1,
 			roundType: stateToUse.roundType ?? initGameState.roundType,
+			roundPhase: stateToUse.roundPhase ?? initGameState.roundPhase,
 			roundSteal: false,
 			teams: stateToUse.teams ?? initGameState.teams,
 			activeTeamIndex: stateToUse.activeTeamIndex,
@@ -94,13 +95,12 @@ class GameStateManager {
 		// TODO this could cause problems for games that are restarting a round?
 		if (this.state.roundType === "face-off")
 			this.state.activeTeamIndex = undefined
+		this.state.roundPhase = "ingame"
 		this.state.strikes = 0
 		this.state.roundSteal = false
 		this.state.question = question
 		this.state.answers = answers
 
-		console.log("gamestate.load()")
-		console.log(this.state)
 		// Save to sessionStorage
 		this.save()
 	}
@@ -130,6 +130,7 @@ class GameStateManager {
 			points,
 			pointMultiplier,
 			roundType,
+			roundPhase,
 			roundSteal,
 			teams,
 			activeTeamIndex,
@@ -143,6 +144,7 @@ class GameStateManager {
 			points,
 			pointMultiplier,
 			roundType,
+			roundPhase,
 			roundSteal,
 			// TODO do i need to map or spread? Is copying important?
 			teams: teams.map((team) => ({ ...team })),
@@ -193,7 +195,32 @@ class GameStateManager {
 		}
 	}
 
-	// TODO change this to `onTeamUpdate` to catch name and score changes
+	/** @param {GameState['roundPhase']} roundPhase   */
+	setRoundPhase(roundPhase) {
+		this.state.roundPhase = roundPhase
+		this.save()
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.SET_ROUNDPHASE, {
+				detail: { roundPhase },
+			})
+		)
+	}
+
+	endRound() {
+		this.setRoundPhase("end")
+		this.awardPoints()
+
+		// other funcs save the data
+		// this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.END_ROUND, {
+				detail: { state: this.get() },
+			})
+		)
+	}
+
+	// TODO remove this and replace with `updateTeam`
 	/**
 	 * @param {number} teamIndex
 	 * @param {string} newName
@@ -225,6 +252,8 @@ class GameStateManager {
 	 *  @param {boolean} isGuessed
 	 */
 	setIsGuessed(id, isGuessed) {
+		const prevPoints = this.state.points
+
 		const updatedAnswer = this.state.answers.find((a) => a.id === id)
 		if (!updatedAnswer) throw new Error("no updatedAnswer")
 
@@ -233,7 +262,6 @@ class GameStateManager {
 		})
 		this.state.answers = updatedAnswers
 
-		const prevPoints = this.state.points
 		this.state.points = this.totalPoints
 
 		this.save()
@@ -247,6 +275,7 @@ class GameStateManager {
 
 	get totalPoints() {
 		if (this.state.roundType === "face-off") return 0
+		if (this.state.roundPhase === "end") return 0
 
 		return this.state.answers.reduce((acc, answer) => {
 			return answer.isGuessed ? acc + answer.points : acc
@@ -255,8 +284,10 @@ class GameStateManager {
 
 	/** @param {number} num */
 	setStrikes(num) {
-		if (this.state.activeTeamIndex === undefined)
-			throw new Error("set active team")
+		const { activeTeamIndex, roundType, roundSteal } = this.state
+		if (activeTeamIndex === undefined) throw new Error("set active team")
+		if (roundType !== "feud")
+			throw new Error(`cannot set strikes on roundType: ${roundType}`)
 
 		const strikes = Math.min(num, 3)
 
@@ -296,6 +327,45 @@ class GameStateManager {
 				break
 			case 7:
 				this.state.roundType = "fast-money"
+				break
+			case 8:
+				this.state.roundType = "fast-money"
+				break
+			case 9:
+				this.state.roundType = "conclusion"
+				break
+
+			default:
+				break
+		}
+
+		switch (currRound) {
+			case 1:
+				this.state.pointMultiplier = 0
+				break
+			case 2:
+				this.state.pointMultiplier = 1
+				break
+			case 3:
+				this.state.pointMultiplier = 0
+				break
+			case 4:
+				this.state.pointMultiplier = 2
+				break
+			case 5:
+				this.state.pointMultiplier = 0
+				break
+			case 6:
+				this.state.pointMultiplier = 3
+				break
+			case 7:
+				this.state.pointMultiplier = 1
+				break
+			case 7:
+				this.state.pointMultiplier = 1
+				break
+			case 8:
+				this.state.pointMultiplier = 0
 				break
 
 			default:
@@ -354,6 +424,24 @@ class GameStateManager {
 		)
 	}
 
+	/**
+	 * @param {number} index - The index of the team to update.
+	 * @param {Partial<Team>} teamUpdate
+	 * */
+	updateTeam(index, teamUpdate) {
+		this.state.teams = this.state.teams.map((team, i) =>
+			i === index ? { ...team, ...teamUpdate } : team
+		)
+
+		this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.TEAM_UPDATE, {
+				detail: { index, teamUpdate },
+			})
+		)
+	}
+
 	awardPoints() {
 		const {
 			roundType,
@@ -396,35 +484,10 @@ class GameStateManager {
 		)
 	}
 
-	// TODO i can do this all with .load()
-	// /** @param {GameAnswer[]} answers  */
-	// nextRound(answers) {
-	// 	console.log("gameState.nextRound()")
-	// 	const currState = this.get()
-
-	// 	this.save()
-
-	// 	events.dispatchEvent(
-	// 		new CustomEvent(EVENT_TYPES.NEXT_ROUND, {
-	// 			detail: {
-	// 				state: {
-	// 					...currState,
-	// 					round: currState.round + 1,
-	// 					points: 0,
-	// 					strikes: 0,
-	// 					answers,
-	// 				},
-	// 			},
-	// 		})
-	// 	)
-	// }
-
-	/**
-	 * Reset state to initial values
-	 */
+	/** Reset state for a whole new game */
 	reset() {
-		this.set(initGameState, EVENT_TYPES.STATE_CHANGED)
 		sessionStorage.removeItem(this.storageKey)
+		this.set(initGameState, EVENT_TYPES.STATE_CHANGED)
 	}
 
 	/**

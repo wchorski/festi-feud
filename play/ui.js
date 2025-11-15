@@ -4,6 +4,7 @@
  * @typedef {import("types/EventDetails").ActiveTeamDetail} ActiveTeamDetail
  * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
  * @typedef {import("types/EventDetails").RoundEndedDetail} RoundEndedDetail
+ * @typedef {import("types/EventDetails").RoundPhaseDetail} RoundPhaseDetail
  * @typedef {import("types/GameState.js").GameState} GameState
  * @typedef {import("types/GameState.js").Team} Team
  */
@@ -26,12 +27,13 @@ const questionEl = getElementById("question", HTMLParagraphElement)
 const team0ActiveCheckbox = getElementById("team-0-active", HTMLInputElement)
 const team1ActiveCheckbox = getElementById("team-1-active", HTMLInputElement)
 const roundStealCheckbox = getElementById("round-steal", HTMLInputElement)
-const gameRoundNumInput = querySelector('input[name="round"]', HTMLInputElement)
+// const gameRoundNumInput = querySelector('input[name="round"]', HTMLInputElement)
 const strikesWrap = getElementById("game-strikes", HTMLDivElement)
 /** @type {NodeListOf<HTMLInputElement>} */
 const strikeCheckboxes = strikesWrap.querySelectorAll('input[type="checkbox"]')
 if (!strikeCheckboxes) throw new Error("no strikeCheckboxes")
 const endRoundBtn = getElementById("end-round", HTMLButtonElement)
+const resetGameBtn = getElementById("rest-game", HTMLButtonElement)
 const nextRoundDetailsEl = getElementById(
 	"next-round-options",
 	HTMLDetailsElement
@@ -40,8 +42,10 @@ const nextRoundDetailsEl = getElementById(
 const teamsWrap = getElementById("teams-wrapper", HTMLDivElement)
 const roundScoreEl = getElementById("round-score", HTMLElement)
 const scoreMultiEl = getElementById("score-multiplier", HTMLElement)
+const gameRoundEl = getElementById("game-round", HTMLSpanElement)
+const roundPhaseEl = getElementById("round-phase", HTMLSpanElement)
 const roundTypeEl = getElementById("round-type", HTMLElement)
-const gameRoundInput = querySelector('input[name="round"', HTMLInputElement)
+// const gameRoundInput = querySelector('input[name="round"', HTMLInputElement)
 
 export function uiInit() {
 	const {
@@ -52,20 +56,28 @@ export function uiInit() {
 		question,
 		round,
 		roundSteal,
+		roundPhase,
 		roundType,
 		strikes,
 		teams,
 	} = gameStateManager.get()
 
 	uiActiveTeam(undefined, activeTeamIndex, window)
+	if (activeTeamIndex === 0) team0ActiveCheckbox.checked = true
+	if (activeTeamIndex === 1) team1ActiveCheckbox.checked = true
 	const answerEls = answers.map((a) => elGameAnswer(a, true))
 	answersList.replaceChildren(...answerEls)
 	scoreMultiEl.textContent = "x" + pointMultiplier.toString()
 	roundScoreEl.textContent = points.toString()
 	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
-	gameRoundInput.value = round.toString()
+	// gameRoundInput.value = String(round)
+	gameRoundEl.textContent = String(round)
 	// state.roundSteal
 	roundTypeEl.textContent = roundType
+	document.body.dataset.roundType = roundType
+	gameRoundEl.textContent = String(round)
+	roundPhaseEl.textContent = roundPhase
+	document.body.dataset.roundPhase = roundPhase
 	// state.strikes
 	teams.forEach((team, i) => {
 		uiTeamUpdate(i, team)
@@ -181,7 +193,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		/** @param {CustomEvent<SetPointsDetail>} e */
 		(e) => {
 			const { prevPoints, currentPoints } = e.detail
-			uiPointsDisplay(currentPoints)
+			const { roundPhase } = gameStateManager.get()
+			if (roundPhase !== "end") uiPointsDisplay(currentPoints)
 		}
 	)
 
@@ -189,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		/** @param {CustomEvent<StrikesSetDetail>} e */
 		(e) => {
 			const { strikes, roundSteal } = e.detail
+
 			roundStealCheckbox.checked = roundSteal
 			roundSteal
 				? teamsWrap.classList.add("round-steal")
@@ -241,6 +255,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
 		}
 	)
+
+	const onRoundPhase = /** @type {EventListener} */ (
+		/** @param {CustomEvent<RoundPhaseDetail>} e */
+		(e) => {
+			//
+			const { roundPhase } = e.detail
+			document.body.dataset.roundPhase = roundPhase
+			// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
+		}
+	)
+
 	// listeners
 	openBtn.addEventListener("pointerup", openPopup)
 	closeBtn.addEventListener("pointerup", closePopup)
@@ -251,12 +276,22 @@ document.addEventListener("DOMContentLoaded", function () {
 	events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
 	events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
 	events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
+	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
 
 	setupTeamControls()
 	setupGameControls()
 })
 
 function setupGameControls() {
+	const { activeTeamIndex } = gameStateManager.get()
+
+	if (activeTeamIndex !== undefined) {
+		strikeCheckboxes.forEach((box) => {
+			box.disabled = false
+		})
+		roundStealCheckbox.disabled = false
+	}
+
 	strikesWrap.addEventListener("change", () => {
 		const activeTeamIndex = gameStateManager.get().activeTeamIndex
 
@@ -293,21 +328,27 @@ function setupGameControls() {
 		gameStateManager.setRoundSteal(e.target.checked)
 	})
 
-	gameRoundNumInput.addEventListener("change", (e) => {
-		if (!(e.target instanceof HTMLInputElement))
-			throw new Error("not an input el")
-		gameStateManager.set({ round: Number(e.target.value) })
-	})
+	// gameRoundNumInput.addEventListener("change", (e) => {
+	// 	if (!(e.target instanceof HTMLInputElement))
+	// 		throw new Error("not an input el")
+	// 	gameStateManager.set({ round: Number(e.target.value) })
+	// })
 
 	endRoundBtn.onclick = (e) => {
-		gameStateManager.awardPoints()
+		// gameStateManager.awardPoints()
+		gameStateManager.endRound()
 		nextRoundDetailsEl.open = true
+	}
+	resetGameBtn.onclick = (e) => {
+		gameStateManager.reset()
 	}
 }
 
 function setupTeamControls() {
 	const teamANameInput = getElementById("team-0-name", HTMLInputElement)
 	const team1NameInput = getElementById("team-1-name", HTMLInputElement)
+	const team0PointsInput = getElementById("team-0-points", HTMLInputElement)
+	const team1PointsInput = getElementById("team-1-points", HTMLInputElement)
 
 	teamANameInput.oninput = (e) => {
 		if (!(e.target instanceof HTMLInputElement))
@@ -319,6 +360,17 @@ function setupTeamControls() {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 		gameStateManager.setTeamName(1, e.target.value)
+	}
+
+	team0PointsInput.oninput = (e) => {
+		if (!(e.target instanceof HTMLInputElement))
+			throw new Error("not an input el")
+		gameStateManager.updateTeam(0, { score: Number(e.target.value) })
+	}
+	team1PointsInput.oninput = (e) => {
+		if (!(e.target instanceof HTMLInputElement))
+			throw new Error("not an input el")
+		gameStateManager.updateTeam(1, { score: Number(e.target.value) })
 	}
 
 	team0ActiveCheckbox.oninput = (e) => {
@@ -374,6 +426,6 @@ function uiUpdateScores(state) {
 		if (!(scoreEl instanceof HTMLInputElement))
 			throw new Error("scoreEl not input el")
 
-		scoreEl.value = team.score.toString()
+		scoreEl.value = String(team.score)
 	})
 }

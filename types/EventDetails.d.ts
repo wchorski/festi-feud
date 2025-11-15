@@ -28,3 +28,6 @@ export type SetPointsDetail = {
 export type RoundEndedDetail = {
 	state: GameState
 }
+export type RoundPhaseDetail = {
+	roundPhase: GameState["roundPhase"]
+}

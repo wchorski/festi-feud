@@ -49,8 +49,16 @@ ul#answers {
 	}
 }
 
-.answer:has(input[type="checkbox"].points:checked) {
-	outline: dashed yellow 2px;
+/* .answer:has(input[type="checkbox"].points:checked) {
+  outline: dashed yellow 2px;
+} */
+
+body[data-round-phase="ingame"] .answer:has(input[type="checkbox"].points:checked) {
+  outline: dashed yellow 2px;
+}
+
+body[data-round-phase="end"] .answer:has(input[type="checkbox"].points:checked) {
+  outline: double rgb(160, 189, 243) 4px;
 }
 
 .teams {
@@ -126,4 +134,8 @@ body[data-round-type="face-off"] {
 		width: 2rem;
 		height: 2rem;
 	}
+}
+
+#next-round-options[open]{
+  border: dashed yellow 1px;
 }
