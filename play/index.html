@@ -12,7 +12,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script>
 		<!-- <script src="/play.js" type="module" defer></script> -->
 	</head>
-	<body class="grid gap-m">
+	<body class="grid gap-m" data-round-type="face-off">
 		<section>
 			<h1>Moderator Controls</h1>
 			<button id="btn_open_win">Open Popup Window</button>
@@ -22,19 +22,29 @@
 			<br />
 			<br />
 			<button id="end-round">End Round</button>
-			<button id="next-round">Next Round</button>
+
+			<details id="next-round-options" class="card">
+				<summary>Next Round Question</summary>
+				<ul id="next-round-questions">
+					<!-- fetched from db -->
+				</ul>
+			</details>
 		</section>
 
 		<section id="playfield" class="polka-dots">
-			<div class="grid col-2 gap-m card">
-				<div class="grid col-2">
-					<h2>score</h2>
-					<span class="score block" id="round-score">0</span>
-				</div>
-				<div class="grid col-2">
-					<h2>round</h2>
+			<div class="grid col-3 gap-m card">
+				<h2 id="round-score-wrap">
+					score <span class="score" id="round-score">0</span>
+					<span id="score-multiplier">x1</span>
+				</h2>
+
+				<!-- TODO make this drop down selector input -->
+				<h2>Round Type: <span id="round-type">NO_TYPE</span></h2>
+
+				<h2>
+					round:
 					<input
-						class="round block"
+						class="round"
 						name="round"
 						type="number"
 						value="0"
@@ -42,7 +52,7 @@
 						min="0"
 						max="999"
 					/>
-				</div>
+				</h2>
 			</div>
 
 			<div id="teams-wrapper" class="teams grid col-2">
@@ -77,6 +87,7 @@
 						<span>Active Team</span>
 					</label>
 					<p class="steal-badge">STEAL</p>
+					<p class="winner-badge">WINNER</p>
 				</div>
 				<div id="team-1" class="team b">
 					<h2>Team B</h2>
@@ -106,11 +117,13 @@
 							title="Active Team"
 						/>
 						<span>Active Team</span>
-						<p class="steal-badge">STEAL</p>
 					</label>
+					<p class="steal-badge">STEAL</p>
+					<p class="winner-badge">WINNER</p>
 				</div>
 			</div>
-			<section class="grid col-2">
+			<!-- TODO hide this section when roundType === "face-off" -->
+			<section id="strikes-and-steal" class="grid col-2">
 				<div id="game-strikes" class="strikes">
 					<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
 					<label for="strike-1" class="strike">
@@ -146,13 +159,6 @@
 				</ul>
 			</div>
 		</section>
-
-		<details class="card" open>
-			<summary>Next Round Question</summary>
-			<ul id="next-round-questions">
-				<!-- fetched from db -->
-			</ul>
-		</details>
 
 		<!-- <section>
       <h2>Test Control Popup Content:</h2>

@@ -36,12 +36,19 @@ export function getElementById(id, type) {
  * @template {HTMLElement} T
  * @param {string} selector
  * @param {new () => T} type
+ * @param {HTMLElement} [parentElement]
  * @returns {T}
  */
-export function querySelector(selector, type) {
-	const el = document.querySelector(selector)
-	if (!el) throw new Error(`Element with selector "${selector}" not found`)
-	return /** @type {T} */ (el)
+export function querySelector(selector, type, parentElement) {
+	if (parentElement) {
+		const el = parentElement.querySelector(selector)
+		if (!el) throw new Error(`Element with selector "${selector}" not found`)
+		return /** @type {T} */ (el)
+	} else {
+		const el = document.querySelector(selector)
+		if (!el) throw new Error(`Element with selector "${selector}" not found`)
+		return /** @type {T} */ (el)
+	}
 }
 
 // TODO look into using template strings. seemed like a lot of type gymnastics tho and should probably stick to js

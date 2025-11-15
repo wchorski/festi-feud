@@ -91,6 +91,13 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] answers. allow user submitted answers to be reviewed first. approved ones will be added to the voting forms
 - [ ] set an `active` boolean on questions to allow moderator filtering 
 - [ ] disable answers points checkboxes after `endRound` 
+- [ ] 2 buzzers (connected by web sockets?). for `face-off` rounds. Fastest buzzer get's highlighted as active team
+- [ ] next round logic
+  - [ ] set round number
+  - [ ] set roundType
+  - [ ] unhide strike and points
+  - [ ] set active player
+- [ ] should i give `round` 1-5 a `roundPhase` (Face-Off, Main Round, Steal, Round End)? or just increment 1-7? making each 'phase' a round number?
 
 ## Existing Repos
 

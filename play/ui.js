@@ -5,6 +5,7 @@
  * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
  * @typedef {import("types/EventDetails").RoundEndedDetail} RoundEndedDetail
  * @typedef {import("types/GameState.js").GameState} GameState
+ * @typedef {import("types/GameState.js").Team} Team
  */
 
 import {
@@ -31,42 +32,78 @@ const strikesWrap = getElementById("game-strikes", HTMLDivElement)
 const strikeCheckboxes = strikesWrap.querySelectorAll('input[type="checkbox"]')
 if (!strikeCheckboxes) throw new Error("no strikeCheckboxes")
 const endRoundBtn = getElementById("end-round", HTMLButtonElement)
-const nextRoundBtn = getElementById("next-round", HTMLButtonElement)
+const nextRoundDetailsEl = getElementById(
+	"next-round-options",
+	HTMLDetailsElement
+)
 
 const teamsWrap = getElementById("teams-wrapper", HTMLDivElement)
 const roundScoreEl = getElementById("round-score", HTMLElement)
+const scoreMultiEl = getElementById("score-multiplier", HTMLElement)
+const roundTypeEl = getElementById("round-type", HTMLElement)
 const gameRoundInput = querySelector('input[name="round"', HTMLInputElement)
 
-document.addEventListener("DOMContentLoaded", function () {
-	function uiSetupValues() {
-		const {
-			activeTeamIndex,
-			answers,
-			pointMultiplier,
-			points,
-			question,
-			round,
-			roundSteal,
-			roundType,
-			strikes,
-			teams,
-		} = gameStateManager.get()
-		uiActiveTeam(undefined, activeTeamIndex, window)
-		const answerEls = answers.map((a) => elGameAnswer(a, true))
-		answersList.replaceChildren(...answerEls)
-		// state.pointMultiplier
-		roundScoreEl.textContent = points.toString()
-		questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
-		gameRoundInput.textContent = round.toString()
-		// state.roundSteal
-		// state.roundType
-		// state.strikes
-		teams.forEach((team, i) => {
-			uiTeamName(i, team.name)
-		})
-	}
-	uiSetupValues()
+export function uiInit() {
+	const {
+		activeTeamIndex,
+		answers,
+		pointMultiplier,
+		points,
+		question,
+		round,
+		roundSteal,
+		roundType,
+		strikes,
+		teams,
+	} = gameStateManager.get()
 
+	uiActiveTeam(undefined, activeTeamIndex, window)
+	const answerEls = answers.map((a) => elGameAnswer(a, true))
+	answersList.replaceChildren(...answerEls)
+	scoreMultiEl.textContent = "x" + pointMultiplier.toString()
+	roundScoreEl.textContent = points.toString()
+	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
+	gameRoundInput.value = round.toString()
+	// state.roundSteal
+	roundTypeEl.textContent = roundType
+	// state.strikes
+	teams.forEach((team, i) => {
+		uiTeamUpdate(i, team)
+	})
+}
+
+/**
+ * @param {number} i
+ * @param {Team} team
+ */
+function uiTeamUpdate(i, team) {
+	// TODO move all popup ui to it's own file. subscribe to same event dispatch
+	// if (!popupWindow || popupWindow.closed) {
+	// 	// TODO add back in for moderator
+	// 	console.log("Popup is not open!")
+	// 	// alert("Popup is not open!")
+	// 	// return
+	// }
+	const teamWrapEl = document.getElementById(`team-${i}`)
+	if (!teamWrapEl) throw new Error("no teamWrapEl")
+
+	const h2 = teamWrapEl.querySelector("h2")
+	if (!(h2 instanceof HTMLHeadingElement))
+		throw new Error(`team-${i} h2 not found`)
+	h2.textContent = team.name || `Team ${i}`
+
+	const nameInput = teamWrapEl.querySelector(`input[name="team-${i}-name"]`)
+	if (!(nameInput instanceof HTMLInputElement))
+		throw new Error(`input team-${i}-name not found`)
+	nameInput.value = team.name
+
+	const pointsInput = teamWrapEl.querySelector(`input[name="team-${i}-points"]`)
+	if (!(pointsInput instanceof HTMLInputElement))
+		throw new Error(`input team-${i}-name not found`)
+	pointsInput.value = team.score.toString()
+}
+
+document.addEventListener("DOMContentLoaded", function () {
 	const openBtn = getElementById("btn_open_win", HTMLButtonElement)
 	const closeBtn = getElementById("btn_close_win", HTMLButtonElement)
 
@@ -103,31 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		openBtn.disabled = false
 		closeBtn.disabled = true
 	}
-	/**
-	 * @param {number} i
-	 * @param {string} newName
-	 */
-	function uiTeamName(i, newName) {
-		// TODO move all popup ui to it's own file. subscribe to same event dispatch
-		// if (!popupWindow || popupWindow.closed) {
-		// 	// TODO add back in for moderator
-		// 	console.log("Popup is not open!")
-		// 	// alert("Popup is not open!")
-		// 	// return
-		// }
-
-		const h2 = document.getElementById(`team-${i}`)?.querySelector("h2")
-		if (!(h2 instanceof HTMLHeadingElement))
-			throw new Error(`team-${i} h2 not found`)
-		h2.textContent = newName || `Team ${i}`
-
-		const input = document
-			.getElementById(`team-${i}`)
-			?.querySelector(`input[name="team-${i}-name"]`)
-		if (!(input instanceof HTMLInputElement))
-			throw new Error(`input team-${i}-name not found`)
-		input.value = newName
-	}
 
 	/** @param {number} points  */
 	function uiPointsDisplay(points) {
@@ -160,7 +172,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		/** @param {CustomEvent<TeamRenamedDetail>} e */
 		(e) => {
 			const { oldName, newName, teamIndex } = e.detail
-			uiTeamName(teamIndex, newName)
+			// TODO make this accept whole team object instead
+			uiTeamUpdate(teamIndex, { name: newName, score: 420 })
 		}
 	)
 
@@ -203,9 +216,19 @@ document.addEventListener("DOMContentLoaded", function () {
 		(e) => {
 			const { state } = e.detail
 			uiUpdateScores(state)
-			// uiPointsDisplay(0)
-			// TODO leave for nextRoundBtn
-			// gameRoundNumInput.value = state.round.toString()
+			console.log("disabled strikes, round steal. turn on winner badge")
+			const { activeTeamIndex, roundSteal, teams } = state
+			if (activeTeamIndex === undefined)
+				throw new Error("activeTeamIndex is undefined")
+
+			const teamStealIndex = (activeTeamIndex + 1) % teams.length
+			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+
+			const winningTeamEl = getElementById(
+				`team-${winningTeamIndex}`,
+				HTMLElement
+			)
+			winningTeamEl.classList.add("winner")
 		}
 	)
 
@@ -278,11 +301,7 @@ function setupGameControls() {
 
 	endRoundBtn.onclick = (e) => {
 		gameStateManager.awardPoints()
-	}
-
-	nextRoundBtn.onclick = (e) => {
-		// TODO how do i get next question & answers?
-		gameStateManager.nextRound([])
+		nextRoundDetailsEl.open = true
 	}
 }
 

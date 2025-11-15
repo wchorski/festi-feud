@@ -1,3 +1,8 @@
+body {
+  max-width: 60em;
+  margin-inline: auto;
+}
+
 @media (prefers-color-scheme: dark) {
 	body,
 	button {
@@ -135,10 +140,10 @@ button.delete {
 	margin: 0;
 	padding: 1rem;
 
-	& :first-child {
+	/* & :first-child {
 		margin-top: 0;
 		text-transform: capitalize;
-	}
+	} */
 
 	& a {
 		text-decoration: none;
@@ -188,6 +193,9 @@ button.delete {
 /* TODO media query that collaps to 1 column. or use grid-template-columns */
 .col-2 {
 	grid-template-columns: 1fr 1fr;
+}
+.col-3 {
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 #sync-state {

@@ -85,8 +85,37 @@ ul#answers {
 	text-align: center;
 }
 
+.winner-badge {
+	opacity: 0.1;
+	/* TODO don't use absolute, make a 2 column layout */
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: rgb(98, 177, 130);
+	color: white;
+	padding: 0.5rem;
+	text-align: center;
+}
+
+.team.winner .winner-badge {
+	opacity: 1;
+}
+
 .round-steal .team:not(.active) .steal-badge {
 	opacity: 1;
+}
+body[data-round-type="face-off"] {
+	#strikes-and-steal,
+	#round-score-wrap {
+    cursor: not-allowed;
+		opacity: 0.1;
+		label, span {
+			cursor: not-allowed;
+		}
+		input {
+			pointer-events: none;
+		}
+	}
 }
 
 .strikes {

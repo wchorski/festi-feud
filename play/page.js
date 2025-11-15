@@ -16,6 +16,7 @@ import {
 	filterAndSortVotes,
 } from "../utils/filterVotes.js"
 import { gameStateManager } from "../utils/gameState.js"
+import { uiInit } from "./ui.js"
 
 //? may remove this wrap cuz i prob don't need it.
 document.addEventListener("DOMContentLoaded", function () {
@@ -35,9 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		if (id) {
 			const question = await dbGetQuestion(id)
 
-			// TODO move any el text setting to ui.js
-			// questionEl.innerText = question.text
-
 			const answerDocsRes = await dbFindAnswersByQuestionId(id)
 			if (!answerDocsRes.docs) throw new Error("no answerDocsRes.docs")
 
@@ -46,17 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				0,
 				8
 			)
-			// const answerEls = gameAnswersFilteredSorted.map((a) =>
-			// 	elGameAnswer(a, true)
-			// )
-
-			// // answersList.replaceChildren(...answerEls)
-			// gameStateManager.set({ answers: gameAnswersFilteredSorted })
 			gameStateManager.load(question, gameAnswersFilteredSorted)
 		} else {
 			//? look for session storage
-			gameStateManager.load()
+			console.log("do i gotta do anything if id is missing?")
+			// gameStateManager.load()
 		}
+
+		document.body.dataset.roundType = gameStateManager.get().roundType
+
+		// TODO could trigger this with event.dispatch from gameStateManager.load()
+		uiInit()
 	}
 
 	async function getOtherQuestions() {
@@ -70,6 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				className: "question",
 				textContent: q.text,
 				href: `/play/index.html?id=${q._id}`,
+			})
+			link.addEventListener("click", (e) => {
+				e.preventDefault()
+				// gameStateManager.set({ round: (gameStateManager.get().round += 1) })
+
+				gameStateManager.setNextRound()
+				// Navigate to next page after gameState up
+				window.location.href = link.href
 			})
 			li.append(link)
 			return li

@@ -12,7 +12,7 @@ const initGameState = {
 	round: 1,
 	points: 0,
 	pointMultiplier: 1,
-	roundType: "feud",
+	roundType: "face-off",
 	roundSteal: false,
 	teams: [
 		{ name: "Team A", score: 0 },
@@ -43,20 +43,17 @@ class GameStateManager {
 		// If instance already exists, return it (Singleton Pattern)
 		if (GameStateManager.instance) return GameStateManager.instance
 		this.storageKey = storageKey
-		const savedState = this.load()
-		const stateToUse = savedState || initialState
+		const localStorageState = this.getStoredData()
+		const stateToUse = localStorageState || initialState
 		// Initialize state with defaults
 		/** @type {GameState} */
 		this.state = {
-			round: stateToUse.round ?? 1,
+			round: stateToUse.round ?? initGameState.round,
 			points: 0,
 			pointMultiplier: 1,
-			roundType: "feud",
+			roundType: stateToUse.roundType ?? initGameState.roundType,
 			roundSteal: false,
-			teams: stateToUse.teams ?? [
-				{ name: "Team A", score: 0 },
-				{ name: "Team B", score: 0 },
-			],
+			teams: stateToUse.teams ?? initGameState.teams,
 			activeTeamIndex: stateToUse.activeTeamIndex,
 			strikes: stateToUse.strikes ?? 0,
 			question: undefined,
@@ -72,34 +69,40 @@ class GameStateManager {
 
 	/**
 	 * Load state from sessionStorage
-	 * @param {Question} [question]
-	 * @param {GameAnswer[]} [answers]
 	 * @returns {Partial<GameState>|null}
 	 */
-	load(question, answers) {
+	getStoredData() {
 		try {
 			const saved = sessionStorage.getItem(this.storageKey)
-			//? return initGameState
 			if (!saved) return null
-
-			/** @type {GameState} */
-			const parsed = JSON.parse(saved)
-
-			// TODO make a shallow `newRoundReset` keeping teams but reseting round values
-			if (question && answers) {
-				parsed.points = 0
-				parsed.activeTeamIndex = undefined
-				parsed.strikes = 0
-				parsed.roundSteal = false
-				parsed.question = question
-				parsed.answers = answers
-			}
-
-			return parsed
+			return JSON.parse(saved)
 		} catch (error) {
 			console.error("Error loading game state:", error)
 			return null
 		}
+	}
+
+	/**
+	 * Load new question and answers into the game state
+	 * @param {Question} question
+	 * @param {GameAnswer[]} answers
+	 */
+	load(question, answers) {
+		// Reset round values but keep teams
+		this.state.points = 0
+		//? must carry over activeTeamIndex from `face-off` to main `feud` round
+		// TODO this could cause problems for games that are restarting a round?
+		if (this.state.roundType === "face-off")
+			this.state.activeTeamIndex = undefined
+		this.state.strikes = 0
+		this.state.roundSteal = false
+		this.state.question = question
+		this.state.answers = answers
+
+		console.log("gamestate.load()")
+		console.log(this.state)
+		// Save to sessionStorage
+		this.save()
 	}
 
 	// TODO i'll need to this.save() on any function that manipulates this.state. or should i funnel all funcs to this.set()?
@@ -190,6 +193,7 @@ class GameStateManager {
 		}
 	}
 
+	// TODO change this to `onTeamUpdate` to catch name and score changes
 	/**
 	 * @param {number} teamIndex
 	 * @param {string} newName
@@ -221,39 +225,32 @@ class GameStateManager {
 	 *  @param {boolean} isGuessed
 	 */
 	setIsGuessed(id, isGuessed) {
-		// TODO i did use to return this.state.points and increment, but this is fool proof for all answers
-		const prevPoints = this.state.points
-		// const newPoints = this.state.answers.find((a) => a.id === id)?.points
-		// if (!newPoints) throw new Error("no newPoints")
 		const updatedAnswer = this.state.answers.find((a) => a.id === id)
 		if (!updatedAnswer) throw new Error("no updatedAnswer")
-		// updatedAnswer.isGuessed = isGuessed
+
 		const updatedAnswers = this.state.answers.map((answer) => {
 			return answer.id === id ? { ...answer, isGuessed } : answer
 		})
 		this.state.answers = updatedAnswers
 
-		const totalPoints = this.state.answers.reduce((accumulator, answer) => {
-			if (answer.isGuessed === true) {
-				return accumulator + answer.points
-			}
-			return accumulator
-		}, 0)
-
-		// TODO. prob should just loop through all this.state.answers and add all points
-		// const currentPoints = isGuessed
-		// 	? prevPoints + newPoints
-		// 	: prevPoints + newPoints * -1
-
-		this.state.points = totalPoints
+		const prevPoints = this.state.points
+		this.state.points = this.totalPoints
 
 		this.save()
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.UPDATE_POINTS, {
-				detail: { prevPoints, currentPoints: totalPoints },
+				detail: { prevPoints, currentPoints: this.state.points },
 			})
 		)
+	}
+
+	get totalPoints() {
+		if (this.state.roundType === "face-off") return 0
+
+		return this.state.answers.reduce((acc, answer) => {
+			return answer.isGuessed ? acc + answer.points : acc
+		}, 0)
 	}
 
 	/** @param {number} num */
@@ -279,6 +276,35 @@ class GameStateManager {
 				detail: { strikes, roundSteal: this.state.roundSteal },
 			})
 		)
+	}
+
+	/** @param {number} [roundOverride]  */
+	setNextRound(roundOverride) {
+		const { round } = this.state
+		const currRound = roundOverride ? roundOverride : round + 1
+		switch (currRound) {
+			case 1:
+			case 3:
+			case 5:
+				this.state.roundType = "face-off"
+				break
+			// TODO is there a cleaner way for cases 2-5?
+			case 2:
+			case 4:
+			case 6:
+				this.state.roundType = "feud"
+				break
+			case 7:
+				this.state.roundType = "fast-money"
+				break
+
+			default:
+				break
+		}
+
+		this.state.round = currRound
+
+		this.save()
 	}
 
 	/** @param {boolean} roundSteal  */
@@ -329,24 +355,37 @@ class GameStateManager {
 	}
 
 	awardPoints() {
-		const { roundSteal, activeTeamIndex, points, pointMultiplier, teams } =
-			this.state
-		if (activeTeamIndex === undefined)
-			throw new Error("activeTeamIndex is undefined")
+		const {
+			roundType,
+			roundSteal,
+			activeTeamIndex,
+			points,
+			pointMultiplier,
+			teams,
+		} = this.state
 
-		const totalPoints = points * pointMultiplier
+		//? do not award points if `face-off` round
+		if (roundType !== "face-off") {
+			if (activeTeamIndex === undefined)
+				throw new Error("activeTeamIndex is undefined")
 
-		const teamStealIndex = (activeTeamIndex + 1) % teams.length
+			const totalPoints = points * pointMultiplier
 
-		const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+			const teamStealIndex = (activeTeamIndex + 1) % teams.length
 
-		this.state.teams = this.state.teams.map((team, index) =>
-			index === winningTeamIndex
-				? { ...team, score: team.score + totalPoints }
-				: team
-		)
+			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+
+			this.state.teams = this.state.teams.map((team, index) =>
+				index === winningTeamIndex
+					? { ...team, score: team.score + totalPoints }
+					: team
+			)
+		}
 
 		this.state.points = 0
+
+		// TODO endRound func? need to check if last round and winner
+		console.log("check round number. set type")
 
 		this.save()
 
@@ -357,27 +396,28 @@ class GameStateManager {
 		)
 	}
 
-	/** @param {GameAnswer[]} answers  */
-	nextRound(answers) {
-		console.log("gameState.nextRound()")
-		const currState = this.get()
+	// TODO i can do this all with .load()
+	// /** @param {GameAnswer[]} answers  */
+	// nextRound(answers) {
+	// 	console.log("gameState.nextRound()")
+	// 	const currState = this.get()
 
-		this.save()
+	// 	this.save()
 
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.NEXT_ROUND, {
-				detail: {
-					state: {
-						...currState,
-						round: currState.round + 1,
-						points: 0,
-						strikes: 0,
-						answers,
-					},
-				},
-			})
-		)
-	}
+	// 	events.dispatchEvent(
+	// 		new CustomEvent(EVENT_TYPES.NEXT_ROUND, {
+	// 			detail: {
+	// 				state: {
+	// 					...currState,
+	// 					round: currState.round + 1,
+	// 					points: 0,
+	// 					strikes: 0,
+	// 					answers,
+	// 				},
+	// 			},
+	// 		})
+	// 	)
+	// }
 
 	/**
 	 * Reset state to initial values
