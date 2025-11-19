@@ -86,7 +86,7 @@ export function uiInit() {
 
 /**
  * @param {number} i
- * @param {Team} team
+ * @param {Partial<Team>} team
  */
 function uiTeamUpdate(i, team) {
 	// TODO move all popup ui to it's own file. subscribe to same event dispatch
@@ -107,12 +107,12 @@ function uiTeamUpdate(i, team) {
 	const nameInput = teamWrapEl.querySelector(`input[name="team-${i}-name"]`)
 	if (!(nameInput instanceof HTMLInputElement))
 		throw new Error(`input team-${i}-name not found`)
-	nameInput.value = team.name
+	if (team.name) nameInput.value = team.name
 
 	const pointsInput = teamWrapEl.querySelector(`input[name="team-${i}-points"]`)
 	if (!(pointsInput instanceof HTMLInputElement))
 		throw new Error(`input team-${i}-name not found`)
-	pointsInput.value = team.score.toString()
+	if (team.score) pointsInput.value = String(team.score)
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		(e) => {
 			const { oldName, newName, teamIndex } = e.detail
 			// TODO make this accept whole team object instead
-			uiTeamUpdate(teamIndex, { name: newName, score: 420 })
+			uiTeamUpdate(teamIndex, { name: newName })
 		}
 	)
 
@@ -341,6 +341,7 @@ function setupGameControls() {
 	}
 	resetGameBtn.onclick = (e) => {
 		gameStateManager.reset()
+		window.location.href = "/"
 	}
 }
 

@@ -166,17 +166,20 @@ class GameStateManager {
 		// TODO a catch all. Don't have to explicited state each object key
 		//! this falls apart
 		for (const [updateKey, updateValue] of Object.entries(updates)) {
-			if (updateValue !== undefined) {
-				//@ts-ignore
-				this.state[updateKey] = updateValue
-				// console.log(
-				// 	"GameState this.state: ",
-				// 	this.state
-				// 	// JSON.stringify(this.state, null, 2)
-				// )
-			} else {
-				console.error(`[${updateKey}] does not exist on GameState`)
-			}
+			// TODO how to check if `updateValue` is an *included* key string in the GameState object?
+			// if (updateValue !== undefined) {
+			//@ts-ignore
+			this.state[updateKey] = updateValue
+			// console.log(
+			// 	"GameState this.state: ",
+			// 	this.state
+			// 	// JSON.stringify(this.state, null, 2)
+			// )
+			// }
+			// TODO does not account for `activeTeamIndex` and `question` which can be set as undefined
+			// else {
+			// 	console.error(`[${updateKey}] cannot be set as undefined on GameState`)
+			// }
 		}
 
 		this.save()

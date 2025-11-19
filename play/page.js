@@ -17,6 +17,7 @@ import {
 } from "../utils/filterVotes.js"
 import { gameStateManager } from "../utils/gameState.js"
 import { uiInit } from "./ui.js"
+const channel = new BroadcastChannel("game-show-buzzer")
 
 //? may remove this wrap cuz i prob don't need it.
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,6 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		"next-round-questions",
 		HTMLUListElement
 	)
+
+	channel.onmessage = (event) => {
+		const { teamIndex, timestamp } = event.data
+		console.log(`Team ${teamIndex} buzzed at ${timestamp}`)
+		// Handle the buzzer press (show which team buzzed first, etc.)
+		// handleBuzzer(team, timestamp)
+	}
 
 	getOtherQuestions()
 	getQuestionAndAnswers()

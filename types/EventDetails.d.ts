@@ -31,3 +31,8 @@ export type RoundEndedDetail = {
 export type RoundPhaseDetail = {
 	roundPhase: GameState["roundPhase"]
 }
+
+export type BuzzerDetail = {
+  disabled: boolean
+  activeTeamIndex: number
+}

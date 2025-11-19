@@ -2,6 +2,8 @@
  * Custom event names for gameStateManager dispatch
  */
 export const EVENT_TYPES = {
+  BUZZER_A_PRESSED: 'buzzer:a_buzzed',
+  BUZZER_B_PRESSED: 'buzzer:b_buzzed',
   STATE_CHANGED: 'game:stateChanged',
   ANSWER_REVEALED: 'game:answerRevealed',
   SET_STRIKES: 'game:setStrikes',

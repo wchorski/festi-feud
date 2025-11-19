@@ -362,7 +362,7 @@ export async function dbVotePerQuestion(data) {
 		// }
 		return {
 			ok: true,
-			code: 420,
+			code: 202,
 			questionRes,
 			answersRes,
 		}

@@ -139,3 +139,18 @@ body[data-round-type="face-off"] {
 #next-round-options[open]{
   border: dashed yellow 1px;
 }
+
+button.buzzer {
+  border-radius: 50%;
+  width: 30rem;
+  height: 30rem;
+  box-shadow: grey 3px 1px 12px;
+  transition-property: all;
+  transition-duration: 100ms;
+}
+
+button.buzzer:active {
+  box-shadow: grey 0px 0px 1px;
+  border-bottom-color: grey;
+  scale: 0.95;
+}

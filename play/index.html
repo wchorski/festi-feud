@@ -8,8 +8,10 @@
 		<link rel="stylesheet" href="./style.css" />
 		<script src="./page.js" type="module" defer></script>
 		<script src="./ui.js" type="module" defer></script>
-		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script> -->
+		<script src="/modules/pouchdb.min.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.find.min.js"></script> -->
+		<script src="/modules/pouchdb.find.min.js"></script>
 		<!-- <script src="/play.js" type="module" defer></script> -->
 	</head>
 	<body class="grid gap-m" data-round-type="face-off" data-round-phase="end">
@@ -59,7 +61,7 @@
 				<h2>
 					round:
 					<span id="game-round">NO_ROUND</span>
-          <!-- TODO game logic too complicated rn, will add control back later -->
+					<!-- TODO game logic too complicated rn, will add control back later -->
 					<!-- <input
 						class="round"
 						name="round"
@@ -76,6 +78,7 @@
 				<div id="team-0" class="team a">
 					<!-- TODO hide h2 and styel input -->
 					<h2>Team A</h2>
+					<p><a href="/buzzer/index.html?teamIndex=0" target="_blank">buzzer</a></p>
 					<input
 						type="text"
 						id="team-0-name"
@@ -109,6 +112,7 @@
 				</div>
 				<div id="team-1" class="team b">
 					<h2>Team B</h2>
+					<p><a href="/buzzer/index.html?teamIndex=1" target="_blank">buzzer</a></p>
 					<input
 						id="team-1-name"
 						name="team-1-name"
