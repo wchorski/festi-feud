@@ -42,8 +42,8 @@ ul#answers {
 	padding: 0;
 
 	& > li {
-		border: solid white 1px;
-		background-color: slategrey;
+		border: solid rgb(107, 107, 107) 1px;
+		background-color: rgb(46, 53, 59);
 		padding: 0.2rem;
 		text-align: center;
 	}

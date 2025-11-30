@@ -122,5 +122,88 @@ table {
 } */
 
 #question {
-  text-align: center;
+	text-align: center;
+	border: double lightblue 3px;
+	background-color: rgba(173, 216, 230, 0.152);
+	padding: 1rem;
+}
+
+ul#answers > li {
+	min-height: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+article.answer {
+	width: 100%;
+	padding: 0.3rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+
+	& > .points {
+		border: solid white 2px;
+		border-radius: 8px;
+		background-color: rgb(62, 69, 76);
+		padding: 1rem;
+	}
+}
+
+.teams {
+	& > div {
+		padding: 0;
+    margin-inline: auto;
+    width: clamp(11rem, 18rem, 100%);
+	}
+}
+.team {
+	padding: 0;
+	background: #040154;
+	background: linear-gradient(
+		65deg,
+		rgba(4, 1, 84, 1) 0%,
+		rgb(14, 14, 80) 66%,
+		rgb(13, 39, 79) 100%
+	);
+
+	& > h2 {
+		border: double rgb(86, 86, 209) 1px;
+		background-color: rgb(0, 0, 202);
+		margin: 0;
+		padding: 0.5rem;
+	}
+
+	& > .points {
+		display: inline-block;
+		width: 100%;
+		padding: 2rem;
+		/* background-color: darkblue; */
+	}
+}
+.steal-badge,
+.winner-badge {
+	opacity: 0;
+}
+#strikes {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+}
+
+svg.strike[data-disabled="true"] {
+	filter: drop-shadow(0 0 1px rgba(131, 131, 131, 0.334));
+
+	& rect,
+	& path {
+		stroke: rgb(39, 39, 39);
+	}
+}
+svg.strike[data-disabled="false"] {
+	filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.797));
+
+	& rect,
+	& path {
+		stroke: red;
+	}
 }
