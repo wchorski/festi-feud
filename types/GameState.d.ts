@@ -8,6 +8,7 @@ export type GameState = {
 	roundPhase: "ingame" | "end"
 	roundSteal: boolean
 	teams: Team[]
+  isBuzzersActive: boolean
 	activeTeamIndex: number | undefined
 	strikes: number
 	question: Question | undefined

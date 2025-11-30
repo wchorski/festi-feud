@@ -20,6 +20,7 @@ export interface StrikesSetEvent extends CustomEvent<StrikesSetDetail> {
 export type ActiveTeamDetail = {
 	nextTeamIndex: number
 	prevTeamIndex: number
+  isBuzzersActive: boolean
 }
 export type SetPointsDetail = {
 	prevPoints: number

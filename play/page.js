@@ -30,10 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	channel.onmessage = (event) => {
 		const { teamIndex, timestamp } = event.data
-		console.log(`Team ${teamIndex} buzzed at ${timestamp}`)
+		// console.log(`Team ${teamIndex} buzzed at ${timestamp}`)
+		gameStateManager.buzzIn(Number(teamIndex))
 		// Handle the buzzer press (show which team buzzed first, etc.)
 		// handleBuzzer(team, timestamp)
 	}
+
+	document.addEventListener("keydown", (event) => {
+		const { key, code } = event
+		// console.log({ key })
+		if (["0", "1"].includes(key)) {
+			gameStateManager.buzzIn(Number(key))
+		}
+	})
 
 	getOtherQuestions()
 	getQuestionAndAnswers()

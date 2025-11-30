@@ -45,6 +45,7 @@ const scoreMultiEl = getElementById("score-multiplier", HTMLElement)
 const gameRoundEl = getElementById("game-round", HTMLSpanElement)
 const roundPhaseEl = getElementById("round-phase", HTMLSpanElement)
 const roundTypeEl = getElementById("round-type", HTMLElement)
+const buzzersActiveEl = getElementById("buzzers-active", HTMLElement)
 // const gameRoundInput = querySelector('input[name="round"', HTMLInputElement)
 
 export function uiInit() {
@@ -56,6 +57,7 @@ export function uiInit() {
 		question,
 		round,
 		roundSteal,
+		isBuzzersActive,
 		roundPhase,
 		roundType,
 		strikes,
@@ -76,6 +78,8 @@ export function uiInit() {
 	roundTypeEl.textContent = roundType
 	document.body.dataset.roundType = roundType
 	gameRoundEl.textContent = String(round)
+	buzzersActiveEl.textContent = String(isBuzzersActive)
+	buzzersActiveEl.className = String(isBuzzersActive)
 	roundPhaseEl.textContent = roundPhase
 	document.body.dataset.roundPhase = roundPhase
 	// state.strikes
@@ -266,6 +270,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	)
 
+	const onActiveTeamId = /** @type {EventListener} */ (
+		/** @param {CustomEvent<ActiveTeamDetail>} e */
+		(e) => {
+			const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = e.detail
+			buzzersActiveEl.className = String(isBuzzersActive)
+			buzzersActiveEl.textContent = String(isBuzzersActive)
+			// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
+		}
+	)
+
 	// listeners
 	openBtn.addEventListener("pointerup", openPopup)
 	closeBtn.addEventListener("pointerup", closePopup)
@@ -277,6 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
 	events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
 	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
+	events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
 
 	setupTeamControls()
 	setupGameControls()

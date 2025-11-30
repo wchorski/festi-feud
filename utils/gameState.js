@@ -18,6 +18,7 @@ const initGameState = {
 		{ name: "Team A", score: 0 },
 		{ name: "Team B", score: 0 },
 	],
+	isBuzzersActive: true,
 	activeTeamIndex: undefined,
 	strikes: 0,
 	question: undefined,
@@ -55,6 +56,8 @@ class GameStateManager {
 			roundPhase: stateToUse.roundPhase ?? initGameState.roundPhase,
 			roundSteal: false,
 			teams: stateToUse.teams ?? initGameState.teams,
+			isBuzzersActive:
+				stateToUse.isBuzzersActive ?? initGameState.isBuzzersActive,
 			activeTeamIndex: stateToUse.activeTeamIndex,
 			strikes: stateToUse.strikes ?? 0,
 			question: undefined,
@@ -95,6 +98,7 @@ class GameStateManager {
 		// TODO this could cause problems for games that are restarting a round?
 		if (this.state.roundType === "face-off")
 			this.state.activeTeamIndex = undefined
+		this.state.isBuzzersActive = true
 		this.state.roundPhase = "ingame"
 		this.state.strikes = 0
 		this.state.roundSteal = false
@@ -133,6 +137,7 @@ class GameStateManager {
 			roundPhase,
 			roundSteal,
 			teams,
+			isBuzzersActive,
 			activeTeamIndex,
 			strikes,
 			answers,
@@ -148,6 +153,7 @@ class GameStateManager {
 			roundSteal,
 			// TODO do i need to map or spread? Is copying important?
 			teams: teams.map((team) => ({ ...team })),
+			isBuzzersActive,
 			activeTeamIndex,
 			strikes,
 			question,
@@ -376,6 +382,7 @@ class GameStateManager {
 		}
 
 		this.state.round = currRound
+		this.state.isBuzzersActive = true
 
 		this.save()
 	}
@@ -394,8 +401,33 @@ class GameStateManager {
 	}
 
 	/**. @param {number|undefined} teamIndex  */
-	setActiveTeam(teamIndex) {
+	buzzIn(teamIndex) {
+		const { isBuzzersActive } = this.get()
+		// TODO show toast notification
+		if (this.state.activeTeamIndex !== undefined)
+			return console.log("activeTeamIndex is undefined")
+		if (!isBuzzersActive) return console.log("isBuzzersActive is false")
 		const { activeTeamIndex: prevIndex } = this.state
+
+		this.state.activeTeamIndex = teamIndex
+		this.state.isBuzzersActive = false
+
+		this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
+				detail: {
+					nextTeamIndex: teamIndex,
+					prevTeamIndex: prevIndex,
+					isBuzzersActive: false,
+				},
+			})
+		)
+	}
+
+	/**. @param {number|undefined} teamIndex  */
+	setActiveTeam(teamIndex) {
+		const { activeTeamIndex: prevIndex, isBuzzersActive } = this.state
 
 		this.state.activeTeamIndex = teamIndex
 
@@ -403,7 +435,11 @@ class GameStateManager {
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
-				detail: { nextTeamIndex: teamIndex, prevTeamIndex: prevIndex },
+				detail: {
+					nextTeamIndex: teamIndex,
+					prevTeamIndex: prevIndex,
+					isBuzzersActive,
+				},
 			})
 		)
 	}

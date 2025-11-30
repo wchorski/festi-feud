@@ -3,6 +3,17 @@ body {
 	margin-inline: auto;
 }
 
+#buzzers-active{
+  padding-inline: 4px;
+
+  &.true {
+    background-color: green;
+  }
+  &.false {
+    background-color: grey;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
 	body,
 	button {
@@ -35,6 +46,9 @@ body {
 
 	a:link {
 		color: orange;
+	}
+	a:visited  {
+		color: rgb(180, 117, 0);
 	}
 
 	.sub-text {

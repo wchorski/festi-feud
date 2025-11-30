@@ -58,27 +58,35 @@
 					</label> -->
 				</div>
 
-				<h2>
-					round:
-					<span id="game-round">NO_ROUND</span>
-					<!-- TODO game logic too complicated rn, will add control back later -->
-					<!-- <input
-						class="round"
-						name="round"
-						type="number"
-						value="0"
-						pattern="[0-9]+"
-						min="0"
-						max="999"
-					/> -->
-				</h2>
+				<div>
+					<h2>
+						round:
+						<span id="game-round">NO_ROUND</span>
+						<!-- TODO game logic too complicated rn, will add control back later -->
+						<!-- <input
+              class="round"
+              name="round"
+              type="number"
+              value="0"
+              pattern="[0-9]+"
+              min="0"
+              max="999"
+            /> -->
+					</h2>
+					<div>
+						<span>isBuzzersActive: </span>
+						<span id="buzzers-active">undefined</span>
+					</div>
+				</div>
 			</div>
 
 			<div id="teams-wrapper" class="teams grid col-2">
 				<div id="team-0" class="team a">
 					<!-- TODO hide h2 and styel input -->
 					<h2>Team A</h2>
-					<p><a href="/buzzer/index.html?teamIndex=0" target="_blank">buzzer</a></p>
+					<p>
+						<a href="/buzzer/index.html?teamIndex=0" target="_blank">buzzer</a>
+					</p>
 					<input
 						type="text"
 						id="team-0-name"
@@ -112,7 +120,9 @@
 				</div>
 				<div id="team-1" class="team b">
 					<h2>Team B</h2>
-					<p><a href="/buzzer/index.html?teamIndex=1" target="_blank">buzzer</a></p>
+					<p>
+						<a href="/buzzer/index.html?teamIndex=1" target="_blank">buzzer</a>
+					</p>
 					<input
 						id="team-1-name"
 						name="team-1-name"
