@@ -18,7 +18,7 @@ const initGameState = {
 		{ name: "Team A", score: 0 },
 		{ name: "Team B", score: 0 },
 	],
-	isBuzzersActive: true,
+	isBuzzersActive: false,
 	activeTeamIndex: undefined,
 	strikes: 0,
 	question: undefined,
@@ -96,9 +96,10 @@ class GameStateManager {
 		this.state.points = 0
 		//? must carry over activeTeamIndex from `face-off` to main `feud` round
 		// TODO this could cause problems for games that are restarting a round?
-		if (this.state.roundType === "face-off")
+		if (this.state.roundType === "face-off") {
 			this.state.activeTeamIndex = undefined
-		this.state.isBuzzersActive = true
+			this.state.isBuzzersActive = true
+		}
 		this.state.roundPhase = "ingame"
 		this.state.strikes = 0
 		this.state.roundSteal = false
@@ -167,7 +168,7 @@ class GameStateManager {
 	 * @param {string} [eventType]
 	 */
 	set(updates, eventType = EVENT_TYPES.STATE_CHANGED) {
-		const previousState = this.get()
+		const previousState = this.state
 
 		// TODO a catch all. Don't have to explicited state each object key
 		//! this falls apart
@@ -219,12 +220,30 @@ class GameStateManager {
 		this.setRoundPhase("end")
 		this.awardPoints()
 
+		if (this.state.round === 6) this.endGame()
+
 		// other funcs save the data
-		// this.save()
+		this.save()
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.END_ROUND, {
-				detail: { state: this.get() },
+				detail: { state: this.state },
+			})
+		)
+	}
+
+	endGame() {
+		const { teams } = this.state
+		this.state.roundType = "conclusion"
+		this.state.roundPhase = "conclusion"
+
+		teams.sort((a, b) => b.score - a.score)
+
+    this.save()
+
+		events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.GAME_WINNER, {
+				detail: { state: this.state, highestScoringTeam: teams[0] },
 			})
 		)
 	}
@@ -327,6 +346,7 @@ class GameStateManager {
 			case 3:
 			case 5:
 				this.state.roundType = "face-off"
+				this.state.isBuzzersActive = true
 				break
 			// TODO is there a cleaner way for cases 2-5?
 			case 2:
@@ -335,14 +355,17 @@ class GameStateManager {
 				this.state.roundType = "feud"
 				break
 			case 7:
-				this.state.roundType = "fast-money"
-				break
-			case 8:
-				this.state.roundType = "fast-money"
-				break
-			case 9:
 				this.state.roundType = "conclusion"
 				break
+			// case 7:
+			// 	this.state.roundType = "fast-money"
+			// 	break
+			// case 8:
+			// 	this.state.roundType = "fast-money"
+			// 	break
+			// case 9:
+			// 	this.state.roundType = "conclusion"
+			// 	break
 
 			default:
 				break
@@ -368,23 +391,28 @@ class GameStateManager {
 				this.state.pointMultiplier = 3
 				break
 			case 7:
-				this.state.pointMultiplier = 1
-				break
-			case 7:
-				this.state.pointMultiplier = 1
-				break
-			case 8:
 				this.state.pointMultiplier = 0
 				break
+			// case 8:
+			// 	this.state.pointMultiplier = 1
+			// 	break
+			// case 9:
+			// 	this.state.pointMultiplier = 0
+			// 	break
 
 			default:
 				break
 		}
 
 		this.state.round = currRound
-		this.state.isBuzzersActive = true
 
 		this.save()
+
+    events.dispatchEvent(
+			new CustomEvent(EVENT_TYPES.ROUNDSTEAL_SET, {
+				detail: { roundSteal: this.state.roundSteal },
+			})
+		)
 	}
 
 	/** @param {boolean} roundSteal  */
@@ -402,10 +430,10 @@ class GameStateManager {
 
 	/**. @param {number|undefined} teamIndex  */
 	buzzIn(teamIndex) {
-		const { isBuzzersActive } = this.get()
+		const { isBuzzersActive, activeTeamIndex } = this.state
 		// TODO show toast notification
-		if (this.state.activeTeamIndex !== undefined)
-			return console.log("activeTeamIndex is undefined")
+		if (activeTeamIndex !== undefined)
+			return console.log(`activeTeamIndex is set to ${activeTeamIndex}`)
 		if (!isBuzzersActive) return console.log("isBuzzersActive is false")
 		const { activeTeamIndex: prevIndex } = this.state
 
@@ -518,7 +546,7 @@ class GameStateManager {
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.AWARD_POINTS, {
-				detail: { state: this.get() },
+				detail: { state: this.state },
 			})
 		)
 	}

@@ -53,12 +53,14 @@ ul#answers {
   outline: dashed yellow 2px;
 } */
 
-body[data-round-phase="ingame"] .answer:has(input[type="checkbox"].points:checked) {
-  outline: dashed yellow 2px;
+body[data-round-phase="ingame"]
+	.answer:has(input[type="checkbox"].points:checked) {
+	outline: dashed yellow 2px;
 }
 
-body[data-round-phase="end"] .answer:has(input[type="checkbox"].points:checked) {
-  outline: double rgb(160, 189, 243) 4px;
+body[data-round-phase="end"]
+	.answer:has(input[type="checkbox"].points:checked) {
+	outline: double rgb(160, 189, 243) 4px;
 }
 
 .teams {
@@ -112,12 +114,24 @@ body[data-round-phase="end"] .answer:has(input[type="checkbox"].points:checked) 
 .round-steal .team:not(.active) .steal-badge {
 	opacity: 1;
 }
+
+h2:has(#game-winner-name:not(:empty)) {
+	border: double lightblue 6px;
+}
+h2:has(#game-winner-name:empty) {
+  display: none;
+}
+
+body[data-round-type="conclusion"] {
+	border: double lightblue 6px;
+}
 body[data-round-type="face-off"] {
 	#strikes-and-steal,
 	#round-score-wrap {
-    cursor: not-allowed;
+		cursor: not-allowed;
 		opacity: 0.1;
-		label, span {
+		label,
+		span {
 			cursor: not-allowed;
 		}
 		input {
@@ -136,21 +150,21 @@ body[data-round-type="face-off"] {
 	}
 }
 
-#next-round-options[open]{
-  border: dashed yellow 1px;
+#next-round-options[open] {
+	border: dashed yellow 1px;
 }
 
 button.buzzer {
-  border-radius: 50%;
-  width: 30rem;
-  height: 30rem;
-  box-shadow: grey 3px 1px 12px;
-  transition-property: all;
-  transition-duration: 100ms;
+	border-radius: 50%;
+	width: 30rem;
+	height: 30rem;
+	box-shadow: grey 3px 1px 12px;
+	transition-property: all;
+	transition-duration: 100ms;
 }
 
 button.buzzer:active {
-  box-shadow: grey 0px 0px 1px;
-  border-bottom-color: grey;
-  scale: 0.95;
+	box-shadow: grey 0px 0px 1px;
+	border-bottom-color: grey;
+	scale: 0.95;
 }

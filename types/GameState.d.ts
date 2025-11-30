@@ -5,10 +5,10 @@ export type GameState = {
 	points: number
 	pointMultiplier: number
 	roundType: "face-off" | "feud" | "fast-money" | "conclusion"
-	roundPhase: "ingame" | "end"
+	roundPhase: "ingame" | "end" | "conclusion"
 	roundSteal: boolean
 	teams: Team[]
-  isBuzzersActive: boolean
+	isBuzzersActive: boolean
 	activeTeamIndex: number | undefined
 	strikes: number
 	question: Question | undefined

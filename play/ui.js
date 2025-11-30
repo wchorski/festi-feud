@@ -5,6 +5,7 @@
  * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
  * @typedef {import("types/EventDetails").RoundEndedDetail} RoundEndedDetail
  * @typedef {import("types/EventDetails").RoundPhaseDetail} RoundPhaseDetail
+ * @typedef {import("types/EventDetails").GameWinnerDetail} GameWinnerDetail
  * @typedef {import("types/GameState.js").GameState} GameState
  * @typedef {import("types/GameState.js").Team} Team
  */
@@ -46,6 +47,7 @@ const gameRoundEl = getElementById("game-round", HTMLSpanElement)
 const roundPhaseEl = getElementById("round-phase", HTMLSpanElement)
 const roundTypeEl = getElementById("round-type", HTMLElement)
 const buzzersActiveEl = getElementById("buzzers-active", HTMLElement)
+const gameWinnerNameEl = getElementById("game-winner-name", HTMLElement)
 // const gameRoundInput = querySelector('input[name="round"', HTMLInputElement)
 
 export function uiInit() {
@@ -69,8 +71,8 @@ export function uiInit() {
 	if (activeTeamIndex === 1) team1ActiveCheckbox.checked = true
 	const answerEls = answers.map((a) => elGameAnswer(a, true))
 	answersList.replaceChildren(...answerEls)
-	scoreMultiEl.textContent = "x" + pointMultiplier.toString()
-	roundScoreEl.textContent = points.toString()
+	scoreMultiEl.textContent = "x" + String(pointMultiplier)
+	roundScoreEl.textContent = String(points)
 	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
 	// gameRoundInput.value = String(round)
 	gameRoundEl.textContent = String(round)
@@ -82,6 +84,11 @@ export function uiInit() {
 	buzzersActiveEl.className = String(isBuzzersActive)
 	roundPhaseEl.textContent = roundPhase
 	document.body.dataset.roundPhase = roundPhase
+	if (roundType === "conclusion") {
+		gameWinnerNameEl.textContent = teams.sort(
+			(a, b) => b.score - a.score
+		)[0].name
+	}
 	// state.strikes
 	teams.forEach((team, i) => {
 		uiTeamUpdate(i, team)
@@ -250,13 +257,26 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	)
 
-	const onRoundNext = /** @type {EventListener} */ (
+	// const onRoundNext = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<RoundEndedDetail>} e */
+	// 	(e) => {
+	// 		//
+	// 		const { state } = e.detail
+	// 		console.log("onRoundNext")
+	// 		// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
+	// 	}
+	// )
+	const onRoundEnd = /** @type {EventListener} */ (
 		/** @param {CustomEvent<RoundEndedDetail>} e */
 		(e) => {
-			//
+			// TODO do i really need to send whole state in this event?
 			const { state } = e.detail
 			console.log("onRoundNext")
-			// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
+			document.body.dataset.roundType = state.roundType
+			document.body.dataset.roundPhase = state.roundPhase
+			if (!(state.roundType === "conclusion")) {
+				nextRoundDetailsEl.open = true
+			}
 		}
 	)
 
@@ -266,7 +286,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			//
 			const { roundPhase } = e.detail
 			document.body.dataset.roundPhase = roundPhase
-			// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
 		}
 	)
 
@@ -276,7 +295,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = e.detail
 			buzzersActiveEl.className = String(isBuzzersActive)
 			buzzersActiveEl.textContent = String(isBuzzersActive)
-			// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
+		}
+	)
+
+	const onGameWinner = /** @type {EventListener} */ (
+		/** @param {CustomEvent<GameWinnerDetail>} e */
+		(e) => {
+			const { state, highestScoringTeam } = e.detail
+			document.body.dataset.roundPhase = state.roundPhase
+			document.body.dataset.roundType = state.roundType
+			gameWinnerNameEl.textContent = highestScoringTeam.name
 		}
 	)
 
@@ -289,9 +317,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
 	events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
 	events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
-	events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
+	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
+	events.addEventListener(EVENT_TYPES.END_ROUND, onRoundEnd)
 	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
 	events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
+	events.addEventListener(EVENT_TYPES.GAME_WINNER, onGameWinner)
 
 	setupTeamControls()
 	setupGameControls()
@@ -352,7 +382,6 @@ function setupGameControls() {
 	endRoundBtn.onclick = (e) => {
 		// gameStateManager.awardPoints()
 		gameStateManager.endRound()
-		nextRoundDetailsEl.open = true
 	}
 	resetGameBtn.onclick = (e) => {
 		gameStateManager.reset()

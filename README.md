@@ -98,6 +98,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
   - [ ] unhide strike and points
   - [ ] set active player
 - [ ] should i give `round` 1-5 a `roundPhase` (Face-Off, Main Round, Steal, Round End)? or just increment 1-7? making each 'phase' a round number?
+- [ ] fix answer points and scoring (uneven voters means each round has variation in total points. Either make each of the 8 fixed point or weight each answer's points against a percentage)
 
 ## Existing Repos
 

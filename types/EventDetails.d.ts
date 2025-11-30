@@ -1,4 +1,4 @@
-import { GameState } from "./GameState"
+import { GameState, Team } from "./GameState"
 
 export type TeamRenamedDetail = {
 	teamIndex: number
@@ -36,4 +36,8 @@ export type RoundPhaseDetail = {
 export type BuzzerDetail = {
   disabled: boolean
   activeTeamIndex: number
+}
+export type GameWinnerDetail = {
+  state: GameState
+  highestScoringTeam: Team
 }

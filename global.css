@@ -50,10 +50,19 @@ body {
 	a:visited  {
 		color: rgb(180, 117, 0);
 	}
+	a:active  {
+		color: rgb(81, 124, 123);
+	}
 
 	.sub-text {
 		color: rgb(139, 139, 139);
 	}
+}
+
+a{
+  transition-property: color, filter;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
 }
 
 a:hover {

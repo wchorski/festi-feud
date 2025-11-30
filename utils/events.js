@@ -15,7 +15,8 @@ export const EVENT_TYPES = {
   NEXT_ROUND: 'game:nextRound',
   UPDATE_POINTS: 'game:updatePoints',
   SET_ROUNDPHASE: 'game:setRoundPhase',
-  END_ROUND: 'game:endRound'
+  END_ROUND: 'game:endRound',
+  GAME_WINNER: 'game:winner'
 };
 
 export const events = new EventTarget();
