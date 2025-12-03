@@ -20,11 +20,13 @@ export interface StrikesSetEvent extends CustomEvent<StrikesSetDetail> {
 export type ActiveTeamDetail = {
 	nextTeamIndex: number
 	prevTeamIndex: number
-  isBuzzersActive: boolean
+	isBuzzersActive: boolean
 }
 export type SetPointsDetail = {
 	prevPoints: number
 	currentPoints: number
+	roundPhase: GameState["roundPhase"]
+	updatedAnswer: GameAnswer
 }
 export type RoundEndedDetail = {
 	state: GameState
@@ -34,10 +36,10 @@ export type RoundPhaseDetail = {
 }
 
 export type BuzzerDetail = {
-  disabled: boolean
-  activeTeamIndex: number
+	disabled: boolean
+	activeTeamIndex: number
 }
 export type GameWinnerDetail = {
-  state: GameState
-  highestScoringTeam: Team
+	state: GameState
+	highestScoringTeam: Team
 }

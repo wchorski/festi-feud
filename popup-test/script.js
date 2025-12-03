@@ -1,6 +1,6 @@
 // IIFE to avoid global scope pollution and prevent "Cannot redeclare" errors
 
-import { getElementById } from "../ui.js"
+import { getElementById } from "../components.js"
 
 //? may remove this wrap cuz i prob don't need it.
 ;(function () {

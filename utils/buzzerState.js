@@ -2,10 +2,10 @@
  * @typedef {import("types/EventDetails.js").BuzzerDetail} BuzzerDetail
  * @typedef {import("types/GameState.js").GameState} GameState
  */
-import { getElementById, querySelector } from "../ui.js"
+import { getElementById, querySelector } from "../components.js"
+import { buzzerChannel } from "./events.js"
 // import { EVENT_TYPES, events } from "../utils/events.js"
 const buzzerBtn = getElementById("buzzer", HTMLButtonElement)
-const channel = new BroadcastChannel("game-show-buzzer")
 
 document.addEventListener("DOMContentLoaded", function () {
 	// const onBuzzerRX = /** @type {EventListener} */ (
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	if (teamIndex) {
 		spanEl.textContent = teamIndex
 		buzzerBtn.addEventListener("pointerdown", () => {
-			channel.postMessage({
+			buzzerChannel.postMessage({
 				teamIndex: Number(teamIndex),
 				timestamp: Date.now(),
 			})

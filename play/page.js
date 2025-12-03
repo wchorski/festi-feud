@@ -3,21 +3,19 @@
  * @typedef {import("types/Answer.js").Answer} Answer
  */
 
-import { events } from "../events.js"
-import { EVENT_TYPES } from "../utils/events.js"
+import { buzzerChannel, EVENT_TYPES } from "../utils/events.js"
 import {
 	dbFindAnswersByQuestionId,
 	dbGetQuestion,
 	getAllQuestionDocs,
 } from "../db.js"
-import { elGameAnswer, getElementById } from "../ui.js"
+import { elGameAnswer, getElementById } from "../components.js"
 import {
 	convertAnswersToGame,
 	filterAndSortVotes,
 } from "../utils/filterVotes.js"
 import { gameStateManager } from "../utils/gameState.js"
 import { uiInit } from "./ui.js"
-const channel = new BroadcastChannel("game-show-buzzer")
 
 //? may remove this wrap cuz i prob don't need it.
 document.addEventListener("DOMContentLoaded", function () {
@@ -28,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		HTMLUListElement
 	)
 
-	channel.onmessage = (event) => {
+	buzzerChannel.onmessage = (event) => {
 		const { teamIndex, timestamp } = event.data
 		// console.log(`Team ${teamIndex} buzzed at ${timestamp}`)
 		gameStateManager.buzzIn(Number(teamIndex))

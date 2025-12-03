@@ -3,8 +3,12 @@
  * @typedef {import('types/GameState.js').Team} Team
  * @typedef {import('types/GameState.js').GameAnswer} GameAnswer
  * @typedef {import("types/Question.js").Question} Question
+ * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
+ * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS} BC_UPDATE_POINTS
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
+ * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES} BC_SET_STRIKES
  */
-import { events, EVENT_TYPES } from "./events.js"
+import { events, EVENT_TYPES, gameChannel, CHANNEL_TYPES } from "./events.js"
 
 /** @type {GameState} */
 const initGameState = {
@@ -72,12 +76,12 @@ class GameStateManager {
 	}
 
 	/**
-	 * Load state from sessionStorage
+	 * Load state from localStorage
 	 * @returns {Partial<GameState>|null}
 	 */
 	getStoredData() {
 		try {
-			const saved = sessionStorage.getItem(this.storageKey)
+			const saved = localStorage.getItem(this.storageKey)
 			if (!saved) return null
 			return JSON.parse(saved)
 		} catch (error) {
@@ -106,20 +110,20 @@ class GameStateManager {
 		this.state.question = question
 		this.state.answers = answers
 
-		// Save to sessionStorage
+		// Save to localStorage
 		this.save()
 	}
 
 	// TODO i'll need to this.save() on any function that manipulates this.state. or should i funnel all funcs to this.set()?
 	/**
-	 * Save state to sessionStorage
+	 * Save state to localStorage
 	 */
 	save() {
 		try {
 			// Convert Set to Array for JSON serialization
 			const stateToSave = this.state
 
-			sessionStorage.setItem(this.storageKey, JSON.stringify(stateToSave))
+			localStorage.setItem(this.storageKey, JSON.stringify(stateToSave))
 		} catch (error) {
 			console.error("Error saving game state:", error)
 		}
@@ -239,7 +243,7 @@ class GameStateManager {
 
 		teams.sort((a, b) => b.score - a.score)
 
-    this.save()
+		this.save()
 
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.GAME_WINNER, {
@@ -280,12 +284,12 @@ class GameStateManager {
 	 *  @param {boolean} isGuessed
 	 */
 	setIsGuessed(id, isGuessed) {
-		const prevPoints = this.state.points
+		const { points: prevPoints, answers, roundPhase } = this.state
 
-		const updatedAnswer = this.state.answers.find((a) => a.id === id)
+		const updatedAnswer = answers.find((a) => a.id === id)
 		if (!updatedAnswer) throw new Error("no updatedAnswer")
 
-		const updatedAnswers = this.state.answers.map((answer) => {
+		const updatedAnswers = answers.map((answer) => {
 			return answer.id === id ? { ...answer, isGuessed } : answer
 		})
 		this.state.answers = updatedAnswers
@@ -294,11 +298,29 @@ class GameStateManager {
 
 		this.save()
 
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.UPDATE_POINTS, {
-				detail: { prevPoints, currentPoints: this.state.points },
+		gameChannel.postMessage(
+			/** @type {BC_UPDATE_POINTS} */ ({
+				type: CHANNEL_TYPES.UPDATE_POINTS,
+				detail: {
+					prevPoints,
+					currentPoints: this.state.points,
+					roundPhase,
+					updatedAnswer: { id, isGuessed },
+				},
 			})
 		)
+		// events.dispatchEvent(
+		// 	/** @type {CustomEvent<SetPointsDetail>} */ (
+		// 		new CustomEvent(EVENT_TYPES.UPDATE_POINTS, {
+		// 			detail: {
+		// 				prevPoints,
+		// 				currentPoints: this.state.points,
+		// 				roundPhase,
+		// 				updatedAnswer: { id, isGuessed },
+		// 			},
+		// 		})
+		// 	)
+		// )
 	}
 
 	get totalPoints() {
@@ -322,19 +344,23 @@ class GameStateManager {
 		// this.set({ strikes }, EVENT_TYPES.STRIKES_SET)
 		this.state.strikes = strikes
 
-		if (strikes === 3) {
-			// TODO instead of setting active team use `roundSteal = true`
-			// this.nextActiveTeam()
-			this.state.roundSteal = true
-		}
+		strikes === 3
+			? (this.state.roundSteal = true)
+			: (this.state.roundSteal = false)
 
 		this.save()
 
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.SET_STRIKES, {
+		gameChannel.postMessage(
+			/** @type {BC_SET_STRIKES} */ ({
+				type: CHANNEL_TYPES.SET_STRIKES,
 				detail: { strikes, roundSteal: this.state.roundSteal },
 			})
 		)
+		// events.dispatchEvent(
+		// 	new CustomEvent(EVENT_TYPES.SET_STRIKES, {
+		// 		detail: { strikes, roundSteal: this.state.roundSteal },
+		// 	})
+		// )
 	}
 
 	/** @param {number} [roundOverride]  */
@@ -408,7 +434,7 @@ class GameStateManager {
 
 		this.save()
 
-    events.dispatchEvent(
+		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.ROUNDSTEAL_SET, {
 				detail: { roundSteal: this.state.roundSteal },
 			})
@@ -502,11 +528,21 @@ class GameStateManager {
 
 		this.save()
 
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.TEAM_UPDATE, {
-				detail: { index, teamUpdate },
+		gameChannel.postMessage(
+			/** @type {BC_TEAM_UPDATE} */ ({
+				type: CHANNEL_TYPES.TEAM_UPDATE,
+				detail: {
+					index,
+					teamUpdate,
+				},
 			})
 		)
+
+		// events.dispatchEvent(
+		// 	new CustomEvent(EVENT_TYPES.TEAM_UPDATE, {
+		// 		detail: { index, teamUpdate },
+		// 	})
+		// )
 	}
 
 	awardPoints() {
@@ -553,7 +589,7 @@ class GameStateManager {
 
 	/** Reset state for a whole new game */
 	reset() {
-		sessionStorage.removeItem(this.storageKey)
+		localStorage.removeItem(this.storageKey)
 		this.set(initGameState, EVENT_TYPES.STATE_CHANGED)
 	}
 

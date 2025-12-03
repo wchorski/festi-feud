@@ -9,7 +9,7 @@
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
 
-import { createTextEl, renderAllTextEls } from "../ui.js"
+import { createTextEl, renderAllTextEls } from "../components.js"
 import {
 	dbCreateQuestion,
 	dbDeleteQuestion,

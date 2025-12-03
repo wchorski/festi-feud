@@ -9,7 +9,7 @@
  * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
  */
-import { elAnswerVoteInput } from "../ui.js"
+import { elAnswerVoteInput } from "../components.js"
 import {
 	dbCreateAnswer,
 	dbDeleteAnswer,

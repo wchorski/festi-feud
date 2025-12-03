@@ -1,126 +1,3 @@
-/*
- * Copyright 2011 Daniel Seither (post@tiwoc.de), Cornelius Flöter (cornelius@nxon.de)
- * 
- * This file is part of Clan Contest.
- * 
- * Clan Contest is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Clan Contest is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Clan Contest.  If not, see http://www.gnu.org/licenses/.
- */
-
-/* #container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	
-	display: table;
-	
-	background-color: black;
-	color: white;
-	font-family: sans-serif;
-}
-
-.screen {
-	display: table-cell;
-	vertical-align: middle;
-
-	text-align: center;
-}
-
-table {
-	margin: 0 auto;
-	width: 800px;
-}
-
-.answerstable tr td {
-	vertical-align: bottom;
-	border-bottom: 0.5em solid black;
-}
-
-.answer_priority, .answer_points {
-	text-align: right;
-	width: 4%;
-}
-
-.answer_priority {
-	padding-right: 0.5em;
-}
-
-#view_finals .answer_points {
-	padding-right: 0.5em;
-	width: 5%;
-}
-
-#view_finals .answer {
-	width: 40%;
-}
-
-.answer {
-	text-align: left;
-	width: auto;
-	padding: 0.2em 0.5em;
-	background-color: #333333;
-}
-
-.answer_span {
-	display: block; 
-	overflow: hidden;
-	height: 20px;
-}
-
-.sumlabel {
-	text-align: right;
-}
-
-.pointstable {
-	margin-top: 1em;
-	border-spacing: 0;
-}
-
-.points_row {
-	background-color: #aaaaaa;
-	color: black;
-}
-
-.pointstable tr td {
-	padding: 0.2em 0.5em;
-	font-weight: bold;
-}
-
-.points_left {
-	text-align: left;
-	min-width: 5em;
-}
-
-.points_center {
-	text-align: center;
-	width: 5em;
-}
-
-.points_right {
-	text-align: right;
-	min-width: 5em;
-}
-
-.maxwidth {
-	width: 100%;
-}
-
-.invisible {
-	visibility: hidden;
-} */
-
 #question {
 	text-align: center;
 	border: double lightblue 3px;
@@ -141,6 +18,8 @@ article.answer {
 	display: flex;
 	justify-content: space-between;
 	gap: 1rem;
+  /* TODO any better way to hide answers? */
+	opacity: 0;
 
 	& > .points {
 		border: solid white 2px;
@@ -150,11 +29,26 @@ article.answer {
 	}
 }
 
+body[data-round-phase="ingame"] .answer.checked {
+	opacity: 1;
+
+	& > span {
+		outline: solid yellow 2px;
+	}
+}
+
+body[data-round-phase="end"] .answer.checked {
+	opacity: 1;
+	& > span {
+		outline: double rgb(160, 189, 243) 4px;
+	}
+}
+
 .teams {
 	& > div {
 		padding: 0;
-    margin-inline: auto;
-    width: clamp(11rem, 18rem, 100%);
+		margin-inline: auto;
+		width: clamp(11rem, 18rem, 100%);
 	}
 }
 .team {

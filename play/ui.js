@@ -8,6 +8,8 @@
  * @typedef {import("types/EventDetails").GameWinnerDetail} GameWinnerDetail
  * @typedef {import("types/GameState.js").GameState} GameState
  * @typedef {import("types/GameState.js").Team} Team
+ * @typedef {import("types/BroadcastChannels").BC_TYPE} BC_TYPE
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
  */
 
 import {
@@ -15,11 +17,16 @@ import {
 	getElementById,
 	querySelector,
 	uiActiveTeam,
-} from "../ui.js"
-import { EVENT_TYPES, events } from "../utils/events.js"
+} from "../components.js"
+import {
+	events,
+	EVENT_TYPES,
+	// CHANNEL_TYPES,
+	// gameChannel,
+} from "../utils/events.js"
 import { gameStateManager } from "../utils/gameState.js"
 
-const { TEAM_ACTIVE, TEAM_RENAME } = EVENT_TYPES
+const { TEAM_ACTIVE, TEAM_RENAME, TEAM_UPDATE } = EVENT_TYPES
 
 /** @type {Window | null} */
 let popupWindow = null
@@ -115,10 +122,10 @@ function uiTeamUpdate(i, team) {
 		throw new Error(`team-${i} h2 not found`)
 	h2.textContent = team.name || `Team ${i}`
 
-	const nameInput = teamWrapEl.querySelector(`input[name="team-${i}-name"]`)
-	if (!(nameInput instanceof HTMLInputElement))
-		throw new Error(`input team-${i}-name not found`)
-	if (team.name) nameInput.value = team.name
+	// const nameInput = teamWrapEl.querySelector(`input[name="team-${i}-name"]`)
+	// if (!(nameInput instanceof HTMLInputElement))
+	// 	throw new Error(`input team-${i}-name not found`)
+	// if (team.name) nameInput.value = team.name
 
 	const pointsInput = teamWrapEl.querySelector(`input[name="team-${i}-points"]`)
 	if (!(pointsInput instanceof HTMLInputElement))
@@ -166,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	/** @param {number} points  */
 	function uiPointsDisplay(points) {
-		roundScoreEl.textContent = points.toString()
+		roundScoreEl.textContent = String(points)
 	}
 
 	const onActiveTeamSwitch = /** @type {EventListener} */ (
@@ -174,12 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		(e) => {
 			const { nextTeamIndex, prevTeamIndex } = e.detail
 
-			if (!popupWindow || popupWindow.closed) {
-				// TODO add back alert after dev
-				console.log("Popup is not open!")
-				// alert("Popup is not open!")
-				// throw new Error("no popup window")
-			}
 			uiActiveTeamCheckboxToggles(nextTeamIndex)
 			nextTeamIndex === undefined
 				? uiToggleCheckboxDisables(true)
@@ -191,20 +192,19 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	)
 
-	const onTeamRename = /** @type {EventListener} */ (
-		/** @param {CustomEvent<TeamRenamedDetail>} e */
-		(e) => {
-			const { oldName, newName, teamIndex } = e.detail
-			// TODO make this accept whole team object instead
-			uiTeamUpdate(teamIndex, { name: newName })
-		}
-	)
+	// const onTeamRename = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<TeamRenamedDetail>} e */
+	// 	(e) => {
+	// 		const { oldName, newName, teamIndex } = e.detail
+	// 		// TODO make this accept whole team object instead
+	// 		uiTeamUpdate(teamIndex, { name: newName })
+	// 	}
+	// )
 
 	const onIsGuessed = /** @type {EventListener} */ (
 		/** @param {CustomEvent<SetPointsDetail>} e */
 		(e) => {
-			const { prevPoints, currentPoints } = e.detail
-			const { roundPhase } = gameStateManager.get()
+			const { prevPoints, currentPoints, roundPhase } = e.detail
 			if (roundPhase !== "end") uiPointsDisplay(currentPoints)
 		}
 	)
@@ -223,18 +223,18 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	)
 
-	const onRoundStealSet = /** @type {EventListener} */ (
-		/** @param {CustomEvent<StrikesSetDetail>} e */
-		(e) => {
-			const { roundSteal } = e.detail
-			roundStealCheckbox.checked = roundSteal
-			roundSteal
-				? teamsWrap.classList.add("round-steal")
-				: teamsWrap.classList.remove("round-steal")
-			// console.log({ state })
-			// uiPointsDisplay(currentPoints)
-		}
-	)
+	// const onRoundStealSet = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<StrikesSetDetail>} e */
+	// 	(e) => {
+	// 		const { roundSteal } = e.detail
+	// 		roundStealCheckbox.checked = roundSteal
+	// 		roundSteal
+	// 			? teamsWrap.classList.add("round-steal")
+	// 			: teamsWrap.classList.remove("round-steal")
+	// 		// console.log({ state })
+	// 		// uiPointsDisplay(currentPoints)
+	// 	}
+	// )
 
 	const onRoundEnded = /** @type {EventListener} */ (
 		/** @param {CustomEvent<RoundEndedDetail>} e */
@@ -308,18 +308,45 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	)
 
+	//! does not react if emitted from same browser window
+	// gameChannel.addEventListener("message", (event) => {
+	// 	/** @type {BC_TYPE} */
+	// 	const type = event.data.type
+	// 	const detail = event.data.detail
+	// 	console.log({ type, detail })
+
+	// 	switch (type) {
+	// 		case CHANNEL_TYPES.UPDATE_POINTS:
+	// 			console.log("CHANNEL_TYPES.UPDATE_POINTS")
+
+	// 			break
+	// 		case CHANNEL_TYPES.TEAM_UPDATE:
+	// 			console.log("CHANNEL_TYPES.TEAM_UPDATE")
+	// 			/** @type {BC_TEAM_UPDATE['detail']} */
+	// 			const { index, teamUpdate } = event.data.detail
+	// 			uiTeamUpdate(index, teamUpdate)
+	// 			break
+
+	// 		default:
+	// 			break
+	// 	}
+	// })
+
 	// listeners
 	openBtn.addEventListener("pointerup", openPopup)
 	closeBtn.addEventListener("pointerup", closePopup)
-	events.addEventListener(TEAM_RENAME, onTeamRename)
+	// events.addEventListener(TEAM_RENAME, onTeamRename)
 	events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
 	events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
 	events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
 	events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
-	events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
+	// TODO don't need below line if above line works
+	// events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
 	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
+	// TODO combine with `onRoundEnded`
 	events.addEventListener(EVENT_TYPES.END_ROUND, onRoundEnd)
 	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
+	// TODO can't i combine below with `onActiveTeamSwitch`?
 	events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
 	events.addEventListener(EVENT_TYPES.GAME_WINNER, onGameWinner)
 
@@ -390,15 +417,16 @@ function setupGameControls() {
 }
 
 function setupTeamControls() {
-	const teamANameInput = getElementById("team-0-name", HTMLInputElement)
+	const team0NameInput = getElementById("team-0-name", HTMLInputElement)
 	const team1NameInput = getElementById("team-1-name", HTMLInputElement)
 	const team0PointsInput = getElementById("team-0-points", HTMLInputElement)
 	const team1PointsInput = getElementById("team-1-points", HTMLInputElement)
 
-	teamANameInput.oninput = (e) => {
+	team0NameInput.oninput = (e) => {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
-		gameStateManager.setTeamName(0, e.target.value)
+		gameStateManager.updateTeam(0, { name: e.target.value })
+		uiTeamUpdate(0, { name: e.target.value })
 	}
 
 	team1NameInput.oninput = (e) => {
@@ -462,14 +490,13 @@ export function uiToggleCheckboxDisables(disabled) {
 	})
 	roundStealCheckbox.disabled = disabled
 }
+// TODO move this to /ui.js
 /** @param {GameState} state  */
 function uiUpdateScores(state) {
 	// console.log({ state })
 	const { teams } = state
 	teams.forEach((team, i) => {
-		const scoreEl = document.querySelector(`input[name="team-${i}-points`)
-		if (!(scoreEl instanceof HTMLInputElement))
-			throw new Error("scoreEl not input el")
+		const scoreEl = querySelector(`input[name="team-${i}-points]`, HTMLInputElement)
 
 		scoreEl.value = String(team.score)
 	})

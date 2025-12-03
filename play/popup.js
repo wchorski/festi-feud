@@ -1,175 +1,229 @@
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
-//! USING play/ui.js instead
 /**
- * @typedef {import("../types/EventDetails").TeamRenamedDetail} TeamRenamedDetail
- * @typedef {import("../types/EventDetails").StrikesSetDetail} StrikesSetDetail
- * @typedef {import("../types/EventDetails").ActiveTeamDetail} ActiveTeamDetail
+ * @typedef {import("types/EventDetails").TeamRenamedDetail} TeamRenamedDetail
+ * @typedef {import("types/EventDetails").StrikesSetDetail} StrikesSetDetail
+ * @typedef {import("types/EventDetails").ActiveTeamDetail} ActiveTeamDetail
  * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
+ * @typedef {import("types/EventDetails").RoundEndedDetail} RoundEndedDetail
+ * @typedef {import("types/EventDetails").RoundPhaseDetail} RoundPhaseDetail
+ * @typedef {import("types/EventDetails").GameWinnerDetail} GameWinnerDetail
+ * @typedef {import("types/GameState.js").GameState} GameState
+ * @typedef {import("types/GameState.js").Team} Team
+ * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS} BC_UPDATE_POINTS
+ * @typedef {import("types/BroadcastChannels").BC_TYPE} BC_TYPE
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
+ * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES} BC_SET_STRIKES
  */
-
-import { getElementById, uiActiveTeam } from "../ui.js"
-import { EVENT_TYPES, events } from "../utils/events.js"
+import {
+	elGameAnswerForPopup,
+	getElementById,
+	querySelector,
+  querySelectorAll,
+} from "../components.js"
+import {
+	CHANNEL_TYPES,
+	EVENT_TYPES,
+	events,
+	gameChannel,
+} from "../utils/events.js"
 import { gameStateManager } from "../utils/gameState.js"
-
-const { TEAM_ACTIVE, SET_STRIKES: STRIKES_SET, TEAM_RENAME } = EVENT_TYPES
-
-/** @type {Window | null} */
-let popupWindow = null
+const { TEAM_ACTIVE, TEAM_RENAME } = EVENT_TYPES
+const teamsWrapEl = getElementById("teams", HTMLDivElement)
+const gameWinnerNameEl = getElementById("game-winner-name", HTMLElement)
+const roundScoreEl = getElementById("round-score", HTMLElement)
+const answersList = getElementById("answers", HTMLDListElement)
+const questionEl = getElementById("question", HTMLParagraphElement)
 
 document.addEventListener("DOMContentLoaded", function () {
-	// setupControls()
+	const {
+		activeTeamIndex,
+		answers,
+		pointMultiplier,
+		points,
+		question,
+		round,
+		roundSteal,
+		isBuzzersActive,
+		roundPhase,
+		roundType,
+		strikes,
+		teams,
+	} = gameStateManager.get()
 
-	const openBtn = getElementById("btn_open_win", HTMLButtonElement)
-	const closeBtn = getElementById("btn_close_win", HTMLButtonElement)
+	const answerEls = answers.map((a) => elGameAnswerForPopup(a))
+	answersList.replaceChildren(...answerEls)
 
-	function openPopup() {
-		const features =
-			"width=600,height=800,left=100,top=100,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes"
+	document.body.dataset.roundPhase = roundPhase
+	document.body.dataset.roundType = roundType
+	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
+	roundScoreEl.textContent = String(points)
 
-		// Open the popup with the external HTML file
-		popupWindow = window.open("popup.html", "PopupWindow", features)
+	teams.forEach((team, i) => {
+		uiTeamUpdate(i, team)
+	})
 
-		if (popupWindow) {
-			openBtn.disabled = true
-			closeBtn.disabled = false
+	reactiveEvents()
+})
 
-			// Check if popup is closed
-			const checkClosed = setInterval(() => {
-				if (popupWindow && popupWindow.closed) {
-					clearInterval(checkClosed)
-					handlePopupClosed()
-				}
-			}, 500)
-		}
+/**
+ * @param {number} i
+ * @param {Partial<Team>} team
+ */
+function uiTeamUpdate(i, team) {
+	const teamWrapEl = document.getElementById(`team-${i}`)
+	if (!teamWrapEl) throw new Error("no teamWrapEl")
+
+	if (team.name) {
+		const h2 = teamWrapEl.querySelector("h2")
+		if (!(h2 instanceof HTMLHeadingElement))
+			throw new Error(`team-${i} h2 not found`)
+		h2.textContent = team.name || `Team ${i}`
 	}
 
-	function closePopup() {
-		if (popupWindow && !popupWindow.closed) {
-			popupWindow.close()
-		}
-		handlePopupClosed()
+	if (team.score !== undefined) {
+		const pointsEl = teamWrapEl.querySelector(".points")
+		if (!(pointsEl instanceof HTMLSpanElement))
+			throw new Error(`team ${i} span.points not found`)
+		pointsEl.textContent = String(team.score)
 	}
+}
 
-	function handlePopupClosed() {
-		popupWindow = null
-		openBtn.disabled = false
-		closeBtn.disabled = true
-	}
-	/**
-	 * @param {number} teamIndex
-	 * @param {string} newName
-	 */
-	function uiTeamName(teamIndex, newName) {
-		if (!popupWindow || popupWindow.closed) {
-			alert("Popup is not open!")
-			return
-		}
+function reactiveEvents() {
+	// const onTeamRename = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<TeamRenamedDetail>} e */
+	// 	(e) => {
+	// 		const { oldName, newName, teamIndex: i } = e.detail
 
-		let h2 = undefined
-
-		h2 = popupWindow.document
-			.getElementById(`team-${teamIndex}`)
-			?.querySelector("h2")
-
-		if (!h2) throw new Error("h2 not found")
-		h2.textContent = newName || `Team ${teamIndex}`
-	}
-
-	/** @param {number} points  */
-	function uiPointsDisplay(points) {
-		// TODO move this definition to top
-		const elRoundScore = getElementById("round-score", HTMLElement)
-		elRoundScore.textContent = points.toString()
-	}
+	// 		uiTeamUpdate(i, { name: newName })
+	// 	}
+	// )
 
 	const onActiveTeamSwitch = /** @type {EventListener} */ (
 		/** @param {CustomEvent<ActiveTeamDetail>} e */
 		(e) => {
-			console.log("onActiveTeamSwitch")
 			const { nextTeamIndex, prevTeamIndex } = e.detail
+			console.log("onActiveTeamSwitch")
+			teamsWrapEl.dataset.nextTeamIndex = String(nextTeamIndex)
+		}
+	)
 
-			if (!popupWindow || popupWindow.closed) {
-				alert("Popup is not open!")
-				throw new Error("no popup window")
+	/** @param {BC_SET_STRIKES['detail']} detail  */
+	function onSetStrikes(detail) {
+		const { strikes, roundSteal } = detail
+
+		const strikesWrap = getElementById("strikes", HTMLDivElement)
+		const strikeSVGs = querySelectorAll("svg.strike", SVGElement, strikesWrap)
+		strikeSVGs.forEach((svg, i) => {
+			i + 1 <= strikes
+				? (svg.dataset.disabled = "false")
+				: (svg.dataset.disabled = "true")
+		})
+
+		roundSteal
+			? teamsWrapEl.classList.add("round-steal")
+			: teamsWrapEl.classList.remove("round-steal")
+	}
+
+	const onGameWinner = /** @type {EventListener} */ (
+		/** @param {CustomEvent<GameWinnerDetail>} e */
+		(e) => {
+			const { state, highestScoringTeam } = e.detail
+			document.body.dataset.roundPhase = state.roundPhase
+			document.body.dataset.roundType = state.roundType
+			gameWinnerNameEl.textContent = highestScoringTeam.name
+		}
+	)
+
+	const onRoundPhase = /** @type {EventListener} */ (
+		/** @param {CustomEvent<RoundPhaseDetail>} e */
+		(e) => {
+			//
+			const { roundPhase } = e.detail
+			document.body.dataset.roundPhase = roundPhase
+		}
+	)
+
+	const onRoundEnd = /** @type {EventListener} */ (
+		/** @param {CustomEvent<RoundEndedDetail>} e */
+		(e) => {
+			// TODO do i really need to send whole state in this event?
+			const { state } = e.detail
+
+			uiUpdateScores(state)
+			console.log("disabled strikes, round steal. turn on winner badge")
+			const { activeTeamIndex, roundSteal, teams } = state
+			if (activeTeamIndex === undefined)
+				throw new Error("activeTeamIndex is undefined")
+
+			const teamStealIndex = (activeTeamIndex + 1) % teams.length
+			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+
+			teamsWrapEl.dataset.winningTeamIndex = String(winningTeamIndex)
+
+			document.body.dataset.roundType = state.roundType
+			document.body.dataset.roundPhase = state.roundPhase
+			if (state.roundType === "conclusion") {
+				console.log("SHOW GAME OVER AND WINNER NAME")
 			}
-
-			// nextTeamIndex === undefined
-			// 	? uiToggleCheckboxDisables(true)
-			// 	: uiToggleCheckboxDisables(false)
-
-			uiActiveTeam(prevTeamIndex, nextTeamIndex, popupWindow)
-			// TODO isn't popup related but... lazy
-			uiActiveTeam(prevTeamIndex, nextTeamIndex, window)
 		}
 	)
 
-	const onTeamRename = /** @type {EventListener} */ (
-		/** @param {CustomEvent<TeamRenamedDetail>} e */
-		(e) => {
-			const { oldName, newName, teamIndex } = e.detail
-			uiTeamName(teamIndex, newName)
-		}
-	)
+	// const onIsGuessed = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<SetPointsDetail>} e */
+	// 	(e) => {
+	// 		const { prevPoints, currentPoints, roundPhase, updatedAnswer } = e.detail
+	// 		if (roundPhase !== "end") roundScoreEl.textContent = String(currentPoints)
+	// 		const gameAnswerEl = getElementById(
+	// 			`gameanswer-${updatedAnswer.id}`,
+	// 			HTMLElement
+	// 		)
+	// 		updatedAnswer.isGuessed
+	// 			? gameAnswerEl.classList.add("checked")
+	// 			: gameAnswerEl.classList.remove("checked")
+	// 	}
+	// )
 
-	const onIsGuessed = /** @type {EventListener} */ (
-		/** @param {CustomEvent<SetPointsDetail>} e */
-		(e) => {
-			const { prevPoints, currentPoints } = e.detail
-			uiPointsDisplay(currentPoints)
-		}
-	)
-	events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
+	gameChannel.addEventListener("message", (event) => {
+		// const message = /** @type {MessageEvent<BC_UPDATE_POINTS>} */ (event)
+		/** @type {BC_TYPE} */
+		const type = event.data.type
+		const detail = event.data.detail
 
-	// listeners
-	openBtn.addEventListener("pointerup", openPopup)
-	closeBtn.addEventListener("pointerup", closePopup)
-	events.addEventListener(TEAM_RENAME, onTeamRename)
+		switch (type) {
+			case CHANNEL_TYPES.UPDATE_POINTS:
+				console.log("CHANNEL_TYPES.UPDATE_POINTS")
+				break
+			case CHANNEL_TYPES.TEAM_UPDATE:
+				/** @type {BC_TEAM_UPDATE['detail']} */
+				const { index, teamUpdate } = detail
+				uiTeamUpdate(index, teamUpdate)
+				break
+			case CHANNEL_TYPES.SET_STRIKES:
+				onSetStrikes(detail)
+				break
+
+			default:
+				break
+		}
+	})
+
+	// events.addEventListener(TEAM_RENAME, onTeamRename)
 	events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
-})
+	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
+	// events.addEventListener(CHANNEL_TYPES.UPDATE_POINTS, onIsGuessed)
+	// events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
+	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
+	events.addEventListener(EVENT_TYPES.END_ROUND, onRoundEnd)
+	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
+	events.addEventListener(EVENT_TYPES.GAME_WINNER, onGameWinner)
+}
 
-// function setupControls() {
-// 	strikesWrap.addEventListener("change", () => {
-// 		const activeTeamIndex = gameStateManager.get().activeTeamIndex
+// TODO move this to /ui.js
+/** @param {GameState} state  */
+function uiUpdateScores(state) {
+	const { teams } = state
+	teams.forEach((team, i) => {
+		const scoreEl = getElementById(`team-${i}`, HTMLSpanElement)
 
-// 		strikeCheckboxes = strikesWrap.querySelectorAll('input[type="checkbox"]')
-// 		const checkedCount = Array.from(strikeCheckboxes).filter(
-// 			(cb) => cb.checked
-// 		).length
-// 		gameStateManager.setStrikes(checkedCount)
-
-// 		if (activeTeamIndex === undefined) {
-// 			strikeCheckboxes.forEach((box) => {
-// 				box.disabled
-// 			})
-// 		}
-
-// 		// TODO could change this over to dispatch listener for ui only script
-// 		if (checkedCount === 3) {
-// 			strikeCheckboxes.forEach((box) => {
-// 				box.disabled = true
-// 			})
-// 			setTimeout(() => {
-// 				strikeCheckboxes?.forEach((box) => {
-// 					box.checked = false
-// 					box.disabled = false
-// 				})
-// 			}, 3000)
-// 		}
-// 	})
-// }
-
-// /** @param {boolean} disabled  */
-// function uiToggleCheckboxDisables(disabled) {
-// 	strikeCheckboxes?.forEach((box) => {
-// 		box.disabled = disabled
-// 	})
-// }
+		scoreEl.textContent = String(team.score)
+	})
+}

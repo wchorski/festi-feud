@@ -6,6 +6,7 @@
  * @typedef {import('types/Question').QuestionDelete} QuestionDelete
  * @typedef {import("types/Answer.js").Answer} Answer
  * @typedef {import("types/GameState").GameAnswer} GameAnswer
+ * @typedef {import("types/GameState").GameState} GameState
  * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
  * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
@@ -48,6 +49,24 @@ export function querySelector(selector, type, parentElement) {
 		const el = document.querySelector(selector)
 		if (!el) throw new Error(`Element with selector "${selector}" not found`)
 		return /** @type {T} */ (el)
+	}
+}
+/**
+ * @template {Element} T
+ * @param {string} selector
+ * @param {new () => T} type
+ * @param {Element} [parentElement]
+ * @returns {NodeListOf<T>}
+ */
+export function querySelectorAll(selector, type, parentElement) {
+	if (parentElement) {
+		const el = parentElement.querySelectorAll(selector)
+		if (!el) throw new Error(`Element with selector "${selector}" not found`)
+		return /** @type {NodeListOf<T>} */ (el)
+	} else {
+		const el = document.querySelectorAll(selector)
+		if (!el) throw new Error(`Element with selector "${selector}" not found`)
+		return /** @type {NodeListOf<T>} */ (el)
 	}
 }
 
@@ -118,6 +137,37 @@ export function uiActiveTeam(prevIndex, nextIndex, window) {
 
 /**
  * @param {GameAnswer} gAnswer
+ * @returns {HTMLElement}
+ */
+export function elGameAnswerForPopup(gAnswer) {
+	const liEl = Object.assign(document.createElement("li"), {})
+	const wrap = Object.assign(document.createElement("article"), {
+		className: "answer",
+	})
+
+	wrap.id = `gameanswer-${gAnswer.id}`
+
+	const p = Object.assign(document.createElement("p"), {
+		textContent: gAnswer.text,
+	})
+	wrap.append(p)
+
+	const pointsSpanEl = Object.assign(document.createElement("span"), {
+		textContent: gAnswer.points,
+		className: "points",
+	})
+	wrap.append(pointsSpanEl)
+	liEl.append(wrap)
+	return liEl
+	// <article class="answer">
+	//   <p>Cooler with food and drinks that are spoiled</p>
+	//   <span class="points">12</span>
+	// </article>
+}
+
+// TODO don't need `isModeratorWindow` because of decoupled event signals
+/**
+ * @param {GameAnswer} gAnswer
  * @param {boolean} isModeratorWindow
  * @returns {HTMLElement}
  */
@@ -125,6 +175,8 @@ export const elGameAnswer = (gAnswer, isModeratorWindow = false) => {
 	const wrap = Object.assign(document.createElement("li"), {
 		className: "answer",
 	})
+
+	wrap.id = `gameanswer-${gAnswer.id}`
 
 	const p = Object.assign(document.createElement("p"), {
 		textContent: gAnswer.text,
@@ -143,7 +195,6 @@ export const elGameAnswer = (gAnswer, isModeratorWindow = false) => {
 
 		pointsCheckbox.addEventListener(
 			"change",
-			// TODO this works but type is wrong
 			/** @param {Event} e */
 			(e) => {
 				if (!(e.target instanceof HTMLInputElement))
