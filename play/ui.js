@@ -213,17 +213,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	}
 	// )
 
-	const onStrikeSet = /** @type {EventListener} */ (
-		/** @param {CustomEvent<StrikesSetDetail>} e */
-		(e) => {
-			const { strikes, roundSteal } = e.detail
+	// const onStrikeSet = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<StrikesSetDetail>} e */
+	// 	(e) => {
+	// 		const { strikes, roundSteal } = e.detail
 
-			roundStealCheckbox.checked = roundSteal
-			roundSteal
-				? teamsWrapEl.classList.add("round-steal")
-				: teamsWrapEl.classList.remove("round-steal")
-		}
-	)
+	// 		roundStealCheckbox.checked = roundSteal
+	// 		roundSteal
+	// 			? teamsWrapEl.classList.add("round-steal")
+	// 			: teamsWrapEl.classList.remove("round-steal")
+	// 	}
+	// )
 
 	// const onRoundStealSet = /** @type {EventListener} */ (
 	// 	/** @param {CustomEvent<StrikesSetDetail>} e */
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
 	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
 	events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
-	events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
+	// events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
 	// TODO don't need below line if above line works
 	// events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
 	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
@@ -368,12 +368,16 @@ function setupGameControls() {
 	}
 
 	strikesWrap.addEventListener("change", () => {
-		const activeTeamIndex = gameStateManager.get().activeTeamIndex
-
 		const checkedCount = Array.from(strikeCheckboxes).filter(
 			(cb) => cb.checked
 		).length
 		gameStateManager.setStrikes(checkedCount)
+
+		const { activeTeamIndex, roundSteal } = gameStateManager.get()
+
+		roundSteal
+			? teamsWrapEl.classList.add("round-steal")
+			: teamsWrapEl.classList.remove("round-steal")
 
 		if (activeTeamIndex === undefined) {
 			strikeCheckboxes.forEach((box) => {

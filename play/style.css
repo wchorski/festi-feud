@@ -74,11 +74,14 @@ body[data-round-phase="end"]
 	}
 }
 
-/* TODO does not support dynamic number of teams */
+/* TODO does not support dynamic number of teams. also kinda a mess */
 #teams[data-active-team-index="0"] {
 	& > .team:nth-child(1) {
 		border: solid yellow 1px;
 		box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+	}
+	&.round-steal .team:nth-child(2) .steal-badge {
+		opacity: 1;
 	}
 }
 #teams[data-active-team-index="1"] {
@@ -86,7 +89,15 @@ body[data-round-phase="end"]
 		border: solid yellow 1px;
 		box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
 	}
+
+	&.round-steal .team:nth-child(1) .steal-badge {
+		opacity: 1;
+	}
 }
+
+/* #teams[data-active-team-index="0"].round-steal .steal-badge{
+
+} */
 
 .team {
 	position: relative;
@@ -120,9 +131,10 @@ body[data-round-phase="end"]
 	opacity: 1;
 }
 
-.round-steal .team:not(.active) .steal-badge {
+/* TODO maybe switch back to this? */
+/* .round-steal .team:not(.active) .steal-badge {
 	opacity: 1;
-}
+} */
 
 h2:has(#game-winner-name:not(:empty)) {
 	border: double lightblue 6px;

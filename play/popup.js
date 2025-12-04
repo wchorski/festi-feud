@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		teams,
 	} = gameStateManager.get()
 
-  teamsWrapEl.dataset.activeTeamIndex = String(activeTeamIndex)
+	teamsWrapEl.dataset.activeTeamIndex = String(activeTeamIndex)
 
 	const answerEls = answers.map((a) => elGameAnswerForPopup(a))
 	answersList.replaceChildren(...answerEls)
@@ -58,6 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	document.body.dataset.roundPhase = roundPhase
 	document.body.dataset.roundType = roundType
 	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
+	roundSteal
+		? teamsWrapEl.classList.add("round-steal")
+		: teamsWrapEl.classList.remove("round-steal")
 	roundScoreEl.textContent = String(points)
 
 	teams.forEach((team, i) => {
