@@ -18,8 +18,11 @@ article.answer {
 	display: flex;
 	justify-content: space-between;
 	gap: 1rem;
-  /* TODO any better way to hide answers? */
+	/* TODO any better way to hide answers? */
 	opacity: 0;
+	transition-duration: 1s;
+	transition-property: opacity;
+	transition-timing-function: ease-in;
 
 	& > .points {
 		border: solid white 2px;
@@ -44,15 +47,11 @@ body[data-round-phase="end"] .answer.checked {
 	}
 }
 
-.teams {
-	& > div {
-		padding: 0;
-		margin-inline: auto;
-		width: clamp(11rem, 18rem, 100%);
-	}
-}
 .team {
-	padding: 0;
+  /* TODO prob should match moderater ui with popup */
+	padding: 0 !important;
+	margin-inline: auto;
+	width: clamp(11rem, 18rem, 100%);
 	background: #040154;
 	background: linear-gradient(
 		65deg,

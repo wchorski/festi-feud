@@ -12,12 +12,13 @@
  * @typedef {import("types/BroadcastChannels").BC_TYPE} BC_TYPE
  * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
  * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES} BC_SET_STRIKES
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_ACTIVE} BC_TEAM_ACTIVE
  */
 import {
 	elGameAnswerForPopup,
 	getElementById,
 	querySelector,
-  querySelectorAll,
+	querySelectorAll,
 } from "../components.js"
 import {
 	CHANNEL_TYPES,
@@ -48,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		strikes,
 		teams,
 	} = gameStateManager.get()
+
+  teamsWrapEl.dataset.activeTeamIndex = String(activeTeamIndex)
 
 	const answerEls = answers.map((a) => elGameAnswerForPopup(a))
 	answersList.replaceChildren(...answerEls)
@@ -97,14 +100,11 @@ function reactiveEvents() {
 	// 	}
 	// )
 
-	const onActiveTeamSwitch = /** @type {EventListener} */ (
-		/** @param {CustomEvent<ActiveTeamDetail>} e */
-		(e) => {
-			const { nextTeamIndex, prevTeamIndex } = e.detail
-			console.log("onActiveTeamSwitch")
-			teamsWrapEl.dataset.nextTeamIndex = String(nextTeamIndex)
-		}
-	)
+	/** @param {BC_TEAM_ACTIVE['detail']} detail  */
+	function onActiveTeamSwitch(detail) {
+		const { nextTeamIndex, prevTeamIndex } = detail
+		teamsWrapEl.dataset.activeTeamIndex = String(nextTeamIndex)
+	}
 
 	/** @param {BC_SET_STRIKES['detail']} detail  */
 	function onSetStrikes(detail) {
@@ -167,20 +167,18 @@ function reactiveEvents() {
 		}
 	)
 
-	// const onIsGuessed = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<SetPointsDetail>} e */
-	// 	(e) => {
-	// 		const { prevPoints, currentPoints, roundPhase, updatedAnswer } = e.detail
-	// 		if (roundPhase !== "end") roundScoreEl.textContent = String(currentPoints)
-	// 		const gameAnswerEl = getElementById(
-	// 			`gameanswer-${updatedAnswer.id}`,
-	// 			HTMLElement
-	// 		)
-	// 		updatedAnswer.isGuessed
-	// 			? gameAnswerEl.classList.add("checked")
-	// 			: gameAnswerEl.classList.remove("checked")
-	// 	}
-	// )
+	/** @param {BC_UPDATE_POINTS['detail']} detail  */
+	function onIsGuessed(detail) {
+		const { prevPoints, currentPoints, roundPhase, updatedAnswer } = detail
+		if (roundPhase !== "end") roundScoreEl.textContent = String(currentPoints)
+		const gameAnswerEl = getElementById(
+			`gameanswer-${updatedAnswer.id}`,
+			HTMLElement
+		)
+		updatedAnswer.isGuessed
+			? gameAnswerEl.classList.add("checked")
+			: gameAnswerEl.classList.remove("checked")
+	}
 
 	gameChannel.addEventListener("message", (event) => {
 		// const message = /** @type {MessageEvent<BC_UPDATE_POINTS>} */ (event)
@@ -190,7 +188,7 @@ function reactiveEvents() {
 
 		switch (type) {
 			case CHANNEL_TYPES.UPDATE_POINTS:
-				console.log("CHANNEL_TYPES.UPDATE_POINTS")
+				onIsGuessed(detail)
 				break
 			case CHANNEL_TYPES.TEAM_UPDATE:
 				/** @type {BC_TEAM_UPDATE['detail']} */
@@ -200,6 +198,9 @@ function reactiveEvents() {
 			case CHANNEL_TYPES.SET_STRIKES:
 				onSetStrikes(detail)
 				break
+			case CHANNEL_TYPES.TEAM_ACTIVE:
+				onActiveTeamSwitch(detail)
+				break
 
 			default:
 				break
@@ -207,7 +208,7 @@ function reactiveEvents() {
 	})
 
 	// events.addEventListener(TEAM_RENAME, onTeamRename)
-	events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
+	// events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
 	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
 	// events.addEventListener(CHANNEL_TYPES.UPDATE_POINTS, onIsGuessed)
 	// events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)

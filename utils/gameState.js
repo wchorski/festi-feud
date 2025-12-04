@@ -7,6 +7,7 @@
  * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS} BC_UPDATE_POINTS
  * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
  * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES} BC_SET_STRIKES
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_ACTIVE} BC_TEAM_ACTIVE
  */
 import { events, EVENT_TYPES, gameChannel, CHANNEL_TYPES } from "./events.js"
 
@@ -481,41 +482,52 @@ class GameStateManager {
 
 	/**. @param {number|undefined} teamIndex  */
 	setActiveTeam(teamIndex) {
-		const { activeTeamIndex: prevIndex, isBuzzersActive } = this.state
+		const { activeTeamIndex: prevTeamIndex, isBuzzersActive } = this.state
 
 		this.state.activeTeamIndex = teamIndex
 
 		this.save()
 
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
+		gameChannel.postMessage(
+			/** @type {BC_TEAM_ACTIVE} */ ({
+				type: CHANNEL_TYPES.TEAM_ACTIVE,
 				detail: {
+					prevTeamIndex,
 					nextTeamIndex: teamIndex,
-					prevTeamIndex: prevIndex,
 					isBuzzersActive,
 				},
 			})
 		)
+
+		// events.dispatchEvent(
+		// 	new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
+		// 		detail: {
+		// 			nextTeamIndex: teamIndex,
+		// 			prevTeamIndex: prevIndex,
+		// 			isBuzzersActive,
+		// 		},
+		// 	})
+		// )
 	}
 
-	nextActiveTeam() {
-		// TODO instead of setting active team use `roundSteal`
-		const { activeTeamIndex: prevIndex, teams } = this.state
-		if (prevIndex === undefined)
-			throw new Error("active team not set. Manually choose active team")
+	// nextActiveTeam() {
+	// 	// TODO instead of setting active team use `roundSteal`
+	// 	const { activeTeamIndex: prevIndex, teams } = this.state
+	// 	if (prevIndex === undefined)
+	// 		throw new Error("active team not set. Manually choose active team")
 
-		const nextIndex = (prevIndex + 1) % teams.length
+	// 	const nextIndex = (prevIndex + 1) % teams.length
 
-		this.state.activeTeamIndex = nextIndex
+	// 	this.state.activeTeamIndex = nextIndex
 
-		this.save()
+	// 	this.save()
 
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
-				detail: { nextTeamIndex: nextIndex, prevTeamIndex: prevIndex },
-			})
-		)
-	}
+	// 	events.dispatchEvent(
+	// 		new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
+	// 			detail: { nextTeamIndex: nextIndex, prevTeamIndex: prevIndex },
+	// 		})
+	// 	)
+	// }
 
 	/**
 	 * @param {number} index - The index of the team to update.

@@ -25,6 +25,7 @@ export const CHANNEL_TYPES = {
 	TEAM_UPDATE: "game:teamUpdate",
 	UPDATE_POINTS: "game:updatePoints",
 	SET_STRIKES: "game:setStrikes",
+  TEAM_ACTIVE: "game:teamActive",
 }
 export const gameChannel = new BroadcastChannel("game-broadcastchannel")
 export const buzzerChannel = new BroadcastChannel("game-show-buzzer")

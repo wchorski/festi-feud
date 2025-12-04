@@ -9,7 +9,7 @@ import {
 	dbGetQuestion,
 	getAllQuestionDocs,
 } from "../db.js"
-import { elGameAnswer, getElementById } from "../components.js"
+import { elGameAnswerModerator, getElementById } from "../components.js"
 import {
 	convertAnswersToGame,
 	filterAndSortVotes,

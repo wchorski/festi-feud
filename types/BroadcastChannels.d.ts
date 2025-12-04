@@ -1,6 +1,10 @@
 import { GameState, Team, GameAnswer } from "./GameState"
 
-export type BC_TYPE = "game:teamUpdate" | "game:updatePoints"
+export type BC_TYPE =
+	| "game:teamUpdate"
+	| "game:updatePoints"
+	| "game:setStrikes"
+	| "game:teamActive"
 
 export type BC_TEAM_UPDATE = {
 	type: "game:teamUpdate"
@@ -25,5 +29,13 @@ export type BC_SET_STRIKES = {
 	detail: {
 		strikes: number
 		roundSteal: boolean
+	}
+}
+export type BC_TEAM_ACTIVE = {
+	type: "game:teamActive"
+	detail: {
+		nextTeamIndex: number
+		prevTeamIndex: number
+		isBuzzersActive: boolean
 	}
 }

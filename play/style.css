@@ -63,7 +63,7 @@ body[data-round-phase="end"]
 	outline: double rgb(160, 189, 243) 4px;
 }
 
-.teams {
+#teams {
 	gap: 1rem;
 	& > div {
 		& > h2 {
@@ -74,13 +74,22 @@ body[data-round-phase="end"]
 	}
 }
 
-.team {
-	position: relative;
+/* TODO does not support dynamic number of teams */
+#teams[data-active-team-index="0"] {
+	& > .team:nth-child(1) {
+		border: solid yellow 1px;
+		box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+	}
+}
+#teams[data-active-team-index="1"] {
+	& > .team:nth-child(2) {
+		border: solid yellow 1px;
+		box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+	}
 }
 
-.team.active {
-	border: solid yellow 1px;
-	box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
+.team {
+	position: relative;
 }
 
 .steal-badge {
@@ -119,7 +128,7 @@ h2:has(#game-winner-name:not(:empty)) {
 	border: double lightblue 6px;
 }
 h2:has(#game-winner-name:empty) {
-  display: none;
+	display: none;
 }
 
 body[data-round-type="conclusion"] {

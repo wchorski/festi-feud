@@ -13,10 +13,9 @@
  */
 
 import {
-	elGameAnswer,
+	elGameAnswerModerator,
 	getElementById,
 	querySelector,
-	uiActiveTeam,
 } from "../components.js"
 import {
 	events,
@@ -47,7 +46,7 @@ const nextRoundDetailsEl = getElementById(
 	HTMLDetailsElement
 )
 
-const teamsWrap = getElementById("teams-wrapper", HTMLDivElement)
+const teamsWrapEl = getElementById("teams", HTMLDivElement)
 const roundScoreEl = getElementById("round-score", HTMLElement)
 const scoreMultiEl = getElementById("score-multiplier", HTMLElement)
 const gameRoundEl = getElementById("game-round", HTMLSpanElement)
@@ -73,10 +72,17 @@ export function uiInit() {
 		teams,
 	} = gameStateManager.get()
 
-	uiActiveTeam(undefined, activeTeamIndex, window)
+	teamsWrapEl.dataset.activeTeamIndex = String(activeTeamIndex)
 	if (activeTeamIndex === 0) team0ActiveCheckbox.checked = true
 	if (activeTeamIndex === 1) team1ActiveCheckbox.checked = true
-	const answerEls = answers.map((a) => elGameAnswer(a, true))
+	const answerEls = answers.map((a) =>
+		elGameAnswerModerator(a, (checked) => {
+			gameStateManager.setIsGuessed(a.id, checked)
+			if (roundPhase !== "end") {
+				roundScoreEl.textContent = String(gameStateManager.totalPoints)
+			}
+		})
+	)
 	answersList.replaceChildren(...answerEls)
 	scoreMultiEl.textContent = "x" + String(pointMultiplier)
 	roundScoreEl.textContent = String(points)
@@ -171,26 +177,24 @@ document.addEventListener("DOMContentLoaded", function () {
 		closeBtn.disabled = true
 	}
 
-	/** @param {number} points  */
-	function uiPointsDisplay(points) {
-		roundScoreEl.textContent = String(points)
-	}
+	// /** @param {number} points  */
+	// function uiPointsDisplay(points) {
+	// 	roundScoreEl.textContent = String(points)
+	// }
 
-	const onActiveTeamSwitch = /** @type {EventListener} */ (
-		/** @param {CustomEvent<ActiveTeamDetail>} e */
-		(e) => {
-			const { nextTeamIndex, prevTeamIndex } = e.detail
+	// /** @param {{nextTeamIndex: number, prevTeamIndex:number}} detail  */
+	// function onActiveTeamSwitch(detail) {
+	// 	const { nextTeamIndex, prevTeamIndex } = detail
 
-			uiActiveTeamCheckboxToggles(nextTeamIndex)
-			nextTeamIndex === undefined
-				? uiToggleCheckboxDisables(true)
-				: uiToggleCheckboxDisables(false)
+	// 	uiActiveTeamCheckboxToggles(nextTeamIndex)
+	// 	nextTeamIndex === undefined
+	// 		? uiToggleCheckboxDisables(true)
+	// 		: uiToggleCheckboxDisables(false)
 
-			// uiActiveTeam(prevTeamIndex, nextTeamIndex, popupWindow)
-			// TODO isn't popup related but... lazy
-			uiActiveTeam(prevTeamIndex, nextTeamIndex, window)
-		}
-	)
+	// 	// uiActiveTeam(prevTeamIndex, nextTeamIndex, popupWindow)
+	// 	// TODO isn't popup related but... lazy
+	// 	uiActiveTeam(prevTeamIndex, nextTeamIndex, window)
+	// }
 
 	// const onTeamRename = /** @type {EventListener} */ (
 	// 	/** @param {CustomEvent<TeamRenamedDetail>} e */
@@ -201,13 +205,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	}
 	// )
 
-	const onIsGuessed = /** @type {EventListener} */ (
-		/** @param {CustomEvent<SetPointsDetail>} e */
-		(e) => {
-			const { prevPoints, currentPoints, roundPhase } = e.detail
-			if (roundPhase !== "end") uiPointsDisplay(currentPoints)
-		}
-	)
+	// const onIsGuessed = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<SetPointsDetail>} e */
+	// 	(e) => {
+	// 		const { prevPoints, currentPoints, roundPhase } = e.detail
+	// 		if (roundPhase !== "end") uiPointsDisplay(currentPoints)
+	// 	}
+	// )
 
 	const onStrikeSet = /** @type {EventListener} */ (
 		/** @param {CustomEvent<StrikesSetDetail>} e */
@@ -216,10 +220,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			roundStealCheckbox.checked = roundSteal
 			roundSteal
-				? teamsWrap.classList.add("round-steal")
-				: teamsWrap.classList.remove("round-steal")
-			// console.log({ state })
-			// uiPointsDisplay(currentPoints)
+				? teamsWrapEl.classList.add("round-steal")
+				: teamsWrapEl.classList.remove("round-steal")
 		}
 	)
 
@@ -289,14 +291,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	)
 
-	const onActiveTeamId = /** @type {EventListener} */ (
-		/** @param {CustomEvent<ActiveTeamDetail>} e */
-		(e) => {
-			const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = e.detail
-			buzzersActiveEl.className = String(isBuzzersActive)
-			buzzersActiveEl.textContent = String(isBuzzersActive)
-		}
-	)
+	// const onActiveTeamId = /** @type {EventListener} */ (
+	// 	/** @param {CustomEvent<ActiveTeamDetail>} e */
+	// 	(e) => {
+	// 		const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = e.detail
+	// 		buzzersActiveEl.className = String(isBuzzersActive)
+	// 		buzzersActiveEl.textContent = String(isBuzzersActive)
+	// 	}
+	// )
 
 	const onGameWinner = /** @type {EventListener} */ (
 		/** @param {CustomEvent<GameWinnerDetail>} e */
@@ -336,8 +338,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	openBtn.addEventListener("pointerup", openPopup)
 	closeBtn.addEventListener("pointerup", closePopup)
 	// events.addEventListener(TEAM_RENAME, onTeamRename)
-	events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
-	events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
+	// events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
+	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
 	events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
 	events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
 	// TODO don't need below line if above line works
@@ -346,8 +348,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	// TODO combine with `onRoundEnded`
 	events.addEventListener(EVENT_TYPES.END_ROUND, onRoundEnd)
 	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
-	// TODO can't i combine below with `onActiveTeamSwitch`?
-	events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
+	// // TODO can't i combine below with `onActiveTeamSwitch`?
+	// events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
 	events.addEventListener(EVENT_TYPES.GAME_WINNER, onGameWinner)
 
 	setupTeamControls()
@@ -355,6 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 function setupGameControls() {
+	// TODO do i gotta get the whole state manager?
 	const { activeTeamIndex } = gameStateManager.get()
 
 	if (activeTeamIndex !== undefined) {
@@ -450,9 +453,9 @@ function setupTeamControls() {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 
-		// e.target.checked
-		// 	? (team1ActiveCheckbox.checked = false)
-		// 	: (team1ActiveCheckbox.checked = true)
+		teamsWrapEl.dataset.activeTeamIndex = String(
+			e.target.checked ? 0 : undefined
+		)
 
 		gameStateManager.setActiveTeam(e.target.checked ? 0 : undefined)
 	}
@@ -461,9 +464,9 @@ function setupTeamControls() {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 
-		// e.target.checked
-		// 	? (team0ActiveCheckbox.checked = false)
-		// 	: (team0ActiveCheckbox.checked = true)
+		teamsWrapEl.dataset.activeTeamIndex = String(
+			e.target.checked ? 1 : undefined
+		)
 
 		gameStateManager.setActiveTeam(e.target.checked ? 1 : undefined)
 	}
@@ -496,7 +499,10 @@ function uiUpdateScores(state) {
 	// console.log({ state })
 	const { teams } = state
 	teams.forEach((team, i) => {
-		const scoreEl = querySelector(`input[name="team-${i}-points]`, HTMLInputElement)
+		const scoreEl = querySelector(
+			`input[name="team-${i}-points]`,
+			HTMLInputElement
+		)
 
 		scoreEl.value = String(team.score)
 	})

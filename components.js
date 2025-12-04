@@ -168,10 +168,10 @@ export function elGameAnswerForPopup(gAnswer) {
 // TODO don't need `isModeratorWindow` because of decoupled event signals
 /**
  * @param {GameAnswer} gAnswer
- * @param {boolean} isModeratorWindow
+ * @param {(checked: boolean) => any} onChange
  * @returns {HTMLElement}
  */
-export const elGameAnswer = (gAnswer, isModeratorWindow = false) => {
+export const elGameAnswerModerator = (gAnswer, onChange) => {
 	const wrap = Object.assign(document.createElement("li"), {
 		className: "answer",
 	})
@@ -183,30 +183,30 @@ export const elGameAnswer = (gAnswer, isModeratorWindow = false) => {
 	})
 	wrap.append(p)
 
-	if (isModeratorWindow) {
-		const pointsLabel = Object.assign(document.createElement("label"), {
-			textContent: `${gAnswer.points} points`,
-		})
-		const pointsCheckbox = Object.assign(document.createElement("input"), {
-			type: "checkbox",
-			value: gAnswer.points,
-		})
-		pointsCheckbox.className = "points"
+	const pointsLabel = Object.assign(document.createElement("label"), {
+		textContent: `${gAnswer.points} points`,
+	})
+	const pointsCheckbox = Object.assign(document.createElement("input"), {
+		type: "checkbox",
+		value: gAnswer.points,
+	})
+	pointsCheckbox.className = "points"
 
-		pointsCheckbox.addEventListener(
-			"change",
-			/** @param {Event} e */
-			(e) => {
-				if (!(e.target instanceof HTMLInputElement))
-					throw new Error("not input el")
+	pointsCheckbox.addEventListener(
+		"change",
+		/** @param {Event} e */
+		(e) => {
+			if (!(e.target instanceof HTMLInputElement))
+				throw new Error("not input el")
+			onChange(e.target.checked)
+			// 		if (roundPhase !== "end") uiPointsDisplay(currentPoints)
+			// gameStateManager.setIsGuessed(gAnswer.id, e.target.checked)
+		}
+	)
 
-				gameStateManager.setIsGuessed(gAnswer.id, e.target.checked)
-			}
-		)
+	pointsLabel.append(pointsCheckbox)
+	wrap.append(pointsLabel)
 
-		pointsLabel.append(pointsCheckbox)
-		wrap.append(pointsLabel)
-	}
 	return wrap
 }
 
