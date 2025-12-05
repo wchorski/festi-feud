@@ -1,18 +1,14 @@
 /**
- * @typedef {import("types/EventDetails").TeamRenamedDetail} TeamRenamedDetail
- * @typedef {import("types/EventDetails").StrikesSetDetail} StrikesSetDetail
- * @typedef {import("types/EventDetails").ActiveTeamDetail} ActiveTeamDetail
- * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
- * @typedef {import("types/EventDetails").RoundEndedDetail} RoundEndedDetail
- * @typedef {import("types/EventDetails").RoundPhaseDetail} RoundPhaseDetail
- * @typedef {import("types/EventDetails").GameWinnerDetail} GameWinnerDetail
  * @typedef {import("types/GameState.js").GameState} GameState
  * @typedef {import("types/GameState.js").Team} Team
- * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS} BC_UPDATE_POINTS
- * @typedef {import("types/BroadcastChannels").BC_TYPE} BC_TYPE
- * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
- * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES} BC_SET_STRIKES
- * @typedef {import("types/BroadcastChannels").BC_TEAM_ACTIVE} BC_TEAM_ACTIVE
+ * @typedef {import("types/BroadcastChannels").BC_GAME_MESSAGE} BC_GAME_MESSAGE
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE_DETAIL} BC_TEAM_UPDATE_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS_DETAIL} BC_UPDATE_POINTS_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES_DETAIL} BC_SET_STRIKES_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_ACTIVE_DETAIL} BC_TEAM_ACTIVE_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_END_ROUND_DETAIL} BC_END_ROUND_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_END_GAME_DETAIL} BC_END_GAME_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_GAME_LOAD_DETAIL} BC_GAME_LOAD_DETAIL
  */
 import {
 	elGameAnswerForPopup,
@@ -20,21 +16,24 @@ import {
 	querySelector,
 	querySelectorAll,
 } from "../components.js"
-import {
-	CHANNEL_TYPES,
-	EVENT_TYPES,
-	events,
-	gameChannel,
-} from "../utils/events.js"
+import { CHANNEL_TYPES, events, gameChannel } from "../utils/events.js"
 import { gameStateManager } from "../utils/gameState.js"
-const { TEAM_ACTIVE, TEAM_RENAME } = EVENT_TYPES
 const teamsWrapEl = getElementById("teams", HTMLDivElement)
 const gameWinnerNameEl = getElementById("game-winner-name", HTMLElement)
 const roundScoreEl = getElementById("round-score", HTMLElement)
+const roundTypeEl = getElementById("round-type", HTMLElement)
+const roundPhaseEl = getElementById("round-phase", HTMLElement)
+const gameRoundEl = getElementById("game-round", HTMLElement)
 const answersList = getElementById("answers", HTMLDListElement)
 const questionEl = getElementById("question", HTMLParagraphElement)
 
 document.addEventListener("DOMContentLoaded", function () {
+	initUi(gameStateManager.get())
+	reactiveEvents()
+})
+
+/** @param {GameState} state  */
+function initUi(state) {
 	const {
 		activeTeamIndex,
 		answers,
@@ -48,15 +47,18 @@ document.addEventListener("DOMContentLoaded", function () {
 		roundType,
 		strikes,
 		teams,
-	} = gameStateManager.get()
+	} = state
 
 	teamsWrapEl.dataset.activeTeamIndex = String(activeTeamIndex)
 
 	const answerEls = answers.map((a) => elGameAnswerForPopup(a))
 	answersList.replaceChildren(...answerEls)
 
+	gameRoundEl.textContent = String(round)
 	document.body.dataset.roundPhase = roundPhase
+	roundPhaseEl.textContent = roundPhase
 	document.body.dataset.roundType = roundType
+	roundTypeEl.textContent = roundType
 	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
 	roundSteal
 		? teamsWrapEl.classList.add("round-steal")
@@ -66,9 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	teams.forEach((team, i) => {
 		uiTeamUpdate(i, team)
 	})
-
-	reactiveEvents()
-})
+}
 
 /**
  * @param {number} i
@@ -103,13 +103,13 @@ function reactiveEvents() {
 	// 	}
 	// )
 
-	/** @param {BC_TEAM_ACTIVE['detail']} detail  */
+	/** @param {BC_TEAM_ACTIVE_DETAIL} detail  */
 	function onActiveTeamSwitch(detail) {
-		const { nextTeamIndex, prevTeamIndex } = detail
+		const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = detail
 		teamsWrapEl.dataset.activeTeamIndex = String(nextTeamIndex)
 	}
 
-	/** @param {BC_SET_STRIKES['detail']} detail  */
+	/** @param {BC_SET_STRIKES_DETAIL} detail  */
 	function onSetStrikes(detail) {
 		const { strikes, roundSteal } = detail
 
@@ -126,51 +126,15 @@ function reactiveEvents() {
 			: teamsWrapEl.classList.remove("round-steal")
 	}
 
-	const onGameWinner = /** @type {EventListener} */ (
-		/** @param {CustomEvent<GameWinnerDetail>} e */
-		(e) => {
-			const { state, highestScoringTeam } = e.detail
-			document.body.dataset.roundPhase = state.roundPhase
-			document.body.dataset.roundType = state.roundType
-			gameWinnerNameEl.textContent = highestScoringTeam.name
-		}
-	)
+	/** @param {BC_END_GAME_DETAIL} detail  */
+	function onGameEnd(detail) {
+		const { state, highestScoringTeam } = detail
+		document.body.dataset.roundPhase = state.roundPhase
+		document.body.dataset.roundType = state.roundType
+		gameWinnerNameEl.textContent = highestScoringTeam.name
+	}
 
-	const onRoundPhase = /** @type {EventListener} */ (
-		/** @param {CustomEvent<RoundPhaseDetail>} e */
-		(e) => {
-			//
-			const { roundPhase } = e.detail
-			document.body.dataset.roundPhase = roundPhase
-		}
-	)
-
-	const onRoundEnd = /** @type {EventListener} */ (
-		/** @param {CustomEvent<RoundEndedDetail>} e */
-		(e) => {
-			// TODO do i really need to send whole state in this event?
-			const { state } = e.detail
-
-			uiUpdateScores(state)
-			console.log("disabled strikes, round steal. turn on winner badge")
-			const { activeTeamIndex, roundSteal, teams } = state
-			if (activeTeamIndex === undefined)
-				throw new Error("activeTeamIndex is undefined")
-
-			const teamStealIndex = (activeTeamIndex + 1) % teams.length
-			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
-
-			teamsWrapEl.dataset.winningTeamIndex = String(winningTeamIndex)
-
-			document.body.dataset.roundType = state.roundType
-			document.body.dataset.roundPhase = state.roundPhase
-			if (state.roundType === "conclusion") {
-				console.log("SHOW GAME OVER AND WINNER NAME")
-			}
-		}
-	)
-
-	/** @param {BC_UPDATE_POINTS['detail']} detail  */
+	/** @param {BC_UPDATE_POINTS_DETAIL} detail  */
 	function onIsGuessed(detail) {
 		const { prevPoints, currentPoints, roundPhase, updatedAnswer } = detail
 		if (roundPhase !== "end") roundScoreEl.textContent = String(currentPoints)
@@ -183,42 +147,80 @@ function reactiveEvents() {
 			: gameAnswerEl.classList.remove("checked")
 	}
 
-	gameChannel.addEventListener("message", (event) => {
-		// const message = /** @type {MessageEvent<BC_UPDATE_POINTS>} */ (event)
-		/** @type {BC_TYPE} */
-		const type = event.data.type
-		const detail = event.data.detail
+	/** @param {BC_END_ROUND_DETAIL} detail  */
+	function onEndRound(detail) {
+		const { state } = detail
+		uiUpdateScores(state)
+		console.log("disabled strikes, round steal. turn on winner badge")
+		const { activeTeamIndex, roundSteal, teams } = state
+		if (activeTeamIndex === undefined)
+			throw new Error("activeTeamIndex is undefined")
 
-		switch (type) {
-			case CHANNEL_TYPES.UPDATE_POINTS:
-				onIsGuessed(detail)
-				break
-			case CHANNEL_TYPES.TEAM_UPDATE:
-				/** @type {BC_TEAM_UPDATE['detail']} */
-				const { index, teamUpdate } = detail
-				uiTeamUpdate(index, teamUpdate)
-				break
-			case CHANNEL_TYPES.SET_STRIKES:
-				onSetStrikes(detail)
-				break
-			case CHANNEL_TYPES.TEAM_ACTIVE:
-				onActiveTeamSwitch(detail)
-				break
+		const teamStealIndex = (activeTeamIndex + 1) % teams.length
+		const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
 
-			default:
-				break
+		const winningTeamEl = getElementById(
+			`team-${winningTeamIndex}`,
+			HTMLElement
+		)
+		winningTeamEl.classList.add("winner")
+
+		document.body.dataset.roundType = state.roundType
+		document.body.dataset.roundPhase = state.roundPhase
+		// TODO move to onEndGame
+		// if (state.roundType === "conclusion") {
+		// 	gameWinnerNameEl.textContent = state.teams[0].name
+		// }
+	}
+
+	/** @param {BC_GAME_LOAD_DETAIL} detail  */
+	function onGameLoad(detail) {
+		const { state } = detail
+		console.log("onGameLoad: ", state)
+		initUi(state)
+	}
+
+	gameChannel.addEventListener(
+		"message",
+		/** @param {MessageEvent<BC_GAME_MESSAGE>} event */
+		(event) => {
+			// const message = /** @type {MessageEvent<BC_UPDATE_POINTS>} */ (event)
+			// /** @type {BC_TYPE} */
+			// const type = event.data.type
+			// const detail = event.data.detail
+
+			const { type, detail } = event.data
+
+			switch (type) {
+				case CHANNEL_TYPES.UPDATE_POINTS:
+					onIsGuessed(detail)
+					break
+				case CHANNEL_TYPES.TEAM_UPDATE:
+					/** @type {Extract<BC_GAME_MESSAGE, { type: "game:teamUpdate" }>["detail"]} */
+					const { index, teamUpdate } = detail
+					uiTeamUpdate(index, teamUpdate)
+					break
+				case CHANNEL_TYPES.SET_STRIKES:
+					onSetStrikes(detail)
+					break
+				case CHANNEL_TYPES.TEAM_ACTIVE:
+					onActiveTeamSwitch(detail)
+					break
+				case CHANNEL_TYPES.END_ROUND:
+					onEndRound(detail)
+					break
+				case CHANNEL_TYPES.END_GAME:
+					onGameEnd(detail)
+					break
+				case CHANNEL_TYPES.GAME_LOAD:
+					onGameLoad(detail)
+					break
+
+				default:
+					break
+			}
 		}
-	})
-
-	// events.addEventListener(TEAM_RENAME, onTeamRename)
-	// events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
-	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
-	// events.addEventListener(CHANNEL_TYPES.UPDATE_POINTS, onIsGuessed)
-	// events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
-	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
-	events.addEventListener(EVENT_TYPES.END_ROUND, onRoundEnd)
-	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
-	events.addEventListener(EVENT_TYPES.GAME_WINNER, onGameWinner)
+	)
 }
 
 // TODO move this to /ui.js
@@ -226,7 +228,7 @@ function reactiveEvents() {
 function uiUpdateScores(state) {
 	const { teams } = state
 	teams.forEach((team, i) => {
-		const scoreEl = getElementById(`team-${i}`, HTMLSpanElement)
+		const scoreEl = getElementById(`team-${i}-score`, HTMLSpanElement)
 
 		scoreEl.textContent = String(team.score)
 	})

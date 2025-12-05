@@ -5,11 +5,9 @@
  * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
  * @typedef {import("types/EventDetails").RoundEndedDetail} RoundEndedDetail
  * @typedef {import("types/EventDetails").RoundPhaseDetail} RoundPhaseDetail
- * @typedef {import("types/EventDetails").GameWinnerDetail} GameWinnerDetail
+ * @typedef {import("types/EventDetails").GameEndDetail} GameEndDetail
  * @typedef {import("types/GameState.js").GameState} GameState
  * @typedef {import("types/GameState.js").Team} Team
- * @typedef {import("types/BroadcastChannels").BC_TYPE} BC_TYPE
- * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
  */
 
 import {
@@ -133,7 +131,7 @@ function uiTeamUpdate(i, team) {
 	// 	throw new Error(`input team-${i}-name not found`)
 	// if (team.name) nameInput.value = team.name
 
-	const pointsInput = teamWrapEl.querySelector(`input[name="team-${i}-points"]`)
+	const pointsInput = teamWrapEl.querySelector(`input[name="team-${i}-score"]`)
 	if (!(pointsInput instanceof HTMLInputElement))
 		throw new Error(`input team-${i}-name not found`)
 	if (team.score) pointsInput.value = String(team.score)
@@ -238,27 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	}
 	// )
 
-	const onRoundEnded = /** @type {EventListener} */ (
-		/** @param {CustomEvent<RoundEndedDetail>} e */
-		(e) => {
-			const { state } = e.detail
-			uiUpdateScores(state)
-			console.log("disabled strikes, round steal. turn on winner badge")
-			const { activeTeamIndex, roundSteal, teams } = state
-			if (activeTeamIndex === undefined)
-				throw new Error("activeTeamIndex is undefined")
-
-			const teamStealIndex = (activeTeamIndex + 1) % teams.length
-			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
-
-			const winningTeamEl = getElementById(
-				`team-${winningTeamIndex}`,
-				HTMLElement
-			)
-			winningTeamEl.classList.add("winner")
-		}
-	)
-
 	// const onRoundNext = /** @type {EventListener} */ (
 	// 	/** @param {CustomEvent<RoundEndedDetail>} e */
 	// 	(e) => {
@@ -268,28 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 		// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
 	// 	}
 	// )
-	const onRoundEnd = /** @type {EventListener} */ (
-		/** @param {CustomEvent<RoundEndedDetail>} e */
-		(e) => {
-			// TODO do i really need to send whole state in this event?
-			const { state } = e.detail
-			console.log("onRoundNext")
-			document.body.dataset.roundType = state.roundType
-			document.body.dataset.roundPhase = state.roundPhase
-			if (!(state.roundType === "conclusion")) {
-				nextRoundDetailsEl.open = true
-			}
-		}
-	)
-
-	const onRoundPhase = /** @type {EventListener} */ (
-		/** @param {CustomEvent<RoundPhaseDetail>} e */
-		(e) => {
-			//
-			const { roundPhase } = e.detail
-			document.body.dataset.roundPhase = roundPhase
-		}
-	)
 
 	// const onActiveTeamId = /** @type {EventListener} */ (
 	// 	/** @param {CustomEvent<ActiveTeamDetail>} e */
@@ -300,8 +255,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	}
 	// )
 
-	const onGameWinner = /** @type {EventListener} */ (
-		/** @param {CustomEvent<GameWinnerDetail>} e */
+	const onEndGame = /** @type {EventListener} */ (
+		/** @param {CustomEvent<GameEndDetail>} e */
 		(e) => {
 			const { state, highestScoringTeam } = e.detail
 			document.body.dataset.roundPhase = state.roundPhase
@@ -340,21 +295,45 @@ document.addEventListener("DOMContentLoaded", function () {
 	// events.addEventListener(TEAM_RENAME, onTeamRename)
 	// events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
 	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
-	events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
+	// events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
 	// events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
 	// TODO don't need below line if above line works
 	// events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
 	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
-	// TODO combine with `onRoundEnded`
-	events.addEventListener(EVENT_TYPES.END_ROUND, onRoundEnd)
-	events.addEventListener(EVENT_TYPES.SET_ROUNDPHASE, onRoundPhase)
 	// // TODO can't i combine below with `onActiveTeamSwitch`?
 	// events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
-	events.addEventListener(EVENT_TYPES.GAME_WINNER, onGameWinner)
+	events.addEventListener(EVENT_TYPES.END_GAME, onEndGame)
 
 	setupTeamControls()
 	setupGameControls()
 })
+
+/** @param {GameState} state  */
+function onEndRound(state) {
+	uiUpdateScores(state)
+	console.log("disabled strikes, round steal. turn on winner badge")
+	const { activeTeamIndex, roundSteal, teams } = state
+	if (activeTeamIndex === undefined)
+		throw new Error("activeTeamIndex is undefined")
+
+	const teamStealIndex = (activeTeamIndex + 1) % teams.length
+	const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+
+	const winningTeamEl = getElementById(`team-${winningTeamIndex}`, HTMLElement)
+	winningTeamEl.classList.add("winner")
+
+	if (state.roundPhase !== "conclusion") {
+		nextRoundDetailsEl.open = true
+	}
+	// TODO move to onEndGame
+	// else {
+	// 	const gameWinnerNameEl = getElementById(
+	// 		"game-winner-name",
+	// 		HTMLHeadingElement
+	// 	)
+	// 	gameWinnerNameEl.textContent = state.teams[0].name
+	// }
+}
 
 function setupGameControls() {
 	// TODO do i gotta get the whole state manager?
@@ -414,8 +393,8 @@ function setupGameControls() {
 	// })
 
 	endRoundBtn.onclick = (e) => {
-		// gameStateManager.awardPoints()
 		gameStateManager.endRound()
+		onEndRound(gameStateManager.get())
 	}
 	resetGameBtn.onclick = (e) => {
 		gameStateManager.reset()
@@ -426,13 +405,14 @@ function setupGameControls() {
 function setupTeamControls() {
 	const team0NameInput = getElementById("team-0-name", HTMLInputElement)
 	const team1NameInput = getElementById("team-1-name", HTMLInputElement)
-	const team0PointsInput = getElementById("team-0-points", HTMLInputElement)
-	const team1PointsInput = getElementById("team-1-points", HTMLInputElement)
+	const team0ScoreInput = getElementById("team-0-score", HTMLInputElement)
+	const team1ScoreInput = getElementById("team-1-score", HTMLInputElement)
 
 	team0NameInput.oninput = (e) => {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 		gameStateManager.updateTeam(0, { name: e.target.value })
+		// TODO remove the h2 tag. let Input be the display and for user input
 		uiTeamUpdate(0, { name: e.target.value })
 	}
 
@@ -440,14 +420,16 @@ function setupTeamControls() {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 		gameStateManager.setTeamName(1, e.target.value)
+		// TODO remove the h2 tag. let Input be the display and for user input
+		uiTeamUpdate(1, { name: e.target.value })
 	}
 
-	team0PointsInput.oninput = (e) => {
+	team0ScoreInput.oninput = (e) => {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 		gameStateManager.updateTeam(0, { score: Number(e.target.value) })
 	}
-	team1PointsInput.oninput = (e) => {
+	team1ScoreInput.oninput = (e) => {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
 		gameStateManager.updateTeam(1, { score: Number(e.target.value) })
@@ -504,7 +486,7 @@ function uiUpdateScores(state) {
 	const { teams } = state
 	teams.forEach((team, i) => {
 		const scoreEl = querySelector(
-			`input[name="team-${i}-points]`,
+			`input[name="team-${i}-score"]`,
 			HTMLInputElement
 		)
 

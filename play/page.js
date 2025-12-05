@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		HTMLUListElement
 	)
 
+  // react to inputs from the /buzzer/index.html page
 	buzzerChannel.onmessage = (event) => {
 		const { teamIndex, timestamp } = event.data
 		// console.log(`Team ${teamIndex} buzzed at ${timestamp}`)
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		// handleBuzzer(team, timestamp)
 	}
 
+  // react to same page keyboard presses 
 	document.addEventListener("keydown", (event) => {
 		const { key, code } = event
 		// console.log({ key })

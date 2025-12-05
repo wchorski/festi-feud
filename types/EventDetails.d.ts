@@ -39,7 +39,7 @@ export type BuzzerDetail = {
 	disabled: boolean
 	activeTeamIndex: number
 }
-export type GameWinnerDetail = {
+export type GameEndDetail = {
 	state: GameState
 	highestScoringTeam: Team
 }

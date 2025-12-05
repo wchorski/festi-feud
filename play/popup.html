@@ -12,7 +12,14 @@
 	<body>
 		<section id="playfield" class="polka-dots">
 			<h2>Game Winner: <span id="game-winner-name"></span></h2>
-			<h2 id="question">QUESTION</h2>
+			<div>
+				<span id="round-type">ROUND_TYPE</span>
+        -
+				<span id="round-phase">ROUND_PHASE</span>
+				-
+				<span id="game-round">ROUND_PHASE</span>
+				<h2 id="question">QUESTION</h2>
+			</div>
 			<span id="round-score" class="score">30</span>
 
 			<ul id="answers">
@@ -38,13 +45,13 @@
 			<div id="teams" class="teams grid col-2">
 				<div id="team-0" class="team a">
 					<h2>Dream Team</h2>
-					<span class="points a">24</span>
+					<span id="team-0-score" class="points a">24</span>
 					<p class="steal-badge">STEAL</p>
 					<p class="winner-badge">WINNER</p>
 				</div>
 				<div id="team-1" class="team b">
 					<h2>The Sparkle Sunshine Cosmic Rays</h2>
-					<span class="points b">132</span>
+					<span id="team-1-score" class="points b">132</span>
 					<p class="steal-badge">STEAL</p>
 					<p class="winner-badge">WINNER</p>
 				</div>

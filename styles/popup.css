@@ -32,6 +32,12 @@ article.answer {
 	}
 }
 
+body[data-round-type="face-off"] {
+	& #strikes {
+		visibility: hidden;
+	}
+}
+
 body[data-round-phase="ingame"] .answer.checked {
 	opacity: 1;
 
@@ -48,7 +54,7 @@ body[data-round-phase="end"] .answer.checked {
 }
 
 .team {
-  /* TODO prob should match moderater ui with popup */
+	/* TODO prob should match moderater ui with popup */
 	padding: 0 !important;
 	margin-inline: auto;
 	width: clamp(11rem, 18rem, 100%);

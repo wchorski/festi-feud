@@ -4,15 +4,19 @@
  * @typedef {import('types/GameState.js').GameAnswer} GameAnswer
  * @typedef {import("types/Question.js").Question} Question
  * @typedef {import("types/EventDetails").SetPointsDetail} SetPointsDetail
- * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS} BC_UPDATE_POINTS
- * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE} BC_TEAM_UPDATE
- * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES} BC_SET_STRIKES
- * @typedef {import("types/BroadcastChannels").BC_TEAM_ACTIVE} BC_TEAM_ACTIVE
+ * @typedef {import("types/BroadcastChannels").BC_GAME_MESSAGE} BC_GAME_MESSAGE
+ * @typedef {import("types/BroadcastChannels").BC_UPDATE_POINTS_DETAIL} BC_UPDATE_POINTS_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_UPDATE_DETAIL} BC_TEAM_UPDATE_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_SET_STRIKES_DETAIL} BC_SET_STRIKES_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_TEAM_ACTIVE_DETAIL} BC_TEAM_ACTIVE_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_END_ROUND_DETAIL} BC_END_ROUND_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_END_GAME_DETAIL} BC_END_GAME_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_GAME_LOAD_DETAIL} BC_GAME_LOAD_DETAIL
  */
 import { events, EVENT_TYPES, gameChannel, CHANNEL_TYPES } from "./events.js"
 
 /** @type {GameState} */
-const initGameState = {
+const initState = {
 	round: 1,
 	points: 0,
 	pointMultiplier: 1,
@@ -30,7 +34,6 @@ const initGameState = {
 	answers: [],
 }
 
-// TODO save gamestate to local storage as to persist if browser is refreshed
 /**
  * Singleton Game State Manager
  * Ensures only one instance of the game state exists
@@ -45,28 +48,44 @@ class GameStateManager {
 	 * @param {Partial<GameState>} [initialState] - Optional initial state
 	 * @param {string} [storageKey]
 	 */
-	constructor(initialState = initGameState, storageKey = "gameState") {
+	constructor(initialState = initState, storageKey = "gameState") {
 		// If instance already exists, return it (Singleton Pattern)
 		if (GameStateManager.instance) return GameStateManager.instance
 		this.storageKey = storageKey
 		const localStorageState = this.getStoredData()
+
+		// TODO couldn't I just spread together. letting initstate override any missing values?
 		const stateToUse = localStorageState || initialState
-		// Initialize state with defaults
+
+		const {
+			round,
+			points,
+			pointMultiplier,
+			roundType,
+			roundPhase,
+			roundSteal,
+			teams,
+			isBuzzersActive,
+			activeTeamIndex,
+			strikes,
+			question,
+			answers,
+		} = stateToUse
+
 		/** @type {GameState} */
 		this.state = {
-			round: stateToUse.round ?? initGameState.round,
-			points: 0,
-			pointMultiplier: 1,
-			roundType: stateToUse.roundType ?? initGameState.roundType,
-			roundPhase: stateToUse.roundPhase ?? initGameState.roundPhase,
-			roundSteal: false,
-			teams: stateToUse.teams ?? initGameState.teams,
-			isBuzzersActive:
-				stateToUse.isBuzzersActive ?? initGameState.isBuzzersActive,
-			activeTeamIndex: stateToUse.activeTeamIndex,
-			strikes: stateToUse.strikes ?? 0,
-			question: undefined,
-			answers: stateToUse.answers ?? [],
+			round: round ?? initState.round,
+			points: points ?? initState.points,
+			pointMultiplier: pointMultiplier ?? initState.pointMultiplier,
+			roundType: roundType ?? initState.roundType,
+			roundPhase: roundPhase ?? initState.roundPhase,
+			roundSteal: roundSteal ?? initState.roundSteal,
+			teams: teams ?? initState.teams,
+			isBuzzersActive: isBuzzersActive ?? initState.isBuzzersActive,
+			activeTeamIndex: activeTeamIndex ?? initState.activeTeamIndex,
+			strikes: strikes ?? initState.strikes,
+			question: question ?? initState.question,
+			answers: answers ?? initState.answers,
 		}
 
 		// Store the instance
@@ -113,6 +132,15 @@ class GameStateManager {
 
 		// Save to localStorage
 		this.save()
+
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.GAME_LOAD,
+			detail: {
+				state: this.state,
+			},
+		}
+		gameChannel.postMessage(message)
 	}
 
 	// TODO i'll need to this.save() on any function that manipulates this.state. or should i funnel all funcs to this.set()?
@@ -182,11 +210,7 @@ class GameStateManager {
 			// if (updateValue !== undefined) {
 			//@ts-ignore
 			this.state[updateKey] = updateValue
-			// console.log(
-			// 	"GameState this.state: ",
-			// 	this.state
-			// 	// JSON.stringify(this.state, null, 2)
-			// )
+
 			// }
 			// TODO does not account for `activeTeamIndex` and `question` which can be set as undefined
 			// else {
@@ -214,11 +238,12 @@ class GameStateManager {
 	setRoundPhase(roundPhase) {
 		this.state.roundPhase = roundPhase
 		this.save()
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.SET_ROUNDPHASE, {
-				detail: { roundPhase },
-			})
-		)
+		// TODO round phase is fetched on new page load. Making this reactive can jumble a game session
+		// events.dispatchEvent(
+		// 	new CustomEvent(EVENT_TYPES.SET_ROUNDPHASE, {
+		// 		detail: { roundPhase },
+		// 	})
+		// )
 	}
 
 	endRound() {
@@ -230,27 +255,50 @@ class GameStateManager {
 		// other funcs save the data
 		this.save()
 
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.END_ROUND,
+			detail: {
+				state: this.state,
+			},
+		}
+
+		gameChannel.postMessage(message)
+
+		// events.dispatchEvent(
+		// 	new CustomEvent(EVENT_TYPES.END_ROUND, {
+		// 		detail: { state: this.state },
+		// 	})
+		// )
+	}
+
+	endGame() {
+		this.state.roundType = "conclusion"
+		this.state.roundPhase = "conclusion"
+
+		this.save()
+
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.END_GAME,
+			detail: this.gameWinner,
+		}
+		gameChannel.postMessage(message)
+
+		//? keeping this event dispatch because I want to keep game logic (if passing last round) inside `this`
 		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.END_ROUND, {
-				detail: { state: this.state },
+			new CustomEvent(EVENT_TYPES.END_GAME, {
+				detail: this.gameWinner,
 			})
 		)
 	}
 
-	endGame() {
+	get gameWinner() {
 		const { teams } = this.state
-		this.state.roundType = "conclusion"
-		this.state.roundPhase = "conclusion"
-
+		// TODO this mutates array. may not want this later if adding more than 2 players
 		teams.sort((a, b) => b.score - a.score)
 
-		this.save()
-
-		events.dispatchEvent(
-			new CustomEvent(EVENT_TYPES.GAME_WINNER, {
-				detail: { state: this.state, highestScoringTeam: teams[0] },
-			})
-		)
+		return { state: this.state, highestScoringTeam: teams[0] }
 	}
 
 	// TODO remove this and replace with `updateTeam`
@@ -299,17 +347,18 @@ class GameStateManager {
 
 		this.save()
 
-		gameChannel.postMessage(
-			/** @type {BC_UPDATE_POINTS} */ ({
-				type: CHANNEL_TYPES.UPDATE_POINTS,
-				detail: {
-					prevPoints,
-					currentPoints: this.state.points,
-					roundPhase,
-					updatedAnswer: { id, isGuessed },
-				},
-			})
-		)
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.UPDATE_POINTS,
+			detail: {
+				prevPoints,
+				currentPoints: this.state.points,
+				roundPhase,
+				updatedAnswer: { id, isGuessed },
+			},
+		}
+
+		gameChannel.postMessage(message)
 		// events.dispatchEvent(
 		// 	/** @type {CustomEvent<SetPointsDetail>} */ (
 		// 		new CustomEvent(EVENT_TYPES.UPDATE_POINTS, {
@@ -351,12 +400,13 @@ class GameStateManager {
 
 		this.save()
 
-		gameChannel.postMessage(
-			/** @type {BC_SET_STRIKES} */ ({
-				type: CHANNEL_TYPES.SET_STRIKES,
-				detail: { strikes, roundSteal: this.state.roundSteal },
-			})
-		)
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.SET_STRIKES,
+			detail: { strikes, roundSteal: this.state.roundSteal },
+		}
+
+		gameChannel.postMessage(message)
 		// events.dispatchEvent(
 		// 	new CustomEvent(EVENT_TYPES.SET_STRIKES, {
 		// 		detail: { strikes, roundSteal: this.state.roundSteal },
@@ -488,16 +538,16 @@ class GameStateManager {
 
 		this.save()
 
-		gameChannel.postMessage(
-			/** @type {BC_TEAM_ACTIVE} */ ({
-				type: CHANNEL_TYPES.TEAM_ACTIVE,
-				detail: {
-					prevTeamIndex,
-					nextTeamIndex: teamIndex,
-					isBuzzersActive,
-				},
-			})
-		)
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.TEAM_ACTIVE,
+			detail: {
+				prevTeamIndex,
+				nextTeamIndex: teamIndex,
+				isBuzzersActive,
+			},
+		}
+		gameChannel.postMessage(message)
 
 		// events.dispatchEvent(
 		// 	new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
@@ -540,15 +590,15 @@ class GameStateManager {
 
 		this.save()
 
-		gameChannel.postMessage(
-			/** @type {BC_TEAM_UPDATE} */ ({
-				type: CHANNEL_TYPES.TEAM_UPDATE,
-				detail: {
-					index,
-					teamUpdate,
-				},
-			})
-		)
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.TEAM_UPDATE,
+			detail: {
+				index,
+				teamUpdate,
+			},
+		}
+		gameChannel.postMessage(message)
 
 		// events.dispatchEvent(
 		// 	new CustomEvent(EVENT_TYPES.TEAM_UPDATE, {
@@ -602,7 +652,7 @@ class GameStateManager {
 	/** Reset state for a whole new game */
 	reset() {
 		localStorage.removeItem(this.storageKey)
-		this.set(initGameState, EVENT_TYPES.STATE_CHANGED)
+		this.set(initState, EVENT_TYPES.STATE_CHANGED)
 	}
 
 	/**

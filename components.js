@@ -121,19 +121,19 @@ export const voteButtons = (label) => {
 	return container
 }
 
-/**
- * @param {number|undefined} prevIndex
- * @param {number|undefined} nextIndex
- * @param {Window|null} window
- * */
-export function uiActiveTeam(prevIndex, nextIndex, window) {
-	const prevTeamEl = window?.document.getElementById(`team-${prevIndex}`)
-	const nextTeamEl = window?.document.getElementById(`team-${nextIndex}`)
-	// TODO no like cuz index can be `undefined`
-	// if (!prevTeamEl || !nextTeamEl) throw new Error("no prevTeamEl or prevTeamEl")
-	if (prevTeamEl) prevTeamEl.classList.remove("active")
-	if (nextTeamEl) nextTeamEl.classList.add("active")
-}
+// /**
+//  * @param {number|undefined} prevIndex
+//  * @param {number|undefined} nextIndex
+//  * @param {Window|null} window
+//  * */
+// export function uiActiveTeam(prevIndex, nextIndex, window) {
+// 	const prevTeamEl = window?.document.getElementById(`team-${prevIndex}`)
+// 	const nextTeamEl = window?.document.getElementById(`team-${nextIndex}`)
+// 	// TODO no like cuz index can be `undefined`
+// 	// if (!prevTeamEl || !nextTeamEl) throw new Error("no prevTeamEl or prevTeamEl")
+// 	if (prevTeamEl) prevTeamEl.classList.remove("active")
+// 	if (nextTeamEl) nextTeamEl.classList.add("active")
+// }
 
 /**
  * @param {GameAnswer} gAnswer
