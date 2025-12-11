@@ -505,25 +505,36 @@ class GameStateManager {
 		)
 	}
 
-	/**. @param {number|undefined} teamIndex  */
-	buzzIn(teamIndex) {
+	/**. @param {number|undefined} nextTeamIndex  */
+	buzzIn(nextTeamIndex) {
 		const { isBuzzersActive, activeTeamIndex } = this.state
 		// TODO show toast notification
 		if (activeTeamIndex !== undefined)
-			return console.log(`activeTeamIndex is set to ${activeTeamIndex}`)
+			return console.log(`activeTeamIndex is already set to ${activeTeamIndex}`)
 		if (!isBuzzersActive) return console.log("isBuzzersActive is false")
-		const { activeTeamIndex: prevIndex } = this.state
+		const { activeTeamIndex: prevTeamIndex } = this.state
 
-		this.state.activeTeamIndex = teamIndex
+		this.state.activeTeamIndex = nextTeamIndex
 		this.state.isBuzzersActive = false
 
 		this.save()
 
+		/** @type {BC_GAME_MESSAGE} */
+		const message = {
+			type: CHANNEL_TYPES.GAME_BUZZIN,
+			detail: {
+				prevTeamIndex,
+				nextTeamIndex,
+				isBuzzersActive,
+			},
+		}
+		gameChannel.postMessage(message)
+
 		events.dispatchEvent(
 			new CustomEvent(EVENT_TYPES.TEAM_ACTIVE, {
 				detail: {
-					nextTeamIndex: teamIndex,
-					prevTeamIndex: prevIndex,
+					nextTeamIndex,
+					prevTeamIndex,
 					isBuzzersActive: false,
 				},
 			})

@@ -9,150 +9,156 @@
 		<link rel="stylesheet" href="/styles/popup.css" />
 		<script src="./popup.js" type="module" defer></script>
 	</head>
-	<body>
-		<section id="playfield" class="polka-dots">
-			<h2>Game Winner: <span id="game-winner-name"></span></h2>
-			<div>
-				<span id="round-type">ROUND_TYPE</span>
-        -
-				<span id="round-phase">ROUND_PHASE</span>
-				-
-				<span id="game-round">ROUND_PHASE</span>
-				<h2 id="question">QUESTION</h2>
-			</div>
-			<span id="round-score" class="score">30</span>
+	<body class="polka-dots">
+		<main class="layout-width-wide">
+			<section id="playfield">
+				<h2 class="gradient-box-3">
+					Game Winner: <span id="game-winner-name"></span>
+				</h2>
+				<div>
+					<span id="round-type">ROUND_TYPE</span>
+					-
+					<span id="round-phase">ROUND_PHASE</span>
+					-
+					<span id="game-round">ROUND_PHASE</span>
+					<h2 id="question">QUESTION</h2>
+				</div>
+				<span id="round-score" class="score">30</span>
 
-			<ul id="answers">
-				<li>
-					<article class="answer">
-						<p>Food and snacks</p>
-						<span class="points">30</span>
-					</article>
-				</li>
-				<li>
-					<article class="answer">
-						<p>Cooler with food and drinks that are spoiled</p>
-						<span class="points">12</span>
-					</article>
-				</li>
-				<li>3</li>
-				<li>4</li>
-				<li>5</li>
-				<li>6</li>
-				<li>7</li>
-				<li>8</li>
-			</ul>
-			<div id="teams" class="teams grid col-2">
-				<div id="team-0" class="team a">
-					<h2>Dream Team</h2>
-					<span id="team-0-score" class="points a">24</span>
-					<p class="steal-badge">STEAL</p>
-					<p class="winner-badge">WINNER</p>
+				<div class="grid col--1-2-1">
+					<ul id="answers">
+						<li>
+							<article class="answer">
+								<p>Food and snacks</p>
+								<span class="points">30</span>
+							</article>
+						</li>
+						<li>
+							<article class="answer">
+								<p>Cooler with food and drinks that are spoiled</p>
+								<span class="points">12</span>
+							</article>
+						</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>6</li>
+						<li>7</li>
+						<li>8</li>
+					</ul>
+					<div id="teams" class="teams grid col-2">
+						<div id="team-0" class="team a">
+							<h2>Dream Team</h2>
+							<span id="team-0-score" class="points a">24</span>
+							<p class="steal-badge">STEAL</p>
+							<p class="winner-badge">WINNER</p>
+						</div>
+						<div id="team-1" class="team b">
+							<h2>The Sparkle Sunshine Cosmic Rays</h2>
+							<span id="team-1-score" class="points b">132</span>
+							<p class="steal-badge">STEAL</p>
+							<p class="winner-badge">WINNER</p>
+						</div>
+					</div>
 				</div>
-				<div id="team-1" class="team b">
-					<h2>The Sparkle Sunshine Cosmic Rays</h2>
-					<span id="team-1-score" class="points b">132</span>
-					<p class="steal-badge">STEAL</p>
-					<p class="winner-badge">WINNER</p>
+			</section>
+			<section>
+				<div id="strikes" class="strikes">
+					<svg
+						data-disabled="true"
+						class="strike"
+						width="109"
+						height="137"
+						viewBox="0 0 309 337"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<rect
+							x="9"
+							y="9"
+							width="291"
+							height="319"
+							rx="25"
+							stroke="currentColor"
+							stroke-width="18"
+						/>
+						<path
+							d="M42 42L266 294"
+							stroke="currentColor"
+							stroke-width="31"
+							stroke-linecap="round"
+						/>
+						<path
+							d="M266.131 42L42 294.391"
+							stroke="currentColor"
+							stroke-width="31"
+							stroke-linecap="round"
+						/>
+					</svg>
+					<svg
+						data-disabled="true"
+						class="strike"
+						width="109"
+						height="137"
+						viewBox="0 0 309 337"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<rect
+							x="9"
+							y="9"
+							width="291"
+							height="319"
+							rx="25"
+							stroke="currentColor"
+							stroke-width="18"
+						/>
+						<path
+							d="M42 42L266 294"
+							stroke="currentColor"
+							stroke-width="31"
+							stroke-linecap="round"
+						/>
+						<path
+							d="M266.131 42L42 294.391"
+							stroke="currentColor"
+							stroke-width="31"
+							stroke-linecap="round"
+						/>
+					</svg>
+					<svg
+						data-disabled="true"
+						class="strike"
+						width="109"
+						height="137"
+						viewBox="0 0 309 337"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<rect
+							x="9"
+							y="9"
+							width="291"
+							height="319"
+							rx="25"
+							stroke="currentColor"
+							stroke-width="18"
+						/>
+						<path
+							d="M42 42L266 294"
+							stroke="currentColor"
+							stroke-width="31"
+							stroke-linecap="round"
+						/>
+						<path
+							d="M266.131 42L42 294.391"
+							stroke="currentColor"
+							stroke-width="31"
+							stroke-linecap="round"
+						/>
+					</svg>
 				</div>
-			</div>
-		</section>
-		<section>
-			<div id="strikes" class="strikes">
-				<svg
-					data-disabled="true"
-					class="strike"
-					width="109"
-					height="137"
-					viewBox="0 0 309 337"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect
-						x="9"
-						y="9"
-						width="291"
-						height="319"
-						rx="25"
-						stroke="currentColor"
-						stroke-width="18"
-					/>
-					<path
-						d="M42 42L266 294"
-						stroke="currentColor"
-						stroke-width="31"
-						stroke-linecap="round"
-					/>
-					<path
-						d="M266.131 42L42 294.391"
-						stroke="currentColor"
-						stroke-width="31"
-						stroke-linecap="round"
-					/>
-				</svg>
-				<svg
-					data-disabled="true"
-					class="strike"
-					width="109"
-					height="137"
-					viewBox="0 0 309 337"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect
-						x="9"
-						y="9"
-						width="291"
-						height="319"
-						rx="25"
-						stroke="currentColor"
-						stroke-width="18"
-					/>
-					<path
-						d="M42 42L266 294"
-						stroke="currentColor"
-						stroke-width="31"
-						stroke-linecap="round"
-					/>
-					<path
-						d="M266.131 42L42 294.391"
-						stroke="currentColor"
-						stroke-width="31"
-						stroke-linecap="round"
-					/>
-				</svg>
-				<svg
-					data-disabled="true"
-					class="strike"
-					width="109"
-					height="137"
-					viewBox="0 0 309 337"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect
-						x="9"
-						y="9"
-						width="291"
-						height="319"
-						rx="25"
-						stroke="currentColor"
-						stroke-width="18"
-					/>
-					<path
-						d="M42 42L266 294"
-						stroke="currentColor"
-						stroke-width="31"
-						stroke-linecap="round"
-					/>
-					<path
-						d="M266.131 42L42 294.391"
-						stroke="currentColor"
-						stroke-width="31"
-						stroke-linecap="round"
-					/>
-				</svg>
-			</div>
-		</section>
+			</section>
+		</main>
 	</body>
 </html>

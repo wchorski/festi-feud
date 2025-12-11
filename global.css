@@ -1,23 +1,21 @@
+#buzzers-active {
+	padding-inline: 4px;
+
+	&.true {
+		background-color: green;
+	}
+	&.false {
+		background-color: grey;
+	}
+}
+
 body {
-	max-width: 60em;
-	margin-inline: auto;
+	background-color: red;
 }
-
-#buzzers-active{
-  padding-inline: 4px;
-
-  &.true {
-    background-color: green;
-  }
-  &.false {
-    background-color: grey;
-  }
-}
-
 @media (prefers-color-scheme: dark) {
 	body,
 	button {
-		background: #0c0c0c;
+		background-color: #040404;
 		color: #bbddc4;
 	}
 	#sync-state {
@@ -47,10 +45,10 @@ body {
 	a:link {
 		color: orange;
 	}
-	a:visited  {
+	a:visited {
 		color: rgb(180, 117, 0);
 	}
-	a:active  {
+	a:active {
 		color: rgb(81, 124, 123);
 	}
 
@@ -59,10 +57,10 @@ body {
 	}
 }
 
-a{
-  transition-property: color, filter;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-out;
+a {
+	transition-property: color, filter;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-out;
 }
 
 a:hover {
@@ -227,6 +225,9 @@ button.delete {
 .col-3 {
 	grid-template-columns: 1fr 1fr 1fr;
 }
+.col--1-2-1 {
+	grid-template-columns: 1fr 2fr 1fr;
+}
 
 #sync-state {
 	background-color: rgb(177, 177, 177);
@@ -275,6 +276,50 @@ button.delete {
 		transform: translateY(0);
 	}
 }
+
+.gradient-box-3 {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.gradient-box-3::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	aspect-ratio: 1/1;
+	background: conic-gradient(transparent, transparent, transparent, #00ff1c);
+	animation: rotate 2s linear infinite;
+  z-index: -1;
+}
+
+.gradient-box-3::after {
+	content: "";
+	position: absolute;
+	inset: 4px;
+	background: #20472e;
+	border-radius: 8px;
+  z-index: -1;
+}
+
+.gradient-box-3 > div, .gradient-box-3 > span {
+	position: relative;
+	z-index: 1;
+	color: #fff;
+	font-weight: 600;
+}
+
+@keyframes rotate {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 .emoji-thumbnail {
 	& .delete-btn {
 		transition: opacity, scale 300ms;
@@ -290,4 +335,26 @@ button.delete {
 
 details > summary {
 	cursor: pointer;
+}
+
+/** LAYOUTS */
+.layout-width-normal {
+	max-width: 60em;
+	margin-inline: auto;
+}
+.layout-width-wide {
+	max-width: 100em;
+	margin-inline: auto;
+}
+
+@media screen and (width < 1200px) {
+	.col--1-2-1 {
+		grid-template-columns: 1fr;
+
+		& > ul,
+		& > div > div {
+			grid-row: unset;
+			grid-column: unset;
+		}
+	}
 }

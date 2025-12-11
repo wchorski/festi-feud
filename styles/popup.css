@@ -1,7 +1,10 @@
+#round-score{
+  font-size: 2rem;
+  min-width: 4ch;
+}
 #question {
 	text-align: center;
-	border: double lightblue 3px;
-	background-color: rgba(173, 216, 230, 0.152);
+	background-color: rgb(44, 48, 49);
 	padding: 1rem;
 }
 
@@ -29,6 +32,8 @@ article.answer {
 		border-radius: 8px;
 		background-color: rgb(62, 69, 76);
 		padding: 1rem;
+    align-content: center;
+    min-width: 3ch;
 	}
 }
 
@@ -50,6 +55,43 @@ body[data-round-phase="end"] .answer.checked {
 	opacity: 1;
 	& > span {
 		outline: double rgb(160, 189, 243) 4px;
+	}
+}
+
+#teams {
+	/* helps nested children act as if outside parent */
+	display: contents;
+}
+
+.col--1-2-1 {
+	& > #answers {
+		grid-column: 2;
+		grid-row: 1;
+	}
+	& #team-0 {
+		grid-column: 1;
+		grid-row: 1;
+	}
+	& #team-1 {
+		grid-column: 3;
+		grid-row: 1;
+	}
+}
+
+@media screen and (width < 1200px) {
+	.col--1-2-1 {
+		& > #answers {
+			grid-column: unset;
+			grid-row: unset;
+		}
+		& #teams {
+			display: flex;
+		}
+		& #team-0,
+		& #team-1 {
+			grid-column: unset;
+			grid-row: unset;
+		}
 	}
 }
 
@@ -75,7 +117,6 @@ body[data-round-phase="end"] .answer.checked {
 
 	& > .points {
 		display: inline-block;
-		width: 100%;
 		padding: 2rem;
 		/* background-color: darkblue; */
 	}

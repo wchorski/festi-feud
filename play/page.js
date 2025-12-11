@@ -3,7 +3,7 @@
  * @typedef {import("types/Answer.js").Answer} Answer
  */
 
-import { buzzerChannel, EVENT_TYPES } from "../utils/events.js"
+import { buzzerChannel } from "../utils/events.js"
 import {
 	dbFindAnswersByQuestionId,
 	dbGetQuestion,

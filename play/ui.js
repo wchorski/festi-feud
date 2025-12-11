@@ -31,7 +31,7 @@ const answersList = getElementById("answers", HTMLDListElement)
 const questionEl = getElementById("question", HTMLParagraphElement)
 const team0ActiveCheckbox = getElementById("team-0-active", HTMLInputElement)
 const team1ActiveCheckbox = getElementById("team-1-active", HTMLInputElement)
-const roundStealCheckbox = getElementById("round-steal", HTMLInputElement)
+// const roundStealCheckbox = getElementById("round-steal", HTMLInputElement)
 // const gameRoundNumInput = querySelector('input[name="round"]', HTMLInputElement)
 const strikesWrap = getElementById("game-strikes", HTMLDivElement)
 /** @type {NodeListOf<HTMLInputElement>} */
@@ -138,122 +138,42 @@ function uiTeamUpdate(i, team) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-	const openBtn = getElementById("btn_open_win", HTMLButtonElement)
-	const closeBtn = getElementById("btn_close_win", HTMLButtonElement)
+	// const openBtn = getElementById("btn_open_win", HTMLButtonElement)
+	// const closeBtn = getElementById("btn_close_win", HTMLButtonElement)
 
-	function openPopup() {
-		const features =
-			"width=600,height=800,left=100,top=100,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes"
+	// function openPopup() {
+	// 	const features =
+	// 		"width=600,height=800,left=100,top=100,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes"
 
-		// Open the popup with the external HTML file
-		popupWindow = window.open("popup.html", "PopupWindow", features)
+	// 	// Open the popup with the external HTML file
+	// 	popupWindow = window.open("popup.html", "PopupWindow", features)
 
-		if (popupWindow) {
-			openBtn.disabled = true
-			closeBtn.disabled = false
+	// 	if (popupWindow) {
+	// 		openBtn.disabled = true
+	// 		closeBtn.disabled = false
 
-			// Check if popup is closed
-			const checkClosed = setInterval(() => {
-				if (popupWindow && popupWindow.closed) {
-					clearInterval(checkClosed)
-					handlePopupClosed()
-				}
-			}, 500)
-		}
-	}
-
-	function closePopup() {
-		if (popupWindow && !popupWindow.closed) {
-			popupWindow.close()
-		}
-		handlePopupClosed()
-	}
-
-	function handlePopupClosed() {
-		popupWindow = null
-		openBtn.disabled = false
-		closeBtn.disabled = true
-	}
-
-	// /** @param {number} points  */
-	// function uiPointsDisplay(points) {
-	// 	roundScoreEl.textContent = String(points)
+	// 		// Check if popup is closed
+	// 		const checkClosed = setInterval(() => {
+	// 			if (popupWindow && popupWindow.closed) {
+	// 				clearInterval(checkClosed)
+	// 				handlePopupClosed()
+	// 			}
+	// 		}, 500)
+	// 	}
 	// }
 
-	// /** @param {{nextTeamIndex: number, prevTeamIndex:number}} detail  */
-	// function onActiveTeamSwitch(detail) {
-	// 	const { nextTeamIndex, prevTeamIndex } = detail
-
-	// 	uiActiveTeamCheckboxToggles(nextTeamIndex)
-	// 	nextTeamIndex === undefined
-	// 		? uiToggleCheckboxDisables(true)
-	// 		: uiToggleCheckboxDisables(false)
-
-	// 	// uiActiveTeam(prevTeamIndex, nextTeamIndex, popupWindow)
-	// 	// TODO isn't popup related but... lazy
-	// 	uiActiveTeam(prevTeamIndex, nextTeamIndex, window)
+	// function closePopup() {
+	// 	if (popupWindow && !popupWindow.closed) {
+	// 		popupWindow.close()
+	// 	}
+	// 	handlePopupClosed()
 	// }
 
-	// const onTeamRename = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<TeamRenamedDetail>} e */
-	// 	(e) => {
-	// 		const { oldName, newName, teamIndex } = e.detail
-	// 		// TODO make this accept whole team object instead
-	// 		uiTeamUpdate(teamIndex, { name: newName })
-	// 	}
-	// )
-
-	// const onIsGuessed = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<SetPointsDetail>} e */
-	// 	(e) => {
-	// 		const { prevPoints, currentPoints, roundPhase } = e.detail
-	// 		if (roundPhase !== "end") uiPointsDisplay(currentPoints)
-	// 	}
-	// )
-
-	// const onStrikeSet = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<StrikesSetDetail>} e */
-	// 	(e) => {
-	// 		const { strikes, roundSteal } = e.detail
-
-	// 		roundStealCheckbox.checked = roundSteal
-	// 		roundSteal
-	// 			? teamsWrapEl.classList.add("round-steal")
-	// 			: teamsWrapEl.classList.remove("round-steal")
-	// 	}
-	// )
-
-	// const onRoundStealSet = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<StrikesSetDetail>} e */
-	// 	(e) => {
-	// 		const { roundSteal } = e.detail
-	// 		roundStealCheckbox.checked = roundSteal
-	// 		roundSteal
-	// 			? teamsWrap.classList.add("round-steal")
-	// 			: teamsWrap.classList.remove("round-steal")
-	// 		// console.log({ state })
-	// 		// uiPointsDisplay(currentPoints)
-	// 	}
-	// )
-
-	// const onRoundNext = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<RoundEndedDetail>} e */
-	// 	(e) => {
-	// 		//
-	// 		const { state } = e.detail
-	// 		console.log("onRoundNext")
-	// 		// TODO maybe i also add event listener in ./page.js to handle data, then trigger ui stuff
-	// 	}
-	// )
-
-	// const onActiveTeamId = /** @type {EventListener} */ (
-	// 	/** @param {CustomEvent<ActiveTeamDetail>} e */
-	// 	(e) => {
-	// 		const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = e.detail
-	// 		buzzersActiveEl.className = String(isBuzzersActive)
-	// 		buzzersActiveEl.textContent = String(isBuzzersActive)
-	// 	}
-	// )
+	// function handlePopupClosed() {
+	// 	popupWindow = null
+	// 	openBtn.disabled = false
+	// 	closeBtn.disabled = true
+	// }
 
 	const onEndGame = /** @type {EventListener} */ (
 		/** @param {CustomEvent<GameEndDetail>} e */
@@ -262,6 +182,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			document.body.dataset.roundPhase = state.roundPhase
 			document.body.dataset.roundType = state.roundType
 			gameWinnerNameEl.textContent = highestScoringTeam.name
+		}
+	)
+
+	const onActiveTeamId = /** @type {EventListener} */ (
+		/** @param {CustomEvent<ActiveTeamDetail>} e */
+		(e) => {
+			const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = e.detail
+			buzzersActiveEl.className = String(isBuzzersActive)
+			buzzersActiveEl.textContent = String(isBuzzersActive)
+			teamsWrapEl.dataset.activeTeamIndex = String(nextTeamIndex)
 		}
 	)
 
@@ -289,20 +219,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	}
 	// })
 
-	// listeners
-	openBtn.addEventListener("pointerup", openPopup)
-	closeBtn.addEventListener("pointerup", closePopup)
-	// events.addEventListener(TEAM_RENAME, onTeamRename)
-	// events.addEventListener(TEAM_ACTIVE, onActiveTeamSwitch)
-	// events.addEventListener(EVENT_TYPES.UPDATE_POINTS, onIsGuessed)
-	// events.addEventListener(EVENT_TYPES.AWARD_POINTS, onRoundEnded)
-	// events.addEventListener(EVENT_TYPES.SET_STRIKES, onStrikeSet)
-	// TODO don't need below line if above line works
-	// events.addEventListener(EVENT_TYPES.ROUNDSTEAL_SET, onRoundStealSet)
-	// events.addEventListener(EVENT_TYPES.NEXT_ROUND, onRoundNext)
-	// // TODO can't i combine below with `onActiveTeamSwitch`?
-	// events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
+	//* listeners
+	// openBtn.addEventListener("pointerup", openPopup)
+	// closeBtn.addEventListener("pointerup", closePopup)
+
 	events.addEventListener(EVENT_TYPES.END_GAME, onEndGame)
+	events.addEventListener(EVENT_TYPES.TEAM_ACTIVE, onActiveTeamId)
 
 	setupTeamControls()
 	setupGameControls()
@@ -343,7 +265,7 @@ function setupGameControls() {
 		strikeCheckboxes.forEach((box) => {
 			box.disabled = false
 		})
-		roundStealCheckbox.disabled = false
+		// roundStealCheckbox.disabled = false
 	}
 
 	strikesWrap.addEventListener("change", () => {
@@ -380,11 +302,11 @@ function setupGameControls() {
 		// }
 	})
 
-	roundStealCheckbox.addEventListener("change", (e) => {
-		if (!(e.target instanceof HTMLInputElement))
-			throw new Error("not an input el")
-		gameStateManager.setRoundSteal(e.target.checked)
-	})
+	// roundStealCheckbox.addEventListener("change", (e) => {
+	// 	if (!(e.target instanceof HTMLInputElement))
+	// 		throw new Error("not an input el")
+	// 	gameStateManager.setRoundSteal(e.target.checked)
+	// })
 
 	// gameRoundNumInput.addEventListener("change", (e) => {
 	// 	if (!(e.target instanceof HTMLInputElement))
@@ -477,7 +399,7 @@ export function uiToggleCheckboxDisables(disabled) {
 	strikeCheckboxes?.forEach((box) => {
 		box.disabled = disabled
 	})
-	roundStealCheckbox.disabled = disabled
+	// roundStealCheckbox.disabled = disabled
 }
 // TODO move this to /ui.js
 /** @param {GameState} state  */

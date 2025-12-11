@@ -9,6 +9,7 @@
  * @typedef {import("types/BroadcastChannels").BC_END_ROUND_DETAIL} BC_END_ROUND_DETAIL
  * @typedef {import("types/BroadcastChannels").BC_END_GAME_DETAIL} BC_END_GAME_DETAIL
  * @typedef {import("types/BroadcastChannels").BC_GAME_LOAD_DETAIL} BC_GAME_LOAD_DETAIL
+ * @typedef {import("types/BroadcastChannels").BC_GAME_BUZZ_IN_DETAIL} BC_GAME_BUZZ_IN_DETAIL
  */
 import {
 	elGameAnswerForPopup,
@@ -16,7 +17,7 @@ import {
 	querySelector,
 	querySelectorAll,
 } from "../components.js"
-import { CHANNEL_TYPES, events, gameChannel } from "../utils/events.js"
+import { CHANNEL_TYPES, gameChannel } from "../utils/events.js"
 import { gameStateManager } from "../utils/gameState.js"
 const teamsWrapEl = getElementById("teams", HTMLDivElement)
 const gameWinnerNameEl = getElementById("game-winner-name", HTMLElement)
@@ -26,6 +27,8 @@ const roundPhaseEl = getElementById("round-phase", HTMLElement)
 const gameRoundEl = getElementById("game-round", HTMLElement)
 const answersList = getElementById("answers", HTMLDListElement)
 const questionEl = getElementById("question", HTMLParagraphElement)
+const strikesWrap = getElementById("strikes", HTMLDivElement)
+const strikeSVGs = querySelectorAll("svg.strike", SVGElement, strikesWrap)
 
 document.addEventListener("DOMContentLoaded", function () {
 	initUi(gameStateManager.get())
@@ -65,7 +68,15 @@ function initUi(state) {
 		: teamsWrapEl.classList.remove("round-steal")
 	roundScoreEl.textContent = String(points)
 
+	strikeSVGs.forEach((svg, i) => {
+		svg.dataset.disabled = "true"
+	})
+
 	teams.forEach((team, i) => {
+		// clean up from last round
+		const teamEl = getElementById(`team-${i}`, HTMLDivElement)
+		teamEl.classList.remove("winner")
+
 		uiTeamUpdate(i, team)
 	})
 }
@@ -113,8 +124,6 @@ function reactiveEvents() {
 	function onSetStrikes(detail) {
 		const { strikes, roundSteal } = detail
 
-		const strikesWrap = getElementById("strikes", HTMLDivElement)
-		const strikeSVGs = querySelectorAll("svg.strike", SVGElement, strikesWrap)
 		strikeSVGs.forEach((svg, i) => {
 			i + 1 <= strikes
 				? (svg.dataset.disabled = "false")
@@ -131,6 +140,7 @@ function reactiveEvents() {
 		const { state, highestScoringTeam } = detail
 		document.body.dataset.roundPhase = state.roundPhase
 		document.body.dataset.roundType = state.roundType
+    roundTypeEl.textContent = state.roundType
 		gameWinnerNameEl.textContent = highestScoringTeam.name
 	}
 
@@ -176,8 +186,12 @@ function reactiveEvents() {
 	/** @param {BC_GAME_LOAD_DETAIL} detail  */
 	function onGameLoad(detail) {
 		const { state } = detail
-		console.log("onGameLoad: ", state)
 		initUi(state)
+	}
+	/** @param {BC_GAME_BUZZ_IN_DETAIL} detail  */
+	function onBuzzIn(detail) {
+		const { nextTeamIndex, prevTeamIndex, isBuzzersActive } = detail
+		teamsWrapEl.dataset.activeTeamIndex = String(nextTeamIndex)
 	}
 
 	gameChannel.addEventListener(
@@ -214,6 +228,9 @@ function reactiveEvents() {
 					break
 				case CHANNEL_TYPES.GAME_LOAD:
 					onGameLoad(detail)
+					break
+				case CHANNEL_TYPES.GAME_BUZZIN:
+					onBuzzIn(detail)
 					break
 
 				default:

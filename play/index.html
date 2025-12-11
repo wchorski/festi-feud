@@ -14,197 +14,210 @@
 		<script src="/modules/pouchdb.find.min.js"></script>
 		<!-- <script src="/play.js" type="module" defer></script> -->
 	</head>
-	<body class="grid gap-m" data-round-type="face-off" data-round-phase="end">
-		<section>
-			<h1>Moderator Controls</h1>
-			<button id="btn_open_win">Open Popup Window</button>
-			<button id="btn_close_win" disabled>Close Popup</button>
-			<input type="button" id="btn_undo" value="undo" />
-			<input type="button" id="btn_redo" value="redo" />
-			<button id="rest-game">Reset Game</button>
-			<br />
-			<br />
-			<button id="end-round">End Round</button>
-      <h2>Game Winner: <span id="game-winner-name"></span></h2>
+	<body data-round-type="face-off" data-round-phase="end">
+		<main class="grid gap-m layout-width-normal">
+			<section>
+				<h1>Moderator Controls</h1>
+				<menu id="game-menu">
+					<a href="/play/popup.html" target="_blank">Popup page</a>
+					<!-- <button id="btn_open_win">Open Popup Window</button> -->
+					<!-- <button id="btn_close_win" disabled>Close Popup</button> -->
+					<!-- <input type="button" id="btn_undo" value="undo" /> -->
+					<!-- <input type="button" id="btn_redo" value="redo" /> -->
 
-			<details id="next-round-options" class="card">
-				<summary>Next Round Question</summary>
-				<p>Choose the next round's prompt</p>
-				<ul id="next-round-questions">
-					<!-- fetched from db -->
-				</ul>
-			</details>
-		</section>
+					<button id="end-round">End Round</button>
+					<button id="rest-game">Reset Game</button>
+				</menu>
+				<h2 class="gradient-box-3">Game Winner: <span id="game-winner-name"></span></h2>
 
-		<section id="playfield" class="polka-dots">
-			<div class="grid col-3 gap-m card">
-				<h2 id="round-score-wrap">
-					score <span class="score" id="round-score">0</span>
-					<span id="score-multiplier">x1</span>
-				</h2>
-
-				<div>
-					<!-- TODO make this drop down selector input -->
-					<h2>Round Type: <span id="round-type">NO_TYPE</span></h2>
-					<h3>
-						Round Phase:
-						<span id="round-phase">NO_PHASE</span>
-					</h3>
-					<!-- <label for="round-phase">
-						<span>Round Phase</span>
-						<select name="round-phase">
-							<option value="ingame">ingame</option>
-							<option value="end">end</option>
-						</select>
-					</label> -->
-				</div>
-
-				<div>
-					<h2>
-						round:
-						<span id="game-round">NO_ROUND</span>
-						<!-- TODO game logic too complicated rn, will add control back later -->
-						<!-- <input
-              class="round"
-              name="round"
-              type="number"
-              value="0"
-              pattern="[0-9]+"
-              min="0"
-              max="999"
-            /> -->
-					</h2>
-					<div>
-						<span>isBuzzersActive: </span>
-						<span id="buzzers-active">undefined</span>
-					</div>
-				</div>
-			</div>
-
-			<div id="teams" class="teams grid col-2">
-				<div id="team-0" class="team a">
-					<!-- TODO hide h2 and styel input -->
-					<h2>Team A</h2>
-					<p>
-						<a href="/buzzer/index.html?teamIndex=0" target="_blank">buzzer</a>
-						[Number 0]
-					</p>
-					<input
-						type="text"
-						id="team-0-name"
-						name="team-0-name"
-						value="Team A"
-					/>
-					<br />
-					<label for="team-0-score">
-						<span>points</span>
-						<input
-							class="round"
-							id="team-0-score"
-							name="team-0-score"
-							type="number"
-							value="0"
-							pattern="[0-9]+"
-						/>
-					</label>
-					<br />
-					<label for="team-0-active">
-						<input
-							id="team-0-active"
-							name="team-active"
-							type="radio"
-							title="Active Team"
-              value="0"
-						/>
-						<span>Active Team</span>
-					</label>
-					<p class="steal-badge">STEAL</p>
-					<p class="winner-badge">WINNER</p>
-				</div>
-				<div id="team-1" class="team b">
-					<h2>Team B</h2>
-					<p>
-						<a href="/buzzer/index.html?teamIndex=1" target="_blank">buzzer</a>
-						[Number 1]
-					</p>
-					<input
-						id="team-1-name"
-						name="team-1-name"
-						type="text"
-						value="Team B"
-					/>
-					<br />
-					<label for="team-1-score">
-						<span>points</span>
-						<input
-							id="team-1-score"
-							class="round"
-							name="team-1-score"
-							type="number"
-							value="0"
-							pattern="[0-9]+"
-						/>
-					</label>
-					<br />
-					<label for="team-1-active">
-						<input
-							id="team-1-active"
-							name="team-active"
-							type="radio"
-							title="Active Team"
-              value="1"
-						/>
-						<span>Active Team</span>
-					</label>
-					<p class="steal-badge">STEAL</p>
-					<p class="winner-badge">WINNER</p>
-				</div>
-			</div>
-			<!-- TODO hide this section when roundType === "face-off" -->
-			<section id="strikes-and-steal" class="grid col-2">
-				<div id="game-strikes" class="strikes">
-					<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
-					<label for="strike-1" class="strike">
-						<input type="checkbox" name="strike-1" disabled />
-						<span>X</span>
-					</label>
-					<label for="strike-2" class="strike">
-						<input type="checkbox" name="strike-2" disabled />
-						<span>X</span>
-					</label>
-					<label for="strike-3" class="strike">
-						<input type="checkbox" name="strike-3" disabled />
-						<span>X</span>
-					</label>
-				</div>
-				<label for="round-steal">
-					<input id="round-steal" type="checkbox" name="round-steal" disabled />
-					<span>Round Steal </span>
-				</label>
+				<details id="next-round-options" class="card">
+					<summary>Next Round Question</summary>
+					<p>Choose the next round's prompt</p>
+					<ul id="next-round-questions">
+						<!-- fetched from db -->
+					</ul>
+				</details>
 			</section>
 
-			<div class="card">
-				<h2>Question:</h2>
-				<p id="question">
-					<!-- gotten from database -->
-				</p>
-			</div>
+			<section id="playfield" class="polka-dots">
+				<div class="grid col-3 gap-m card">
+					<h2 id="round-score-wrap">
+						score <span class="score" id="round-score">0</span>
+						<span id="score-multiplier">x1</span>
+					</h2>
 
-			<div>
-				<h2>Answers</h2>
-				<ul id="answers">
-					<!-- gathered from question -->
-				</ul>
-			</div>
-		</section>
+					<div>
+						<!-- TODO make this drop down selector input -->
+						<h2>Round Type: <span id="round-type">NO_TYPE</span></h2>
+						<h3>
+							Round Phase:
+							<span id="round-phase">NO_PHASE</span>
+						</h3>
+						<!-- <label for="round-phase">
+              <span>Round Phase</span>
+              <select name="round-phase">
+                <option value="ingame">ingame</option>
+                <option value="end">end</option>
+              </select>
+            </label> -->
+					</div>
 
-		<!-- <section>
-      <h2>Test Control Popup Content:</h2>
-      <input type="text" id="textInput" placeholder="Enter text to display" />
-      <button id="updateText">Update Popup Text</button>
+					<div>
+						<h2>
+							round:
+							<span id="game-round">NO_ROUND</span>
+							<!-- TODO game logic too complicated rn, will add control back later -->
+							<!-- <input
+                class="round"
+                name="round"
+                type="number"
+                value="0"
+                pattern="[0-9]+"
+                min="0"
+                max="999"
+              /> -->
+						</h2>
+						<div>
+							<span>isBuzzersActive: </span>
+							<span id="buzzers-active">undefined</span>
+						</div>
+					</div>
+				</div>
 
-      <button id="changeColor">Change Background Color</button>
-      <button id="addElement">Add New Element</button>
-    </section> -->
+				<div id="teams" class="teams grid col-2">
+					<div id="team-0" class="team a">
+						<!-- TODO hide h2 and styel input -->
+						<h2>Team A</h2>
+						<p>
+							<a href="/buzzer/index.html?teamIndex=0" target="_blank"
+								>buzzer</a
+							>
+							[Number 0]
+						</p>
+						<input
+							type="text"
+							id="team-0-name"
+							name="team-0-name"
+							value="Team A"
+						/>
+						<br />
+						<label for="team-0-score">
+							<span>points</span>
+							<input
+								class="round"
+								id="team-0-score"
+								name="team-0-score"
+								type="number"
+								value="0"
+								pattern="[0-9]+"
+							/>
+						</label>
+						<br />
+						<label for="team-0-active">
+							<input
+								id="team-0-active"
+								name="team-active"
+								type="radio"
+								title="Active Team"
+								value="0"
+							/>
+							<span>Active Team</span>
+						</label>
+						<p class="steal-badge">STEAL</p>
+						<p class="winner-badge">WINNER</p>
+					</div>
+					<div id="team-1" class="team b">
+						<h2>Team B</h2>
+						<p>
+							<a href="/buzzer/index.html?teamIndex=1" target="_blank"
+								>buzzer</a
+							>
+							[Number 1]
+						</p>
+						<input
+							id="team-1-name"
+							name="team-1-name"
+							type="text"
+							value="Team B"
+						/>
+						<br />
+						<label for="team-1-score">
+							<span>points</span>
+							<input
+								id="team-1-score"
+								class="round"
+								name="team-1-score"
+								type="number"
+								value="0"
+								pattern="[0-9]+"
+							/>
+						</label>
+						<br />
+						<label for="team-1-active">
+							<input
+								id="team-1-active"
+								name="team-active"
+								type="radio"
+								title="Active Team"
+								value="1"
+							/>
+							<span>Active Team</span>
+						</label>
+						<p class="steal-badge">STEAL</p>
+						<p class="winner-badge">WINNER</p>
+					</div>
+				</div>
+				<!-- TODO hide this section when roundType === "face-off" -->
+				<section id="strikes-and-steal" class="grid col-2">
+					<div id="game-strikes" class="strikes">
+						<!-- TODO hide this if no active team is set. or do not allow change and throw toast warning -->
+						<label for="strike-1" class="strike">
+							<input type="checkbox" name="strike-1" disabled />
+							<span>X</span>
+						</label>
+						<label for="strike-2" class="strike">
+							<input type="checkbox" name="strike-2" disabled />
+							<span>X</span>
+						</label>
+						<label for="strike-3" class="strike">
+							<input type="checkbox" name="strike-3" disabled />
+							<span>X</span>
+						</label>
+					</div>
+					<!-- <label for="round-steal">
+						<input
+							id="round-steal"
+							type="checkbox"
+							name="round-steal"
+							disabled
+						/>
+						<span>Round Steal </span>
+					</label> -->
+				</section>
+
+				<div class="card">
+					<h2>Question:</h2>
+					<p id="question">
+						<!-- gotten from database -->
+					</p>
+				</div>
+
+				<div>
+					<h2>Answers</h2>
+					<ul id="answers">
+						<!-- gathered from question -->
+					</ul>
+				</div>
+			</section>
+
+			<!-- <section>
+        <h2>Test Control Popup Content:</h2>
+        <input type="text" id="textInput" placeholder="Enter text to display" />
+        <button id="updateText">Update Popup Text</button>
+  
+        <button id="changeColor">Change Background Color</button>
+        <button id="addElement">Add New Element</button>
+      </section> -->
+		</main>
 	</body>
 </html>

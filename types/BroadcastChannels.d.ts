@@ -30,6 +30,10 @@ export type BC_GAME_MESSAGE =
 			type: "game:load"
 			detail: BC_GAME_LOAD_DETAIL
 	  }
+	| {
+			type: "game:buzzIn"
+			detail: BC_GAME_BUZZ_IN_DETAIL
+	  }
 
 //? keeping this around if BC_GAME_MESSAGE type doesn't work out
 // export type BC_TYPE =
@@ -71,4 +75,9 @@ export type BC_END_GAME_DETAIL = {
 }
 export type BC_GAME_LOAD_DETAIL = {
 	state: GameState
+}
+export type BC_GAME_BUZZ_IN_DETAIL = {
+	nextTeamIndex: GameState["activeTeamIndex"]
+	prevTeamIndex: number | undefined
+	isBuzzersActive: boolean
 }

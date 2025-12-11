@@ -28,6 +28,7 @@ export const CHANNEL_TYPES = Object.freeze({
   END_ROUND: "game:endRound",
   END_GAME: "game:end",
   GAME_LOAD: "game:load",
+  GAME_BUZZIN: "game:buzzIn"
 })
 export const gameChannel = new BroadcastChannel("game-broadcastchannel")
 export const buzzerChannel = new BroadcastChannel("game-show-buzzer")
