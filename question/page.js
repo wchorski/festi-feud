@@ -1,15 +1,15 @@
 /**
- * @typedef {import('types/Question').Question} Question
- * @typedef {import('types/Question').QuestionSet} QuestionSet
- * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
- * @typedef {import('types/Question').QuestionDelete} QuestionDelete
- * @typedef {import("types/Answer.js").Answer} Answer
- * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreateRaw} AnswerCreateRaw
- * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
- * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
+ * @typedef {import('Question').Question} Question
+ * @typedef {import('Question').QuestionSet} QuestionSet
+ * @typedef {import('Question').QuestionCreateTrans} QuestionCreateTrans
+ * @typedef {import('Question').QuestionDelete} QuestionDelete
+ * @typedef {import("Answer").Answer} Answer
+ * @typedef {import("Answer").AnswerSet} AnswerSet
+ * @typedef {import("Answer").AnswerCreateRaw} AnswerCreateRaw
+ * @typedef {import("Answer").AnswerCreateTrans} AnswerCreateTrans
+ * @typedef {import("Answer").AnswerDelete} AnswerDelete
  */
-import { elAnswerVoteInput } from "../components.js"
+import { elAnswerVoteInput, getElementById } from "../components.js"
 import {
 	dbCreateAnswer,
 	dbDeleteAnswer,
@@ -21,13 +21,17 @@ import {
 import { formHandler, formVoterHandler } from "../forms.js"
 import { compose, transforms } from "../transforms.js"
 import { getUserUUID } from "../uuid.js"
-import { filterAndSortVotes } from "../utils/filterVotes.js"
+import {
+	convertAnswersToGame,
+	filterAndSortVotes,
+} from "../utils/filterVotes.js"
 
-const h1 = document.querySelector("h1")
+// const h1 = document.querySelector("h1")
 const questionEl = document.getElementById("question")
 const answersWrap = document.getElementById("answers-wrap")
 const answerForm = document.forms.namedItem("answerForm")
 const voteForm = document.forms.namedItem("voteForm")
+const playLinkEl = getElementById('play-link', HTMLAnchorElement)
 let questionId = ""
 if (!answerForm || !voteForm) throw new Error("form(s) not found")
 
@@ -64,21 +68,23 @@ async function ini() {
 	const id = params.get("id")
 	if (id) {
 		questionId = id
-		if (!h1) throw new Error("no h1")
-		h1.innerText = `Question: ${id}`
+		// if (!h1) throw new Error("no h1")
+		// h1.innerText = `Question: ${id}`
 
 		const question = await dbGetQuestion(id)
 		if (!questionEl) throw new Error("no questionEl")
 		questionEl.innerText = question.text
+    playLinkEl.href = `/play/index.html?id=${id}`
 
 		if (!answersWrap) throw new Error("no answersWrap")
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
-		const votes = filterAndSortVotes(answerDocsRes.docs)
-		// TODO should i sort by popularity? could cause bias 
-    // console.log(votes);
+
+		// const votes = filterAndSortVotes(answerDocsRes.docs)
+		// TODO should i sort by popularity? could cause bias
+		// console.log(votes);
 		// console.log(answerDocsRes)
 		// renderAllTextEls(answerDocsRes.docs, answersWrap)
-		const answerEls = votes.map((doc) => elAnswerVoteInput(doc))
+		const answerEls = answerDocsRes.docs.map((doc) => elAnswerVoteInput(doc))
 		answersWrap.replaceChildren(...answerEls)
 
 		// const voteBtns = voteButtons("vote 4 me")

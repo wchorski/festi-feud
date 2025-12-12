@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Festi Feud</title>
+		<link rel="stylesheet" href="/global.css" />
+		<script src="./page.js" type="module" defer></script>
+		<script src="/db.js" type="module" defer></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script> -->
+		<script src="/modules/pouchdb.min.js"></script>
+		
+	</head>
+	<body>
+    <section class="settings-wrap">
+      
+      <button popovertarget="settings" width="51" height="51">
+        <svg width="40" height="40" viewBox="0 0 16 16"><use href="/icons/gear.svg#icon-gear" ></use></svg> 
+      </button>
+
+      <div id="settings" class="popover" popover>
+        <button title="close popover" popovertarget="settings">x</button>
+        <p id="db-message"></p>
+        <h2>Settings</h2>
+        <p></p>
+        <div class="flex">
+          <button id="seed-db-btn">seed database</button>
+          <button id="destroy-db-btn">delete all docs</button>
+        </div>
+      </section>
+
+		<h1>Questions</h1>
+		<span data-sync-state="connecting" id="sync-state"> ␖ </span>
+
+		<h2>Survey Says:</h2>
+    <p class="sub-text">Vote on current Questions or pick a favorite and start a game of feud</p>
+		<div id="questions-wrap" class="grid-tiles"></div>
+
+		<hr />
+		<h2>Add more fuel to the feud fire</h2>
+    <form name="questionForm" data-state="idle">
+			<legend>Create New Question</legend>
+			<label for="text">
+				<span>Question:</span>
+				<textarea name="text" min="2" max="30" placeholder="Easily forgotten item to pack..."></textarea>
+			</label>
+			<!-- <fieldset for="categoryIds">
+				<p>TODO add these features</p>
+				<legend>categories</legend>
+
+				<div id="category-options" class="dropdown-content">
+					<label><input type="checkbox" value="cat-1" /> Cat 1</label>
+					<label><input type="checkbox" value="cat-2" /> Cat 2</label>
+					<label><input type="checkbox" value="cat-3" /> Cat 3</label>
+				</div>
+			</fieldset> -->
+			<!-- <fieldset for="tagIds">
+        <p>TODO add these features</p>
+				<legend>tags</legend>
+				<div id="tag-options" class="dropdown-content">
+					<label><input type="checkbox" value="tag-1" /> tag 1</label>
+					<label><input type="checkbox" value="tag-2" /> tag 2</label>
+					<label><input type="checkbox" value="tag-3" /> tag 3</label>
+				</div> -->
+			</fieldset>
+
+			<p class="response-message"></p>
+			<button type="submit">submit</button>
+		</form>
+
+	</body>
+</html>

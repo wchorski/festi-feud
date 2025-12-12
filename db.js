@@ -183,6 +183,21 @@ export async function getAllQuestionDocs() {
 	}
 }
 /**
+ * Retrieves all documents ids from the database
+ * @returns {Promise<string[]|undefined>} Array of document objects
+ */
+export async function getAllQuestionIds() {
+	try {
+		const res = await dbQuestions.allDocs({ include_docs: false })
+	
+		return res.rows.map((row) => row.id)
+	} catch (error) {
+		console.log("getAllQuestionIds: ", error)
+    throw new Error("getAllQ IDS ERROR");
+    
+	}
+}
+/**
  *
  * @param {string} id
  * @returns {Promise<Question>}
@@ -511,7 +526,7 @@ export async function dbQuestionDeleteMany(docs) {
 		// if(!res) throw new Error('db delete res not OK')
 		return {
 			ok: true,
-			message: "All Emoji Docs have been marked as _deleted",
+			message: "All Docs have been marked as _deleted",
 		}
 	} catch (error) {
 		console.log(error)

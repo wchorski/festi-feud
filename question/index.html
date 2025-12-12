@@ -13,20 +13,40 @@
 		<script src="/modules/pouchdb.find.min.js"></script>
 	</head>
 	<body>
-		<h1>Question: [ID]</h1>
-		<p id="question"></p>
-		<h2>Answers:</h2>
-		<!-- <div id="answers-wrap" class="grid-list"></div> -->
+		<h1 class="card">
+			Question:
+			<p id="question"></p>
+		</h1>
+    <div class="card">
+      <a id="play-link" href="/play/index.html?id=${}">Play game with this question</a>
+    </div>
+		<hr />
+
 		<form name="voteForm" data-state="idle">
 			<legend>
 				<h3>Vote</h3>
-				<p class="sub-text">
-					The more upvotes an item receives, the higher it will rank in the
-					final results. Downvote items you don't want included — enough votes
-					will remove it from the poll. If you're neutral about an item or don't
-					have a preference, simply leave it as is and it won't affect the
-					rankings.
-				</p>
+				<table class="simple sub-text">
+					<tbody>
+						<tr>
+							<td>↑</td>
+							<td>
+								The more upvotes an item receives, the higher it will rank in
+								the final results
+							</td>
+						</tr>
+						<tr>
+							<td>↓</td>
+							<td>Downvote items you deam as irrelevant</td>
+						</tr>
+						<tr>
+							<td>—</td>
+							<td>
+								If you're neutral about an item simply leave it as is and it
+								won't affect the rankings.
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</legend>
 			<!-- <input type="text" name="voterId" value="123.123.0.123" readonly /> -->
 			<!-- <input type="text" name="questionId" readonly /> -->

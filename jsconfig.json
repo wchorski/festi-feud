@@ -8,7 +8,9 @@
     "allowJs": true, // Allow JavaScript files (important for mixed TS/JS projects)
     "noEmit": true, // Prevents compilation (only type-checking)
     "module": "ESNext", // Supports modern ES modules
+    "moduleResolution": "node", // Changed: Better for modern ES modules
     "target": "ES6", // Target modern JavaScript
+    "baseUrl": ".",  // Add this
     "paths": { // Aliases (optional)
       "/*": [
         "."
@@ -21,12 +23,18 @@
       ]
     },
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./types"
     ], // Ensure type definitions are used
-    "strict": true // Enable strict type checking
+    "strict": true, // Enable strict type checking
+    "allowImportingTsExtensions": false, // Prevents .ts extensions in imports
+    "resolveJsonModule": true, // Allow importing JSON files
+    "esModuleInterop": true, // Better compatibility
+    "forceConsistentCasingInFileNames": true // Catch casing errors
   },
   "include": [
-    "**/*.js"
+    "**/*.js",
+    "**/*.d.ts"
   ], // Include all JavaScript files in the `src` folder
   "exclude": [
     "node_modules",

@@ -90,6 +90,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] results. bar/pie chart for admin users
 - [ ] answers. allow user submitted answers to be reviewed first. approved ones will be added to the voting forms
 - [ ] set an `active` boolean on questions to allow moderator filtering 
+- [ ] pollingClosed boolean (or timestamp) to prevent early or late votes?
 - [ ] disable answers points checkboxes after `endRound` 
 - [ ] 2 buzzers (connected by web sockets?). for `face-off` rounds. Fastest buzzer get's highlighted as active team
 - [ ] next round logic

@@ -282,23 +282,51 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 				: console.error("typeof != Question || Answer"),
 	})
 
-	const docLinkEl = Object.assign(document.createElement("a"), {
-		// className: "delete",
-		// ariaLabel: `delete ${doc.typeof} item`,
-		// title: `go to poll`,
-		textContent: "question -->",
-		href: `/${doc.typeof.toLowerCase()}/index.html?id=${doc._id}`,
+	const navDocs = Object.assign(document.createElement("nav"), {})
+	const navDocList = Object.assign(document.createElement("ul"), {})
+
+	if (doc.typeof === "Answer") {
+		const navDocListItem2 = Object.assign(document.createElement("li"), {})
+		const questionLinkEl = Object.assign(document.createElement("a"), {
+			textContent: "Question: cast your vote",
+			href: `/question/index.html?id=${doc.questionId}`,
+		})
+		navDocListItem2.append(questionLinkEl)
+		navDocList.append(navDocListItem2)
+	}
+
+	const items = [
+		{
+			text: `${doc.typeof}: view/edit/vote `,
+			href: `/${doc.typeof.toLowerCase()}/index.html?id=${doc._id}`,
+		},
+		{
+			text: "Play: start round with this question",
+			href: `/play/index.html?id=${doc._id}`,
+		},
+	]
+
+	items.forEach(({ text, href }) => {
+		const navDocListItem = Object.assign(document.createElement("li"), {})
+		const docLinkEl = Object.assign(document.createElement("a"), {
+			textContent: text,
+			href,
+		})
+
+		navDocListItem.append(docLinkEl)
+		navDocList.append(navDocListItem)
 	})
 
-	const playLinkEl = Object.assign(document.createElement("a"), {
-		// className: "delete",
-		// ariaLabel: `delete ${doc.typeof} item`,
-		// title: `go to poll`,
-		textContent: "play -->",
-		href: `/play/index.html?id=${doc._id}`,
-	})
+	// const playLinkEl = Object.assign(document.createElement("a"), {
+	// 	// className: "delete",
+	// 	// ariaLabel: `delete ${doc.typeof} item`,
+	// 	// title: `go to poll`,
+	// 	textContent: "play -->",
+	// 	href: `/play/index.html?id=${doc._id}`,
+	// })
 
-	p.append(docLinkEl, playLinkEl, deleteBtn)
+	navDocs.append(navDocList)
+	p.append(navDocs, deleteBtn)
 
 	return p
 }
