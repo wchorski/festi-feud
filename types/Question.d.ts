@@ -5,6 +5,7 @@ type BaseQuestion = {
 	tagIds: string[]
 	voterIds: string[]
 	dateCreated: string
+  approved: boolean
 	// Add more shared fields here as needed
 }
 

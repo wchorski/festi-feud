@@ -6,6 +6,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "Name something you might lose at a music festival before the first headliner even starts."
   },
   {
@@ -15,6 +16,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "What's the worst thing to forget to pack for a camping music festival?"
   },
   {
@@ -24,6 +26,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "Name a sound you hear at 4 AM in the campground that's definitely not music."
   },
   {
@@ -33,6 +36,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "What's something a festival vendor could charge $20 for that people would still buy?"
   },
   {
@@ -42,6 +46,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "Name something a raver might say when they realize they've been at the wrong stage for 30 minutes."
   },
   {
@@ -51,6 +56,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "What's a telltale sign someone's been to too many festivals this summer?"
   },
   {
@@ -60,6 +66,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "What's something you'll definitely step on in the festival crowd?"
   },
   {
@@ -69,6 +76,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "Name something that mysteriously disappears from your campsite overnight."
   },
   {
@@ -78,6 +86,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "What's the most creative excuse someone might give for missing a DJ set?"
   },
   {
@@ -87,6 +96,7 @@
     "voterIds": [],
     "categoryId": [],
     "tagIds": [],
+    "approved": true,
     "text": "Name something that smells *way too strong* at a festival — and not in a good way."
   }
 ]

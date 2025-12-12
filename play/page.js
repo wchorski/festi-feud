@@ -12,7 +12,7 @@ import {
 import { elGameAnswerModerator, getElementById } from "../components.js"
 import {
 	convertAnswersToGame,
-	filterAndSortVotes,
+	votesFilterSortAndSliceEight,
 } from "../utils/filterVotes.js"
 import { gameStateManager } from "../utils/gameState.js"
 import { uiInit } from "./ui.js"
@@ -57,10 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (!answerDocsRes.docs) throw new Error("no answerDocsRes.docs")
 
 			const gameAnswers = convertAnswersToGame(answerDocsRes.docs)
-			const gameAnswersFilteredSorted = filterAndSortVotes(gameAnswers).slice(
-				0,
-				8
-			)
+			const gameAnswersFilteredSorted = votesFilterSortAndSliceEight(gameAnswers)
 			gameStateManager.load(question, gameAnswersFilteredSorted)
 		} else {
 			//? look for session storage

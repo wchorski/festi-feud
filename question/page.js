@@ -21,10 +21,6 @@ import {
 import { formHandler, formVoterHandler } from "../forms.js"
 import { compose, transforms } from "../transforms.js"
 import { getUserUUID } from "../uuid.js"
-import {
-	convertAnswersToGame,
-	filterAndSortVotes,
-} from "../utils/filterVotes.js"
 
 // const h1 = document.querySelector("h1")
 const questionEl = document.getElementById("question")
@@ -79,7 +75,7 @@ async function ini() {
 		if (!answersWrap) throw new Error("no answersWrap")
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
 
-		// const votes = filterAndSortVotes(answerDocsRes.docs)
+
 		// TODO should i sort by popularity? could cause bias
 		// console.log(votes);
 		// console.log(answerDocsRes)
