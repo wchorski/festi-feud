@@ -1,4 +1,8 @@
 {
+  "type": "module",
+  "scripts": {
+    "gen:votes": "node shell/genVotes.js"
+  },
 	"devDependencies": {
 		"@types/pouchdb": "^6.4.2"
 	},

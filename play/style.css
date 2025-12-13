@@ -23,7 +23,7 @@
 .score {
 	text-align: center;
 	padding: 1rem;
-	border: solid 1px white;
+	border: solid 1px rgb(109, 109, 109);
 	background-color: blue;
 	width: minmax(10rem, 15rem);
 	margin-inline: auto;

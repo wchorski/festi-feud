@@ -1,3 +1,5 @@
+// * example script from other repo
+
 import { State } from "./state.js"
 import {
 	answers_finals,

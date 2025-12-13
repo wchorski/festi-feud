@@ -24,7 +24,11 @@ const {
 	DB_COLLECTION_A,
 } = ENVS
 
-const syncDom = document.querySelector("#sync-state")
+/** @type {HTMLElement|null} */
+let syncDom = null;
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  syncDom = document.querySelector("#sync-state")
+}
 
 const dbQuestions = new PouchDB(DB_COLLECTION_Q, {
 	//? creates database on remote CouchDB if none exists
@@ -449,10 +453,6 @@ export async function dbDeleteQuestion(doc) {
 	} catch (error) {
 		throw new Error("delete failed", { cause: error })
 	}
-}
-
-export function testMe() {
-	console.log("test ME BUDDY")
 }
 
 export async function dbSeedDatabase() {

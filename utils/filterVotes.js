@@ -23,15 +23,12 @@ export function calcAnswerPoints(doc, totalVotesSum) {
 
 /** @param {Answer[]} docs */
 export function convertAnswersToGame(docs) {
-	const answersLength = docs.length
+
 	const votesSum = docs.reduce(
 		(count, doc) =>
 			count + Math.max(doc.upvotes.length - doc.downvotes.length, 0),
 		0
 	)
-	console.log({ answersLength, votesSum })
-
-	// total number of votes?
 
 	return docs.map((doc) => ({
 		id: doc._id,

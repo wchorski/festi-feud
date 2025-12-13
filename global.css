@@ -9,8 +9,18 @@
 	}
 }
 
-body {
-	background-color: red;
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: whitesmoke;
+	}
+	.card,
+	form {
+		background-color: rgb(245, 245, 255);
+		border: solid 1px #d7d3d3;
+		& > fieldset {
+			border-color: #0c0c0c4d;
+		}
+	}
 }
 @media (prefers-color-scheme: dark) {
 	body,
@@ -25,10 +35,10 @@ body {
 	.card,
 	form {
 		background-color: rgb(24, 24, 25);
-
-    & > fieldset {
-      border-color: #0c0c0c4d;
-    }
+    border: solid 1px #222222;
+		& > fieldset {
+			border-color: #0c0c0c4d;
+		}
 	}
 
 	button {
@@ -124,7 +134,7 @@ form {
 	transition-duration: 500ms;
 	transition-property: border-color, color;
 	transition-timing-function: ease-out;
-	max-width: 30rem;
+	max-width: 50rem;
 	border: solid rgba(128, 128, 128, 0.253) 1px;
 	box-shadow: rgba(0, 0, 0, 0.081) 3px 3px 8px;
 	position: relative;
@@ -370,11 +380,11 @@ table.simple {
 		padding-inline: 1rem;
 		padding-block: 0.3rem;
 	}
-  
+
 	& tr {
-    border-bottom: solid rgba(128, 128, 128, 0.506) 1px;
+		border-bottom: solid rgba(128, 128, 128, 0.506) 1px;
 	}
 	& tr:last-child {
-    border-bottom: none;
+		border-bottom: none;
 	}
 }

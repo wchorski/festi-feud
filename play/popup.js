@@ -28,6 +28,7 @@ const gameRoundEl = getElementById("game-round", HTMLElement)
 const answersList = getElementById("answers", HTMLDListElement)
 const questionEl = getElementById("question", HTMLParagraphElement)
 const strikesWrap = getElementById("strikes", HTMLDivElement)
+const scoreMultiplierEl = getElementById("score-multiplier", HTMLSpanElement)
 const strikeSVGs = querySelectorAll("svg.strike", SVGElement, strikesWrap)
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -67,6 +68,7 @@ function initUi(state) {
 		? teamsWrapEl.classList.add("round-steal")
 		: teamsWrapEl.classList.remove("round-steal")
 	roundScoreEl.textContent = String(points)
+	scoreMultiplierEl.textContent = "x" + String(pointMultiplier)
 
 	strikeSVGs.forEach((svg, i) => {
 		svg.dataset.disabled = "true"
@@ -140,7 +142,7 @@ function reactiveEvents() {
 		const { state, highestScoringTeam } = detail
 		document.body.dataset.roundPhase = state.roundPhase
 		document.body.dataset.roundType = state.roundType
-    roundTypeEl.textContent = state.roundType
+		roundTypeEl.textContent = state.roundType
 		gameWinnerNameEl.textContent = highestScoringTeam.name
 	}
 

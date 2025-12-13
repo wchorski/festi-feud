@@ -33,7 +33,7 @@ const dbMessage = document.getElementById("db-message")
 const seedDbBtn = document.getElementById("seed-db-btn")
 const questionsWrap = document.getElementById("questions-wrap")
 const questionForm = document.forms.namedItem("questionForm")
-const answersWrap = document.getElementById("answers-wrap")
+// const answersWrap = document.getElementById("answers-wrap")
 if (!questionForm) throw new Error("form(s) not found")
 
 /** @param {QuestionSet} e */
@@ -50,17 +50,17 @@ function handleQuestionDelete(e) {
 }
 
 /** @param {AnswerSet} e */
-function handleAnswerSet(e) {
-	if (!answersWrap) throw new Error("wrap not found")
-	const p = createTextEl(e.detail, dbDeleteAnswer)
-	answersWrap.prepend(p)
-}
-/** @param {AnswerDelete} e */
-function handleAnswerDelete(e) {
-	const id = e.detail
-	const el = answersWrap?.querySelector(`[data-id="${id}"]`)
-	if (el) el.remove()
-}
+// function handleAnswerSet(e) {
+// 	if (!answersWrap) throw new Error("wrap not found")
+// 	const p = createTextEl(e.detail, dbDeleteAnswer)
+// 	answersWrap.prepend(p)
+// }
+// /** @param {AnswerDelete} e */
+// function handleAnswerDelete(e) {
+// 	const id = e.detail
+// 	const el = answersWrap?.querySelector(`[data-id="${id}"]`)
+// 	if (el) el.remove()
+// }
 
 document.addEventListener("DOMContentLoaded", function () {
 	events.addEventListener(
@@ -94,16 +94,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		},
 	})
 
-	events.addEventListener(
-		"answers:set",
-		//@ts-ignore
-		handleAnswerSet
-	)
-	events.addEventListener(
-		"answers:delete",
-		//@ts-ignore
-		handleAnswerDelete
-	)
+	// events.addEventListener(
+	// 	"answers:set",
+	// 	//@ts-ignore
+	// 	handleAnswerSet
+	// )
+	// events.addEventListener(
+	// 	"answers:delete",
+	// 	//@ts-ignore
+	// 	handleAnswerDelete
+	// )
 })
 
 async function ini() {
@@ -111,9 +111,9 @@ async function ini() {
 	await getAllQuestionDocs()
 	renderAllTextEls(questionsMap, questionsWrap, dbDeleteQuestion)
 
-	if (!answersWrap) throw new Error("no wrap")
-	await getAllAnswerDocs()
-	renderAllTextEls(answersMap, answersWrap, dbDeleteAnswer)
+	// if (!answersWrap) throw new Error("no wrap")
+	// await getAllAnswerDocs()
+	// renderAllTextEls(answersMap, answersWrap, dbDeleteAnswer)
 
 	if (!dbMessage) throw new Error("dbMessage not found in dom")
 	if (!seedDbBtn) throw new Error("seedDbBtn not found in dom")

@@ -1,11 +1,9 @@
 type BaseAnswer = {
 	text: string
 	questionId: string
-	// TODO will it be better future proof to do nested ids?
-	// upvotes: { userId: string }[]
-	// downvotes: { userId: string }[]
-	upvotes: string[]
-	downvotes: string[]
+	voteIds: string[]
+	// upvotes: string[]
+	// downvotes: string[]
 	dateCreated: string
 	authorId: string
 	// Add more shared fields here as needed

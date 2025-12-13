@@ -1,0 +1,679 @@
+[
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-0",
+    "voterId": "User-0",
+    "questionId": "question-1",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-1",
+    "voterId": "User-1",
+    "questionId": "question-1",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-2",
+    "voterId": "User-2",
+    "questionId": "question-1",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-3",
+    "voterId": "User-0",
+    "questionId": "question-2",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-4",
+    "voterId": "User-1",
+    "questionId": "question-2",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-5",
+    "voterId": "User-2",
+    "questionId": "question-2",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-6",
+    "voterId": "User-0",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "upvotes": [
+      "093658dd-1e94-437d-b5f8-e5fe8c9097e5",
+      "12ca57b5-8d76-4ca8-996b-f4099fe95a0f",
+      "2bbad186-080b-4b05-9136-bde496b429ab",
+      "3b334c59-e30a-41d0-a3e0-590ca4850688",
+      "44165717-af24-4a8b-8a6b-3fe41411c4c2",
+      "54763783-254e-41e2-a3cc-c9fc0c1df7ee",
+      "77a3a7f1-189c-48c6-b3ff-8074e7f32097",
+      "8015718a-5588-4c43-98e5-ee133403d7bb",
+      "answer-10",
+      "answer-12",
+      "answer-14",
+      "answer-15",
+      "answer-16",
+      "answer-18",
+      "answer-19",
+      "answer-20",
+      "answer-3",
+      "answer-5",
+      "answer-8",
+      "answer-9",
+      "b4b3814c-d58d-444f-9a16-810b6a53f56e",
+      "c493930c-e119-44c5-a153-61d176e7bff5",
+      "d8fbb97e-b418-4431-a299-f9c01df5385a",
+      "de42ffbc-0c09-47ad-aef3-b6711f95859f"
+    ],
+    "downvotes": [
+      "1245eea9-b67a-402f-a5a4-8ccf65497efb",
+      "302290b3-fead-4d9f-b7f0-ed45c74cdfb1",
+      "75f70562-ab32-48ca-86e6-28fd35dca740",
+      "96b92528-133e-42e5-b94e-ce4f2aba2eeb",
+      "answer-1",
+      "answer-2",
+      "answer-4",
+      "b95eb964-da21-4193-b8c9-3eb406a3816a",
+      "d42d61c3-ab8b-44ef-bc24-f3b894848041",
+      "ec385206-48cf-4c84-b46a-55fe61fda71d",
+      "f5d8b3f5-14bc-4a00-adfb-d654b4402e78",
+      "fb3526cd-b8c7-444d-a354-4702d4fe480d"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-7",
+    "voterId": "User-1",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "upvotes": [
+      "093658dd-1e94-437d-b5f8-e5fe8c9097e5",
+      "1245eea9-b67a-402f-a5a4-8ccf65497efb",
+      "2bbad186-080b-4b05-9136-bde496b429ab",
+      "3b334c59-e30a-41d0-a3e0-590ca4850688",
+      "42f53161-fb2f-4831-b55b-1172166a49c4",
+      "54763783-254e-41e2-a3cc-c9fc0c1df7ee",
+      "75f70562-ab32-48ca-86e6-28fd35dca740",
+      "77a3a7f1-189c-48c6-b3ff-8074e7f32097",
+      "96b92528-133e-42e5-b94e-ce4f2aba2eeb",
+      "answer-1",
+      "answer-11",
+      "answer-12",
+      "answer-13",
+      "answer-15",
+      "answer-16",
+      "answer-17",
+      "answer-18",
+      "answer-19",
+      "answer-2",
+      "answer-3",
+      "answer-4",
+      "answer-5",
+      "answer-7",
+      "answer-9",
+      "b4b3814c-d58d-444f-9a16-810b6a53f56e",
+      "b95eb964-da21-4193-b8c9-3eb406a3816a",
+      "bdda151d-3ad0-4bb1-962c-06d223b1a15d",
+      "d8fbb97e-b418-4431-a299-f9c01df5385a",
+      "de42ffbc-0c09-47ad-aef3-b6711f95859f",
+      "ec385206-48cf-4c84-b46a-55fe61fda71d",
+      "fb3526cd-b8c7-444d-a354-4702d4fe480d"
+    ],
+    "downvotes": [
+      "12ca57b5-8d76-4ca8-996b-f4099fe95a0f",
+      "302290b3-fead-4d9f-b7f0-ed45c74cdfb1",
+      "44165717-af24-4a8b-8a6b-3fe41411c4c2",
+      "8015718a-5588-4c43-98e5-ee133403d7bb",
+      "answer-10",
+      "f5d8b3f5-14bc-4a00-adfb-d654b4402e78"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-8",
+    "voterId": "User-2",
+    "questionId": "question-2b74a78f-62f2-4ad9-bd4e-196f3a0df7a4",
+    "upvotes": [
+      "12ca57b5-8d76-4ca8-996b-f4099fe95a0f",
+      "302290b3-fead-4d9f-b7f0-ed45c74cdfb1",
+      "3b334c59-e30a-41d0-a3e0-590ca4850688",
+      "75f70562-ab32-48ca-86e6-28fd35dca740",
+      "77a3a7f1-189c-48c6-b3ff-8074e7f32097",
+      "803a4a34-14f6-4efa-9ece-0429dfbbb4eb",
+      "answer-1",
+      "answer-10",
+      "answer-11",
+      "answer-12",
+      "answer-15",
+      "answer-18",
+      "answer-2",
+      "answer-20",
+      "answer-3",
+      "answer-4",
+      "answer-5",
+      "answer-6",
+      "answer-7",
+      "answer-8",
+      "b4b3814c-d58d-444f-9a16-810b6a53f56e",
+      "b95eb964-da21-4193-b8c9-3eb406a3816a",
+      "c493930c-e119-44c5-a153-61d176e7bff5",
+      "d42d61c3-ab8b-44ef-bc24-f3b894848041",
+      "d8fbb97e-b418-4431-a299-f9c01df5385a",
+      "ec385206-48cf-4c84-b46a-55fe61fda71d",
+      "f5d8b3f5-14bc-4a00-adfb-d654b4402e78",
+      "fb3526cd-b8c7-444d-a354-4702d4fe480d"
+    ],
+    "downvotes": [
+      "42f53161-fb2f-4831-b55b-1172166a49c4",
+      "44165717-af24-4a8b-8a6b-3fe41411c4c2",
+      "54763783-254e-41e2-a3cc-c9fc0c1df7ee",
+      "8015718a-5588-4c43-98e5-ee133403d7bb",
+      "answer-13",
+      "answer-14",
+      "answer-19",
+      "bdda151d-3ad0-4bb1-962c-06d223b1a15d"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-9",
+    "voterId": "User-0",
+    "questionId": "question-3",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-10",
+    "voterId": "User-1",
+    "questionId": "question-3",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-11",
+    "voterId": "User-2",
+    "questionId": "question-3",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-12",
+    "voterId": "User-0",
+    "questionId": "question-4",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-13",
+    "voterId": "User-1",
+    "questionId": "question-4",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-14",
+    "voterId": "User-2",
+    "questionId": "question-4",
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-15",
+    "voterId": "User-0",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "upvotes": [
+      "36060276-d9c6-4a63-bb43-a802e709b961",
+      "3c4c0f95-af8a-4599-941b-a0af9240a9b7",
+      "5f117042-ce9c-498b-b4af-10692c186902",
+      "6ce8cca6-e92e-4603-9fd3-55dc3a0100a5",
+      "d252c86a-8c60-47a0-b22d-566ee79c9a3c",
+      "e47c6623-b861-4430-ae1c-fe048fb09db6",
+      "e73161da-d1ac-461f-abf8-b3b803398eae",
+      "ead1365b-1180-4cb8-9cc8-74efd8d91c15",
+      "f49b023b-0707-417f-95c9-60b40810cb7d"
+    ],
+    "downvotes": [
+      "5c39fb25-a84f-4753-945d-18016ea50362",
+      "77f8df4e-644d-4648-80a2-2ff653584289",
+      "a2d0b23a-abfa-4232-87cd-3a52c427d3d1"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-16",
+    "voterId": "User-1",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "upvotes": [
+      "36060276-d9c6-4a63-bb43-a802e709b961",
+      "41b680fe-4b1b-44a3-8129-29aa798c230e",
+      "4b06d9e8-db34-4291-9049-cc427b26e747",
+      "4babdea7-9a65-4423-bbd6-2be03263fb46",
+      "5f117042-ce9c-498b-b4af-10692c186902",
+      "77f8df4e-644d-4648-80a2-2ff653584289",
+      "7bf9fdb8-5d33-4152-9e49-ce6567ca638d",
+      "cec0c31f-50d8-4a4a-a570-430e9393ce82",
+      "e47c6623-b861-4430-ae1c-fe048fb09db6",
+      "e73161da-d1ac-461f-abf8-b3b803398eae",
+      "ead1365b-1180-4cb8-9cc8-74efd8d91c15",
+      "f49b023b-0707-417f-95c9-60b40810cb7d"
+    ],
+    "downvotes": [
+      "5fa6e317-44bd-4c7a-9190-971e070dfce4",
+      "6ce8cca6-e92e-4603-9fd3-55dc3a0100a5",
+      "bae811d0-5290-4dfe-badc-a8aa2145492c",
+      "d252c86a-8c60-47a0-b22d-566ee79c9a3c"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-17",
+    "voterId": "User-2",
+    "questionId": "question-63e5cbd2-25b0-4ff3-92e2-71e2c33c4b81",
+    "upvotes": [
+      "07fa7740-c1c4-4205-a97c-02ebc4ea99cf",
+      "3c4c0f95-af8a-4599-941b-a0af9240a9b7",
+      "41b680fe-4b1b-44a3-8129-29aa798c230e",
+      "5c39fb25-a84f-4753-945d-18016ea50362",
+      "5f117042-ce9c-498b-b4af-10692c186902",
+      "6ce8cca6-e92e-4603-9fd3-55dc3a0100a5",
+      "77f8df4e-644d-4648-80a2-2ff653584289",
+      "9f7e52b7-d103-4ea9-97f7-e2428a1a462a",
+      "a2d0b23a-abfa-4232-87cd-3a52c427d3d1",
+      "bae811d0-5290-4dfe-badc-a8aa2145492c",
+      "d252c86a-8c60-47a0-b22d-566ee79c9a3c",
+      "e47c6623-b861-4430-ae1c-fe048fb09db6",
+      "ead1365b-1180-4cb8-9cc8-74efd8d91c15"
+    ],
+    "downvotes": [
+      "4babdea7-9a65-4423-bbd6-2be03263fb46",
+      "5fa6e317-44bd-4c7a-9190-971e070dfce4",
+      "7bf9fdb8-5d33-4152-9e49-ce6567ca638d",
+      "e73161da-d1ac-461f-abf8-b3b803398eae"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-18",
+    "voterId": "User-0",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "upvotes": [
+      "1e9960cf-8667-4d1b-82d5-bbeca8ce5d26",
+      "1f5b4d1a-0fcd-4e99-9eac-fc7103c7b4b0",
+      "1f93bf2d-deec-4212-851d-63b6793d21b3",
+      "227a2341-9e3d-4a2f-8d21-b321db66c7fe",
+      "282a2972-cb67-46e9-abcb-aad5210d7c25",
+      "2aee11a0-7729-49c0-a13d-b18b52629054",
+      "32474480-66ce-444f-8dca-71d6485c7f61",
+      "48b88557-1376-44c8-bc0a-82ea1b3d633c",
+      "66e5eb5b-d005-4bf7-9163-217d45e42145",
+      "75d6c881-f3c7-4158-9d3a-fdab70bd393d",
+      "7c9e5e42-deca-4627-b6f5-af22c507b749",
+      "ccbb3df6-1f0f-4631-b2ad-db9232d47fc2",
+      "da755e4d-157e-4ea8-94b6-f3d8904abd76",
+      "dc970ffe-c7b0-4813-9864-3e277c11ea2d"
+    ],
+    "downvotes": [
+      "0d5b0c6f-a64f-4629-b2cc-c800a736668d",
+      "29cc9d7f-74a6-499c-973d-237913ad2ca0",
+      "32fedd88-cb97-4587-9276-771e841badab",
+      "9acae8f7-7ffa-44b9-868c-0f0d911489ce",
+      "e60a1347-0d0d-47ba-b821-930b1bacb63e",
+      "ee62875a-29cd-4169-a85e-43b567a99f18"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-19",
+    "voterId": "User-1",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "upvotes": [
+      "1e9960cf-8667-4d1b-82d5-bbeca8ce5d26",
+      "1f5b4d1a-0fcd-4e99-9eac-fc7103c7b4b0",
+      "1f93bf2d-deec-4212-851d-63b6793d21b3",
+      "227a2341-9e3d-4a2f-8d21-b321db66c7fe",
+      "282a2972-cb67-46e9-abcb-aad5210d7c25",
+      "29cc9d7f-74a6-499c-973d-237913ad2ca0",
+      "32fedd88-cb97-4587-9276-771e841badab",
+      "48b88557-1376-44c8-bc0a-82ea1b3d633c",
+      "75d6c881-f3c7-4158-9d3a-fdab70bd393d",
+      "99a309fb-d6b0-4e57-8078-49854fa05178",
+      "a7b062e0-3758-4973-aa99-c15c59c757d2",
+      "a834c665-37f7-4576-be86-54a465188fd0",
+      "c8cbffd6-427e-49bc-835d-d76204f0fe5a",
+      "da755e4d-157e-4ea8-94b6-f3d8904abd76",
+      "dc970ffe-c7b0-4813-9864-3e277c11ea2d",
+      "e60a1347-0d0d-47ba-b821-930b1bacb63e",
+      "ee62875a-29cd-4169-a85e-43b567a99f18"
+    ],
+    "downvotes": [
+      "32474480-66ce-444f-8dca-71d6485c7f61",
+      "66e5eb5b-d005-4bf7-9163-217d45e42145",
+      "ccbb3df6-1f0f-4631-b2ad-db9232d47fc2"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-20",
+    "voterId": "User-2",
+    "questionId": "question-7c8b8e0e-0e36-4a16-9ef0-1b9d1bb2b284",
+    "upvotes": [
+      "1e9960cf-8667-4d1b-82d5-bbeca8ce5d26",
+      "227a2341-9e3d-4a2f-8d21-b321db66c7fe",
+      "282a2972-cb67-46e9-abcb-aad5210d7c25",
+      "29cc9d7f-74a6-499c-973d-237913ad2ca0",
+      "2aee11a0-7729-49c0-a13d-b18b52629054",
+      "48b88557-1376-44c8-bc0a-82ea1b3d633c",
+      "66e5eb5b-d005-4bf7-9163-217d45e42145",
+      "7c9e5e42-deca-4627-b6f5-af22c507b749",
+      "a834c665-37f7-4576-be86-54a465188fd0",
+      "c8cbffd6-427e-49bc-835d-d76204f0fe5a",
+      "ccbb3df6-1f0f-4631-b2ad-db9232d47fc2",
+      "da755e4d-157e-4ea8-94b6-f3d8904abd76",
+      "e60a1347-0d0d-47ba-b821-930b1bacb63e",
+      "ee62875a-29cd-4169-a85e-43b567a99f18"
+    ],
+    "downvotes": [
+      "32fedd88-cb97-4587-9276-771e841badab",
+      "75d6c881-f3c7-4158-9d3a-fdab70bd393d",
+      "9acae8f7-7ffa-44b9-868c-0f0d911489ce",
+      "a7b062e0-3758-4973-aa99-c15c59c757d2",
+      "dc970ffe-c7b0-4813-9864-3e277c11ea2d"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-21",
+    "voterId": "User-0",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "upvotes": [
+      "11062e5f-4d3d-417f-9142-ab158a831083",
+      "21123017-c5f0-4484-822b-d072feee412c",
+      "2eeac50b-ba22-4132-91b4-12bf5e05561f",
+      "34223aa5-1e1e-4685-b56f-fc6e71c25630",
+      "3dd3d4f0-71b0-406c-a835-072c1078b8a8",
+      "4bcc8e8f-80ec-4605-92c6-2679fa876722",
+      "50e519e2-bdd3-41d6-9f24-5f2327d9df86",
+      "89934c9a-977b-483d-96cf-f68fa7a61d56",
+      "8b301e9d-7982-4be1-b536-8516014c8331",
+      "8fa00009-e6b3-4286-aa22-447043736318",
+      "90c654aa-57ac-4a55-b05f-bf7e7d6235db",
+      "9563bba4-877b-4617-9ea9-97f04167c154",
+      "b0f0d7e7-cbf6-4b08-ac41-88da412a03f7",
+      "b8e3ad53-05a8-4a69-98c8-781043a408c5",
+      "c0b7b8f7-24f9-447c-965f-308b7158293e",
+      "d4b9e93f-ec0f-4bf9-8ddd-c75c16ecc885",
+      "df91f164-dfc6-465a-9c3d-446bf7554d07"
+    ],
+    "downvotes": [
+      "6c2e680d-844a-459a-91d7-a9a25b951642",
+      "a82994b5-d072-4f61-96a0-1d8ee419fdbe",
+      "c78cdaec-8c3e-4ef2-8f58-f4562aa1aa9a"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-22",
+    "voterId": "User-1",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "upvotes": [
+      "11062e5f-4d3d-417f-9142-ab158a831083",
+      "21123017-c5f0-4484-822b-d072feee412c",
+      "3dd3d4f0-71b0-406c-a835-072c1078b8a8",
+      "49dc9f5d-821c-44cb-aca6-e21462211c98",
+      "6c2e680d-844a-459a-91d7-a9a25b951642",
+      "90c654aa-57ac-4a55-b05f-bf7e7d6235db",
+      "a16b204c-25fa-4b4d-8c00-b9b65dfbc28f",
+      "b8e3ad53-05a8-4a69-98c8-781043a408c5",
+      "c0b7b8f7-24f9-447c-965f-308b7158293e",
+      "c78cdaec-8c3e-4ef2-8f58-f4562aa1aa9a",
+      "df91f164-dfc6-465a-9c3d-446bf7554d07",
+      "fdbda9b8-70b6-470f-80a7-9619f47b415b"
+    ],
+    "downvotes": [
+      "2eeac50b-ba22-4132-91b4-12bf5e05561f",
+      "50e519e2-bdd3-41d6-9f24-5f2327d9df86",
+      "9563bba4-877b-4617-9ea9-97f04167c154",
+      "a82994b5-d072-4f61-96a0-1d8ee419fdbe",
+      "d4b9e93f-ec0f-4bf9-8ddd-c75c16ecc885"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-23",
+    "voterId": "User-2",
+    "questionId": "question-9f59f6a4-9c93-45c4-b18b-3271dc3c85f1",
+    "upvotes": [
+      "11062e5f-4d3d-417f-9142-ab158a831083",
+      "21123017-c5f0-4484-822b-d072feee412c",
+      "2eeac50b-ba22-4132-91b4-12bf5e05561f",
+      "34223aa5-1e1e-4685-b56f-fc6e71c25630",
+      "3dd3d4f0-71b0-406c-a835-072c1078b8a8",
+      "49dc9f5d-821c-44cb-aca6-e21462211c98",
+      "89934c9a-977b-483d-96cf-f68fa7a61d56",
+      "90c654aa-57ac-4a55-b05f-bf7e7d6235db",
+      "a16b204c-25fa-4b4d-8c00-b9b65dfbc28f",
+      "a82994b5-d072-4f61-96a0-1d8ee419fdbe",
+      "b8e3ad53-05a8-4a69-98c8-781043a408c5",
+      "c0b7b8f7-24f9-447c-965f-308b7158293e",
+      "c78cdaec-8c3e-4ef2-8f58-f4562aa1aa9a",
+      "d4b9e93f-ec0f-4bf9-8ddd-c75c16ecc885",
+      "df91f164-dfc6-465a-9c3d-446bf7554d07",
+      "fdbda9b8-70b6-470f-80a7-9619f47b415b"
+    ],
+    "downvotes": [
+      "6c2e680d-844a-459a-91d7-a9a25b951642",
+      "8b301e9d-7982-4be1-b536-8516014c8331",
+      "8fa00009-e6b3-4286-aa22-447043736318",
+      "9563bba4-877b-4617-9ea9-97f04167c154",
+      "b0f0d7e7-cbf6-4b08-ac41-88da412a03f7"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-24",
+    "voterId": "User-0",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "upvotes": [
+      "05f33a90-1542-439e-8d56-c0169be14659",
+      "0f839d2f-bd90-4c93-a8a7-46ba61e58831",
+      "5cb89c18-2de3-46f6-ad20-46f276a3fcf7",
+      "80c190e9-ff71-4309-ad1b-b20a3277d1b8",
+      "81f6b93c-8896-48c6-92fc-cd5f051bdb01",
+      "8c4fcb4f-9b3a-42b5-a05c-2dc989ceb206",
+      "8c93be8a-a5c2-4e75-a98b-c1c67d5157cb",
+      "9e5c4dfc-77bd-4992-bb36-698aaeacd916",
+      "a08c6967-3ff9-4f4f-946b-183f52990be9",
+      "ac2ba31b-698b-46ab-b7ee-7a1227d66175",
+      "aff35c12-6d99-4bce-b0e0-f758cfc2d921",
+      "bc8a4c3c-470a-4d4c-8f40-f23a09690636",
+      "c7cdbe1f-f6f0-4f58-b06a-7ddf71357982",
+      "cb9abb3c-212c-4f22-8952-2f538c07ba61",
+      "cbf5178e-839b-4b1d-97c4-aa6ef8d50707",
+      "cf8a35e4-9e1f-4c12-bef2-3d52b57dbecb",
+      "e7c4dd91-af8b-4d6e-99aa-33d48e7533e1"
+    ],
+    "downvotes": [
+      "05c1461d-4029-4655-a360-62f3d7a0e7a9",
+      "0f01a43c-4466-48cc-8755-0e9b0c4a6563",
+      "34ecdda0-1e28-4bda-85f2-e5c957936609",
+      "38a16483-b018-4247-b10d-c064cdf55580",
+      "5016d97e-e355-4067-8c3a-9a37f5b48639",
+      "702cacc3-6aeb-413b-a531-636165ccff93"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-25",
+    "voterId": "User-1",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "upvotes": [
+      "011ba505-0d11-478f-95d5-aa5bf2153919",
+      "05c1461d-4029-4655-a360-62f3d7a0e7a9",
+      "05f33a90-1542-439e-8d56-c0169be14659",
+      "0f01a43c-4466-48cc-8755-0e9b0c4a6563",
+      "147d0c86-4871-4f06-bba3-55432b31af9b",
+      "34ecdda0-1e28-4bda-85f2-e5c957936609",
+      "38a16483-b018-4247-b10d-c064cdf55580",
+      "5016d97e-e355-4067-8c3a-9a37f5b48639",
+      "5cb89c18-2de3-46f6-ad20-46f276a3fcf7",
+      "702cacc3-6aeb-413b-a531-636165ccff93",
+      "80c190e9-ff71-4309-ad1b-b20a3277d1b8",
+      "81f6b93c-8896-48c6-92fc-cd5f051bdb01",
+      "8c4fcb4f-9b3a-42b5-a05c-2dc989ceb206",
+      "8c93be8a-a5c2-4e75-a98b-c1c67d5157cb",
+      "aff35c12-6d99-4bce-b0e0-f758cfc2d921",
+      "bc8a4c3c-470a-4d4c-8f40-f23a09690636",
+      "cb9abb3c-212c-4f22-8952-2f538c07ba61",
+      "cf8a35e4-9e1f-4c12-bef2-3d52b57dbecb",
+      "e7c4dd91-af8b-4d6e-99aa-33d48e7533e1"
+    ],
+    "downvotes": [
+      "9e5c4dfc-77bd-4992-bb36-698aaeacd916",
+      "a446636a-c199-474c-9b85-fb83e3694fe6",
+      "ac2ba31b-698b-46ab-b7ee-7a1227d66175",
+      "c7cdbe1f-f6f0-4f58-b06a-7ddf71357982",
+      "cbf5178e-839b-4b1d-97c4-aa6ef8d50707"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-26",
+    "voterId": "User-2",
+    "questionId": "question-e2a78712-9f6a-4a8b-b05c-0e6b69f84c82",
+    "upvotes": [
+      "011ba505-0d11-478f-95d5-aa5bf2153919",
+      "05f33a90-1542-439e-8d56-c0169be14659",
+      "34ecdda0-1e28-4bda-85f2-e5c957936609",
+      "5016d97e-e355-4067-8c3a-9a37f5b48639",
+      "5cb89c18-2de3-46f6-ad20-46f276a3fcf7",
+      "702cacc3-6aeb-413b-a531-636165ccff93",
+      "8c4fcb4f-9b3a-42b5-a05c-2dc989ceb206",
+      "8c93be8a-a5c2-4e75-a98b-c1c67d5157cb",
+      "9e5c4dfc-77bd-4992-bb36-698aaeacd916",
+      "a08c6967-3ff9-4f4f-946b-183f52990be9",
+      "a446636a-c199-474c-9b85-fb83e3694fe6",
+      "bc8a4c3c-470a-4d4c-8f40-f23a09690636",
+      "cbf5178e-839b-4b1d-97c4-aa6ef8d50707",
+      "cf8a35e4-9e1f-4c12-bef2-3d52b57dbecb",
+      "e7c4dd91-af8b-4d6e-99aa-33d48e7533e1"
+    ],
+    "downvotes": [
+      "147d0c86-4871-4f06-bba3-55432b31af9b",
+      "38a16483-b018-4247-b10d-c064cdf55580",
+      "80c190e9-ff71-4309-ad1b-b20a3277d1b8",
+      "81f6b93c-8896-48c6-92fc-cd5f051bdb01",
+      "ac2ba31b-698b-46ab-b7ee-7a1227d66175",
+      "aff35c12-6d99-4bce-b0e0-f758cfc2d921",
+      "cb9abb3c-212c-4f22-8952-2f538c07ba61"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-27",
+    "voterId": "User-0",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "upvotes": [
+      "02572f92-3e7d-4e4e-9230-8372d6ec7178",
+      "16790bd2-ef6e-48f3-92c3-3d56004c170e",
+      "19a9d608-6308-4252-9276-5030cffe89e4",
+      "19f239af-9e69-4bba-b4fb-529561a5eb70",
+      "2c9edb56-d498-48c4-a587-bce0424d85b5",
+      "3b437ae3-a259-445a-b098-9ddee7a3c53b",
+      "514772f8-593e-426c-8e02-b86ed5b2c768",
+      "6fa25ba7-aecb-4216-b4d8-d50b3f1dadb8",
+      "7dbad817-320a-432d-b7b1-0a84dd4b17e2",
+      "8895f435-52fa-4ea4-acfb-eb0d941bfaba",
+      "892125c8-5d2d-4227-a310-ba57563f1923",
+      "8ab0cc6a-bfe1-4448-8231-4391c53d5bdd",
+      "8afc72b9-2d9b-4ea8-8b52-0f1be451f3d7",
+      "a292f61f-31d1-4e8b-873c-574782830f87",
+      "a6ade251-2bea-4641-9810-81d844aa3e0f",
+      "bd9ea5a3-8b4b-4294-9fb6-8ef4086ad5c1",
+      "c141e9ed-c295-43fa-a40d-740c43f09c23",
+      "ecf05298-8cbf-4151-a354-967b8bc080a6",
+      "f9b5745f-4e52-47cf-9f84-556330ba8f1c"
+    ],
+    "downvotes": [
+      "717b7f94-edc4-4c11-8a14-f730bfaaf2fe",
+      "75df1ea2-91e3-4a43-8551-192c13d73160",
+      "ea9b881c-62a5-429e-af31-1af6f0b7b758"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-28",
+    "voterId": "User-1",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "upvotes": [
+      "02572f92-3e7d-4e4e-9230-8372d6ec7178",
+      "09bd8b43-1954-4434-9ccf-b0808a5ecfb3",
+      "0d71cf98-4a1d-440d-ac7d-63ea54d91671",
+      "16790bd2-ef6e-48f3-92c3-3d56004c170e",
+      "19a9d608-6308-4252-9276-5030cffe89e4",
+      "19f239af-9e69-4bba-b4fb-529561a5eb70",
+      "514772f8-593e-426c-8e02-b86ed5b2c768",
+      "6fa25ba7-aecb-4216-b4d8-d50b3f1dadb8",
+      "8895f435-52fa-4ea4-acfb-eb0d941bfaba",
+      "8ab0cc6a-bfe1-4448-8231-4391c53d5bdd",
+      "8afc72b9-2d9b-4ea8-8b52-0f1be451f3d7",
+      "a292f61f-31d1-4e8b-873c-574782830f87",
+      "bd9ea5a3-8b4b-4294-9fb6-8ef4086ad5c1",
+      "c141e9ed-c295-43fa-a40d-740c43f09c23",
+      "ea9b881c-62a5-429e-af31-1af6f0b7b758",
+      "ecf05298-8cbf-4151-a354-967b8bc080a6"
+    ],
+    "downvotes": [
+      "717b7f94-edc4-4c11-8a14-f730bfaaf2fe",
+      "75df1ea2-91e3-4a43-8551-192c13d73160",
+      "892125c8-5d2d-4227-a310-ba57563f1923",
+      "a6ade251-2bea-4641-9810-81d844aa3e0f",
+      "f9b5745f-4e52-47cf-9f84-556330ba8f1c"
+    ]
+  },
+  {
+    "typeof": "Ballot",
+    "_id": "Ballot-29",
+    "voterId": "User-2",
+    "questionId": "question-f8e4a9c7-d8a3-46d1-94a5-27b4e9c8c4df",
+    "upvotes": [
+      "2c9edb56-d498-48c4-a587-bce0424d85b5",
+      "514772f8-593e-426c-8e02-b86ed5b2c768",
+      "6fa25ba7-aecb-4216-b4d8-d50b3f1dadb8",
+      "75df1ea2-91e3-4a43-8551-192c13d73160",
+      "7dbad817-320a-432d-b7b1-0a84dd4b17e2",
+      "8895f435-52fa-4ea4-acfb-eb0d941bfaba",
+      "892125c8-5d2d-4227-a310-ba57563f1923",
+      "8ab0cc6a-bfe1-4448-8231-4391c53d5bdd",
+      "8afc72b9-2d9b-4ea8-8b52-0f1be451f3d7",
+      "bd9ea5a3-8b4b-4294-9fb6-8ef4086ad5c1",
+      "c141e9ed-c295-43fa-a40d-740c43f09c23",
+      "ecf05298-8cbf-4151-a354-967b8bc080a6",
+      "f9b5745f-4e52-47cf-9f84-556330ba8f1c"
+    ],
+    "downvotes": [
+      "09bd8b43-1954-4434-9ccf-b0808a5ecfb3",
+      "717b7f94-edc4-4c11-8a14-f730bfaaf2fe",
+      "a292f61f-31d1-4e8b-873c-574782830f87",
+      "a6ade251-2bea-4641-9810-81d844aa3e0f",
+      "ea9b881c-62a5-429e-af31-1af6f0b7b758"
+    ]
+  }
+]

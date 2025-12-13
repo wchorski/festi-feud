@@ -38,7 +38,7 @@ article.answer {
 }
 
 body[data-round-type="face-off"] {
-	& #strikes {
+	& #strikes, & #round-score {
 		visibility: hidden;
 	}
 }

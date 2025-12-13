@@ -1,0 +1,11 @@
+[
+  {
+    "typeof": "Vote",
+    "_id": "vote-1",
+    "voterId": "user-1",
+    "questionId": "question-1",
+    "answerId": "answer-1",
+    "upvote": true,
+    "downvote": false
+  }
+]

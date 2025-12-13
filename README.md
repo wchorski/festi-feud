@@ -76,7 +76,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 ```
 
 ## Todos
-
+- [ ] move votes to it's own model in schema.
 - [ ] `/questions` page where you can vote on existing and insert new answers
   - [ ] either `/questions?id=123` or `/questions/123` to go to individual
 - [ ] `/play` page where you pull in questions with corrisponsing answers
@@ -100,6 +100,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
   - [ ] set active player
 - [ ] should i give `round` 1-5 a `roundPhase` (Face-Off, Main Round, Steal, Round End)? or just increment 1-7? making each 'phase' a round number?
 - [ ] fix answer points and scoring (uneven voters means each round has variation in total points. Either make each of the 8 fixed point or weight each answer's points against a percentage)
+- [ ] filter out questions that don't have more than 100 votes
 
 ## Existing Repos
 
