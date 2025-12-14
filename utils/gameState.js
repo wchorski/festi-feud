@@ -254,8 +254,6 @@ class GameStateManager {
 
 		// other funcs save the data
 		this.save()
-		console.log("endRound")
-		console.log(this.state)
 
 		/** @type {BC_GAME_MESSAGE} */
 		const message = {
@@ -640,8 +638,6 @@ class GameStateManager {
 			const teamStealIndex = (activeTeamIndex + 1) % teams.length
 
 			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
-			console.log({ winningTeamIndex })
-			console.log({ points, pointMultiplier })
 
 			this.state.teams = this.state.teams.map((team, index) =>
 				index === winningTeamIndex

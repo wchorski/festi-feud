@@ -404,9 +404,9 @@ export function uiToggleCheckboxDisables(disabled) {
 // TODO move this to /ui.js
 /** @param {GameState} state  */
 function uiUpdateScores(state) {
-	// console.log({ state })
+
 	const { teams } = state
-	console.log({ teams })
+
 	teams.forEach((team, i) => {
 		const scoreEl = querySelector(
 			`input[name="team-${i}-score"]`,
