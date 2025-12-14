@@ -23,6 +23,12 @@ export type Team = {
 export type GameAnswer = {
 	id: string
 	text: string
+	authorId: string
+	upvotes: number
+	downvotes: number
 	points: number
 	isGuessed: boolean
+	netScore: number
+	popularity: number
+	uniqueVoterNum: uniqueVoters.size
 }

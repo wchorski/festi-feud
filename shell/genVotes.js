@@ -57,18 +57,18 @@ async function dbGenerateRandomVotes() {
 	// BUUTTT i can just filter from here because I need to get all answers anyway
 	const answerDocs = await fetchAnswers()
 	const questionDocs = await fetchQuestion()
-	/** @type{Ballot[]} */
+	/** @type{Partial<Ballot>[]} */
 	const ballots = []
 
 	questionDocs.map((question, index) => {
-		console.log(question)
+		console.log("question._id: ", question._id)
 		const surveyAnswers = answerDocs.filter(
 			(doc) => doc.questionId === question._id
 		)
 		console.log("surveyAnswers.length: ", surveyAnswers.length)
 
 		// TODO make this 100 for more realistic numbers
-		Array(3)
+		Array(100)
 			.fill("x")
 			.forEach((_, i) => {
 				/** @type{string[]} */
@@ -89,30 +89,31 @@ async function dbGenerateRandomVotes() {
 
 				ballots.push({
 					typeof: "Ballot",
-					_id: `BAD_ID`,
 					voterId: `User-${i}`,
 					questionId: question._id,
 					upvotes,
 					downvotes,
+					dateCreated: new Date().toISOString(),
 				})
 			})
 	})
 
 	const fixBallotIds = ballots.map((doc, i) => ({ ...doc, _id: "Ballot-" + i }))
+	console.log("total ballots generated: ", fixBallotIds.length)
 	await fs.writeFile(
 		"ini/out/ballots-seed.json",
 		JSON.stringify(fixBallotIds, null, 2)
 	)
-	const fixQuestionIds = questionDocs.map((doc, i) => ({
-		...doc,
-		_id: "Question-" + i,
-		authorId: "User-admin",
-		voterIds: ["User-1", "User-2", "User-3"],
-	}))
-	await fs.writeFile(
-		"ini/out/questions-seed.json",
-		JSON.stringify(fixQuestionIds, null, 2)
-	)
+	// const fixQuestionIds = questionDocs.map((doc, i) => ({
+	// 	...doc,
+	// 	_id: "Question-" + i,
+	// 	authorId: "User-admin",
+	// 	voterIds: ["User-1", "User-2", "User-3"],
+	// }))
+	// await fs.writeFile(
+	// 	"ini/out/questions-seed.json",
+	// 	JSON.stringify(fixQuestionIds, null, 2)
+	// )
 	// const fixAnswersIds = answerDocs.map((doc, i) => ({ ...doc, _id: "Answer-" + i }))
 	// await fs.writeFile("ini/out/answer-seed.json", JSON.stringify(fixAnswersIds, null, 2))
 

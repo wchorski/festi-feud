@@ -1,19 +1,17 @@
 /**
- * @typedef {import('types/Question').Question} Question
- * @typedef {import("types/Answer.js").Answer} Answer
+ * @typedef {import('Question').Question} Question
+ * @typedef {import("Answer").Answer} Answer
  */
 
 import { buzzerChannel } from "../utils/events.js"
 import {
 	dbFindAnswersByQuestionId,
+	dbFindBallotsByQuestionId,
 	dbGetQuestion,
 	getAllQuestionDocs,
 } from "../db.js"
-import { elGameAnswerModerator, getElementById } from "../components.js"
-import {
-	convertAnswersToGame,
-	votesFilterSortAndSliceEight,
-} from "../utils/filterVotes.js"
+import { getElementById } from "../components.js"
+import { gameAnswersTop8 } from "../utils/filterVotes.js"
 import { gameStateManager } from "../utils/gameState.js"
 import { uiInit } from "./ui.js"
 
@@ -26,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		HTMLUListElement
 	)
 
-  // react to inputs from the /buzzer/index.html page
+	// react to inputs from the /buzzer/index.html page
 	buzzerChannel.onmessage = (event) => {
 		const { teamIndex, timestamp } = event.data
 		// console.log(`Team ${teamIndex} buzzed at ${timestamp}`)
@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		// handleBuzzer(team, timestamp)
 	}
 
-  // react to same page keyboard presses 
+	// react to same page keyboard presses
 	document.addEventListener("keydown", (event) => {
 		const { key, code } = event
 		// console.log({ key })
@@ -53,12 +51,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		if (id) {
 			const question = await dbGetQuestion(id)
 
-			const answerDocsRes = await dbFindAnswersByQuestionId(id)
-			if (!answerDocsRes.docs) throw new Error("no answerDocsRes.docs")
+			const answerRes = await dbFindAnswersByQuestionId(id)
+			if (!answerRes.docs) throw new Error("no answerDocsRes.docs")
+			// TODO get ballots and figure out score w new system
+			const ballotRes = await dbFindBallotsByQuestionId(id)
+			if (!ballotRes.docs) throw new Error("no ballotRes.docs")
 
-			const gameAnswers = convertAnswersToGame(answerDocsRes.docs)
-			const gameAnswersFilteredSorted = votesFilterSortAndSliceEight(gameAnswers)
-			gameStateManager.load(question, gameAnswersFilteredSorted)
+			const gameAnswers = gameAnswersTop8(id, ballotRes.docs, answerRes.docs)
+			// TODO just a debug check
+			console.log(
+				"total round points: " +
+					gameAnswers.reduce((count, obj) => count + obj.points, 0)
+			)
+
+			gameStateManager.load(question, gameAnswers)
 		} else {
 			//? look for session storage
 			console.log("do i gotta do anything if id is missing?")

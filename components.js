@@ -284,7 +284,7 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 		onpointerup:
 			doc.typeof === "Question" || doc.typeof === "Answer"
 				? () => deleteFunc(doc)
-				: console.error("typeof != Question || Answer"),
+				: console.log("typeof != Question || Answer"),
 	})
 
 	const navDocs = Object.assign(document.createElement("nav"), {})

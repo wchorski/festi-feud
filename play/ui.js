@@ -341,7 +341,7 @@ function setupTeamControls() {
 	team1NameInput.oninput = (e) => {
 		if (!(e.target instanceof HTMLInputElement))
 			throw new Error("not an input el")
-		gameStateManager.setTeamName(1, e.target.value)
+		gameStateManager.updateTeam(1, { name: e.target.value })
 		// TODO remove the h2 tag. let Input be the display and for user input
 		uiTeamUpdate(1, { name: e.target.value })
 	}
@@ -406,6 +406,7 @@ export function uiToggleCheckboxDisables(disabled) {
 function uiUpdateScores(state) {
 	// console.log({ state })
 	const { teams } = state
+	console.log({ teams })
 	teams.forEach((team, i) => {
 		const scoreEl = querySelector(
 			`input[name="team-${i}-score"]`,

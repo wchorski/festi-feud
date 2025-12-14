@@ -101,6 +101,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] should i give `round` 1-5 a `roundPhase` (Face-Off, Main Round, Steal, Round End)? or just increment 1-7? making each 'phase' a round number?
 - [ ] fix answer points and scoring (uneven voters means each round has variation in total points. Either make each of the 8 fixed point or weight each answer's points against a percentage)
 - [ ] filter out questions that don't have more than 100 votes
+- [ ] `face-off` round should continue on with the points like a regular `feud` round https://www.ultraboardgames.com/family-feud/game-rules.php
 
 ## Existing Repos
 

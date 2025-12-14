@@ -254,6 +254,8 @@ class GameStateManager {
 
 		// other funcs save the data
 		this.save()
+		console.log("endRound")
+		console.log(this.state)
 
 		/** @type {BC_GAME_MESSAGE} */
 		const message = {
@@ -295,10 +297,10 @@ class GameStateManager {
 
 	get gameWinner() {
 		const { teams } = this.state
-		// TODO this mutates array. may not want this later if adding more than 2 players
-		teams.sort((a, b) => b.score - a.score)
+		
+		const sorted = [...teams].sort((a, b) => b.score - a.score)
 
-		return { state: this.state, highestScoringTeam: teams[0] }
+		return { state: this.state, highestScoringTeam: sorted[0] }
 	}
 
 	// TODO remove this and replace with `updateTeam`
@@ -638,6 +640,8 @@ class GameStateManager {
 			const teamStealIndex = (activeTeamIndex + 1) % teams.length
 
 			const winningTeamIndex = roundSteal ? teamStealIndex : activeTeamIndex
+			console.log({ winningTeamIndex })
+			console.log({ points, pointMultiplier })
 
 			this.state.teams = this.state.teams.map((team, index) =>
 				index === winningTeamIndex
