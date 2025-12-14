@@ -35,7 +35,7 @@
 	.card,
 	form {
 		background-color: rgb(24, 24, 25);
-    border: solid 1px #222222;
+		border: solid 1px #222222;
 		& > fieldset {
 			border-color: #0c0c0c4d;
 		}
@@ -97,6 +97,17 @@ label:has(input:disabled) {
 		pointer-events: none;
 		cursor: not-allowed;
 	}
+}
+fieldset:disabled {
+	background: repeating-linear-gradient(
+		45deg,
+		#7d7d7d28 0px,
+		#7d7d7d28 10px,
+		transparent 10px,
+		transparent 20px
+	);
+	opacity: 0.4;
+	cursor: not-allowed;
 }
 button:hover {
 	cursor: pointer;
@@ -161,6 +172,13 @@ form {
 	& > .response-message:empty {
 		visibility: hidden;
 	}
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  border-radius: 9px;
+	border: solid 2px var(--c-accent, orange);
 }
 
 button.delete {
@@ -387,4 +405,8 @@ table.simple {
 	& tr:last-child {
 		border-bottom: none;
 	}
+}
+
+hr {
+  margin-block: 2rem;
 }

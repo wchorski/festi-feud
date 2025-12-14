@@ -18,11 +18,11 @@
 			<p id="question"></p>
 		</h1>
     <div class="card">
-      <a id="play-link" href="/play/index.html?id=${}">Play game with this question</a>
+      <a id="play-link" href="/play/index.html?id=${}" class="btn">Play game with this question</a>
     </div>
 		<hr />
 
-		<form name="voteForm" data-state="idle">
+		<form name="ballotForm" data-state="idle">
 			<legend>
 				<h3>Vote</h3>
 				<table class="simple sub-text">
@@ -66,6 +66,8 @@
 				<p class="sub-text">
 					Have a unique answer to add to the voting poll? Only one per person.
 				</p>
+
+        <p>Question: "<span id="question-on-form"></span>"</p>
 			</legend>
 
 			<label for="questionId">

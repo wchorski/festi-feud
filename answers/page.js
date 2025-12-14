@@ -17,7 +17,7 @@ import {
 	renderAllTextEls,
 } from "../components.js"
 import { answersMap, dbDeleteAnswer, getAllAnswerDocs } from "../db.js"
-import { events } from "../events.js"
+import { events } from "../utils/events.js"
 import { formHandler } from "../forms.js"
 import { getUserUUID } from "../uuid.js"
 import { compose, transforms } from "../transforms.js"

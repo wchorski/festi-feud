@@ -6,13 +6,16 @@
  * @typedef {import('./types/Answer').AnswerCreateTrans} AnswerCreateTrans
  * @typedef {import("./types/Answer").AnswerFormData} AnswerFormData
  * @typedef {import('./types/Question').Question} Question
+ * @typedef {import('Vote').Ballot} Ballot
+ * @typedef {import('Vote').BaseBallot} BaseBallot
  * @typedef {import('./types/Question').QuestionCreateTrans} QuestionCreateTrans
  * @typedef {import('./types/PouchDBChange').PouchDBChange} PouchDBChange
  */
 
 import { getUserUUID } from "./uuid.js"
 import { ENVS } from "./envs.js"
-import { events } from "./events.js"
+import { events, EVENT_TYPES } from "./utils/events.js"
+const { DB_BALLOT_DELETE, DB_BALLOT_SET, DB_BALLOT_CHANGE } = EVENT_TYPES
 
 if (!ENVS) throw new Error("check envs.js file")
 const {
@@ -22,12 +25,13 @@ const {
 	DB_COLLECTION_Q,
 	DB_URL,
 	DB_COLLECTION_A,
+	DB_COLLECTION_B,
 } = ENVS
 
 /** @type {HTMLElement|null} */
-let syncDom = null;
-if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  syncDom = document.querySelector("#sync-state")
+let syncDom = null
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+	syncDom = document.querySelector("#sync-state")
 }
 
 const dbQuestions = new PouchDB(DB_COLLECTION_Q, {
@@ -41,12 +45,19 @@ const dbAnswers = new PouchDB(DB_COLLECTION_A, {
 	auth: { username: DB_USER, password: DB_PASSWORD },
 })
 const remoteAnswersDbUrl = `${DB_PROTOCOL}://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_COLLECTION_A}`
+const dbBallots = new PouchDB(DB_COLLECTION_B, {
+	skip_setup: false,
+	auth: { username: DB_USER, password: DB_PASSWORD },
+})
+const remoteBallotDbUrl = `${DB_PROTOCOL}://${DB_USER}:${DB_PASSWORD}@${DB_URL}/${DB_COLLECTION_B}`
 const opts = { live: true, retry: true }
 
 /** @type {Map<string, Question>} */
 export const questionsMap = new Map()
 /** @type {Map<string, Answer>} */
 export const answersMap = new Map()
+/** @type {Map<string, Ballot>} */
+export const ballotsMap = new Map()
 
 // // Client logs in with username/password
 // async function login(username, password) {
@@ -131,6 +142,7 @@ function ini() {
 			if (deleted) {
 				answersMap.delete(id)
 				events.dispatchEvent(
+					// TODO add to event ENUM
 					new CustomEvent("answers:delete", { detail: change.id })
 				)
 			} else {
@@ -143,6 +155,48 @@ function ini() {
 			// react to both delete and update
 			events.dispatchEvent(
 				new CustomEvent("answers:change", { detail: answersMap })
+			)
+		})
+
+	dbBallots.replicate
+		.from(remoteBallotDbUrl)
+		.on("complete", function (info) {
+			// then two-way, continuous, retriable sync
+			syncDom?.setAttribute("data-sync-state", "connected")
+			syncDom?.setAttribute("title", `cloud sync: ${"connected"}`)
+			dbBallots
+				.sync(remoteBallotDbUrl, opts)
+				//typescript no like
+				// .on("change", onSyncChange)
+				.on("paused", onSyncPaused)
+				.on("error", onSyncError)
+		})
+		.on("error", onSyncError)
+
+	dbBallots
+		.changes({
+			since: "now",
+			live: true,
+			include_docs: true,
+		})
+		.on("change", (change) => {
+			const { id, deleted, doc } = change
+
+			if (deleted) {
+				ballotsMap.delete(id)
+				events.dispatchEvent(
+					new CustomEvent(DB_BALLOT_DELETE, { detail: change.id })
+				)
+			} else {
+				ballotsMap.set(id, doc)
+				events.dispatchEvent(
+					new CustomEvent(DB_BALLOT_SET, { detail: change.doc })
+				)
+			}
+
+			// react to both delete and update
+			events.dispatchEvent(
+				new CustomEvent(DB_BALLOT_CHANGE, { detail: ballotsMap })
 			)
 		})
 }
@@ -193,12 +247,11 @@ export async function getAllQuestionDocs() {
 export async function getAllQuestionIds() {
 	try {
 		const res = await dbQuestions.allDocs({ include_docs: false })
-	
+
 		return res.rows.map((row) => row.id)
 	} catch (error) {
 		console.log("getAllQuestionIds: ", error)
-    throw new Error("getAllQ IDS ERROR");
-    
+		throw new Error("getAllQ IDS ERROR")
 	}
 }
 /**
@@ -235,7 +288,6 @@ export async function getAllAnswerDocs() {
 	}
 }
 /**
- *
  * @param {string} questionId
  * @returns {Promise<PouchDB.Find.FindResponse<Answer>>}
  */
@@ -248,6 +300,24 @@ export async function dbFindAnswersByQuestionId(questionId) {
 		})
 
 		return /** @type {PouchDB.Find.FindResponse<Answer>} */ (res)
+	} catch (err) {
+		console.log(err)
+		throw new Error("db find error")
+	}
+}
+/**
+ * @param {string} questionId
+ * @returns {Promise<PouchDB.Find.FindResponse<Ballot>>}
+ */
+export async function dbFindBallotsByQuestionId(questionId) {
+	try {
+		const res = await dbBallots.find({
+			selector: { questionId },
+			// fields: ["_id", "text"],
+			// sort: ["_id"],
+		})
+
+		return /** @type {PouchDB.Find.FindResponse<Ballot>} */ (res)
 	} catch (err) {
 		console.log(err)
 		throw new Error("db find error")
@@ -306,7 +376,7 @@ async function dbCreateManyQuestions(docs) {
  *  @param {AnswerCreateTrans} point
  */
 export async function dbCreateAnswer(point) {
-	const { authorId, upvotes, downvotes } = point
+	// const { authorId } = point
 
 	// TODO do i really need to validate again here?
 	// if (!text) throw new Error("create validation: no text")
@@ -318,8 +388,6 @@ export async function dbCreateAnswer(point) {
 		const res = await dbAnswers.post({
 			...point,
 			typeof: "Answer",
-			upvotes: [...upvotes, authorId],
-			downvotes: [...downvotes],
 		})
 
 		if (!res.ok) throw new Error("form save res not OK")
@@ -337,59 +405,60 @@ export async function dbCreateAnswer(point) {
 	}
 }
 
-/**
- * @param {{voterId:string, question:Question, answers:Answer[], votes:AnswerFormData[], submittedAt:string}} data
- */
-export async function dbVotePerQuestion(data) {
-	try {
-		//? used in transforms.getUUID()
-		// const voterId = await getUserUUID()
-		const { voterId, question, votes, answers } = data
+// TODO dbBallotCreate()
+// /**
+//  * @param {{voterId:string, question:Question, answers:Answer[], votes:AnswerFormData[], submittedAt:string}} data
+//  */
+// export async function dbVotePerQuestion(data) {
+// 	try {
+// 		//? used in transforms.getUUID()
+// 		// const voterId = await getUserUUID()
+// 		const { voterId, question, votes, answers } = data
 
-		// TODO may comment out for debuging later
-		// TODO do i need to validate here even tho i did in the form?
-		if (question.voterIds.includes(voterId))
-			throw new Error("One submission per voter")
+// 		// TODO may comment out for debuging later
+// 		// TODO do i need to validate here even tho i did in the form?
+// 		if (question.voterIds.includes(voterId))
+// 			throw new Error("One submission per voter")
 
-		const questionRes = await dbQuestions.put({
-			...question,
-			voterIds: [...question.voterIds, voterId],
-		})
-		const answersRes = await dbAnswers.bulkDocs(
-			votes.flatMap((vote) => {
-				const foundAnswer = answers.find((a) => a._id === vote._id)
-				if (!foundAnswer) return []
-				return {
-					...foundAnswer,
-					_id: vote._id,
-					...(vote.upvote
-						? { upvotes: [...foundAnswer.upvotes, voterId] }
-						: vote.downvote
-						? { downvotes: [...foundAnswer.downvotes, voterId] }
-						: {}),
-				}
-			})
-		)
+// 		const questionRes = await dbQuestions.put({
+// 			...question,
+// 			voterIds: [...question.voterIds, voterId],
+// 		})
+// 		const answersRes = await dbAnswers.bulkDocs(
+// 			votes.flatMap((vote) => {
+// 				const foundAnswer = answers.find((a) => a._id === vote._id)
+// 				if (!foundAnswer) return []
+// 				return {
+// 					...foundAnswer,
+// 					_id: vote._id,
+// 					...(vote.upvote
+// 						? { upvotes: [...foundAnswer.upvotes, voterId] }
+// 						: vote.downvote
+// 						? { downvotes: [...foundAnswer.downvotes, voterId] }
+// 						: {}),
+// 				}
+// 			})
+// 		)
 
-		console.log({ questionRes, answersRes })
-		// TODO figure out good res for form
-		// if(!questionRes.ok || answersRes.map)
+// 		console.log({ questionRes, answersRes })
+// 		// TODO figure out good res for form
+// 		// if(!questionRes.ok || answersRes.map)
 
-		// return {
-		// 	questionRes,
-		// 	answersRes,
-		// }
-		return {
-			ok: true,
-			code: 202,
-			questionRes,
-			answersRes,
-		}
-	} catch (err) {
-		console.log(err)
-		throw new Error(`!!! dbVotePerQuestion: ${err}`)
-	}
-}
+// 		// return {
+// 		// 	questionRes,
+// 		// 	answersRes,
+// 		// }
+// 		return {
+// 			ok: true,
+// 			code: 202,
+// 			questionRes,
+// 			answersRes,
+// 		}
+// 	} catch (err) {
+// 		console.log(err)
+// 		throw new Error(`!!! dbVotePerQuestion: ${err}`)
+// 	}
+// }
 
 /**
  *  @param {QuestionCreateTrans} point
@@ -404,6 +473,41 @@ export async function dbCreateQuestion(point) {
 			categoryId: point.categoryIds || [],
 			tagIds: point.tagIds || [],
 			voterIds: [],
+		})
+
+		if (!res.ok) throw new Error("create form save res not OK")
+
+		return {
+			...res,
+			point: {
+				...point,
+				_id: res.id,
+				_rev: res.rev,
+			},
+		}
+	} catch (error) {
+		console.log("create error: ", error)
+	}
+}
+/** @param {BaseBallot} point */
+export async function dbCreateBallot(point) {
+	console.log("💽 dbCreateBallot: ", point)
+	if (!point.questionId || !point.voterId)
+		throw new Error("data is not correct model shape")
+
+	// VALIDATE if user has already voted on question
+	const ballotDocsRes = await dbFindBallotsByQuestionId(point.questionId)
+	const hasUserVoted = ballotDocsRes.docs
+		.flatMap((doc) => doc.voterId)
+		.includes(point.voterId)
+	if (hasUserVoted) {
+		throw new Error("User may only submit one ballot per question")
+	}
+
+	try {
+		const res = await dbBallots.post({
+			...point,
+			typeof: "Ballot",
 		})
 
 		if (!res.ok) throw new Error("create form save res not OK")
@@ -481,30 +585,41 @@ export async function dbSeedDatabase() {
 		 */
 		const hasErrors = (results) => results.some((obj) => obj.error === true)
 
-		const [questionDocs, answerDocs] = await Promise.all([
+		const [questionDocs, answerDocs, ballotDocs] = await Promise.all([
 			fetchAndProcess("/ini/questions-seed.json"),
 			fetchAndProcess("/ini/answers-seed.json"),
+			fetchAndProcess("/ini/ballots-seed.json"),
 		])
 
-		const [questionRes, answerRes] = await Promise.all([
+		const [questionRes, answerRes, ballotRes] = await Promise.all([
 			dbQuestions.bulkDocs(questionDocs),
 			dbAnswers.bulkDocs(answerDocs),
+			dbBallots.bulkDocs(ballotDocs),
 		])
 
-		if (hasErrors(questionRes) || hasErrors(answerRes)) {
+		if (
+			hasErrors(questionRes) ||
+			hasErrors(answerRes) ||
+			hasErrors(ballotRes)
+		) {
 			const questionErrors = countErrors(questionRes)
 			const answerErrors = countErrors(answerRes)
+			const ballotErrors = countErrors(ballotRes)
 
 			throw new Error(
 				`🌱 Database already (or partially) seeded with data.\n` +
 					`Question errors: ${questionErrors}/${questionRes.length}, ` +
-					`Answer errors: ${answerErrors}/${answerRes.length}`
+					`Answer errors: ${answerErrors}/${answerRes.length}` +
+					`Ballot errors: ${ballotErrors}/${ballotRes.length}`
 			)
 		}
 
 		return {
 			ok: true,
-			message: `Database seeded with ${answerRes.length} answers and ${questionRes.length} questions`,
+			message: `Database seeded with 
+      ${answerRes.length} answers, 
+      ${questionRes.length} questions, and 
+      ${ballotRes.length} ballots`,
 		}
 	} catch (error) {
 		return {

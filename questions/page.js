@@ -1,14 +1,14 @@
 /**
- * @typedef {import('types/Question').Question} Question
- * @typedef {import('types/Question').QuestionSet} QuestionSet
- * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
- * @typedef {import('types/Question').QuestionCreateRaw} QuestionCreateRaw
- * @typedef {import('types/Question').QuestionDelete} QuestionDelete
- * @typedef {import("types/Answer.js").Answer} Answer
- * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreateRaw} AnswerCreateRaw
- * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
- * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
+ * @typedef {import('Question').Question} Question
+ * @typedef {import('Question').QuestionSet} QuestionSet
+ * @typedef {import('Question').QuestionCreateTrans} QuestionCreateTrans
+ * @typedef {import('Question').QuestionCreateRaw} QuestionCreateRaw
+ * @typedef {import('Question').QuestionDelete} QuestionDelete
+ * @typedef {import("Answer").Answer} Answer
+ * @typedef {import("Answer").AnswerSet} AnswerSet
+ * @typedef {import("Answer").AnswerCreateRaw} AnswerCreateRaw
+ * @typedef {import("Answer").AnswerCreateTrans} AnswerCreateTrans
+ * @typedef {import("Answer").AnswerDelete} AnswerDelete
  */
 // TODO remove `getAllAnswers` from this page.js
 import { createTextEl, renderAllTextEls } from "../components.js"
@@ -23,7 +23,7 @@ import {
 	getAllQuestionDocs,
 	questionsMap,
 } from "../db.js"
-import { events } from "../events.js"
+import { events } from "../utils/events.js"
 import { formHandler } from "../forms.js"
 import { getUserUUID } from "../uuid.js"
 import { compose, transforms } from "../transforms.js"

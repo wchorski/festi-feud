@@ -1,25 +1,20 @@
 /**
  * @typedef {Object} ElementProps
- * @typedef {import('types/Question').Question} Question
- * @typedef {import('types/Question').QuestionSet} QuestionSet
- * @typedef {import('types/Question').QuestionCreateTrans} QuestionCreateTrans
- * @typedef {import('types/Question').QuestionDelete} QuestionDelete
- * @typedef {import("types/Answer.js").Answer} Answer
- * @typedef {import("types/GameState").GameAnswer} GameAnswer
- * @typedef {import("types/GameState").GameState} GameState
- * @typedef {import("types/Answer.js").AnswerSet} AnswerSet
- * @typedef {import("types/Answer.js").AnswerCreateTrans} AnswerCreateTrans
- * @typedef {import("types/Answer.js").AnswerDelete} AnswerDelete
- * @typedef {import("types/RemoveObject").RemoveObject} RemoveObject
+ * @typedef {import('Question').Question} Question
+ * @typedef {import('Question').QuestionSet} QuestionSet
+ * @typedef {import('Question').QuestionCreateTrans} QuestionCreateTrans
+ * @typedef {import('Question').QuestionDelete} QuestionDelete
+ * @typedef {import("Answer").Answer} Answer
+ * @typedef {import("GameState").GameAnswer} GameAnswer
+ * @typedef {import("GameState").GameState} GameState
+ * @typedef {import("Answer").AnswerSet} AnswerSet
+ * @typedef {import("Answer").AnswerCreateTrans} AnswerCreateTrans
+ * @typedef {import("Answer").AnswerDelete} AnswerDelete
+ * @typedef {import("RemoveObject").RemoveObject} RemoveObject
+ * @typedef {import("Vote").Ballot} Ballot
  * @typedef {function(string, Record<string, any>|null, ...(HTMLElement|string)[]): HTMLElement} CreateElement
  */
 //! don't import anything relating to db in here
-// import { dbDeleteAnswer, dbDeleteQuestion } from "./db.js"
-
-import { events } from "./events.js"
-import { EVENT_TYPES } from "./utils/events.js"
-import { calcAnswerPoints } from "./utils/filterVotes.js"
-import { gameStateManager } from "./utils/gameState.js"
 
 /**
  * @template {HTMLElement} T
@@ -211,11 +206,21 @@ export const elGameAnswerModerator = (gAnswer, onChange) => {
 }
 
 /**
- * @param {Answer} doc
+ * @param {Answer} anwr
+ * @param {Ballot[]} ballots
  * @returns {HTMLDivElement}
  */
-export const elAnswerVoteInput = (doc) => {
-	const { _id, text, upvotes, downvotes } = doc
+export const elAnswerVoteInput = (anwr, ballots) => {
+	const { _id, text } = anwr
+
+	const upvoteCount = ballots.filter((ballot) =>
+		ballot.upvotes.includes(anwr._id)
+	).length
+
+	const downvoteCount = ballots.filter((ballot) =>
+		ballot.downvotes.includes(anwr._id)
+	).length
+
 	const wrap = Object.assign(document.createElement("div"), {
 		className: "vote-field",
 	})
@@ -226,7 +231,7 @@ export const elAnswerVoteInput = (doc) => {
 
 	// TODO may leave off to prevent voter bias
 	const countEl = Object.assign(document.createElement("span"), {
-		textContent: `(↑${upvotes.length} ↓${downvotes.length})`,
+		textContent: `(↑${upvoteCount} ↓${downvoteCount})`,
 	})
 
 	const inputsWrap = Object.assign(document.createElement("div"), {
@@ -238,7 +243,7 @@ export const elAnswerVoteInput = (doc) => {
 	 * @param {string} text
 	 * */
 	function checkboxLabel(value, text) {
-		const name = `votes['${_id}']`
+		const name = `answer['${_id}']`
 		return Object.assign(document.createElement("label"), {
 			textContent: text,
 			for: name,

@@ -12,51 +12,25 @@
 import { elAnswerVoteInput, getElementById } from "../components.js"
 import {
 	dbCreateAnswer,
+	dbCreateBallot,
 	dbDeleteAnswer,
 	dbFindAnswersByQuestionId,
+	dbFindBallotsByQuestionId,
 	dbGetQuestion,
-	dbVotePerQuestion,
 } from "../db.js"
-// import { events } from "../events.js"
-import { formHandler, formVoterHandler } from "../forms.js"
+import { formBallotHandler, formHandler, formVoterHandler } from "../forms.js"
 import { compose, transforms } from "../transforms.js"
 import { getUserUUID } from "../uuid.js"
 
 // const h1 = document.querySelector("h1")
-const questionEl = document.getElementById("question")
-const answersWrap = document.getElementById("answers-wrap")
+const questionEl = getElementById("question", HTMLSpanElement)
+const questionOnFormEl = getElementById("question-on-form", HTMLSpanElement)
+const answersWrap = getElementById("answers-wrap", HTMLFieldSetElement)
 const answerForm = document.forms.namedItem("answerForm")
-const voteForm = document.forms.namedItem("voteForm")
-const playLinkEl = getElementById('play-link', HTMLAnchorElement)
+const ballotForm = document.forms.namedItem("ballotForm")
+const playLinkEl = getElementById("play-link", HTMLAnchorElement)
 let questionId = ""
-if (!answerForm || !voteForm) throw new Error("form(s) not found")
-
-// /** @param {AnswerSet} e */
-// function handleAnswerSet(e) {
-// 	if (!answersWrap) throw new Error("wrap not found")
-// 	if (e.detail.questionId === questionId) {
-// 		const p = createTextEl(e.detail, dbDeleteAnswer)
-// 		answersWrap.prepend(p)
-// 	}
-// }
-// /** @param {AnswerDelete} e */
-// function handleAnswerDelete(e) {
-// 	const id = e.detail
-// 	const el = answersWrap?.querySelector(`[data-id="${id}"]`)
-// 	if (el) el.remove()
-// }
-
-// TODO maybe i shouldn't listen to events because it will react to ANY changes to answersDB
-// events.addEventListener(
-// 	"answers:set",
-// 	//@ts-ignore
-// 	handleAnswerSet
-// )
-// events.addEventListener(
-// 	"answers:delete",
-// 	//@ts-ignore
-// 	handleAnswerDelete
-// )
+if (!answerForm || !ballotForm) throw new Error("form(s) not found")
 
 // TODO throw a "submission already made" if uuid exists in question.voterIds array
 async function ini() {
@@ -64,29 +38,48 @@ async function ini() {
 	const id = params.get("id")
 	if (id) {
 		questionId = id
-		// if (!h1) throw new Error("no h1")
-		// h1.innerText = `Question: ${id}`
 
 		const question = await dbGetQuestion(id)
-		if (!questionEl) throw new Error("no questionEl")
-		questionEl.innerText = question.text
-    playLinkEl.href = `/play/index.html?id=${id}`
+		questionEl.textContent = question.text
+		questionOnFormEl.textContent = question.text
+		playLinkEl.href = `/play/index.html?id=${id}`
 
 		if (!answersWrap) throw new Error("no answersWrap")
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
+		const ballotDocsRes = await dbFindBallotsByQuestionId(id)
+		const uuid = localStorage.getItem("user_fingerprint")
+		if (uuid) {
+			console.log(uuid)
+			const hasUserVoted = ballotDocsRes.docs
+				.flatMap((doc) => doc.voterId)
+				.includes(uuid)
+			if (hasUserVoted && ballotForm) {
+				ballotForm.dataset.state = "error"
+				// ballotForm.disabled = true // <-- doesn't work
+				answersWrap.disabled = true
+				const messageEl = ballotForm.querySelector(".response-message")
+        console.log(ballotForm);
+        console.log(messageEl);
+				if (messageEl) messageEl.textContent = "You have already voted"
+			}
+		}
 
+		// TODO check `voterId` is included in ballots
+		// warn user if they already voted
 
 		// TODO should i sort by popularity? could cause bias
 		// console.log(votes);
 		// console.log(answerDocsRes)
 		// renderAllTextEls(answerDocsRes.docs, answersWrap)
-		const answerEls = answerDocsRes.docs.map((doc) => elAnswerVoteInput(doc))
+		const answerEls = answerDocsRes.docs.map((doc) =>
+			elAnswerVoteInput(doc, ballotDocsRes.docs)
+		)
 		answersWrap.replaceChildren(...answerEls)
 
 		// const voteBtns = voteButtons("vote 4 me")
 		// answersWrap.append(voteBtns)
 
-		if (!answerForm || !voteForm) throw new Error("form(s) not found")
+		if (!answerForm || !ballotForm) throw new Error("form(s) not found")
 		// const questionIdField = document.querySelector('[name="questionId"]')
 
 		const answerFormQuestionIdField = /** @type {HTMLInputElement}*/ (
@@ -106,10 +99,6 @@ async function ini() {
 					values.answers?.flatMap((a) => a.authorId).includes(values.authorId)
 				)
 					throw new Error("Can only submit one new answer")
-				if (!values.downvotes || !values.upvotes)
-					throw new Error(
-						"must include upvotes and downvotes arrays even if empty"
-					)
 			},
 			//? able to make transform async when needed
 			/** @param {AnswerCreateRaw} raw */
@@ -121,18 +110,16 @@ async function ini() {
 					transforms.metadata({
 						answers: answerDocsRes.docs,
 						authorId: uuid,
-						upvotes: [],
-						downvotes: [],
 					})
 				)(raw)
 			},
 		})
 
-		formVoterHandler(voteForm, {
-			onSubmit: dbVotePerQuestion,
+		// TODO create a Ballot instead
+		formBallotHandler(ballotForm, {
+			onSubmit: dbCreateBallot,
 			metadata: {
-				question,
-				answers: answerDocsRes.docs,
+				questionId,
 			},
 		})
 	}

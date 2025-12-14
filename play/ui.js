@@ -84,7 +84,7 @@ export function uiInit() {
 	answersList.replaceChildren(...answerEls)
 	scoreMultiEl.textContent = "x" + String(pointMultiplier)
 	roundScoreEl.textContent = String(points)
-	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
+	questionEl.textContent = question?.text || "QUESTION_NOT_FOUND"
 	// gameRoundInput.value = String(round)
 	gameRoundEl.textContent = String(round)
 	// state.roundSteal

@@ -1,7 +1,6 @@
 type BaseAnswer = {
 	text: string
 	questionId: string
-	voteIds: string[]
 	// upvotes: string[]
 	// downvotes: string[]
 	dateCreated: string

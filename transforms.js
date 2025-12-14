@@ -1,6 +1,7 @@
 /**
- * @typedef {import("./types/Vote").VoteSubmission} VoteSubmission
- * @typedef {import("./types/Vote").VoteFlag} VoteFlags
+ * @typedef {import("Vote").VoteSubmission} VoteSubmission
+ * @typedef {import("Vote").VoteFlag} VoteFlags
+ * @typedef {import("Vote").VoteArrays} VoteArrays
  * @typedef {Object.<string, any>} FormData
  * Raw form data as key-value pairs
  */
@@ -55,7 +56,7 @@ export const transforms = {
 	 * const result = transform({ "answers['123']": "upvote" })
 	 * // { "answers['123']": "upvote", answers: [{ id: "123", value: "upvote" }] }
 	 */
-	extractVotes: (pattern) => (raw) => {
+	extractRadioIdAndValue: (pattern) => (raw) => {
 		const votes = []
 		for (const [key, value] of Object.entries(raw)) {
 			const match = key.match(pattern)
@@ -89,6 +90,28 @@ export const transforms = {
 				upvote: v.value === "upvote",
 				downvote: v.value === "downvote",
 			})),
+		}
+	},
+
+	/**
+	 * Convert answer values to boolean flags (upvote, downvote, novote)
+	 * @type {TransformFunction}
+	 * @param {FormData & { votes?: VoteSubmission[] }} raw - Form data with answers array
+	 * @returns {FormData & VoteArrays }
+	 * @example
+	 * const input = { answers: [{ id: "123", value: "upvote" }] }
+	 * const result = transforms.answersToFlags(input)
+	 * // { votes: [{ _id: "123", upvote: true, downvote: false }] }
+	 */
+	ballotVoteArrays: (raw) => {
+		//@ts-ignore
+		if (!raw.votes) return raw
+		return {
+			...raw,
+			upvotes: raw.votes.filter((v) => v.value === "upvote").map((v) => v._id),
+			downvotes: raw.votes
+				.filter((v) => v.value === "downvote")
+				.map((v) => v._id),
 		}
 	},
 

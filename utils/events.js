@@ -16,6 +16,9 @@ export const EVENT_TYPES = /** @type {const} */ ({
 	UPDATE_POINTS: "game:updatePoints",
 	END_ROUND: "game:endRound",
 	END_GAME: "game:end",
+  DB_BALLOT_DELETE: "Ballot:delete",
+  DB_BALLOT_SET: "Ballot:set",
+  DB_BALLOT_CHANGE: "Ballot:change",
 })
 export const events = new EventTarget()
 
@@ -30,5 +33,6 @@ export const CHANNEL_TYPES = Object.freeze({
   GAME_LOAD: "game:load",
   GAME_BUZZIN: "game:buzzIn"
 })
+
 export const gameChannel = new BroadcastChannel("game-broadcastchannel")
 export const buzzerChannel = new BroadcastChannel("game-show-buzzer")

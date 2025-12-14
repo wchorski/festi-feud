@@ -16,7 +16,7 @@ import {
 	getAllQuestionDocs,
 	questionsMap,
 } from "../db.js"
-import { events } from "../events.js"
+import { events } from "../utils/events.js"
 
 const questionsWrap = document.getElementById("questions-wrap")
 const questionForm = document.forms.namedItem("questionForm")

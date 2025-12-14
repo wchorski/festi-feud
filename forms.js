@@ -83,6 +83,7 @@ export function formHandler(form, options) {
 }
 
 /**
+ * TODO becomes obsolete because of new ballot form
  * Creates vote data transform pipeline with metadata
  * @param {Object} metadata - Page metadata to inject
  * @returns {TransformFunction} Composed transform function
@@ -90,9 +91,23 @@ export function formHandler(form, options) {
 const transformVoteData = (metadata) =>
 	compose(
 		transforms.trimStrings,
-		transforms.extractVotes(/^votes\['(.+)'\]$/),
+		transforms.extractRadioIdAndValue(/^votes\['(.+)'\]$/),
 		transforms.votesToFlags,
 		transforms.pick("votes"),
+		transforms.addTimestamp,
+		transforms.metadata(metadata)
+		// transforms.getUUID("voterId")
+	)
+
+/**
+ * @param {Object} metadata - Page metadata to inject
+ * @returns {TransformFunction} Composed transform function
+ */
+const transformBallotData = (metadata) =>
+	compose(
+		transforms.extractRadioIdAndValue(/^answer\['(.+)'\]$/),
+		transforms.ballotVoteArrays,
+		transforms.pick("upvotes", "downvotes"),
 		transforms.addTimestamp,
 		transforms.metadata(metadata)
 		// transforms.getUUID("voterId")
@@ -112,8 +127,17 @@ function validateVoteData(data) {
 	// 	throw new Error("At least one answer required")
 	// }
 }
+/**
+ * Validate vote form data
+ * @param {VoteFormData} data - Transformed vote data
+ * @throws {Error} If validation fails
+ */
+function validateBallotData(data) {
+	console.log("VALIDATE  validateBallotData")
+}
 
 /**
+ * TODO becomes obsolete because of new ballot form (remove later if needed)
  * Creates a vote form handler with pre-configured transforms and validation
  * @param {HTMLFormElement} form - The vote form element
  * @param {Object} options - Configuration options
@@ -130,6 +154,27 @@ export async function formVoterHandler(form, options) {
 	return formHandler(form, {
 		transform: transformVoteData({ ...metadata, voterId: uuid }),
 		validate: validateVoteData,
+		onSuccess: "disable",
+		...handlerOptions, // Spread user options (onSubmit, successTimeout, etc.)
+	})
+}
+
+/**
+ * @param {HTMLFormElement} form - The vote form element
+ * @param {Object} options - Configuration options
+ * @param {Object} options.metadata - Page metadata to inject into form data
+ * @param {Function} options.onSubmit - Async function to handle transformed vote data
+ * @param {Function} [options.validate] - Optional validation function
+ * @param {number} [options.successTimeout] - Time to show success state
+ * @param {string} [options.messageSel] - Message element selector
+ * @returns {Promise<void>}
+ */
+export async function formBallotHandler(form, options) {
+	const { metadata, ...handlerOptions } = options
+	const uuid = await getUserUUID()
+	return formHandler(form, {
+		transform: transformBallotData({ ...metadata, voterId: uuid }),
+		validate: validateBallotData,
 		onSuccess: "disable",
 		...handlerOptions, // Spread user options (onSubmit, successTimeout, etc.)
 	})

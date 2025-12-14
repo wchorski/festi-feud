@@ -63,7 +63,7 @@ function initUi(state) {
 	roundPhaseEl.textContent = roundPhase
 	document.body.dataset.roundType = roundType
 	roundTypeEl.textContent = roundType
-	questionEl.innerText = question?.text || "QUESTION_NOT_FOUND"
+	questionEl.textContent = question?.text || "QUESTION_NOT_FOUND"
 	roundSteal
 		? teamsWrapEl.classList.add("round-steal")
 		: teamsWrapEl.classList.remove("round-steal")

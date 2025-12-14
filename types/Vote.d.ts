@@ -18,6 +18,7 @@ export type VoteFormData = {
 }
 
 export type VoteSubmission = {
+	//? Answer id
 	_id: string
 	value: "upvote" | "downvote"
 }
@@ -25,6 +26,10 @@ export type VoteFlag = {
 	_id: string
 	upvote: boolean
 	downvote: boolean
+}
+export type VoteArrays = {
+	upvotes: string[]
+	downvotes: string[]
 }
 
 type BaseVote = {
@@ -43,12 +48,28 @@ type DatabaseFields = {
 
 export type Vote = BaseVote & DatabaseFields
 
-export type Ballot = {
-  _id: string
-	typeof: "Ballot"
+export type BaseBallot = {
 	voterId: string
 	questionId: string
+	dateCreated: string
 	// answerIds
 	upvotes: string[]
 	downvotes: string[]
+}
+
+type BallotDatabaseFields = {
+	_id: string
+	_rev: string
+	typeof: "Ballot"
+}
+
+export type Ballot = BaseBallot & BallotDatabaseFields
+
+export type BallotCreateRaw = {
+	questionId: string
+	text: string
+}
+export type AnswerCreateTrans = BaseAnswer & {
+	// check if question.answers have same userId
+	answers?: Answer[]
 }

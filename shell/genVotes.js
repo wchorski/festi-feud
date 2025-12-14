@@ -67,6 +67,7 @@ async function dbGenerateRandomVotes() {
 		)
 		console.log("surveyAnswers.length: ", surveyAnswers.length)
 
+		// TODO make this 100 for more realistic numbers
 		Array(3)
 			.fill("x")
 			.forEach((_, i) => {
