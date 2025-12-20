@@ -102,6 +102,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] fix answer points and scoring (uneven voters means each round has variation in total points. Either make each of the 8 fixed point or weight each answer's points against a percentage)
 - [ ] filter out questions that don't have more than 100 votes
 - [ ] `face-off` round should continue on with the points like a regular `feud` round https://www.ultraboardgames.com/family-feud/game-rules.php
+- [ ] on game conclusion why do all answers become hidden again and not be visible even when clicked?
 
 ## Existing Repos
 

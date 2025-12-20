@@ -7,8 +7,8 @@
 		<link rel="stylesheet" href="/global.css" />
 		<script src="./page.js" type="module" defer></script>
 		<script src="/db.js" type="module" defer></script>
-		<!-- <script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script> -->
 		<script src="/modules/pouchdb.min.js"></script>
+    <script src="/modules/pouchdb.find.min.js"></script>
 		
 	</head>
 	<body>
@@ -39,29 +39,23 @@
 		<hr />
 		<h2>Add more fuel to the feud fire</h2>
     <form name="questionForm" data-state="idle">
-			<legend>Create New Question</legend>
+			<legend>Submit a Question Prompt</legend>
+      <label for="category" class="flex">
+        <span>Category</span>
+        <select id="category-select" name="category">
+          <option value="">---</option>
+        </select>
+      </label>
+      <label for="tag" class="flex">
+        <span>Tag</span>
+        <select id="tag-select" name="tag">
+          <option value="">---</option>
+        </select>
+      </label>
 			<label for="text">
 				<span>Question:</span>
 				<textarea name="text" min="2" max="30" placeholder="Easily forgotten item to pack..."></textarea>
 			</label>
-			<!-- <fieldset for="categoryIds">
-				<p>TODO add these features</p>
-				<legend>categories</legend>
-
-				<div id="category-options" class="dropdown-content">
-					<label><input type="checkbox" value="cat-1" /> Cat 1</label>
-					<label><input type="checkbox" value="cat-2" /> Cat 2</label>
-					<label><input type="checkbox" value="cat-3" /> Cat 3</label>
-				</div>
-			</fieldset> -->
-			<!-- <fieldset for="tagIds">
-        <p>TODO add these features</p>
-				<legend>tags</legend>
-				<div id="tag-options" class="dropdown-content">
-					<label><input type="checkbox" value="tag-1" /> tag 1</label>
-					<label><input type="checkbox" value="tag-2" /> tag 2</label>
-					<label><input type="checkbox" value="tag-3" /> tag 3</label>
-				</div> -->
 			</fieldset>
 
 			<p class="response-message"></p>

@@ -267,13 +267,15 @@ export const elAnswerVoteInput = (anwr, ballots) => {
  * @param {number} delay - animation start in ms
  */
 export function createTextEl(doc, deleteFunc, delay = 80) {
+	const wrap = Object.assign(document.createElement("div"), {
+		// className: ["card", "anim-fade-in"].join(" "),
+		className: ["card"].join(" "),
+  })
+  wrap.dataset.id = doc._id
+
 	const p = Object.assign(document.createElement("p"), {
 		textContent: doc.text + "  ",
-		//? only getter, not setter
-		// dataset: { id: doc._id }
-		className: ["card", "anim-fade-in"].join(" "),
 	})
-	p.dataset.id = doc._id
 	p.style.animationDelay = `${delay}ms`
 
 	const deleteBtn = Object.assign(document.createElement("button"), {
@@ -287,13 +289,16 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 				: console.log("typeof != Question || Answer"),
 	})
 
-	const navDocs = Object.assign(document.createElement("nav"), {})
+	const navDocs = Object.assign(document.createElement("nav"), {
+		className: "survey-nav",
+	})
 	const navDocList = Object.assign(document.createElement("ul"), {})
 
 	if (doc.typeof === "Answer") {
 		const navDocListItem2 = Object.assign(document.createElement("li"), {})
 		const questionLinkEl = Object.assign(document.createElement("a"), {
-			textContent: "Question: cast your vote",
+			className: "btn",
+			textContent: "Question",
 			href: `/question/index.html?id=${doc.questionId}`,
 		})
 		navDocListItem2.append(questionLinkEl)
@@ -302,11 +307,11 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 
 	const items = [
 		{
-			text: `${doc.typeof}: view/edit/vote `,
+			text: `Vote`,
 			href: `/${doc.typeof.toLowerCase()}/index.html?id=${doc._id}`,
 		},
 		{
-			text: "Play: start round with this question",
+			text: "Play",
 			href: `/play/index.html?id=${doc._id}`,
 		},
 	]
@@ -314,6 +319,7 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 	items.forEach(({ text, href }) => {
 		const navDocListItem = Object.assign(document.createElement("li"), {})
 		const docLinkEl = Object.assign(document.createElement("a"), {
+			className: "btn",
 			textContent: text,
 			href,
 		})
@@ -331,9 +337,11 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 	// })
 
 	navDocs.append(navDocList)
-	p.append(navDocs, deleteBtn)
+	// p.append(navDocs, deleteBtn)
 
-	return p
+	wrap.append(p, navDocs, deleteBtn)
+
+	return wrap
 }
 
 /**

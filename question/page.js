@@ -49,7 +49,6 @@ async function ini() {
 		const ballotDocsRes = await dbFindBallotsByQuestionId(id)
 		const uuid = localStorage.getItem("user_fingerprint")
 		if (uuid) {
-			console.log(uuid)
 			const hasUserVoted = ballotDocsRes.docs
 				.flatMap((doc) => doc.voterId)
 				.includes(uuid)

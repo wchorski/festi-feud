@@ -11,7 +11,11 @@
  * @typedef {import("Answer").AnswerDelete} AnswerDelete
  */
 // TODO remove `getAllAnswers` from this page.js
-import { createTextEl, renderAllTextEls } from "../components.js"
+import {
+	createTextEl,
+	getElementById,
+	renderAllTextEls,
+} from "../components.js"
 import {
 	answersMap,
 	dbCreateQuestion,
@@ -27,6 +31,7 @@ import { events } from "../utils/events.js"
 import { formHandler } from "../forms.js"
 import { getUserUUID } from "../uuid.js"
 import { compose, transforms } from "../transforms.js"
+import { ENVS } from "../envs.js"
 
 const destroyDdBtn = document.getElementById("destroy-db-btn")
 const dbMessage = document.getElementById("db-message")
@@ -35,6 +40,8 @@ const questionsWrap = document.getElementById("questions-wrap")
 const questionForm = document.forms.namedItem("questionForm")
 // const answersWrap = document.getElementById("answers-wrap")
 if (!questionForm) throw new Error("form(s) not found")
+const categorySelectEl = getElementById("category-select", HTMLSelectElement)
+const tagSelectEl = getElementById("tag-select", HTMLSelectElement)
 
 /** @param {QuestionSet} e */
 function handleQuestionSet(e) {
@@ -63,6 +70,8 @@ function handleQuestionDelete(e) {
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
+	genFormSelectOptions()
+
 	events.addEventListener(
 		"questions:set",
 		//@ts-ignore
@@ -136,6 +145,25 @@ async function ini() {
 		if (res.error) dbMessage.style.setProperty("--c-status", "red")
 		if (res.ok) dbMessage.style.setProperty("--c-status", "green")
 		dbMessage.textContent = res.message
+	})
+}
+
+function genFormSelectOptions() {
+	ENVS.CATEGORY_OPTIONS.forEach((cat) => {
+		const option = Object.assign(document.createElement("option"), {
+			value: cat,
+			textContent: cat,
+		})
+
+		categorySelectEl.append(option)
+	})
+	ENVS.TAG_OPTIONS.forEach((tag) => {
+		const option = Object.assign(document.createElement("option"), {
+			value: tag,
+			textContent: tag,
+		})
+
+		tagSelectEl.append(option)
 	})
 }
 

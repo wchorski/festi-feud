@@ -229,13 +229,20 @@ function onSyncError(error) {
  */
 export async function getAllQuestionDocs() {
 	try {
-		const res = await dbQuestions.allDocs({ include_docs: true })
-
-		res.rows.forEach((row) => {
-			questionsMap.set(row.id, row.doc)
+		// Then query for approved documents
+		const findRes = await dbQuestions.find({
+			selector: { approved: true },
 		})
 
-		return res.rows.map((row) => row.doc)
+		const docs = /** @type{Question[]} */ (findRes.docs.flatMap((doc) => doc))
+
+		// const res = await dbQuestions.allDocs({ include_docs: true })
+
+		docs.forEach((doc) => {
+			questionsMap.set(doc._id, doc)
+		})
+
+		return docs
 	} catch (error) {
 		console.log("dbEmoji.js getAllQuestionDocs: ", error)
 	}
@@ -466,21 +473,25 @@ export async function dbCreateAnswer(point) {
 export async function dbCreateQuestion(point) {
 	if (!point.text) throw new Error("data is not correct model shape")
 
+	/** @type{QuestionCreateTrans & {typeof: "Question"}} */
+	const doc = {
+		...point,
+		typeof: "Question",
+		approved: false,
+		categoryIds: point.categoryIds || [],
+		tagIds: point.tagIds || [],
+		voterIds: [],
+	}
+
 	try {
-		const res = await dbQuestions.post({
-			...point,
-			typeof: "Question",
-			categoryId: point.categoryIds || [],
-			tagIds: point.tagIds || [],
-			voterIds: [],
-		})
+		const res = await dbQuestions.post(doc)
 
 		if (!res.ok) throw new Error("create form save res not OK")
 
 		return {
 			...res,
 			point: {
-				...point,
+				...doc,
 				_id: res.id,
 				_rev: res.rev,
 			},

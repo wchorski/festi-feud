@@ -1,6 +1,6 @@
-#round-score{
-  font-size: 2rem;
-  min-width: 4ch;
+#round-score {
+	font-size: 2rem;
+	min-width: 4ch;
 }
 #question {
 	text-align: center;
@@ -32,13 +32,14 @@ article.answer {
 		border-radius: 8px;
 		background-color: rgb(62, 69, 76);
 		padding: 1rem;
-    align-content: center;
-    min-width: 3ch;
+		align-content: center;
+		min-width: 3ch;
 	}
 }
 
 body[data-round-type="face-off"] {
-	& #strikes, & #round-score {
+	& #strikes,
+	& #round-score {
 		visibility: hidden;
 	}
 }
@@ -55,6 +56,13 @@ body[data-round-phase="end"] .answer.checked {
 	opacity: 1;
 	& > span {
 		outline: double rgb(160, 189, 243) 4px;
+	}
+}
+
+body[data-round-type="conclusion"] .answer {
+	opacity: 1 !important;
+	& > span {
+		outline: double rgb(160, 243, 161) 4px;
 	}
 }
 

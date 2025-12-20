@@ -21,6 +21,15 @@
 			border-color: #0c0c0c4d;
 		}
 	}
+  a:link {
+		color: rgb(172, 112, 0);
+	}
+	a:visited {
+		color: rgb(132, 104, 52);
+	}
+	a:active {
+		color: rgb(81, 124, 123);
+	}
 }
 @media (prefers-color-scheme: dark) {
 	body,
@@ -79,6 +88,15 @@ a {
 
 a:hover {
 	filter: brightness(1.4);
+}
+
+nav.survey-nav {
+  & > ul {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+  }
 }
 
 label:has(input[type="checkbox"]:checked, input[type="radio"]:checked) {
@@ -199,11 +217,17 @@ button.delete {
 	box-shadow: rgba(0, 0, 0, 0.27) 3px 3px 3px;
 	margin: 0;
 	padding: 1rem;
+  position: relative;
+  display: grid;
 
-	/* & :first-child {
+	& :first-child {
 		margin-top: 0;
 		text-transform: capitalize;
-	} */
+	}
+   & :last-child {
+    margin-top: auto;
+    margin-bottom: 0;
+   }
 
 	& a {
 		text-decoration: none;
@@ -259,6 +283,10 @@ button.delete {
 }
 .col--1-2-1 {
 	grid-template-columns: 1fr 2fr 1fr;
+}
+
+.flex {
+  display: flex;
 }
 
 #sync-state {
