@@ -270,8 +270,8 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 	const wrap = Object.assign(document.createElement("div"), {
 		// className: ["card", "anim-fade-in"].join(" "),
 		className: ["card"].join(" "),
-  })
-  wrap.dataset.id = doc._id
+	})
+	wrap.dataset.id = doc._id
 
 	const p = Object.assign(document.createElement("p"), {
 		textContent: doc.text + "  ",
@@ -312,7 +312,10 @@ export function createTextEl(doc, deleteFunc, delay = 80) {
 		},
 		{
 			text: "Play",
-			href: `/play/index.html?id=${doc._id}`,
+			href:
+				doc.typeof === "Question"
+					? `/play/index.html?id=${doc._id}&category=${doc.category}`
+					: `/play/index.html?id=${doc._id}`,
 		},
 	]
 

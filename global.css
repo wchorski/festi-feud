@@ -11,7 +11,7 @@
 
 @media (prefers-color-scheme: light) {
 	:root {
-    --polka-bg-color: rgb(240, 240, 240);
+		--polka-bg-color: rgb(240, 240, 240);
 		--polka-bg-image: radial-gradient(rgb(255 255 255) 10%, transparent 12.4%),
 			radial-gradient(rgb(243 243 243) 10%, transparent 12.4%),
 			radial-gradient(rgb(251 251 251) 10%, transparent 12.4%),
@@ -19,7 +19,7 @@
 	}
 	body {
 		background-color: whitesmoke;
-    color: black;
+		color: black;
 	}
 	.card,
 	form {
@@ -41,7 +41,7 @@
 }
 @media (prefers-color-scheme: dark) {
 	:root {
-    --polka-bg-color: rgb(11, 11, 12);
+		--polka-bg-color: rgb(11, 11, 12);
 		--polka-bg-image: radial-gradient(rgb(0, 0, 0) 10%, transparent 12.4%),
 			radial-gradient(rgb(20, 20, 20) 10%, transparent 12.4%),
 			radial-gradient(rgb(17, 17, 17) 10%, transparent 12.4%),
@@ -452,4 +452,10 @@ table.simple {
 
 hr {
 	margin-block: 2rem;
+}
+
+[popover]::backdrop {
+	opacity: 0.5;
+	backdrop-filter: blur(4px);
+	background: #000000;
 }

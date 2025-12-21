@@ -14,6 +14,11 @@ import { getElementById } from "../components.js"
 import { gameAnswersTop8 } from "../utils/filterVotes.js"
 import { gameStateManager } from "../utils/gameState.js"
 import { uiInit } from "./ui.js"
+import { ENVS } from "../envs.js"
+
+const params = new URLSearchParams(window.location.search)
+
+const categorySelectEl = getElementById("category-select", HTMLSelectElement)
 
 //? may remove this wrap cuz i prob don't need it.
 document.addEventListener("DOMContentLoaded", function () {
@@ -44,10 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	getOtherQuestions()
 	getQuestionAndAnswers()
+	genFormSelectOptions()
 
 	async function getQuestionAndAnswers() {
-		const params = new URLSearchParams(window.location.search)
 		const id = params.get("id")
+
 		if (id) {
 			const question = await dbGetQuestion(id)
 
@@ -78,7 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	async function getOtherQuestions() {
-		const allQuestions = await getAllQuestionDocs()
+		const category = params.get("category") || ""
+		const allQuestions = await getAllQuestionDocs(category)
 
 		if (!allQuestions) throw new Error("no questions found")
 
@@ -104,3 +111,26 @@ document.addEventListener("DOMContentLoaded", function () {
 		nextRoundQuestionsEl.replaceChildren(...links)
 	}
 })
+
+function genFormSelectOptions() {
+	ENVS.CATEGORY_OPTIONS.forEach((cat) => {
+		const option = Object.assign(document.createElement("option"), {
+			value: cat,
+			textContent: cat,
+		})
+
+		categorySelectEl.append(option)
+	})
+
+  const category = params.get("category") || ""
+  categorySelectEl.value = category
+	// TODO add tag filter too
+	// ENVS.TAG_OPTIONS.forEach((tag) => {
+	//   const option = Object.assign(document.createElement("option"), {
+	//     value: tag,
+	//     textContent: tag,
+	//   })
+
+	//   tagSelectEl.append(option)
+	// })
+}

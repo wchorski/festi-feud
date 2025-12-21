@@ -34,6 +34,8 @@ import { getUserUUID } from "../uuid.js"
 import { compose, transforms } from "../transforms.js"
 import { ENVS } from "../envs.js"
 
+const params = new URLSearchParams(window.location.search)
+
 const destroyDdBtn = document.getElementById("destroy-db-btn")
 const dbMessage = document.getElementById("db-message")
 const seedDbBtn = document.getElementById("seed-db-btn")
@@ -107,9 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 async function ini() {
-	const params = new URLSearchParams(window.location.search)
+	
 	const category = params.get("category") || ""
-	console.log('category, ', category)
 	await getAllQuestionDocs(category)
 	renderAllTextEls(questionsMap, questionsWrap, dbDeleteQuestion)
 
@@ -155,6 +156,9 @@ function genFormSelectOptions() {
 
 		tagSelectEl.append(option)
 	})
+
+  const category = params.get("category") || ""
+  categorySelectEl.value = category
 }
 
 document.addEventListener("DOMContentLoaded", function () {
