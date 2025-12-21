@@ -149,7 +149,7 @@ svg.strike[data-disabled="true"] {
 
 	& rect,
 	& path {
-		stroke: rgb(39, 39, 39);
+		stroke: rgb(39 39 39 / 32%);
 	}
 }
 svg.strike[data-disabled="false"] {

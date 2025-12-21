@@ -37,7 +37,7 @@ import { ENVS } from "../envs.js"
 const destroyDdBtn = document.getElementById("destroy-db-btn")
 const dbMessage = document.getElementById("db-message")
 const seedDbBtn = document.getElementById("seed-db-btn")
-const questionsWrap = document.getElementById("questions-wrap")
+const questionsWrap = getElementById("questions-wrap", HTMLDivElement)
 const questionForm = document.forms.namedItem("questionForm")
 // const answersWrap = document.getElementById("answers-wrap")
 if (!questionForm) throw new Error("form(s) not found")
@@ -104,26 +104,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		},
 	})
 
-	// events.addEventListener(
-	// 	"answers:set",
-	// 	//@ts-ignore
-	// 	handleAnswerSet
-	// )
-	// events.addEventListener(
-	// 	"answers:delete",
-	// 	//@ts-ignore
-	// 	handleAnswerDelete
-	// )
 })
 
 async function ini() {
-	if (!questionsWrap) throw new Error("no wrap")
-	await getAllQuestionDocs()
+	const params = new URLSearchParams(window.location.search)
+	const category = params.get("category") || ""
+	console.log('category, ', category)
+	await getAllQuestionDocs(category)
 	renderAllTextEls(questionsMap, questionsWrap, dbDeleteQuestion)
-
-	// if (!answersWrap) throw new Error("no wrap")
-	// await getAllAnswerDocs()
-	// renderAllTextEls(answersMap, answersWrap, dbDeleteAnswer)
 
 	if (!dbMessage) throw new Error("dbMessage not found in dom")
 	if (!seedDbBtn) throw new Error("seedDbBtn not found in dom")
@@ -141,7 +129,7 @@ async function ini() {
 		// const res = await dbEmojiDeleteMany([...emojisMap.values()])
 		const res = await dbDeleteAllDocs(
 			[...questionsMap.values()],
-			[...answersMap.values()],
+			[...answersMap.values()]
 			// [...ballotsMap.values()]
 		)
 		if (res.error) dbMessage.style.setProperty("--c-status", "red")

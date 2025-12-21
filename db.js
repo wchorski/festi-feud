@@ -225,12 +225,13 @@ function onSyncError(error) {
 
 /**
  * Retrieves all documents from the database
+ * @param {string} [category]
  * @returns {Promise<Question[]|undefined>} Array of document objects
  */
-export async function getAllQuestionDocs() {
+export async function getAllQuestionDocs(category) {
 	try {
 		const res = await dbQuestions.find({
-			selector: { approved: true },
+			selector: { approved: true, ...(category ? { category } : {}) },
 			// TODO think of better rate limiting
 			limit: 999,
 		})
@@ -323,8 +324,8 @@ export async function dbFindBallotsByQuestionId(questionId) {
 	try {
 		const res = await dbBallots.find({
 			selector: { questionId },
-      // TODO better rate limit logic?
-      limit: 99999,
+			// TODO better rate limit logic?
+			limit: 99999,
 			// fields: ["_id", "text"],
 			// sort: ["_id"],
 		})

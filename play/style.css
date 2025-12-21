@@ -24,7 +24,8 @@
 	text-align: center;
 	padding: 1rem;
 	border: solid 1px rgb(109, 109, 109);
-	background-color: blue;
+	background-color: rgb(46, 46, 117);
+  color: white;
 	width: minmax(10rem, 15rem);
 	margin-inline: auto;
 }
@@ -80,7 +81,7 @@ body[data-round-phase="end"]
 /* TODO does not support dynamic number of teams. also kinda a mess */
 #teams[data-active-team-index="0"] {
 	& > .team:nth-child(1) {
-		border: solid yellow 1px;
+		border: solid yellow 7px;
 		box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
 	}
 	&.round-steal .team:nth-child(2) .steal-badge {
@@ -89,7 +90,7 @@ body[data-round-phase="end"]
 }
 #teams[data-active-team-index="1"] {
 	& > .team:nth-child(2) {
-		border: solid yellow 1px;
+		border: solid yellow 7px;
 		box-shadow: rgba(255, 255, 0, 0.397) 3px 3px 3px;
 	}
 
