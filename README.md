@@ -103,6 +103,7 @@ Surveyors can periodically sync by coming back in range of the server's network 
 - [ ] filter out questions that don't have more than 100 votes
 - [ ] `face-off` round should continue on with the points like a regular `feud` round https://www.ultraboardgames.com/family-feud/game-rules.php
 - [ ] on game conclusion why do all answers become hidden again and not be visible even when clicked?
+- [ ] allow for less than 8 game answers
 
 ## Existing Repos
 

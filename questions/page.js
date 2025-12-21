@@ -18,6 +18,7 @@ import {
 } from "../components.js"
 import {
 	answersMap,
+	ballotsMap,
 	dbCreateQuestion,
 	dbDeleteAllDocs,
 	dbDeleteAnswer,
@@ -140,7 +141,8 @@ async function ini() {
 		// const res = await dbEmojiDeleteMany([...emojisMap.values()])
 		const res = await dbDeleteAllDocs(
 			[...questionsMap.values()],
-			[...answersMap.values()]
+			[...answersMap.values()],
+			// [...ballotsMap.values()]
 		)
 		if (res.error) dbMessage.style.setProperty("--c-status", "red")
 		if (res.ok) dbMessage.style.setProperty("--c-status", "green")

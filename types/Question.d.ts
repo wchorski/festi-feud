@@ -1,7 +1,7 @@
 type BaseQuestion = {
 	text: string
 	authorId: string
-	categoryIds: string[]
+	category: string
 	tagIds: string[]
 	voterIds: string[]
 	dateCreated: string

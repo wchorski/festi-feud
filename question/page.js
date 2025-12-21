@@ -47,6 +47,7 @@ async function ini() {
 		if (!answersWrap) throw new Error("no answersWrap")
 		const answerDocsRes = await dbFindAnswersByQuestionId(id)
 		const ballotDocsRes = await dbFindBallotsByQuestionId(id)
+		console.log(ballotDocsRes)
 		const uuid = localStorage.getItem("user_fingerprint")
 		if (uuid) {
 			const hasUserVoted = ballotDocsRes.docs
@@ -57,8 +58,8 @@ async function ini() {
 				// ballotForm.disabled = true // <-- doesn't work
 				answersWrap.disabled = true
 				const messageEl = ballotForm.querySelector(".response-message")
-        console.log(ballotForm);
-        console.log(messageEl);
+				console.log(ballotForm)
+				console.log(messageEl)
 				if (messageEl) messageEl.textContent = "You have already voted"
 			}
 		}

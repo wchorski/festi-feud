@@ -1,11 +1,11 @@
 :root {
-	--polka-bg-image: radial-gradient(rgb(0, 0, 0) 10%, transparent 12.4%),
+	/* --polka-bg-image: radial-gradient(rgb(0, 0, 0) 10%, transparent 12.4%),
 		radial-gradient(rgb(20, 20, 20) 10%, transparent 12.4%),
 		radial-gradient(rgb(17, 17, 17) 10%, transparent 12.4%),
-		radial-gradient(rgb(14, 14, 14) 10%, transparent 12.4%);
+		radial-gradient(rgb(14, 14, 14) 10%, transparent 12.4%); */
+	/* --polka-bg-color: rgb(11, 11, 12); */
 	--polka-bg-position: 0px 0px, 36px 36px, -3.6px 3.6px, 32.4px 39.6px;
 	--polka-bg-size: 13px 10px;
-	--polka-bg-color: rgb(11, 11, 12);
 }
 
 .polka-dots {
@@ -40,8 +40,7 @@ ul#answers {
 	padding: 0;
 
 	& > li {
-		border: solid rgb(107, 107, 107) 1px;
-		background-color: rgb(46, 53, 59);
+		background: #80808059;
 		padding: 0.2rem;
 		text-align: center;
 	}
@@ -61,11 +60,15 @@ body[data-round-phase="end"]
 	outline: double rgb(160, 189, 243) 4px;
 }
 
+.points {
+  color: white;
+}
+
 #teams {
 	gap: 1rem;
+
 	& > div {
 		padding: 1rem;
-		background-color: rgb(28, 28, 28);
 		align-self: center;
 
 		& > h2 {
@@ -136,52 +139,49 @@ body[data-round-phase="end"]
 	opacity: 1;
 } */
 
-
-
 menu#game-menu {
-  padding: 0;
-  display: flex;
-  gap: 0.5rem;
+	padding: 0;
+	display: flex;
+	gap: 0.5rem;
 }
 
 #rest-game {
-  background-color: crimson;
-  color: white;
-  margin-inline-start: auto;
+	background-color: crimson;
+	color: white;
+	margin-inline-start: auto;
 
-  &:active {
-    background-color: maroon;
-  }
+	&:active {
+		background-color: maroon;
+	}
 }
 
 h2:has(#game-winner-name) {
 	width: 100%;
-  display: flex;
-  gap: 1rem;
+	display: flex;
+	gap: 1rem;
 }
 h2:has(#game-winner-name:empty) {
 	display: none;
 }
 
 #round-type {
-  padding-inline: 0.8rem;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 10px;
+	padding-inline: 0.8rem;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 10px;
 }
 
 body[data-round-type="conclusion"] {
 	border: double lightblue 6px;
 
-  #round-type {
-    border-color: red;
-  }
+	#round-type {
+		border-color: red;
+	}
 }
 body[data-round-type="feud"] {
-
-  #round-type {
-    border-color: lightblue;
-  }
+	#round-type {
+		border-color: lightblue;
+	}
 }
 body[data-round-type="face-off"] {
 	#strikes-and-steal,
@@ -196,9 +196,9 @@ body[data-round-type="face-off"] {
 			pointer-events: none;
 		}
 	}
-  #round-type {
-    border-color: yellow;
-  }
+	#round-type {
+		border-color: yellow;
+	}
 }
 
 .strikes {

@@ -137,7 +137,7 @@ export const voteButtons = (label) => {
 export function elGameAnswerForPopup(gAnswer) {
 	const liEl = Object.assign(document.createElement("li"), {})
 	const wrap = Object.assign(document.createElement("article"), {
-		className: "answer",
+		className: "answer card",
 	})
 
 	wrap.id = `gameanswer-${gAnswer.id}`
@@ -168,7 +168,7 @@ export function elGameAnswerForPopup(gAnswer) {
  */
 export const elGameAnswerModerator = (gAnswer, onChange) => {
 	const wrap = Object.assign(document.createElement("li"), {
-		className: "answer",
+		className: "answer card",
 	})
 
 	wrap.id = `gameanswer-${gAnswer.id}`

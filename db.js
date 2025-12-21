@@ -229,14 +229,15 @@ function onSyncError(error) {
  */
 export async function getAllQuestionDocs() {
 	try {
-		// Then query for approved documents
-		const findRes = await dbQuestions.find({
+		const res = await dbQuestions.find({
 			selector: { approved: true },
+			// TODO think of better rate limiting
+			limit: 999,
 		})
-
-		const docs = /** @type{Question[]} */ (findRes.docs.flatMap((doc) => doc))
+		const docs = /** @type{Question[]} */ (res.docs.flatMap((doc) => doc))
 
 		// const res = await dbQuestions.allDocs({ include_docs: true })
+		// const docs = /** @type{Question[]} */ (res.rows.flatMap((row) => row.doc))
 
 		docs.forEach((doc) => {
 			questionsMap.set(doc._id, doc)
@@ -302,6 +303,8 @@ export async function dbFindAnswersByQuestionId(questionId) {
 	try {
 		const res = await dbAnswers.find({
 			selector: { questionId },
+			// TODO think of better rate limiting
+			limit: 9999,
 			// fields: ["_id", "text"],
 			// sort: ["_id"],
 		})
@@ -320,6 +323,8 @@ export async function dbFindBallotsByQuestionId(questionId) {
 	try {
 		const res = await dbBallots.find({
 			selector: { questionId },
+      // TODO better rate limit logic?
+      limit: 99999,
 			// fields: ["_id", "text"],
 			// sort: ["_id"],
 		})
@@ -478,7 +483,7 @@ export async function dbCreateQuestion(point) {
 		...point,
 		typeof: "Question",
 		approved: false,
-		categoryIds: point.categoryIds || [],
+		category: point.category || "",
 		tagIds: point.tagIds || [],
 		voterIds: [],
 	}
@@ -688,6 +693,30 @@ export async function dbAnswersDeleteMany(docs) {
 	}
 }
 /**
+ * @param {Ballot[]} docs
+ * @returns {Promise<Response>}
+ */
+export async function dbBallotsDeleteMany(docs) {
+	console.log(docs)
+	try {
+		const res = await dbBallots.bulkDocs(
+			docs.map((doc) => ({ ...doc, _deleted: true }))
+		)
+		// if(!res.ok) throw new Error('db delete res not OK')
+		return {
+			ok: true,
+			message: "All Message Docs have been marked as _deleted",
+		}
+	} catch (error) {
+		console.log(error)
+		return {
+			error: true,
+			message:
+				error instanceof Error ? "Database not found" : "Database not found",
+		}
+	}
+}
+/**
  *
  * @param {Question[]} qDocs
  * @param {Answer[]} aDocs
@@ -695,7 +724,11 @@ export async function dbAnswersDeleteMany(docs) {
 export async function dbDeleteAllDocs(qDocs, aDocs) {
 	try {
 		await dbQuestionDeleteMany(qDocs)
-		await dbAnswersDeleteMany(aDocs)
+		const resAnswers = await dbAnswers.allDocs({ include_docs: true })
+		await dbAnswersDeleteMany(resAnswers.rows.map((row) => row.doc))
+		// await dbAnswersDeleteMany(aDocs)
+		const res = await dbBallots.allDocs({ include_docs: true })
+		await dbBallotsDeleteMany(res.rows.map((row) => row.doc))
 		return {
 			ok: true,
 			message: "Database: All Docs have been marked as _deleted",

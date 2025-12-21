@@ -4,7 +4,6 @@
 }
 #question {
 	text-align: center;
-	background-color: rgb(44, 48, 49);
 	padding: 1rem;
 }
 
@@ -20,12 +19,17 @@ article.answer {
 	padding: 0.3rem 1rem;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	gap: 1rem;
 	/* TODO any better way to hide answers? */
 	opacity: 0;
 	transition-duration: 1s;
 	transition-property: opacity;
 	transition-timing-function: ease-in;
+
+  & > p {
+    margin: 0;
+  }
 
 	& > .points {
 		border: solid white 2px;
@@ -69,6 +73,7 @@ body[data-round-type="conclusion"] .answer {
 #teams {
 	/* helps nested children act as if outside parent */
 	display: contents;
+  color: white;
 }
 
 .col--1-2-1 {

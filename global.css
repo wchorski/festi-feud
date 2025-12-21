@@ -10,8 +10,16 @@
 }
 
 @media (prefers-color-scheme: light) {
+	:root {
+    --polka-bg-color: rgb(240, 240, 240);
+		--polka-bg-image: radial-gradient(rgb(255 255 255) 10%, transparent 12.4%),
+			radial-gradient(rgb(243 243 243) 10%, transparent 12.4%),
+			radial-gradient(rgb(251 251 251) 10%, transparent 12.4%),
+			radial-gradient(rgb(227 222 222) 10%, transparent 12.4%);
+	}
 	body {
 		background-color: whitesmoke;
+    color: black;
 	}
 	.card,
 	form {
@@ -21,7 +29,7 @@
 			border-color: #0c0c0c4d;
 		}
 	}
-  a:link {
+	a:link {
 		color: rgb(172, 112, 0);
 	}
 	a:visited {
@@ -32,6 +40,13 @@
 	}
 }
 @media (prefers-color-scheme: dark) {
+	:root {
+    --polka-bg-color: rgb(11, 11, 12);
+		--polka-bg-image: radial-gradient(rgb(0, 0, 0) 10%, transparent 12.4%),
+			radial-gradient(rgb(20, 20, 20) 10%, transparent 12.4%),
+			radial-gradient(rgb(17, 17, 17) 10%, transparent 12.4%),
+			radial-gradient(rgb(14, 14, 14) 10%, transparent 12.4%);
+	}
 	body,
 	button {
 		background-color: #040404;
@@ -91,12 +106,12 @@ a:hover {
 }
 
 nav.survey-nav {
-  & > ul {
-    padding: 0;
-    display: flex;
-    list-style: none;
-    gap: 0.5rem;
-  }
+	& > ul {
+		padding: 0;
+		display: flex;
+		list-style: none;
+		gap: 0.5rem;
+	}
 }
 
 label:has(input[type="checkbox"]:checked, input[type="radio"]:checked) {
@@ -193,9 +208,9 @@ form {
 }
 
 .btn {
-  display: inline-block;
-  padding: 0.3rem 0.5rem;
-  border-radius: 9px;
+	display: inline-block;
+	padding: 0.3rem 0.5rem;
+	border-radius: 9px;
 	border: solid 2px var(--c-accent, orange);
 }
 
@@ -217,17 +232,17 @@ button.delete {
 	box-shadow: rgba(0, 0, 0, 0.27) 3px 3px 3px;
 	margin: 0;
 	padding: 1rem;
-  position: relative;
-  display: grid;
+	position: relative;
+	display: grid;
 
 	& :first-child {
 		margin-top: 0;
 		text-transform: capitalize;
 	}
-   & :last-child {
-    margin-top: auto;
-    margin-bottom: 0;
-   }
+	& :last-child {
+		margin-top: auto;
+		margin-bottom: 0;
+	}
 
 	& a {
 		text-decoration: none;
@@ -286,7 +301,7 @@ button.delete {
 }
 
 .flex {
-  display: flex;
+	display: flex;
 }
 
 #sync-state {
@@ -436,5 +451,5 @@ table.simple {
 }
 
 hr {
-  margin-block: 2rem;
+	margin-block: 2rem;
 }
